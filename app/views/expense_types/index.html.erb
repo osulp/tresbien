@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Displaying all Expense Types</h1>
+
+
+
+<div class="container">
+<%#  %>
+        <div class="row">
+            <div class="col-6">
+                <h2><%= label :name, 'Type' %></h2>
+            </div>
+            <div class="col-1">
+                <h2><%= label :active, 'Active' %></h2>
+            </div>
+        </div>
+    <% @expense_types.each do |expense_type| %>
+        <%= render 'form_list_item', expense_type: expense_type %>
+    <% end %>
+    <%= render 'form_list_item', expense_type: ExpenseType.new %>
+</div>
+
+<br>
+
+
+
+

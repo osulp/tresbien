@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Tresbien</title>
+    <title>Tres Bien</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +9,7 @@
   </head>
 
   <body>
+  <div class="container">
     <% if user_signed_in? %>
       <p>Welcome back</p>
       <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
@@ -18,5 +19,6 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= yield %>
+    </div>
   <body>
 </html>
