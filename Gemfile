@@ -52,3 +52,12 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Use devise for authentication
+gem 'devise'
+gem 'devise-guests', '~> 0.5'
+
+# CAS Authentication gems
+gem 'rubycas-client', git: 'https://github.com/osulp/rubycas-client'
+gem 'rubycas-client-rails', git: 'https://github.com/osulp/rubycas-client-rails'
+gem 'devise_cas_authenticatable'
