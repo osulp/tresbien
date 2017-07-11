@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -61,3 +62,11 @@ gem 'devise-guests', '~> 0.5'
 gem 'rubycas-client', git: 'https://github.com/osulp/rubycas-client'
 gem 'rubycas-client-rails', git: 'https://github.com/osulp/rubycas-client-rails'
 gem 'devise_cas_authenticatable'
+
+gem 'city-state'
+
+gem 'jquery-rails'
+
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+
+gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'

@@ -12,6 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20170710174632) do
 
+  create_table "expense_types", force: :cascade do |t|
+    t.string "name"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
