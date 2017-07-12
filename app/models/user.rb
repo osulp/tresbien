@@ -12,6 +12,8 @@ class User < ApplicationRecord
       #   self.fullname = value
       when :email
         self.email = value
+      when :osupidm
+        self.pidm = value
       end
     end
   end
