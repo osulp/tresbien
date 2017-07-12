@@ -4,7 +4,11 @@ class User < ApplicationRecord
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :trackable, :validatable
   devise :cas_authenticatable
+  validates :username, presence: true
 
+  # Sets email and pidm attributes for current_user 
+  # If a user is created manually in the database but email and pidm fields are left blank, 
+  # this will set those fields for that user
   def cas_extra_attributes=(extra_attributes)
     extra_attributes.each do |name, value|
       case name.to_sym
