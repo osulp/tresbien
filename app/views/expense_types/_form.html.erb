@@ -1,0 +1,29 @@
+<%= form_with(model: expense_type, local: true) do |form| %>
+  <% if expense_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(expense_type.errors.count, "error") %> prohibited this expense_type from being saved:</h2>
+      <ul>
+      <% expense_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+      <div class="field_exp">
+        <%= form.label :name %>
+        <%= form.text_field :name, id: :expense_type_name %>
+      </div>
+
+      <div class="field_exp">
+        <%= form.label :active %>
+        <%= form.check_box :active, id: :expense_type_active %>
+      </div>
+      <div class="field_exp">
+        <div class="actions">
+         <%= form.submit %>
+      </div>
+      </div>
+
+<% end %>

@@ -1,0 +1,18 @@
+
+
+<%= form_with(class: "row", model: expense_type, local: true) do |form| %>
+
+      <div class="col-6 name">
+        <%= form.text_field :name, id: :expense_type_name %>
+      </div>
+
+      <div class="col-1">
+        <%= form.check_box :active, id: :expense_type_active%>
+      </div>
+      <div class="col-2 save">
+        <div class="actions">
+          <%= form.submit "#{expense_type.new_record? ? 'Create' : 'Save'}" %>
+        </div>
+      </div>
+
+<% end %>
