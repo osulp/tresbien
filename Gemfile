@@ -6,11 +6,18 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+#may make an error => " Could not find table 'city_states' " disappear
+group :production do
+  gem 'pg', '0.17.1'
+  gem 'rails_12factor', '0.0.2'
+end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+group :development, :test do
+  gem 'sqlite3'
+end
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -70,3 +77,6 @@ gem 'jquery-rails'
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
+
+gem 'rails_admin'
+
