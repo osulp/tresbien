@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   before_action :set_user, only: [:edit, :update, :show, :destroy]
 
   def index
@@ -7,14 +8,14 @@ class UsersController < ApplicationController
 
   def edit
   end
-  
+
   def show
   end
 
   def update
     if @user.update(user_params)
       redirect_to @user
-    else 
+    else
       render :edit
     end
   end
@@ -32,7 +33,7 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     if @user.save
       redirect_to @user, notice: "User was created"
-    else 
+    else
       render "new"
     end
   end
