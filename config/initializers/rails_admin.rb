@@ -36,7 +36,7 @@ RailsAdmin.config do |config|
     edit
     show_in_app
 
-    config.excluded_models << "CityState"
+    config.included_models = ["User", "ExpenseType"]
 
     ## With an audit adapter, you can add:
     # history_index
