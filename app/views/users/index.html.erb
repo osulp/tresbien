@@ -1,0 +1,23 @@
+<h2>Users</h2>
+<table class=".table">
+  <tr>
+    <th>Username</th>
+    <th>Email</th>
+    <th>PIDM</th>
+    <th>Is certifier?</th>
+    <th>Edit</th>
+    <th>Delete</th>
+  </tr>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= link_to user.username, user_path(user.id) %></td>
+      <td><%= user.email %></td>
+      <td><%= user.pidm %></td>
+      <td><%= user.certifier %></td>
+      <td><%= link_to "Edit", edit_user_path(user.id) %>
+      <td><%= link_to "Destroy", user_path(user.id), method: :delete %>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to "New User", new_user_path %>
