@@ -1,3 +1,4 @@
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -5,11 +6,12 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+group :development, :test do
+  gem 'sqlite3'
+end
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -61,3 +63,14 @@ gem 'devise-guests', '~> 0.5'
 gem 'rubycas-client', git: 'https://github.com/osulp/rubycas-client'
 gem 'rubycas-client-rails', git: 'https://github.com/osulp/rubycas-client-rails'
 gem 'devise_cas_authenticatable'
+
+gem 'city-state'
+
+gem 'jquery-rails'
+
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+
+gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
+
+gem 'rails_admin'
+
