@@ -5,5 +5,9 @@
   <td><%= f.input :to_location, label: false %></td>
   <td><%= f.input :notes, label: false, as: :string %></td>
   <td><%= f.input :amount, label: false , input_html: { class: "amount-input" }%></td>
-  <td><%= link_to_remove_association "Remove", f %></td>
+  <td>
+      <%= link_to_remove_association f do %>
+        <i class="fa fa-trash-o fa-2x"></i>
+      <% end %>
+    </td>
 </tr>

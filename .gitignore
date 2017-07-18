@@ -24,7 +24,9 @@
 .vscode
 
 /public/*
+
 /lib/*
+
 # Ignore vim .swp files
 *.swp
 config/config.yml

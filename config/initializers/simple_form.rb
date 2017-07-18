@@ -56,11 +56,8 @@ SimpleForm.setup do |config|
   end
 
   # The default wrapper to be used by the FormBuilder.
-<<<<<<< fcc1141e2257e4e4e7ef4ef28d48c0f301be3ac2
   config.default_wrapper = :horizontal_form
-=======
-  config.default_wrapper = :default
->>>>>>> Installs simple form and generates reimbursement requests controller
+
 
   # Define the way to render check boxes / radio buttons with labels.
   # Defaults to :nested for bootstrap config.
@@ -138,10 +135,6 @@ SimpleForm.setup do |config|
   # Custom wrappers for input types. This should be a hash containing an input
   # type as key and the wrapper that will be used for all inputs with specified type.
   # config.wrapper_mappings = { string: :prepend }
-<<<<<<< fcc1141e2257e4e4e7ef4ef28d48c0f301be3ac2
-=======
-
->>>>>>> Installs simple form and generates reimbursement requests controller
   # Namespaces where SimpleForm should look for custom input classes that
   # override default inputs.
   # config.custom_inputs_namespaces << "CustomInputs"

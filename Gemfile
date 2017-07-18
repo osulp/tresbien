@@ -96,3 +96,6 @@ gem 'cocoon'
 # Use Paperclip for adding attachments
 gem "paperclip", "~> 5.0.0"
 
+# Use nested_form to help with reimbursement request form
+gem 'nested_form'
+

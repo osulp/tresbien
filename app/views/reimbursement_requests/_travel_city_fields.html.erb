@@ -5,5 +5,9 @@
   <td><%= f.select :city, [],{prompt: "City"}, id: "cities-of-state", class: "form-control" %></td>
   <td><%= f.input :include_meals, as: :boolean, wrapper_html: { class: "form-check" }, input_html: { class: "form-check" }, label: false %></td>
   <td><%= f.input :hotel_rate, label: false %></td>
-  <td><%= link_to_remove_association "Remove", f %></td>
+  <td>
+      <%= link_to_remove_association f do %>
+        <i class="fa fa-trash-o fa-2x"></i>
+      <% end %>
+    </td>
 </tr>
