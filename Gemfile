@@ -79,3 +79,8 @@ gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 
 gem 'rails_admin'
 
+# Use simple form for reimbursement request form
+gem 'simple_form'
+
+# Use cocoon for add/remove functionality in nested forms
+gem 'cocoon'

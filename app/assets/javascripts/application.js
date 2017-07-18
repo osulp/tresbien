@@ -16,3 +16,7 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require city_state
+//= require cocoon
+//= require_tree .
+//= require reimbursement_request.js
+//= require jquery.datetimepicker.full.min.js

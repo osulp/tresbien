@@ -7,7 +7,8 @@ class ReimbursementRequest < ApplicationRecord
   has_many :expense_others
   has_many :travel_cities
   has_many :travel_itineraries
-
+  accepts_nested_attributes_for :accountings, :expense_airfares, :expense_mileages, :expense_others, :travel_itineraries, :travel_cities, :claimant, :certifier, allow_destroy: true
+  # validates_presence_of :certifier, :claimant
 
   # Calculate the grand total for the reimbursement request
   def calculate_grand_total
