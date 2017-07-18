@@ -4,7 +4,12 @@ SimpleForm.setup do |config|
   config.button_class = 'btn btn-default'
   config.boolean_label_class = nil
 
+<<<<<<< 94e0cad41164901876659ad4003b112910ffccbb
   config.wrappers :table_form, tag: 'div', class: 'form-group form-col', error_class: 'has-error' do |b|
+=======
+<<<<<<< fcc1141e2257e4e4e7ef4ef28d48c0f301be3ac2
+  config.wrappers :table_form, tag: 'td', class: 'form-group table-form', error_class: 'has-error' do |b|
+>>>>>>> Installs simple form and generates reimbursement requests controller
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -19,6 +24,8 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
 
+=======
+>>>>>>> Installs simple form and generates reimbursement requests controller
   config.wrappers :vertical_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
     b.use :html5
     b.use :placeholder

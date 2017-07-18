@@ -95,3 +95,4 @@ gem 'cocoon'
 
 # Use Paperclip for adding attachments
 gem "paperclip", "~> 5.0.0"
+
