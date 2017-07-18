@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  index: MyString
+  fund: MyString
+  organization: MyString
+  account: MyString
+  program: MyString
+  activity: MyString
+  amount: 15.0
+  reimbursement_request_id: 0
+
+two:
+  index: MyString
+  fund: MyString
+  organization: MyString
+  account: MyString
+  program: MyString
+  activity: MyString
+  amount: 15.0
+  reimbursement_request_id: 0

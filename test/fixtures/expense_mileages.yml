@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  from_date: 2017-07-13 12:09:52
+  to_date: 2017-07-13 12:09:52
+  from_city: MyString
+  from_state: MyString
+  to_city: MyString
+  to_state: MyString
+  miles: 
+  round_trip: false
+  notes: MyText
+  amount: 1.5
+  reimbursement_request_id: 0
+
+two:
+  from_date: 2017-07-13 12:09:52
+  to_date: 2017-07-13 12:09:52
+  from_city: MyString
+  from_state: MyString
+  to_city: MyString
+  to_state: MyString
+  miles: 
+  round_trip: false
+  notes: MyText
+  amount: 1.5
+  reimbursement_request_id: 0

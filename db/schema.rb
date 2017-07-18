@@ -10,7 +10,64 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170713213045) do
+ActiveRecord::Schema.define(version: 20170717162710) do
+
+  create_table "accountings", force: :cascade do |t|
+    t.string "index"
+    t.string "fund"
+    t.string "organization"
+    t.string "account"
+    t.string "program"
+    t.string "activity"
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "reimbursement_request_id"
+    t.index ["reimbursement_request_id"], name: "index_accountings_on_reimbursement_request_id"
+  end
+
+  create_table "expense_airfares", force: :cascade do |t|
+    t.datetime "from_date"
+    t.datetime "to_date"
+    t.string "from_location"
+    t.string "to_location"
+    t.text "notes"
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "reimbursement_request_id"
+    t.index ["reimbursement_request_id"], name: "index_expense_airfares_on_reimbursement_request_id"
+  end
+
+  create_table "expense_mileages", force: :cascade do |t|
+    t.datetime "from_date"
+    t.datetime "to_date"
+    t.string "from_city"
+    t.string "from_state"
+    t.string "to_city"
+    t.string "to_state"
+    t.integer "miles"
+    t.boolean "round_trip"
+    t.text "notes"
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "reimbursement_request_id"
+    t.index ["reimbursement_request_id"], name: "index_expense_mileages_on_reimbursement_request_id"
+  end
+
+  create_table "expense_others", force: :cascade do |t|
+    t.integer "expense_type_id"
+    t.datetime "from_date"
+    t.datetime "to_date"
+    t.text "notes"
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "reimbursement_request_id"
+    t.index ["expense_type_id"], name: "index_expense_others_on_expense_type_id"
+    t.index ["reimbursement_request_id"], name: "index_expense_others_on_reimbursement_request_id"
+  end
 
   create_table "expense_types", force: :cascade do |t|
     t.string "name"
@@ -19,8 +76,53 @@ ActiveRecord::Schema.define(version: 20170713213045) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reimbursement_requests", force: :cascade do |t|
+    t.integer "claimant_id"
+    t.integer "certifier_id"
+    t.string "identifier"
+    t.text "description"
+    t.float "itinerary_total"
+    t.float "mileage_total"
+    t.float "airfare_total"
+    t.float "other_total"
+    t.float "accounting_total"
+    t.float "grand_total"
+    t.float "claiming_total"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["certifier_id"], name: "index_reimbursement_requests_on_certifier_id"
+    t.index ["claimant_id"], name: "index_reimbursement_requests_on_claimant_id"
+  end
+
+  create_table "travel_cities", force: :cascade do |t|
+    t.datetime "from_date"
+    t.datetime "to_date"
+    t.string "city"
+    t.string "state"
+    t.boolean "include_meals"
+    t.string "hotel_rate"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "reimbursement_request_id"
+    t.index ["reimbursement_request_id"], name: "index_travel_cities_on_reimbursement_request_id"
+  end
+
+  create_table "travel_itineraries", force: :cascade do |t|
+    t.datetime "date"
+    t.string "city"
+    t.string "state"
+    t.string "break"
+    t.string "lunch"
+    t.string "dinner"
+    t.string "hotel"
+    t.float "amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "reimbursement_request_id"
+    t.index ["reimbursement_request_id"], name: "index_travel_itineraries_on_reimbursement_request_id"
+  end
+
   create_table "users", force: :cascade do |t|
-    t.boolean "admin"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -36,6 +138,7 @@ ActiveRecord::Schema.define(version: 20170713213045) do
     t.string "username"
     t.integer "pidm"
     t.boolean "certifier", default: false
+    t.boolean "admin"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

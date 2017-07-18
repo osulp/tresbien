@@ -1,0 +1,28 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 0
+  claimant: one
+  certifier: two
+  identifier: MyString
+  description: MyText
+  itinerary_total: 1.5
+  mileage_total: 1.5
+  airfare_total: 1.5
+  other_total: 1.5
+  accounting_total: 1.5
+  grand_total: 7.5
+  claiming_total: 1.5
+
+two:
+  claimant: two
+  certifier: two
+  identifier: MyString
+  description: MyText
+  itinerary_total: 1.5
+  mileage_total: 1.5
+  airfare_total: 1.5
+  other_total: 1.5
+  accounting_total: 1.5
+  grand_total: 1.5
+  claiming_total: 1.5
