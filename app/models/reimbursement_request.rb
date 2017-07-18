@@ -1,4 +1,5 @@
 class ReimbursementRequest < ApplicationRecord
+  attr_accessor :accounting_total, :airfare_total, :mileage_total, :itinerary_total, :other_total
   belongs_to :claimant, class_name: "User"
   belongs_to :certifier, class_name: "User"
   has_many :accountings
@@ -7,15 +8,15 @@ class ReimbursementRequest < ApplicationRecord
   has_many :expense_others
   has_many :travel_cities
   has_many :travel_itineraries
-  accepts_nested_attributes_for :accountings, :expense_airfares, :expense_mileages, :expense_others, :travel_itineraries, :travel_cities, :claimant, :certifier, allow_destroy: true
-  # validates_presence_of :certifier, :claimant
+  has_many :attachments
+  accepts_nested_attributes_for :accountings, :expense_airfares, :expense_mileages, :expense_others, :travel_itineraries, :travel_cities, :claimant, :certifier, :attachments, allow_destroy: true
 
   # Calculate the grand total for the reimbursement request
   def calculate_grand_total
     set_totals
     self.grand_total = self.totals.sum
   end
-  
+
   # set individual totals for each child model
   def set_totals
     self.accounting_total = get_total_sum(self.accountings)
@@ -32,7 +33,11 @@ class ReimbursementRequest < ApplicationRecord
 
   # return an array of all models; not useful for changing these values
   def models
-    [self.accountings, self.expense_airfares, self.expense_mileages, self.expense_others, self.travel_itineraries]
+    [self.accountings, self.expense_airfares, self.expense_mileages, self.expense_others, self.travel_itineraries, self.attachments]
+  end
+
+  def children
+    @children ||=(self.attachments.all)
   end
 
   private

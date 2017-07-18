@@ -26,6 +26,15 @@ ActiveRecord::Schema.define(version: 20170801171320) do
     t.index ["reimbursement_request_id"], name: "index_accountings_on_reimbursement_request_id"
   end
 
+  create_table "attachments", force: :cascade do |t|
+    t.string "attachment_file_name"
+    t.string "attachment_content_type"
+    t.integer "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.integer "reimbursement_request_id"
+    t.index ["reimbursement_request_id"], name: "index_attachments_on_reimbursement_request_id"
+  end
+
   create_table "expense_airfares", force: :cascade do |t|
     t.datetime "from_date"
     t.datetime "to_date"

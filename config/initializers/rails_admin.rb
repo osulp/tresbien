@@ -34,9 +34,12 @@ RailsAdmin.config do |config|
     export
     show
     edit
+    delete do
+      only ['ReimbursementRequest']
+    end
     show_in_app
 
-    config.included_models = ["User", "ExpenseType"]
+    config.included_models = ["User", "ExpenseType", "ReimbursementRequest"] #Added ReimbursementRequest for testing purposes, remove later
 
     ## With an audit adapter, you can add:
     # history_index
