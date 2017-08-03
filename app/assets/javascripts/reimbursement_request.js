@@ -90,10 +90,9 @@ $(document).ready(function() {
             });
         });
     });
-    $('.datetimepicker').datetimepicker();
+    //$('.datetimepicker').datetimepicker();
     $('.datepicker').datetimepicker({
-        timepicker: false // ,
-            // uformat:'m/d/y'
+        timepicker: false
     });
     $('.timepicker').datetimepicker({
         datepicker: false,
