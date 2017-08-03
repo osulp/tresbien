@@ -14,7 +14,7 @@
         <% if current_user.admin %>
           <%= link_to "Admin Interface", rails_admin_path %>
         <% end %>
-        <p>Welcome back</p>
+        <p>Welcome back, <%= current_user.username %></p>
         <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
       <% else %>
         <%= link_to "Sign in", new_user_session_path %>

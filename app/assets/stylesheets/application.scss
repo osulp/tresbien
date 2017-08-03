@@ -1,4 +1,7 @@
 // @import "other files and stuff"
+/*
+ *= require jquery.datetimepicker.min
+ */
 
 @import "bootstrap";
 
@@ -14,3 +17,23 @@
   width: 75px;
 }
 
+.form-table {
+  display: table;
+}
+
+.form-row {
+  display: table-row;
+  .form-group {
+    margin-bottom: .25rem;
+  }
+}
+
+.form-col {
+  display: table-cell;
+  padding: 5px;
+}
+
+.form-colh {
+  display: table-cell;
+  // font-weight: bold;
+}

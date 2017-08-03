@@ -1,0 +1,148 @@
+<%= simple_form_for @reimbursement_request do |f| %>
+  <h3>Traveller Information</h3>
+  <p>Name: <%= current_user.full_name if user_signed_in? %></p>
+  <%= f.input :non_resident_alien %>
+  <%= f.input :address %>
+  <%= 
+    f.input :certifier_id, 
+      collection: @certifiers, 
+      label_method: lambda { |c| c.full_name }, 
+      value_method: lambda { |c| c.id } 
+    %>
+  <h3>Request Information</h3>
+  <%= f.input :identifier %>
+  <%= f.input :description, as: :string%>
+  <%= f.input :business_notes_and_purpose %>
+  <% # create certifiers dropdown where each certifier is labeled by name but the form passes their id to params %>
+  <h3>Itinerary</h3>
+  <div class="container">
+    <%= f.input :depart_time, as: :time_picker %>
+    <%= f.input :return_time, as: :time_picker %>
+  </div>
+  <h4>Cities</h4>
+  <div class="form-table">
+    <div class="form-row">
+      <div class="form-colh">From</div>
+      <div class="form-colh">To</div>
+      <div class="form-colh">State</div>
+      <div class="form-colh">City</div>
+      <div class="form-colh">Include meals?</div>
+      <div class="form-colh">Hotel rate</div>
+      <div class="form-colh"></div>
+    </div>
+    <%= f.simple_fields_for :travel_cities, wrapper: false do |travel_city| %>
+      <%= render "travel_city_fields", f: travel_city %>
+    <% end %>
+    <div class="form-row">
+      <%= link_to_add_association 'Add line', f, :travel_cities %>
+    </div>
+  </div>
+  <h4>Daily Itineraries</h4>
+  <div class="form-table">
+    <div class="form-row">
+      <div class="form-colh">Date</div>
+      <div class="form-colh">State</div>
+      <div class="form-colh">City</div>
+      <div class="form-colh">Break</div>
+      <div class="form-colh">Lunch</div>
+      <div class="form-colh">Dinner</div>
+      <div class="form-colh">Hotel</div>
+      <div class="form-colh">Amount</div>
+      <div class="form-colh"></div>
+    </div> 
+    <%= f.simple_fields_for :travel_itineraries, wrapper: false, defaults: { label: false } do |travel_itinerary| %>
+      <%= render "travel_itinerary_fields", f: travel_itinerary %>
+    <% end %>
+    <div class="form-row">
+      <%= link_to_add_association 'Add line', f, :travel_itineraries %>
+      <%= f.input :itinerary_total, input_html: { class: "total-input" } %>
+    </div>
+  </div>
+  <h3>Auto Mileage</h3>
+  <div class="form-table">
+    <div class="form-row">
+      <div class="form-colh">From</div>
+      <div class="form-colh">To</div>
+      <div class="form-colh">From State</div>
+      <div class="form-colh">From City</div>
+      <div class="form-colh">To State</div>
+      <div class="form-colh">To City</div>
+      <div class="form-colh">Round trip?</div>
+      <div class="form-colh">Miles</div>
+      <div class="form-colh">Notes</div>
+      <div class="form-colh">Amount</div>
+    </div>
+    <%= f.simple_fields_for :expense_mileages, wrapper: false, defaults: { label: false } do |expense_milage| %>
+      <%= render "expense_mileage_fields", f: expense_milage %>
+    <% end %>
+    <div class="form-row">
+      <%= link_to_add_association 'Add line', f, :expense_mileages %>
+      <%= f.input :mileage_total, input_html: { class: "total-input" }  %>
+    </div>
+  </div>
+  <h3>Airfare</h3>
+  <div class="form-table">
+    <div class="form-row">
+      <div class="form-colh">From</div>
+      <div class="form-colh">To</div>
+      <div class="form-colh">From Location</div>
+      <div class="form-colh">To Location</div>
+      <div class="form-colh">Notes</div>
+      <div class="form-colh">Amount</div>
+    </div>
+    <%= f.simple_fields_for :expense_airfares, wrapper: false, defaults: { label: false } do |expense_airfare| %>
+      <%= render "expense_airfare_fields", f: expense_airfare %>
+    <% end %>
+    <div class="form-row">
+      <%= link_to_add_association 'Add line', f, :expense_airfares %>
+      <%= f.input :airfare_total, input_html: { class: "total-input" }  %>
+    </div>
+  </div>
+  <h3>Other expenses</h3>
+  <div class="form-table">
+    <div class="form-row">
+      <div class="form-colh">Expense Type</div>
+      <div class="form-colh">From</div>
+      <div class="form-colh">To</div>
+      <div class="form-colh">Notes</div>
+      <div class="form-colh">Amount</div>
+    </div>
+    <%= f.simple_fields_for :expense_others, wrapper: false, defaults: { label: false } do |expense_other| %>
+      <%= render "expense_other_fields", f: expense_other %>
+    <% end %>
+    <div class="form-row">
+      <%= link_to_add_association 'Add line', f, :expense_others %>
+      <%= f.input :other_total, input_html: { class: "total-input" }  %>
+    </div>
+  </div>
+  <h3>Accounting</h3>
+  <div class="form-table">
+    <div class="form-row">
+      <div class="form-colh">Index</div>
+      <div class="form-colh">Fund</div>
+      <div class="form-colh">Organization</div>
+      <div class="form-colh">Account</div>
+      <div class="form-colh">Program</div>
+      <div class="form-colh">Activity</div>
+      <div class="form-colh">Amount</div>
+    </div>
+    <%= f.simple_fields_for :accountings, wrapper: false, defaults: { label: false } do |accounting| %>
+      <%= render "accounting_fields", f: accounting %>
+    <% end %>
+    <div class="form-row">
+      <%= link_to_add_association 'Add line', f, :accountings %>
+      <%= f.input :accounting_total, input_html: { class: "total-input" }  %>
+    </div>
+  </div>
+
+  <h3>Total</h3>
+  <div class="total">
+    <button class="btn btn-success" id="calculate-total">Calculate Total</button>
+    <%= f.input :grand_total, input_html: { class: "grand-total-input" } %>
+  </div>
+  </p>
+  <p>
+  <%= f.button :submit, class: "btn btn-primary" %>
+  </p>
+<% end %>
+<% console %>
