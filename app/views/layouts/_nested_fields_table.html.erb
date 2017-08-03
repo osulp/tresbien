@@ -1,0 +1,9 @@
+<div class="form-table">
+  <div class="form-row">
+    <%= attributes.each do |attr| %>
+      <div class="form-colh">attr</div>
+    <% end %>
+    <div class="form-colh"></div>
+  </div>
+  <%= yield %>
+</div>
