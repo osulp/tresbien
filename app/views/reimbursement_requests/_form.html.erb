@@ -135,6 +135,16 @@
     </div>
   </div>
 
+
+  <h3>Attachments</h3>
+
+  <div class = "control-group">
+    <%= f.label :attachments, class: 'control-label' %>
+    <div class = "controls">
+      <%= file_field_tag "attachments[]", type: :file, multiple: true %>
+    </div>
+  </div>
+
   <h3>Total</h3>
   <div class="total">
     <button class="btn btn-success" id="calculate-total">Calculate Total</button>
