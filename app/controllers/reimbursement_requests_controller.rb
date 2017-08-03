@@ -1,10 +1,7 @@
 class ReimbursementRequestsController < ApplicationController
-  before_action :set_reimbursement_request, only: [:show, :edit]  
+  before_action :set_reimbursement_request, only: [:show, :edit]
   before_action :set_certifiers, only: [:new, :create, :edit]
   before_action :set_expense_types, only: [:new, :create, :edit]
-
-  def show
-  end   
 
   def new
     @reimbursement_request = ReimbursementRequest.new
@@ -16,14 +13,23 @@ class ReimbursementRequestsController < ApplicationController
     @reimbursement_request.travel_itineraries.build
   end
 
+
+  def show
+    @reimbursement_request = ReimbursementRequest.find(params[:id])
+    @children = @reimbursement_request.children
+  end
+
   def create
     @reimbursement_request = ReimbursementRequest.create(reimbursement_request_params)
     @reimbursement_request.claimant = current_user if user_signed_in?
     @reimbursement_request.certifier = User.find(params.dig(:reimbursement_request, :certifier_id)) unless params.dig(:reimbursement_request, :certifier_id)
     @reimbursement_request.expense_others.each_with_index { |expense_other, index| expense_other.expense_type = ExpenseType.find(params[:reimbursement_request][:expense_others_attributes][index.to_s][:expense_type_id]) unless params[:reimbursement_request][:expense_others_attributes][index.to_s][:expense_type_id]  }
     if @reimbursement_request.save
+      params[:attachments].each do |file|
+        @reimbursement_request.attachments.create(attachment: file)
+      end
       redirect_to reimbursement_request_path(@reimbursement_request)
-    else 
+    else
       flash[:alert] = "Some fields were left blank"
       puts @reimbursement_request.errors.full_messages.to_s
       render "new"
@@ -37,17 +43,18 @@ class ReimbursementRequestsController < ApplicationController
 
   def reimbursement_request_params
     params.require(:reimbursement_request).permit(
+      :attachments,
       :identifier,
       :description,
       :claimant_id,
       :certifier_id,
-      :itinerary_total, 
-      :mileage_total, 
-      :airfare_total, 
-      :other_total, 
-      :accounting_total, 
-      :grand_total, 
-      :claiming_total, 
+      :itinerary_total,
+      :mileage_total,
+      :airfare_total,
+      :other_total,
+      :accounting_total,
+      :grand_total,
+      :claiming_total,
       :depart_time,
       :return_time,
       :non_resident_alien,
@@ -71,7 +78,8 @@ class ReimbursementRequestsController < ApplicationController
 
   def set_expense_types
     @expense_types = ExpenseType.where(active: true)
-  end 
+  end
+
   # converts all date and time params into valid formats
   # Pre conditions: date and time values should include "date" and "time" in their names, respectively
   #   Non date/time values should not include these terms in their names
@@ -83,7 +91,7 @@ class ReimbursementRequestsController < ApplicationController
       puts "parsing params"
       if param_val && param_val.respond_to?("each_pair")
         parse_date_params(param_val)
-      else 
+      else
         if param_key.to_s.include? "date"
           param_val = DateTime.strptime(param_val, "%m/%d/%d").to_date
           puts "converted #{param_key} value to #{param_val}"

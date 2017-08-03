@@ -1,7 +1,7 @@
 <div class="form-row nested-fields">
   <div class="form-col"><%= f.input :from_date, as: :date_picker, label: false %></div>
   <div class="form-col"><%= f.input :to_date, as: :date_picker, label: false %></div>
-  <div class="form-col"><%= f.select :state, 
+  <div class="form-col"><%= f.select :state,
     CS.get(:us).map { |state| [state[1], state[1], { id: state[0] } ] },
     { prompt: "State" },
     id: "states-of-country", class: "form-control"  %></div>

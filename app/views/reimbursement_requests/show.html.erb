@@ -1,2 +1,5 @@
 <h2>Congratulations! You finished your reimbursement request!</h2>
-<% console %>
+
+<% @reimbursement_request.children.each do |child| %>
+  <%= link_to (image_tag child.attachment.url(:thumb) ), child.attachment.url, target: :_blank %>
+<% end %>

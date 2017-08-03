@@ -1,17 +1,17 @@
-<%= simple_form_for @reimbursement_request do |f| %>
+<%= simple_form_for @reimbursement_request, url: reimbursement_requests_path, html: { multipart: true } do |f| %>
   <h3>Traveller Information</h3>
   <p>Name: <%= current_user.full_name if user_signed_in? %></p>
   <%= f.input :non_resident_alien %>
   <%= f.input :address %>
-  <%= 
-    f.input :certifier_id, 
-      collection: @certifiers, 
-      label_method: lambda { |c| c.full_name }, 
-      value_method: lambda { |c| c.id } 
+  <%=
+    f.input :certifier_id,
+      collection: @certifiers,
+      label_method: lambda { |c| c.full_name },
+      value_method: lambda { |c| c.id }
     %>
   <h3>Request Information</h3>
   <%= f.input :identifier %>
-  <%= f.input :description, as: :string%>
+  <%= f.input :description, as: :text %>
   <%= f.input :business_notes_and_purpose %>
   <% # create certifiers dropdown where each certifier is labeled by name but the form passes their id to params %>
   <h3>Itinerary</h3>
@@ -41,15 +41,15 @@
   <div class="form-table">
     <div class="form-row">
       <div class="form-colh">Date</div>
-      <div class="form-colh">State</div>
       <div class="form-colh">City</div>
+      <div class="form-colh">State</div>
       <div class="form-colh">Break</div>
       <div class="form-colh">Lunch</div>
       <div class="form-colh">Dinner</div>
       <div class="form-colh">Hotel</div>
       <div class="form-colh">Amount</div>
       <div class="form-colh"></div>
-    </div> 
+    </div>
     <%= f.simple_fields_for :travel_itineraries, wrapper: false, defaults: { label: false } do |travel_itinerary| %>
       <%= render "travel_itinerary_fields", f: travel_itinerary %>
     <% end %>
@@ -145,4 +145,3 @@
   <%= f.button :submit, class: "btn btn-primary" %>
   </p>
 <% end %>
-<% console %>
