@@ -1,7 +1,7 @@
 class ReimbursementRequestsController < ApplicationController
-  before_action :set_reimbursement_request, only: [:show, :edit]
-  before_action :set_certifiers, only: [:new, :create, :edit]
-  before_action :set_expense_types, only: [:new, :create, :edit]
+  before_action :set_reimbursement_request, only: [:show, :edit, :update]  
+  before_action :set_certifiers, only: [:new, :create, :edit, :update]
+  before_action :set_expense_types, only: [:new, :create, :edit, :update]
 
   def new
     @reimbursement_request = ReimbursementRequest.new
@@ -39,6 +39,13 @@ class ReimbursementRequestsController < ApplicationController
   def edit
   end
 
+  def update
+    if @reimbursement_request.update(reimbursement_request_params)
+      redirect_to @reimbursement_request, notice: "Your reimbursement request was updated."
+    else 
+      render :edit
+    end
+  end
   private
 
   def reimbursement_request_params
@@ -60,12 +67,12 @@ class ReimbursementRequestsController < ApplicationController
       :non_resident_alien,
       :business_notes_and_purpose,
       :address,
-      accountings_attributes: [:fund, :organization, :account, :program, :activity, :amount, :_destroy],
-      expense_airfares_attributes: [:from_date, :to_date, :from_location, :to_location, :notes, :amount, :_destroy],
-      expense_mileages_attributes: [:from_date, :to_date, :from_city, :from_state, :to_city, :to_state, :miles, :round_trip, :notes, :amount, :_destroy],
-      expense_others_attributes: [:expense_type_id, :from_date, :to_date, :notes, :amount, :_destroy],
-      travel_itineraries_attributes: [:city, :state, :break, :lunch, :dinner, :hotel, :amount, :date, :_destroy],
-      travel_cities_attributes: [:from_date, :to_date, :city, :state, :include_meals, :hotel_rate, :_destroy])
+      accountings_attributes: [:id, :fund, :organization, :account, :program, :activity, :amount, :_destroy],
+      expense_airfares_attributes: [:id, :from_date, :to_date, :from_location, :to_location, :notes, :amount, :_destroy],
+      expense_mileages_attributes: [:id, :from_date, :to_date, :from_city, :from_state, :to_city, :to_state, :miles, :round_trip, :notes, :amount, :_destroy],
+      expense_others_attributes: [:id, :expense_type_id, :from_date, :to_date, :notes, :amount, :_destroy],
+      travel_itineraries_attributes: [:id, :city, :state, :break, :lunch, :dinner, :hotel, :amount, :date, :_destroy],
+      travel_cities_attributes: [:id, :from_date, :to_date, :city, :state, :include_meals, :hotel_rate, :_destroy])
   end
 
   def set_reimbursement_request
@@ -85,6 +92,7 @@ class ReimbursementRequestsController < ApplicationController
   #   Non date/time values should not include these terms in their names
   #   All dates must be strings in mm/dd/yy format
   # Post conditions: dates and times will be converted to datetime/time acceptable formats and will be processed correctly when entered into the db
+  # Doesn't work right now
 
   def parse_date_params(params)
     params.each do |param_key, param_val|
