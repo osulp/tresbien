@@ -76,7 +76,11 @@ gem 'jquery-rails'
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
+# gem 'bootstrap', '~> 3.3.7', git: 'https://github.com/twbs/bootstrap-rubygem'
+# gem 'bootstrap-sass', '~> 3.3.7'
 
+# use font-awesome as a replacement for lost glyphicons in bootstrap 4
+gem 'font-awesome-rails'
 gem 'rails_admin'
 
 # Use simple form for reimbursement request form

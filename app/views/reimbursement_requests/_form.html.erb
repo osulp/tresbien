@@ -1,23 +1,29 @@
 <%= simple_form_for @reimbursement_request, url: reimbursement_requests_path, html: { multipart: true } do |f| %>
+  <div class="container" id="traveller-information">
   <h3>Traveller Information</h3>
   <p>Name: <%= current_user.full_name if user_signed_in? %></p>
   <%= f.input :non_resident_alien %>
-  <%= f.input :address %>
+  <%= f.input :address, input_html: { class: "col-md-4" } %>
+  <% # create certifiers dropdown where each certifier is labeled by name but the form passes their id to params %>
   <%=
     f.input :certifier_id,
       collection: @certifiers,
       label_method: lambda { |c| c.full_name },
-      value_method: lambda { |c| c.id }
+      value_method: lambda { |c| c.id },
+      input_html: { class: "col-md-4" }
     %>
+</div>
+<div class="container" id="request-information">
   <h3>Request Information</h3>
-  <%= f.input :identifier %>
-  <%= f.input :description, as: :text %>
-  <%= f.input :business_notes_and_purpose %>
-  <% # create certifiers dropdown where each certifier is labeled by name but the form passes their id to params %>
+  <%= f.input :identifier , input_html: { class: "col-md-4" }%>
+  <%= f.input :description, as: :text, input_html: { class: "col-md-4" } %>
+  <%= f.input :business_notes_and_purpose, input_html: { class: "col-md-4" } %>
+</div>
+  <div class="container" id="itinerary">
   <h3>Itinerary</h3>
-  <div class="container">
-    <%= f.input :depart_time, as: :time_picker %>
-    <%= f.input :return_time, as: :time_picker %>
+  <div class="row">
+    <%= f.input :depart_time, as: :time_picker, wrapper_html: { class: "col-md-4 offset-2 col-md-offset-2" } %>
+    <%= f.input :return_time, as: :time_picker, wrapper_html: { class: "col-md-4" } %>
   </div>
   <h4>Cities</h4>
   <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "State", "City", "Include meals?", "Hotel rate"] } do %>
@@ -25,7 +31,7 @@
       <%= render "travel_city_fields", f: travel_city %>
     <% end %>
     <div class="form-row">
-      <%= link_to_add_association 'Add line', f, :travel_cities %>
+      <%= link_to_add_association "Add line", f, :travel_cities %>
     </div>
   <% end %>
   <h4>Daily Itineraries</h4>
@@ -38,6 +44,8 @@
       <%= f.input :itinerary_total, input_html: { class: "total-input" } %>
     </div>
   <% end %>
+  </div>
+  <div class="container" id="auto-mileage">
   <h3>Auto Mileage</h3>
   <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "From State", "From City", "To State", "To City", "Round Trip?", "Miles", "Notes", "Amount"] } do %>
     <%= f.simple_fields_for :expense_mileages, wrapper: false, defaults: { label: false } do |expense_milage| %>
@@ -48,6 +56,8 @@
       <%= f.input :mileage_total, input_html: { class: "total-input" }  %>
     </div>
   <% end %>
+  </div>
+  <div class="container" id="airfare">
   <h3>Airfare</h3>
   <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "From Location", "To Location", "Notes", "Amount"] } do %>
     <%= f.simple_fields_for :expense_airfares, wrapper: false, defaults: { label: false } do |expense_airfare| %>
@@ -58,6 +68,8 @@
       <%= f.input :airfare_total, input_html: { class: "total-input" }  %>
     </div>
   <% end %>
+  </div>
+  <div class="container" id="other-expenses">
   <h3>Other expenses</h3>
   <%= render layout: "nested_fields_table", locals: { attributes: ["Expense Type", "From", "To", "Notes", "Amount"] } do %>
     <%= f.simple_fields_for :expense_others, wrapper: false, defaults: { label: false } do |expense_other| %>
@@ -68,6 +80,8 @@
       <%= f.input :other_total, input_html: { class: "total-input" }  %>
     </div>
   <% end %>
+  </div>
+  <div class="container" id="accounting">
   <h3>Accounting</h3>
   <%= render layout: "nested_fields_table", locals: { attributes: ["Index", "Fund", "Organization", "Account", "Program", "Activity", "Amount"] } do %>
     <%= f.simple_fields_for :accountings, wrapper: false, defaults: { label: false } do |accounting| %>
@@ -79,7 +93,8 @@
     </div>
   <% end %>
 
-
+  </div>
+  <div class="container" id="attachments">
   <h3>Attachments</h3>
 
   <div class = "control-group">
@@ -88,7 +103,8 @@
       <%= file_field_tag "attachments[]", type: :file, multiple: true %>
     </div>
   </div>
-
+  </div>
+  <div class="container" id="total">
   <h3>Total</h3>
   <div class="total">
     <button class="btn btn-success" id="calculate-total">Calculate Total</button>
@@ -98,4 +114,5 @@
   <p>
   <%= f.button :submit, class: "btn btn-primary" %>
   </p>
+  </div>
 <% end %>
