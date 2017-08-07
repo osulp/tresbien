@@ -6,7 +6,7 @@
     { prompt: "State" },
     id: "states-of-country", class: "form-control", label: false%></div>
   <div class="form-col"><%= f.select :city, [],{prompt: "City"}, id: "cities-of-state", class: "form-control" %></div>
-  <div class="form-col"><%= f.input :include_meals, as: :boolean, label: false %></div>
+  <div class="form-col"><%= f.input :include_meals, as: :boolean, wrapper_html: { class: "form-check" }, input_html: { class: "form-check" }, label: false %></div>
   <div class="form-col"><%= f.input :hotel_rate,  input_html: { class: "amount-input" }, label: false %></div>
   <div class="form-col"><%= link_to_remove_association "Remove", f %></div>
 </div>
