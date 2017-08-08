@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170808192016) do
+ActiveRecord::Schema.define(version: 20170809184719) do
 
   create_table "accountings", force: :cascade do |t|
     t.string "index"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 20170808192016) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "order"
   end
 
   create_table "travel_cities", force: :cascade do |t|

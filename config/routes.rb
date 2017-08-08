@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   resources :reimbursement_requests do
     resources :travel_itineraries
   end
+  resources :statuses do
+    resources :reimbursement_requests
+  end
   resources :city_state
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 

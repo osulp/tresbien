@@ -24,9 +24,12 @@ class ReimbursementRequestsController < ApplicationController
     @reimbursement_request.claimant = current_user if user_signed_in?
     @reimbursement_request.certifier = User.find(params.dig(:reimbursement_request, :certifier_id)) unless params.dig(:reimbursement_request, :certifier_id)
     @reimbursement_request.expense_others.each_with_index { |expense_other, index| expense_other.expense_type = ExpenseType.find(params[:reimbursement_request][:expense_others_attributes][index.to_s][:expense_type_id]) unless params[:reimbursement_request][:expense_others_attributes][index.to_s][:expense_type_id]  }
+    @reimbursement_request.status = Status.order(:order).first
     if @reimbursement_request.save
-      params[:attachments].each do |file|
-        @reimbursement_request.attachments.create(attachment: file)
+      if params[:attachments]
+        params[:attachments].each do |file|
+          @reimbursement_request.attachments.create(attachment: file)
+        end
       end
       redirect_to reimbursement_request_path(@reimbursement_request)
     else
