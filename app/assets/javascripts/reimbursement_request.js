@@ -61,13 +61,23 @@ $(document).ready(function() {
             });
         });
 
-    //$('.datetimepicker').datetimepicker();
+    $(".form-table").each(function() {
+        table = $(this);
+        $(this).find(".nested-fields").on("keyup", "input", function(e) {
+            setTableVal(table);
+        });
+        $(this).on("cocoon:after-insert", function(e, insertedItem) {
+            insertedItem.on("keyup", "input", function(e2) {
+                setTableVal(table);
+            });
+        });
+    });
     $('.datepicker').datetimepicker({
-        timepicker: false
+        timepicker: true
     });
     $('.timepicker').datetimepicker({
         datepicker: false,
-        format: 'g:i A' // ,
-            // formatTime:'g:i A'
+        format: 'g:i A'  ,
+             formatTime:'g:i A'
     });
 });

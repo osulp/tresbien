@@ -1,4 +1,3 @@
-
 <tr class="nested-fields">
   <td><%= f.input :date, as: :date_picker, label: false %></td>
   <td><%= f.select :state, CS.get(:us).map { |state| [state[1], state[1], { id: state[0] } ] }, { prompt: "State" }, id: "states-of-country", class: "form-control"  %></td>
@@ -8,8 +7,8 @@
   <td><%= f.input :dinner, label: false %></td>
   <td><%= f.input :hotel, label: false %></td>
   <td><%= f.input :amount, label: false, input_html: { class: "amount-input" } %></td>
-    <%= link_to_remove_association f do %>
-      <i class="fa fa-trash-o fa-2x"></i>
-    <% end %>
+  <td><%= link_to_remove_association f, class: "btn btn-danger btn-sm"  do %>
+        <i class="fa fa-trash-o fa-2x"></i>
+      <% end %></td>
   </div>
 </div>

@@ -1,3 +1,4 @@
+
 <tr class="nested-fields">
   <td><%= f.input :index, label: false, input_html: { value: current_user.index_code }  %></td>
   <td><%= f.input :fund, label: false %></td>
@@ -7,7 +8,7 @@
   <td><%= f.input :activity, label: false  %></td>
   <td><%= f.input :amount, label: false, input_html: { class: "amount-input" }  %></td>
   <td>
-  <%= link_to_remove_association f do %>
+  <%= link_to_remove_association f, class: "btn btn-danger btn-sm"  do %>
       <i class="fa fa-trash-o fa-2x"></i>
     <% end %>
   </td>

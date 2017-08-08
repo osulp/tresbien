@@ -2,54 +2,5 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "reimbursement_request";
-<<<<<<< 3f17f3ee03611436545f149ab7e55b66d8f8480a
 @import "jquery.datetimepicker.min";
-=======
 
-.name input {
-  width: 100%;
-}
-
-.row {
-  padding-bottom: 10px;
-}
-
-.save input {
-  width: 75px;
-}
-
-.form-table {
-  display: table;
-}
-
-.form-row {
-  display: table-row;
-  .form-group {
-    margin-bottom: .25rem;
-  }
-}
-
-.form-col {
-  display: table-cell;
-  overflow: auto;
-  padding: 5px;
-}
-
-.form-colh {
-  display: table-cell;
-  font-weight: bold;
-}
-
-a.remove_fields{
-    color: red;
-}
-
-.fa-plus-square{
-    margin-left: 5px;
-    margin-bottom: 15px;
-}
-
-h3, h4{
-    padding-top: 10px;
-}
->>>>>>> Allows multiple files upload
