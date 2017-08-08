@@ -2,6 +2,7 @@ class ReimbursementRequest < ApplicationRecord
   attr_accessor :accounting_total, :airfare_total, :mileage_total, :itinerary_total, :other_total
   belongs_to :claimant, class_name: "User"
   belongs_to :certifier, class_name: "User"
+  belongs_to :status, :inverse_of => :reimbursement_requests
   has_many :accountings
   has_many :expense_airfares
   has_many :expense_mileages

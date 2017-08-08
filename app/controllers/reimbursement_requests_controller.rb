@@ -1,5 +1,5 @@
 class ReimbursementRequestsController < ApplicationController
-  before_action :set_reimbursement_request, only: [:show, :edit, :update]  
+  before_action :set_reimbursement_request, only: [:show, :edit, :update]
   before_action :set_certifiers, only: [:new, :create, :edit, :update]
   before_action :set_expense_types, only: [:new, :create, :edit, :update]
 
@@ -42,7 +42,7 @@ class ReimbursementRequestsController < ApplicationController
   def update
     if @reimbursement_request.update(reimbursement_request_params)
       redirect_to @reimbursement_request, notice: "Your reimbursement request was updated."
-    else 
+    else
       render :edit
     end
   end
