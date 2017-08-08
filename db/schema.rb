@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170801171320) do
+ActiveRecord::Schema.define(version: 20170808192016) do
 
   create_table "accountings", force: :cascade do |t|
     t.string "index"
@@ -66,13 +66,13 @@ ActiveRecord::Schema.define(version: 20170801171320) do
   end
 
   create_table "expense_others", force: :cascade do |t|
+    t.integer "expense_type_id"
     t.datetime "from_date"
     t.datetime "to_date"
     t.text "notes"
     t.float "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "expense_type_id"
     t.integer "reimbursement_request_id"
     t.index ["expense_type_id"], name: "index_expense_others_on_expense_type_id"
     t.index ["reimbursement_request_id"], name: "index_expense_others_on_reimbursement_request_id"
@@ -104,8 +104,16 @@ ActiveRecord::Schema.define(version: 20170801171320) do
     t.boolean "non_resident_alien"
     t.text "business_notes_and_purpose"
     t.string "address"
+    t.integer "status_id"
     t.index ["certifier_id"], name: "index_reimbursement_requests_on_certifier_id"
     t.index ["claimant_id"], name: "index_reimbursement_requests_on_claimant_id"
+    t.index ["status_id"], name: "index_reimbursement_requests_on_status_id"
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "travel_cities", force: :cascade do |t|
