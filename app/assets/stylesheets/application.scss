@@ -5,36 +5,38 @@
  */
 @import "bootstrap";
 @import "font-awesome";
+@import "reimbursement_request";
 
 .name input {
-    width: 100%;
+  width: 100%;
 }
 
 .row {
-    padding-bottom: 10px;
+  padding-bottom: 10px;
 }
 
 .save input {
-    width: 75px;
+  width: 75px;
 }
 
 .form-table {
-    display: table;
+  display: table;
 }
 
 .form-row {
-    display: table-row;
-    .form-group {
-        margin-bottom: .25rem;
-    }
+  display: table-row;
+  .form-group {
+    margin-bottom: .25rem;
+  }
 }
 
 .form-col {
-    display: table-cell;
-    padding: 5px;
+  display: table-cell;
+  overflow: auto;
+  padding: 5px;
 }
 
 .form-colh {
-    display: table-cell;
-    font-weight: bold;
+  display: table-cell;
+  font-weight: bold;
 }

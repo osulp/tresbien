@@ -21,8 +21,8 @@
 </div>
   <div class="container" id="itinerary">
   <h3>Itinerary</h3>
-  <div class="row">
-    <%= f.input :depart_time, as: :time_picker, wrapper_html: { class: "col-md-4 offset-2 col-md-offset-2" } %>
+  <div class="row justify-content-center">
+    <%= f.input :depart_time, as: :time_picker, wrapper_html: { class: "col-md-4" } %>
     <%= f.input :return_time, as: :time_picker, wrapper_html: { class: "col-md-4" } %>
   </div>
   <h4>Cities</h4>
@@ -31,7 +31,7 @@
       <%= render "travel_city_fields", f: travel_city %>
     <% end %>
     <div class="form-row">
-      <%= link_to_add_association "Add line", f, :travel_cities %>
+      <%= link_to_add_association  "Add line", f, :travel_cities do  %>
     </div>
   <% end %>
   <h4>Daily Itineraries</h4>
