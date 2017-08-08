@@ -22,7 +22,6 @@
 
 .byebug_history
 .vscode
-/vendor*
 
 /public/*
 /lib/*
