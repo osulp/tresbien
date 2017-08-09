@@ -1,10 +1,10 @@
-<div class="form-row nested-fields">
-  <div class="form-col"><%= f.input :index, label: false  %></div>
-  <div class="form-col"><%= f.input :fund, label: false %></div>
-  <div class="form-col"><%= f.input :organization, label: false  %></div>
-  <div class="form-col"><%= f.input :account, label: false %></div>
-  <div class="form-col"><%= f.input :program, label: false  %></div>
-  <div class="form-col"><%= f.input :activity, label: false  %></div>
-  <div class="form-col"><%= f.input :amount, label: false, input_html: { class: "amount-input" }  %></div>
-  <div class="form-col"><%= link_to_remove_association "Remove", f %></div>
-</div>
+<tr class="nested-fields">
+  <td><%= f.input :index, label: false  %></td>
+  <td><%= f.input :fund, label: false %></td>
+  <td><%= f.input :organization, label: false  %></td>
+  <td><%= f.input :account, label: false %></td>
+  <td><%= f.input :program, label: false  %></td>
+  <td><%= f.input :activity, label: false  %></td>
+  <td><%= f.input :amount, label: false, input_html: { class: "amount-input" }  %></td>
+  <td><%= link_to_remove_association "Remove", f %></td>
+</tr>

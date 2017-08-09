@@ -10,7 +10,7 @@ var getInputTotal = function(input) {
 
 // sets the 'total' input box for table; table should be a "form-table" div with an field whose name contains amount in the last row; total is left blank if total is 0
 var setTableTotal = function(table) {
-    var totalInput = table.children().last().find("input");
+    var totalInput = $("." + table.data('total-class'));
     var total;
     total = 0;
     table.children().each(function() {
@@ -36,29 +36,12 @@ var setGrandTotal = function(grandTotalInput) {
     else totalInput.val(null);
 };
 
-var setTableVal = function(table) {
-    var totalInput = table.children().last().find("input");
-    var total = 0;
-    table.children().each(function() {
-        $(this).find('input').each(function() {
-            if ($(this).length && $(this).attr('id').includes('amount')) {
-                if ($(this).val())
-                    total += parseFloat($(this).val());
-            }
-        });
-    });
-    if (total > 0)
-        totalInput.val(total);
-    else
-        totalInput.val(null);
-};
-
 $(document).ready(function() {
-    $(document).on('change keyup', '.amount-input', function(e) {
-            table = $(this).parents('.form-table');
+    $(document).on('keyup', '.amount-input', function(e) {
+            table = $(this).parents('.table');
             setTableTotal(table);
         })
-        .on('cocoon:after-remove', '.form-table', function(e) {
+        .on('cocoon:after-remove', '.table', function(e) {
             setTableTotal($(this));
         })
         .on('click', "#calculate-total", function(e) {
@@ -66,7 +49,7 @@ $(document).ready(function() {
             totalInput = $(this).next().find(".grand-total-input");
             setGrandTotal(totalInput);
         })
-        .on('cocoon:after-insert', '.form-table', function(e) {
+        .on('cocoon:after-insert', '.table', function(e) {
             $(this).find('.datetimepicker').datetimepicker();
             $(this).find('.datepicker').datetimepicker({
                 timepicker: false
@@ -77,19 +60,7 @@ $(document).ready(function() {
                 formatTime: 'g:i A'
             });
         });
-    // sets the 'total' input box for table; table should be a "form-table" div with an field whose name contains amount in the last row; total is left blank if total is 0
 
-    $(".form-table").each(function() {
-        table = $(this);
-        $(this).find(".nested-fields").on("keyup", "input", function(e) {
-            setTableVal(table);
-        });
-        $(this).on("cocoon:after-insert", function(e, insertedItem) {
-            insertedItem.on("keyup", "input", function(e2) {
-                setTableVal(table);
-            });
-        });
-    });
     //$('.datetimepicker').datetimepicker();
     $('.datepicker').datetimepicker({
         timepicker: false

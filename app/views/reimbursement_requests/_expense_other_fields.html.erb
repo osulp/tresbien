@@ -1,12 +1,14 @@
-<div class="form-row nested-fields">
-  <div class="form-col"><%= f.input :expense_type_id,
-    collection: @expense_types, 
-    label_method: lambda { |e| e.name },
-    value_method: lambda { |e| e.id },
-    label: false  %></div>
-  <div class="form-col"><%= f.input :from_date, as: :date_picker, label: false %></div>
-  <div class="form-col"><%= f.input :to_date, as: :date_picker, label: false %></div>
-  <div class="form-col"><%= f.input :notes, label: false, as: :string%></div>
-  <div class="form-col"><%= f.input :amount, label: false, input_html: { class: "amount-input" } %></div>
-  <div class="form-col"><%= link_to_remove_association "Remove", f %></div> 
-</div>
+<tr class="nested-fields">
+  <td>
+    <%= f.input :expense_type_id,
+        collection: @expense_types,
+        label_method: lambda { |e| e.name },
+        value_method: lambda { |e| e.id },
+        label: false  %>
+  </td>
+  <td><%= f.input :from_date, as: :date_picker, label: false %></td>
+  <td><%= f.input :to_date, as: :date_picker, label: false %></td>
+  <td><%= f.input :notes, label: false, as: :string%></td>
+  <td><%= f.input :amount, label: false, input_html: { class: "amount-input" } %></td>
+  <td><%= link_to_remove_association "Remove", f %></td>
+</tr>

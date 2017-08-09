@@ -1,9 +1,12 @@
-<div class="form-table">
-  <div class="form-row">
-    <% attributes.each do |attr| %>
-      <div class="form-colh"><%= attr %></div>
-    <%end %>
-  <div class="form-row"></div>
-  </div>
-  <%= yield %>
+<div class="row">
+  <table id="<%= id %>" class="table" data-total-class="<%= total_class %>">
+    <thead>
+      <% attributes.each do |attr| %>
+        <th><%= attr %></th>
+      <% end %>
+    </thead>
+    <tbody>
+      <%= yield %>
+    </tbody>
+  </table>
 </div>
