@@ -1,5 +1,5 @@
 <div class="row">
-  <table id="<%= id %>" class="table" data-total-class="<%= total_class %>">
+  <table id="<%= id %>" class="table" data-total-class="<%= local_assigns[:total_class].nil? ? "" : total_class %>">
     <thead>
       <% attributes.each do |attr| %>
         <th><%= attr %></th>
