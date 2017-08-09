@@ -1,16 +1,20 @@
-<div class="row">
-  <h3>Airfare</h3>
-</div>
-<%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "From Location", "To Location", "Notes", "Amount", ""], id: "airfare", total_class: "airfare-total" } do %>
-  <%= f.simple_fields_for :expense_airfares do |expense_airfare| %>
-    <%= render "expense_airfare_fields", f: expense_airfare %>
-  <% end %>
-<% end %>
-<div class="row">
-  <%= link_to_add_association 'Add line', f, :expense_airfares,
-      'data-association-insertion-node' => '#airfare tbody',
-      'data-association-insertion-method' => 'append' %>
-</div>
-<div class="row justify-content-end">
-  <%= f.input :airfare_total, input_html: { class: "airfare-total" }  %>
+<div id="airfare_panel" class="row">
+  <div class="col-12">
+    <div class="row">
+      <h3>Airfare</h3>
+    </div>
+    <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "From Location", "To Location", "Notes", "Amount", ""], id: "airfare", total_class: "airfare-total" } do %>
+      <%= f.simple_fields_for :expense_airfares do |expense_airfare| %>
+        <%= render "expense_airfare_fields", f: expense_airfare %>
+      <% end %>
+    <% end %>
+    <div class="row">
+      <%= link_to_add_association 'Add line', f, :expense_airfares,
+          'data-association-insertion-node' => '#airfare tbody',
+          'data-association-insertion-method' => 'append' %>
+    </div>
+    <div class="row justify-content-end">
+      <%= f.input :airfare_total, input_html: { class: "airfare-total" }  %>
+    </div>
+  </div>
 </div>

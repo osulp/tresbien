@@ -1,16 +1,20 @@
-<div class="row">
-  <h3>Accounting</h3>
-</div>
-<%= render layout: "nested_fields_table", locals: { attributes: ["Index", "Fund", "Organization", "Account", "Program", "Activity", "Amount", ""], id: "accountings", total_class: "accountings-total" } do %>
-  <%= f.simple_fields_for :accountings do |accounting| %>
-    <%= render "accounting_fields", f: accounting %>
-  <% end %>
-<% end %>
-<div class="row">
-  <%= link_to_add_association 'Add line', f, :accountings,
-      'data-association-insertion-node' => '#accountings tbody',
-      'data-association-insertion-method' => 'append' %>
-</div>
-<div class="row justify-content-end">
-  <%= f.input :accounting_total, input_html: { class: "accountings-total" }  %>
+<div id="accounting_panel" class="row">
+  <div class="col-12">
+    <div class="row">
+      <h3>Accounting</h3>
+    </div>
+    <%= render layout: "nested_fields_table", locals: { attributes: ["Index", "Fund", "Organization", "Account", "Program", "Activity", "Amount", ""], id: "accountings", total_class: "accountings-total" } do %>
+      <%= f.simple_fields_for :accountings do |accounting| %>
+        <%= render "accounting_fields", f: accounting %>
+      <% end %>
+    <% end %>
+    <div class="row">
+      <%= link_to_add_association 'Add line', f, :accountings,
+          'data-association-insertion-node' => '#accountings tbody',
+          'data-association-insertion-method' => 'append' %>
+    </div>
+    <div class="row justify-content-end">
+      <%= f.input :accounting_total, input_html: { class: "accountings-total" }  %>
+    </div>
+  </div>
 </div>
