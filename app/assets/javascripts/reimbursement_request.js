@@ -37,7 +37,7 @@ var setGrandTotal = function(grandTotalInput) {
 };
 
 $(document).ready(function() {
-    $(document).on('keyup', '.amount-input', function(e) {
+    $(document).on('keyup mouseup', '.amount-input', function(e) {
             table = $(this).parents('.table');
             setTableTotal(table);
         })
