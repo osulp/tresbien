@@ -1,0 +1,32 @@
+<%# TODO: Derive depart_time and return_time based on the dates provided in Daily Itineraries %>
+
+<div class="row">
+  <h3>Cities Travelled</h3>
+</div>
+<%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "State", "City", "Include meals?", "Hotel rate", ""], id: "cities_travelled", total_class: "itineraries-total" } do %>
+  <%= f.simple_fields_for :travel_cities do |travel_city| %>
+    <%= render "travel_city_fields", f: travel_city %>
+  <% end %>
+<% end %>
+<div class="row">
+  <%= link_to_add_association  "Add line", f, :travel_cities,
+      'data-association-insertion-node' => '#cities_travelled tbody',
+      'data-association-insertion-method' => 'append' %>
+</div>
+
+<div class="row">
+  <h3>Daily Itineraries</h3>
+</div>
+<%= render layout: "nested_fields_table", locals: { attributes: ["Date", "State", "City", "Break", "Lunch", "Dinner", "Hotel", "Amount", ""], id: "daily_itineraries", total_class: "itineraries-total" } do %>
+  <%= f.simple_fields_for :travel_itineraries do |travel_itinerary| %>
+    <%= render "travel_itinerary_fields", f: travel_itinerary %>
+  <% end %>
+<% end %>
+<div class="row">
+  <%= link_to_add_association 'Add line', f, :travel_itineraries,
+    'data-association-insertion-node' => '#daily_itineraries tbody',
+    'data-association-insertion-method' => 'append' %>
+</div>
+<div class="row justify-content-end">
+  <%= f.input :itinerary_total, input_html: { class: "itineraries-total" } %>
+</div>

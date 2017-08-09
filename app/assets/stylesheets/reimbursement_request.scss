@@ -1,23 +1,6 @@
 // Place all the styles related to the reimbursement_request controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-.form-table {
-  table-layout: fixed;
-  width: 100%;
-  .form-col {
-    overflow: hidden;
-  } 
+.table {
+    margin-bottom: 0;
 }
-
-.checkbox label {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-.form-table input[type="checkbox"] {
-  display: block;
-  @extend .mx-auto;
-}
-

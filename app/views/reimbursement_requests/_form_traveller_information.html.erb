@@ -1,0 +1,13 @@
+<div class="row">
+  <h3>Traveller Information</h3>
+</div>
+<div class="row">
+  <span class="col-2">Name: <%= current_user.full_name if user_signed_in? %></span>
+  <%= f.input :non_resident_alien, wrapper_html: { class: "col" } %>
+</div>
+<div class="row">
+  <%= f.input :certifier_id,
+      collection: @certifiers,
+      label_method: lambda { |c| c.full_name },
+      value_method: lambda { |c| c.id } %>
+</div>
