@@ -1,30 +1,5 @@
-<h2>Reimbursement request submitted</h2>
+<h2>Congratulations! You finished your reimbursement request!</h2>
 
-<h3>Traveller Informatin</h3>
-  <%= "Address: #{@reimbursement_request.address}"%><br>
-  <%= "Certifier: #{@reimbursement_request.claimant.full_name}"%>
-
-<h3>Request Information</h3>
-<%= "Identifier: #{@reimbursement_request.identifier}" %><br>
-<%= "Description: #{@reimbursement_request.description}"%><br>
-<%= "Business notes and purpose: #{@reimbursement_request.business_notes_and_purpose}"%>
-<h3>Itinerary</h3>
-<%= "Depart time: #{@reimbursement_request.depart_time} Return time: #{@reimbursement_request.return_time}"%>
-<h4>Cities</h4>
-<% @reimbursement_request.travel_cities.each do |city| %>
-  <%= "From #{city.from_date} to #{city.to_date}"%>
-  <%= "#{city.include_meals?}"%>
-<% end %>
-<h4>Daily Itineraries</h4>
-<h3>Auto Mileage</h3>
-<h3>Airfare</h3>
-<h3>Other expenses</h3>
-<h3>Accounting</h3>
-
-<br>
-<h3>Attachments</h3>
 <% @reimbursement_request.children.each do |child| %>
   <%= link_to (image_tag child.attachment.url(:thumb) ), child.attachment.url, target: :_blank %>
 <% end %>
-<% console %>
-

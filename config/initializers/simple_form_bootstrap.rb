@@ -5,7 +5,6 @@ SimpleForm.setup do |config|
   config.boolean_label_class = nil
 
   config.wrappers :table_form, tag: 'div', class: 'form-group form-col', error_class: 'has-error' do |b|
-
     b.use :html5
     b.use :placeholder
     b.optional :maxlength

@@ -61,28 +61,13 @@ $(document).ready(function() {
             });
         });
 
-    $(".form-table").each(function() {
-        table = $(this);
-        $(this).find(".nested-fields").on("keyup", "input", function(e) {
-            setTableVal(table);
-        });
-        $(this).on("cocoon:after-insert", function(e, insertedItem) {
-            insertedItem.on("keyup", "input", function(e2) {
-                setTableVal(table);
-            });
-        });
-    });
-
-    $('.datetimepicker').datetimepicker({
-        format: 'g:i A'  ,
-        formatTime:'g:i A'
-    });
+    //$('.datetimepicker').datetimepicker();
     $('.datepicker').datetimepicker({
         timepicker: false
     });
     $('.timepicker').datetimepicker({
         datepicker: false,
-        format: 'g:i A'  ,
-        formatTime:'g:i A'
+        format: 'g:i A' // ,
+            // formatTime:'g:i A'
     });
 });
