@@ -1,5 +1,5 @@
 <tr class="nested-fields">
-  <td><%= f.input :index, label: false  %></td>
+  <td><%= f.input :index, label: false, input_html: { value: current_user.index_code }  %></td>
   <td><%= f.input :fund, label: false %></td>
   <td><%= f.input :organization, label: false  %></td>
   <td><%= f.input :account, label: false %></td>
