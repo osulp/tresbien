@@ -1,0 +1,14 @@
+@import 'bootstrap';
+
+.row {
+  margin-bottom: 20px;
+}
+
+.print-hide {
+  display: none;
+}
+
+// Use this to avoid having rows/table rows/whatever cut in half when generating pdfs. May need to adjust selected elements as page evolves
+.row {
+  page-break-inside: avoid;
+}

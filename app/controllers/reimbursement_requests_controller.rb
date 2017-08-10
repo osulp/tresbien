@@ -12,8 +12,17 @@ class ReimbursementRequestsController < ApplicationController
   def index; end
 
   def show
-    @reimbursement_request = ReimbursementRequest.find(params[:id])
     @children = @reimbursement_request.children
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "#{@reimbursement_request.id}",
+          template: "reimbursement_requests/show.html.erb",
+          layout: 'pdf',
+          handlers: [:erb],
+          formats: [:pdf]
+      end
+    end 
   end
 
   def create
