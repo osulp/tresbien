@@ -10,7 +10,6 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
 //= require jquery3
 //= require popper
 //= require jquery_ujs
@@ -19,9 +18,6 @@
 //= require turbolinks
 //= require city_state
 //= require cocoon
+//= require_tree .
 //= require reimbursement_request.js
 //= require jquery.datetimepicker.full.min.js
-//= require jquery_nested_form
-
-// Make sure this is always last
-//= require_tree .
