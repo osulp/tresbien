@@ -72,12 +72,17 @@ $(document).ready(function() {
             });
         });
     });
+
+    $('.datetimepicker').datetimepicker({
+        format: 'g:i A'  ,
+        formatTime:'g:i A'
+    });
     $('.datepicker').datetimepicker({
-        timepicker: true
+        timepicker: false
     });
     $('.timepicker').datetimepicker({
         datepicker: false,
         format: 'g:i A'  ,
-             formatTime:'g:i A'
+        formatTime:'g:i A'
     });
 });
