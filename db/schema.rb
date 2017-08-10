@@ -66,13 +66,13 @@ ActiveRecord::Schema.define(version: 20170810162621) do
   end
 
   create_table "expense_others", force: :cascade do |t|
+    t.integer "expense_type_id"
     t.datetime "from_date"
     t.datetime "to_date"
     t.text "notes"
     t.float "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "expense_type_id"
     t.integer "reimbursement_request_id"
     t.index ["expense_type_id"], name: "index_expense_others_on_expense_type_id"
     t.index ["reimbursement_request_id"], name: "index_expense_others_on_reimbursement_request_id"
