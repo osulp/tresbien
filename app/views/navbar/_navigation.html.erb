@@ -1,0 +1,26 @@
+<nav class="navbar">
+  <div class="unicorn toggle-down navbar-brand" onclick="toggle()"><%= image_tag("unicorn.png", size: "60x60", alt: "Edit Entry") %>TRESBIEN</div>
+  <ul class="nav">
+    <% if user_signed_in? %>
+      <li class="nav-item welcome">
+        <p>Welcome back, <%= current_user.username %></p>
+      </li>
+      <li class="nav-item">
+          <%= link_to "Reimbursement Requests List", root_path , class: "nav-link" %>
+      </li>
+      <li class="nav-item">
+        <% if current_user.admin %>
+          <%= link_to "Admin Interface", rails_admin_path , class: "nav-link" %>
+        <% end %>
+      </li>
+        <li class="nav-item">
+        <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+      </li>
+  <% else %>
+      <li class="nav-item">
+        <%= link_to "Sign in", new_user_session_path, class:"nav-link" %>
+      </li>
+    <% end %>
+  </ul>
+</nav>
+
