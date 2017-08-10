@@ -36,6 +36,40 @@ gem 'capistrano-rails'
 gem 'capistrano-passenger'
 gem 'capistrano-rbenv'
 gem 'capistrano3-puma'
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Use devise for authentication
+gem 'devise'
+gem 'devise-guests', '~> 0.5'
+
+# CAS Authentication gems
+gem 'rubycas-client', git: 'https://github.com/osulp/rubycas-client'
+gem 'rubycas-client-rails', git: 'https://github.com/osulp/rubycas-client-rails'
+gem 'devise_cas_authenticatable'
+
+gem 'city-state'
+gem 'jquery-rails'
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
+
+gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.3.3'
+end
+
+# use font-awesome as a replacement for lost glyphicons in bootstrap 4
+gem 'font-awesome-rails'
+gem 'rails_admin'
+# Use simple form for reimbursement request form
+gem 'simple_form'
+# Use cocoon for add/remove functionality in nested forms
+gem 'cocoon'
+# Use Paperclip for adding attachments
+gem "paperclip", "~> 5.0.0"
+# Use nested_form to help with reimbursement request form
+gem 'nested_form'
+# Use webpacker to support ES6 javascript
+gem "webpacker", github: "rails/webpacker"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -59,43 +93,3 @@ group :development do
   gem 'fasterer'
   gem 'rubocop'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-# Use devise for authentication
-gem 'devise'
-gem 'devise-guests', '~> 0.5'
-
-# CAS Authentication gems
-gem 'rubycas-client', git: 'https://github.com/osulp/rubycas-client'
-gem 'rubycas-client-rails', git: 'https://github.com/osulp/rubycas-client-rails'
-gem 'devise_cas_authenticatable'
-
-gem 'city-state'
-
-gem 'jquery-rails'
-
-gem 'wdm', '>= 0.1.0' if Gem.win_platform?
-
-gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
-source 'https://rails-assets.org' do
-  gem 'rails-assets-tether', '>= 1.3.3'
-end
-
-# use font-awesome as a replacement for lost glyphicons in bootstrap 4
-gem 'font-awesome-rails'
-gem 'rails_admin'
-
-# Use simple form for reimbursement request form
-gem 'simple_form'
-
-# Use cocoon for add/remove functionality in nested forms
-gem 'cocoon'
-
-# Use Paperclip for adding attachments
-gem "paperclip", "~> 5.0.0"
-
-# Use nested_form to help with reimbursement request form
-gem 'nested_form'
-
