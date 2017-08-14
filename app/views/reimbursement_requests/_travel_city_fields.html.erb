@@ -9,14 +9,14 @@
       <%= f.input :id, as: :hidden, wrapper: false, input_html: { class: "travel-city-id" } %>
       <input type='hidden' class='unique-id' />
       <a class='add-itineraries btn btn-primary btn-sm' data-toggle='tooltip' data-placement='top' title='<%= t('reimbursement_request_form.tooltips.add_daily_itineraries') %>' href='#'>
-        <i class="fa fa-calendar-plus-o"></i>
+        <i class="fa fa-calendar-plus-o fa-2x"></i>
       </a>
       <%= link_to_remove_association f,
           class: "btn btn-danger btn-sm",
           "data-toggle" => 'tooltip',
           "data-placement" => 'top',
           title: t('reimbursement_request_form.tooltips.remove_travel_city')  do %>
-        <i class="fa fa-trash-o"></i>
+        <i class="fa fa-trash-o fa-2x"></i>
       <% end %>
     </div>
   </td>

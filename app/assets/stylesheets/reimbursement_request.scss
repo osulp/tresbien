@@ -1,7 +1,6 @@
 // Place all the styles related to the reimbursement_request controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
 .table {
   margin-bottom: 0;
   thead {
@@ -63,8 +62,52 @@
     font-size: $font-size;
     padding: 0.2rem 0.75rem 0.2rem 0;
   }
-  .grand-total-label, .grand-total-input {
+  .grand-total-label,
+  .grand-total-input {
     font-weight: bold;
     font-size: $font-size + 0.1rem;
+  }
+}
+
+.add_fields {
+  margin: 5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin-top: 15px;
+}
+
+.attachment {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.btn-success {
+  margin-top: 25px;
+  margin-bottom: 20px;
+}
+
+.style1 {
+  margin-top: 15px;
+  border-top: 1px solid #c6c6c6;
+}
+
+.flash_messages {
+  width: 500px;
+  margin-top: 35px;
+}
+
+div.has-error {
+  input,
+  select {
+    border: 1px #ff3535 solid;
+    background-color: #ffd9d9;
+  }
+  .help-block {
+    color: #ff3535
   }
 }

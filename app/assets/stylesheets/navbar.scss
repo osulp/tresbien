@@ -10,7 +10,6 @@
     &.toggle-down {
       transform: rotate(0deg);
     }
-
     &.toggle-up {
       transform: rotate(180deg);
     }
@@ -21,8 +20,8 @@
   .nav-link {
     border-left: 1px solid #637890;
     margin-top: 0px;
-    padding-top: 22px;
-    padding-bottom: 22px;
+    padding-top: 24px;
+    padding-bottom: 24px;
     color: #000;
     &:hover {
       background: #555;
