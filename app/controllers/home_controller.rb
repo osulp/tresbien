@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
   before_action :set_reimbursement_requests, only: [:index]
+  before_action :authenticate_user!
 
   def index
 
