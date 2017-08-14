@@ -1,6 +1,6 @@
-<div id="other_expenses_panel" class="row">
-  <div class="col-12">
-    <div class="row">
+<div id="other_expenses_panel" class="form-row">
+  <div class="col col-12">
+    <div class="form-row">
       <h3>Other Expenses</h3>
     </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["Expense Type", "From", "To", "Notes", "Amount", ""], id: "other_expenses", total_class: "other-expenses-total" } do %>
@@ -8,13 +8,10 @@
         <%= render "expense_other_fields", f: expense_other %>
       <% end %>
     <% end %>
-    <div class="row">
+    <div class="form-row">
       <%= link_to_add_association 'Add line', f, :expense_others,
           'data-association-insertion-node' => '#other_expenses tbody',
           'data-association-insertion-method' => 'append' %>
-    </div>
-    <div class="row justify-content-end">
-      <%= f.input :other_total, input_html: { class: "other-expenses-total grand-total" }  %>
     </div>
   </div>
 </div>

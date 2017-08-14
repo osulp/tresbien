@@ -1,6 +1,6 @@
-<div id="airfare_panel" class="row">
-  <div class="col-12">
-    <div class="row">
+<div id="airfare_panel" class="form-row">
+  <div class="col col-12">
+    <div class="form-row">
       <h3>Airfare</h3>
     </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "From Location", "To Location", "Notes", "Amount", ""], id: "airfare", total_class: "airfare-total" } do %>
@@ -8,13 +8,10 @@
         <%= render "expense_airfare_fields", f: expense_airfare %>
       <% end %>
     <% end %>
-    <div class="row">
+    <div class="form-row">
       <%= link_to_add_association 'Add line', f, :expense_airfares,
           'data-association-insertion-node' => '#airfare tbody',
           'data-association-insertion-method' => 'append' %>
-    </div>
-    <div class="row justify-content-end">
-      <%= f.input :airfare_total, input_html: { class: "airfare-total grand-total" }  %>
     </div>
   </div>
 </div>

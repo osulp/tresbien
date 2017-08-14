@@ -1,14 +1,21 @@
-<%= simple_form_for @reimbursement_request, url: reimbursement_requests_path, html: { multipart: true, class: 'container reimbursement-request-form' } do |f| %>
-  <%= render partial: 'form_traveller_information',  locals: { f: f, current_user: current_user, certifiers: @certifiers }  %>
-  <%= render partial: 'form_request_information', locals: { f: f } %>
-  <%= render partial: 'form_itinerary', locals: { f: f } %>
-  <%= render partial: 'form_other_expenses', locals: { f: f } %>
-  <%= render partial: 'form_accounting', locals: { f: f } %>
-  <%= render partial: 'form_airfare', locals: { f: f } %>
-  <%= render partial: 'form_mileage', locals: { f: f } %>
-  <%= render partial: 'form_attachments', locals: { f: f } %>
-  <%= render partial: 'form_total', locals: { f: f } %>
+<%= simple_form_for @reimbursement_request, url: reimbursement_requests_path, html: { multipart: true, class: 'reimbursement-request-form' } do |f| %>
   <div class="row">
-    <%= f.button :submit, class: "btn btn-primary" %>
+    <div class="col col-md-2">
+      <%= render partial: 'form_total', locals: { f: f } %>
+    </div>
+    <div class="col col-md-10">
+      <h2 class="form-row"><%= @reimbursement_request.new_record? ? "New" : "Edit" %> Reimbursement Request</h2>
+      <%= render partial: 'form_traveller_information',  locals: { f: f, current_user: current_user, certifiers: @certifiers }  %>
+      <%= render partial: 'form_request_information', locals: { f: f } %>
+      <%= render partial: 'form_itinerary', locals: { f: f } %>
+      <%= render partial: 'form_other_expenses', locals: { f: f } %>
+      <%= render partial: 'form_accounting', locals: { f: f } %>
+      <%= render partial: 'form_airfare', locals: { f: f } %>
+      <%= render partial: 'form_mileage', locals: { f: f } %>
+      <%= render partial: 'form_attachments', locals: { f: f } %>
+      <div class="form-row">
+        <%= f.button :submit, class: "btn btn-primary" %>
+      </div>
+    </div>
   </div>
 <% end %>

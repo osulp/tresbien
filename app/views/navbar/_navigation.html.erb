@@ -1,5 +1,5 @@
-<nav class="navbar">
-  <div class="unicorn toggle-down navbar-brand" onclick="toggle()"><%= image_tag("unicorn.png", size: "60x60", alt: "Edit Entry") %>TRESBIEN</div>
+<nav class="navbar fixed-top">
+  <div class="unicorn toggle-down navbar-brand"><%= image_tag("unicorn.png", size: "60x60") %>TRESBIEN</div>
   <ul class="nav">
     <% if user_signed_in? %>
       <li class="nav-item welcome">
@@ -18,7 +18,7 @@
       </li>
   <% else %>
       <li class="nav-item">
-        <%= link_to "Sign in", new_user_session_path, class:"nav-link" %>
+        <%= link_to "Sign in", new_user_session_path, class:"sign-in btn btn-primary" %>
       </li>
     <% end %>
   </ul>

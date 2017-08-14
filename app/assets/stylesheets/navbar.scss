@@ -1,0 +1,33 @@
+.navbar {
+  background: #d1ecff;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-right: 0px;
+  .unicorn {
+    transition: all .75s 0.25s;
+    padding: 3px;
+    cursor: pointer;
+    &.toggle-down {
+      transform: rotate(0deg);
+    }
+
+    &.toggle-up {
+      transform: rotate(180deg);
+    }
+  }
+  .sign-in {
+    margin-right: 10px;
+  }
+  .nav-link {
+    border-left: 1px solid #637890;
+    margin-top: 0px;
+    padding-top: 22px;
+    padding-bottom: 22px;
+    color: #000;
+    &:hover {
+      background: #555;
+      color: white;
+      cursor: pointer;
+    }
+  }
+}
