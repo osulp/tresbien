@@ -1,5 +1,5 @@
 // returns the value in input converted to a float or zero if the input is blank; returns NaN for non-number inputs
-var getInputTotal = function(input) {
+var getInputTotal = function (input) {
     if (input.length) {
         if (input.val().length > 0) {
             return parseFloat(input.val());
@@ -9,12 +9,12 @@ var getInputTotal = function(input) {
 }
 
 // sets the 'total' input box for table; table should be a "form-table" div with an field whose name contains amount in the last row; total is left blank if total is 0
-var setTableTotal = function(table) {
+var setTableTotal = function (table) {
     var totalInput = $("." + table.data('total-class'));
     var total;
     total = 0;
-    table.children().each(function() {
-        $(this).find('.amount-input').each(function() {
+    table.children().each(function () {
+        $(this).find('.amount-input').each(function () {
             total += getInputTotal($(this));
         });
     });
@@ -26,30 +26,30 @@ var setTableTotal = function(table) {
 }
 
 // set grandTotalInput to the sum of the values in each total-input field; ignores null values and leaves grandTotalInput blank if total is zero
-var setGrandTotal = function(grandTotalInput) {
+var setGrandTotal = function (grandTotalInput) {
     var total;
     total = 0;
-    $(".total-input").each(function() {
+    $(".total-input").each(function () {
         total += getInputTotal($(this));
     });
     if (total > 0) totalInput.val(total);
     else totalInput.val(null);
 };
 
-$(document).ready(function() {
-    $(document).on('keyup mouseup', '.amount-input', function(e) {
+$(document).ready(function () {
+    $(document).on('keyup mouseup', '.amount-input', function (e) {
             table = $(this).parents('.table');
             setTableTotal(table);
         })
-        .on('cocoon:after-remove', '.table', function(e) {
+        .on('cocoon:after-remove', '.table', function (e) {
             setTableTotal($(this));
         })
-        .on('click', "#calculate-total", function(e) {
+        .on('click', "#calculate-total", function (e) {
             e.preventDefault();
             totalInput = $(this).next().find(".grand-total-input");
             setGrandTotal(totalInput);
         })
-        .on('cocoon:after-insert', '.table', function(e) {
+        .on('cocoon:after-insert', '.table', function (e) {
             $(this).find('.datetimepicker').datetimepicker();
             $(this).find('.datepicker').datetimepicker({
                 timepicker: false
@@ -61,28 +61,41 @@ $(document).ready(function() {
             });
         });
 
-    $(".form-table").each(function() {
+    $(".form-table").each(function () {
         table = $(this);
-        $(this).find(".nested-fields").on("keyup", "input", function(e) {
+        $(this).find(".nested-fields").on("keyup", "input", function (e) {
             setTableVal(table);
         });
-        $(this).on("cocoon:after-insert", function(e, insertedItem) {
-            insertedItem.on("keyup", "input", function(e2) {
+        $(this).on("cocoon:after-insert", function (e, insertedItem) {
+            insertedItem.on("keyup", "input", function (e2) {
                 setTableVal(table);
             });
         });
     });
 
     $('.datetimepicker').datetimepicker({
-        format: 'g:i A'  ,
-        formatTime:'g:i A'
+        format: 'g:i A',
+        formatTime: 'g:i A'
     });
     $('.datepicker').datetimepicker({
         timepicker: false
     });
     $('.timepicker').datetimepicker({
         datepicker: false,
-        format: 'g:i A'  ,
-        formatTime:'g:i A'
+        format: 'g:i A',
+        formatTime: 'g:i A'
     });
 });
+
+// This is for the unicorn effect
+var upClass = 'toggle-up';
+var downClass = 'toggle-down';
+
+function toggle() {
+    var unicorn = document.querySelector('.unicorn');
+    if (~unicorn.className.indexOf(downClass)) {
+        unicorn.className = unicorn.className.replace(downClass, upClass);
+    } else {
+        unicorn.className = unicorn.className.replace(upClass, downClass);
+    }
+}

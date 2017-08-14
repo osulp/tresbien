@@ -1,10 +1,10 @@
 // Place all the styles related to the reimbursement_request controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
 .table {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
+
 .form-table {
   table-layout: fixed;
   width: 100%;
@@ -19,17 +19,64 @@
   display: flex;
   align-items: center;
 }
+
 .form-table input[type="checkbox"] {
   display: block;
   @extend .mx-auto;
 }
 
-.remove_fields{
+.remove_fields {
   padding: 3px;
 }
 
-.add_fields{
+.add_fields {
   padding-left: 3px;
   padding-right: 3px;
   padding-bottom: 0px;
+}
+
+.welcome {
+  padding-top: 20px;
+  padding-right: 50px;
+  cursor: default;
+}
+
+.unicorn {
+  transition: all .75s 0.25s;
+  padding: 3px;
+  cursor: none;
+}
+
+.toggle-down {
+  transform: rotate(0deg);
+}
+
+.toggle-up {
+  transform: rotate(180deg);
+}
+
+.nav-link {
+  border-left: 1px solid #637890;
+  margin-top: 0px;
+  padding-top: 22px;
+  padding-bottom: 22px;
+  color: #000;
+}
+
+.add-line {
+  padding: 3px;
+  font-weight: bolder;
+}
+
+.nav-link:hover {
+  background: #555;
+  color: white;
+  cursor: pointer;
+}
+
+.navbar {
+  background: #d1ecff;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-right: 0px;
 }
