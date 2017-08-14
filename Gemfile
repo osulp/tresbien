@@ -53,9 +53,6 @@ gem 'jquery-rails'
 gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
-source 'https://rails-assets.org' do
-  gem 'rails-assets-tether', '>= 1.3.3'
-end
 
 # use font-awesome as a replacement for lost glyphicons in bootstrap 4
 gem 'font-awesome-rails'

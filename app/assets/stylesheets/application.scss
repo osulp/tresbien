@@ -1,6 +1,27 @@
 // @import "other files and stuff"
 @import "bootstrap";
 @import "font-awesome";
-@import "reimbursement_request";
 @import "jquery.datetimepicker.min";
+
+$font-size: 0.75rem;
+
+@import "reimbursement_request";
+@import "navbar";
+
+body {
+  font-size: $font-size;
+  padding-top: 30px;
+}
+
+.welcome {
+  padding-top: 20px;
+  padding-right: 50px;
+  cursor: default;
+}
+
+.hidden {
+  display: none;
+}
+
+
 

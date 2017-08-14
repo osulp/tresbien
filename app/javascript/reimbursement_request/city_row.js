@@ -32,6 +32,7 @@ class CityRow {
           let days = Array.from(range.by('days'));
           days.forEach(day => this.state.itinerary_days_queue.push(Object.assign({}, data, { day })));
           days.forEach(day => $('#add_travel_itinerary').click());
+          $(button).addClass('hidden');
         } else {
           // warn user that there are invalid dates
           console.log('Invalid dates selected.');

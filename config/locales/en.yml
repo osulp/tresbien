@@ -31,3 +31,22 @@
 
 en:
   hello: "Hello world"
+  reimbursement_request_form:
+    tooltips:
+      add_daily_itineraries: "Add Daily Itineraries"
+      remove_travel_city: "Remove City and Related Itineraries"
+      remove_travel_itinerary: "Remove Daily Itinerary"
+    buttons:
+      add_travel_city: "Add City"
+      add_daily_itinerary: "Add Itinerary"
+    headers:
+      cities_travelled: "Cities Travelled"
+      daily_itineraries: "Daily Itineraries"
+      totals: "Reimbursement Totals"
+    totals_labels:
+      accounting: "Accounting:"
+      other_expenses: "Other:"
+      mileage: "Mileage:"
+      airfare: "Airfare:"
+      itinerary: "Itinerary:"
+      grand_total: "Total:"
