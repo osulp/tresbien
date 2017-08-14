@@ -1,4 +1,4 @@
-<%= simple_form_for @reimbursement_request, url: reimbursement_requests_path, html: { multipart: true, class: 'container' } do |f| %>
+<%= simple_form_for @reimbursement_request, url: reimbursement_requests_path, html: { multipart: true, class: 'container reimbursement-request-form' } do |f| %>
   <%= render partial: 'form_traveller_information',  locals: { f: f, current_user: current_user, certifiers: @certifiers }  %>
   <%= render partial: 'form_request_information', locals: { f: f } %>
   <%= render partial: 'form_itinerary', locals: { f: f } %>

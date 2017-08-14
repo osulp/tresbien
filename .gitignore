@@ -30,3 +30,6 @@
 # Ignore vim .swp files
 *.swp
 config/config.yml
+/public/packs
+/public/packs-test
+/node_modules

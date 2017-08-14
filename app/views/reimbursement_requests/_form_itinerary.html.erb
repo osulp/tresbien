@@ -5,11 +5,12 @@
     </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "State", "City", "Include meals?", "Hotel rate", ""], id: "cities_travelled" } do %>
       <%= f.simple_fields_for :travel_cities do |travel_city| %>
-        <%= render "travel_city_fields", f: travel_city %>
+        <%= render partial: "travel_city_fields", locals: { f: travel_city, object: f } %>
       <% end %>
     <% end %>
     <div class="row">
       <%= link_to_add_association  "Add line", f, :travel_cities,
+          render_options: { locals: { object: f }},
           'data-association-insertion-node' => '#cities_travelled tbody',
           'data-association-insertion-method' => 'append' %>
     </div>
@@ -24,11 +25,12 @@
     <% end %>
     <div class="row">
       <%= link_to_add_association 'Add line', f, :travel_itineraries,
+        id: "add_travel_itinerary",
         'data-association-insertion-node' => '#daily_itineraries tbody',
         'data-association-insertion-method' => 'append' %>
     </div>
     <div class="row justify-content-end">
-      <%= f.input :itinerary_total, input_html: { class: "itineraries-total" } %>
+      <%= f.input :itinerary_total, input_html: { class: "itineraries-total grand-total" } %>
     </div>
   </div>
 </div>

@@ -19,7 +19,6 @@
 //= require turbolinks
 //= require city_state
 //= require cocoon
-//= require reimbursement_request.js
 //= require jquery.datetimepicker.full.min.js
 //= require jquery_nested_form
 
