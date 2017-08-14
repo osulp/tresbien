@@ -31,3 +31,35 @@
 
 en:
   hello: "Hello world"
+  reimbursement_request_form:
+    tooltips:
+      add_daily_itineraries: "Add Daily Itineraries"
+      remove_accounting: "Remove an Accounting Line"
+      remove_airfare: "Removes an Airfare Line"
+      remove_expense_other: "Remove Other Expense Line"
+      remove_mileage: "Remove Mileage Line"
+      remove_travel_city: "Remove City and Related Itineraries"
+      remove_travel_itinerary: "Remove Daily Itinerary Line"
+    buttons:
+      add_accounting: "Add Accounting Line"
+      add_expense_airfares: "Add Airfare"
+      add_expense_milages: "Add Milage"
+      add_other_expenses: "Add Other Expenses"
+      add_travel_city: "Add City"
+      add_daily_itinerary: "Add Itinerary"
+    headers:
+      accounting: "Accounting"
+      airfare: "Airfare"
+      attachments: "Attachments"
+      auto_mileage: "Auto Mileage"
+      cities_travelled: "Cities Travelled"
+      daily_itineraries: "Daily Itineraries"
+      other_expenses: "Other Expenses"
+      totals: "Reimbursement Totals"
+    totals_labels:
+      accounting: "Accounting:"
+      other_expenses: "Other:"
+      mileage: "Mileage:"
+      airfare: "Airfare:"
+      itinerary: "Itinerary:"
+      grand_total: "Total:"

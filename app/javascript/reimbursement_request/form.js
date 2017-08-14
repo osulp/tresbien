@@ -78,7 +78,8 @@ class Form {
 
   bindDateTimePicker = element => {
     $(element).datetimepicker({
-      timepicker: false
+      timepicker: false,
+      format: 'Y/m/d'
     });
   };
 

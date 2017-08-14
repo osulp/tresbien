@@ -1,20 +1,22 @@
-<div id="accounting_panel" class="row">
-  <div class="col-12">
-    <div class="row">
-      <h3>Accounting</h3>
+<div id="accounting_panel" class="form-row">
+  <div class="col col-12">
+    <div class="form-row">
+      <h3><%= t('reimbursement_request_form.headers.accounting')%></h3>
     </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["Index", "Fund", "Organization", "Account", "Program", "Activity", "Amount", ""], id: "accountings", total_class: "accountings-total" } do %>
       <%= f.simple_fields_for :accountings do |accounting| %>
         <%= render "accounting_fields", f: accounting %>
       <% end %>
     <% end %>
-    <div class="row">
-      <%= link_to_add_association 'Add line', f, :accountings,
+    <div class="form-row">
+      <%= link_to_add_association f, :accountings,
+          class: 'btn btn-primary btn-sm',
+          id: "add_accountings",
           'data-association-insertion-node' => '#accountings tbody',
-          'data-association-insertion-method' => 'append' %>
-    </div>
-    <div class="row justify-content-end">
-      <%= f.input :accounting_total, input_html: { class: "accountings-total grand-total" }  %>
+          'data-association-insertion-method' => 'append' do %>
+            <i class="fa fa-plus-square-o"></i>
+            <span><%= t('reimbursement_request_form.buttons.add_accounting') %></span>
+      <% end %>
     </div>
   </div>
 </div>

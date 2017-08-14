@@ -1,20 +1,22 @@
-<div id="mileage_panel" class="row">
-  <div class="col-12">
-    <div class="row">
-      <h3>Auto Mileage</h3>
+<div id="mileage_panel" class="form-row">
+  <div class="col col-12">
+    <div class="form-row">
+      <h3><%= t('reimbursement_request_form.headers.auto_mileage')%></h3>
     </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "From State", "From City", "To State", "To City", "Round Trip?", "Miles", "Notes", "Amount", ""], id: "mileage", total_class: "mileage-total" } do %>
       <%= f.simple_fields_for :expense_mileages do |expense_milage| %>
         <%= render "expense_mileage_fields", f: expense_milage %>
       <% end %>
     <% end %>
-    <div class="row">
-      <%= link_to_add_association 'Add line', f, :expense_mileages,
+    <div class="form-row">
+      <%= link_to_add_association f, :expense_mileages,
+          class: 'btn btn-primary btn-sm',
+          id: "add_mileages",
           'data-association-insertion-node' => '#mileage tbody',
-          'data-association-insertion-method' => 'append' %>
-    </div>
-    <div class="row justify-content-end">
-      <%= f.input :mileage_total, input_html: { class: "mileage-total grand-total" }  %>
+          'data-association-insertion-method' => 'append' do %>
+            <i class="fa fa-plus-square-o"></i>
+            <span><%= t('reimbursement_request_form.buttons.add_expense_milages') %></span>
+      <% end %>
     </div>
   </div>
 </div>

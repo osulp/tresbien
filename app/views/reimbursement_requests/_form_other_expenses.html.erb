@@ -1,20 +1,22 @@
-<div id="other_expenses_panel" class="row">
-  <div class="col-12">
-    <div class="row">
-      <h3>Other Expenses</h3>
+<div id="other_expenses_panel" class="form-row">
+  <div class="col col-12">
+    <div class="form-row">
+      <h3><%= t('reimbursement_request_form.headers.other_expenses')%></h3>
     </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["Expense Type", "From", "To", "Notes", "Amount", ""], id: "other_expenses", total_class: "other-expenses-total" } do %>
       <%= f.simple_fields_for :expense_others do |expense_other| %>
         <%= render "expense_other_fields", f: expense_other %>
       <% end %>
     <% end %>
-    <div class="row">
-      <%= link_to_add_association 'Add line', f, :expense_others,
+    <div class="form-row">
+      <%= link_to_add_association f, :expense_others,
+          class: 'btn btn-primary btn-sm',
+          id: "add_expense_other",
           'data-association-insertion-node' => '#other_expenses tbody',
-          'data-association-insertion-method' => 'append' %>
-    </div>
-    <div class="row justify-content-end">
-      <%= f.input :other_total, input_html: { class: "other-expenses-total grand-total" }  %>
+          'data-association-insertion-method' => 'append' do %>
+            <i class="fa fa-plus-square-o"></i>
+            <span><%= t('reimbursement_request_form.buttons.add_other_expense') %></span>
+      <% end %>
     </div>
   </div>
 </div>

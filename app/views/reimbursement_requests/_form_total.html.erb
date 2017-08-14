@@ -1,8 +1,31 @@
 <div class="row">
-  <h3>Total</h3>
+  <h5 class="col col-md-12"><%= t('reimbursement_request_form.headers.totals') %></h5>
 </div>
-<div class="row">
-  <div class="col-md-3">
-    <%= f.input :grand_total, wrapper: false, label: false, input_html: { class: "grand-total-input" } %>
+<div class="row grand-totals">
+  <div class="col col-md-12">
+    <div class="row">
+      <label class="col-form-label col-md-5"><%= t('reimbursement_request_form.totals_labels.accounting') %></label>
+      <%= f.input :accounting_total, label: false, wrapper: false, input_html: { class: "col-md-5 accountings-total grand-total" }, disabled: true  %>
+    </div>
+    <div class="row">
+      <label class="col-form-label col-md-5"><%= t('reimbursement_request_form.totals_labels.other_expenses') %></label>
+      <%= f.input :other_total, label: false, wrapper: false, input_html: { class: "col-md-5 other-expenses-total grand-total" }, disabled: true  %>
+    </div>
+    <div class="row">
+      <label class="col-form-label col-md-5"><%= t('reimbursement_request_form.totals_labels.mileage') %></label>
+      <%= f.input :mileage_total, label: false, wrapper: false, input_html: { class: "col-md-5 mileage-total grand-total" }, disabled: true  %>
+    </div>
+    <div class="row">
+      <label class="col-form-label col-md-5"><%= t('reimbursement_request_form.totals_labels.airfare') %></label>
+      <%= f.input :airfare_total, label: false, wrapper: false, input_html: { class: "col-md-5 airfare-total grand-total" }, disabled: true  %>
+    </div>
+    <div class="row">
+      <label class="col-form-label col-md-5"><%= t('reimbursement_request_form.totals_labels.itinerary') %></label>
+      <%= f.input :itinerary_total, label: false, wrapper: false, input_html: { class: "col-md-5 itineraries-total grand-total", disabled: true } %>
+    </div>
+    <div class="row">
+      <label class="col-form-label col-md-5 grand-total-label"><%= t('reimbursement_request_form.totals_labels.grand_total') %></label>
+      <%= f.input :grand_total, wrapper: false, label: false, input_html: { class: "col-md-5 grand-total-input" }, disabled: true %>
+    </div>
   </div>
 </div>
