@@ -27,6 +27,8 @@ class ReimbursementRequestsController < ApplicationController
     @reimbursement_request.status = Status.order(:order).first
     if @reimbursement_request.save
       if params[:attachments]
+        # Uncomment to begin sending emails when reimbursement request is submitted
+        # CertifierMailer.certifiy_request(@certifier).deliver_now
         params[:attachments].each do |file|
           @reimbursement_request.attachments.create(attachment: file)
         end
