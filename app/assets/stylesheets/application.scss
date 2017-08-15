@@ -15,8 +15,9 @@ html {
 body {
   font-size: $font-size;
   padding-top: 75px;
-  margin: 0 0 100px;
-  /* bottom = footer height */
+  margin: 25px 0 100px;
+  /* bottom = footer height 
+     top = space under navbar */
 }
 
 .hidden {

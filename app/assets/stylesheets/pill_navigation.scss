@@ -7,6 +7,21 @@
       border: 2px solid $btn-success;
       box-shadow: 0px 0px 2px 1px gray;
     }
+    border-bottom: none;
+    border-radius: 0;
+    i {
+      display: none;
+      padding-right: 10px;
+    }
+  }
+  a.nav-link:last-child {
+    border-bottom: 1px solid lighten($btn-success, 50%);
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+  a.nav-link:first-child {
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
   }
   a.nav-link.active { 
     color: white;
@@ -14,6 +29,9 @@
     background-color: $btn-success;
     animation-duration: .5s;
     animation-name: popleft;
+    i {
+      display: inline-block;
+    }
   }
 }
 
