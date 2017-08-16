@@ -1,4 +1,4 @@
-<div id="itinerary_panel" class="form-row">
+<div id="itinerary_panel" class="form-row tab-pane">
   <div class="col col-12">
     <div class="form-row">
       <h3><%= t('reimbursement_request_form.headers.cities_travelled') %></h3>
@@ -20,7 +20,7 @@
     </div>
 
     <div class="form-row">
-      <h5><%= t('reimbursement_request_form.headers.daily_itineraries') %></h5>
+      <h4><%= t('reimbursement_request_form.headers.daily_itineraries') %></h4>
     </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["Date", "State", "City", "Breakfast", "Lunch", "Dinner", "Hotel", "Amount", ""], id: "daily_itineraries", total_class: "itineraries-total" } do %>
       <%= f.simple_fields_for :travel_itineraries do |travel_itinerary| %>
