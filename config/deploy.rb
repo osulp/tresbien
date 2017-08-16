@@ -27,7 +27,7 @@ set :rbenv_ruby, '2.4.1'
 set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, 'config/local_env.yml', 'config/config.yml' 
+append :linked_files, 'config/local_env.yml', 'config/config.yml'
 
 # Default value for linked_dirs is []
 append :linked_dirs, 'log', 'tmp', 'config/puma', 'public/assets'
@@ -39,3 +39,7 @@ append :linked_dirs, 'log', 'tmp', 'config/puma', 'public/assets'
 set :keep_releases, 5
 
 set :passenger_restart_with_touch, true
+
+set :nvm_type, :user # or :system, depends on your nvm setup
+set :nvm_node, 'v6.9.5'
+set :nvm_map_bins, %w{node npm yarn}
