@@ -165,6 +165,7 @@ GEM
     ffi (1.9.18)
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
+    get_process_mem (0.2.1)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     haml (5.0.2)
@@ -232,6 +233,9 @@ GEM
     powerpack (0.1.1)
     public_suffix (2.0.5)
     puma (3.9.1)
+    puma_worker_killer (0.1.0)
+      get_process_mem (~> 0.2)
+      puma (>= 2.7, < 4)
     rack (2.0.3)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
@@ -395,6 +399,7 @@ DEPENDENCIES
   nested_form
   paperclip (~> 5.0.0)
   puma (~> 3.7)
+  puma_worker_killer
   rails (~> 5.1.2)
   rails_admin
   rcodetools
