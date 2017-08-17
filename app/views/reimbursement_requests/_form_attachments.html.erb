@@ -1,10 +1,10 @@
 <div id="attachments_panel" class="form-row">
   <div class="col col-12">
     <div class="form-row">
-      <h3>Attachments</h3>
+      <h3><%= t('reimbursement_request_form.headers.attachments')%></h3>
     </div>
     <div class="form-row">
-      <%= file_field_tag "attachments[]", type: :file, multiple: true %>
+      <%= file_field_tag "attachments[]", type: :file, multiple: true, class: "attachment" %>
     </div>
   </div>
 </div>

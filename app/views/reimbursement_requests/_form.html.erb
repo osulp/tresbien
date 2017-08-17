@@ -3,7 +3,8 @@
     <div class="col col-md-2">
       <%= render partial: 'form_total', locals: { f: f } %>
     </div>
-    <div class="col col-md-10">
+    <div class="col col-md-9">
+      <%= render "layouts/error", obj: @reimbursement_request%>
       <h2 class="form-row"><%= @reimbursement_request.new_record? ? "New" : "Edit" %> Reimbursement Request</h2>
       <%= render partial: 'form_traveller_information',  locals: { f: f, current_user: current_user, certifiers: @certifiers }  %>
       <%= render partial: 'form_request_information', locals: { f: f } %>
@@ -13,8 +14,8 @@
       <%= render partial: 'form_airfare', locals: { f: f } %>
       <%= render partial: 'form_mileage', locals: { f: f } %>
       <%= render partial: 'form_attachments', locals: { f: f } %>
-      <div class="form-row">
-        <%= f.button :submit, class: "btn btn-primary" %>
+      <div class="form-row style1">
+        <%= f.button :submit, class: "btn btn-success " %>
       </div>
     </div>
   </div>
