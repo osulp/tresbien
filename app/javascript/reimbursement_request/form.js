@@ -79,7 +79,8 @@ class Form {
   bindDateTimePicker = element => {
     $(element).datetimepicker({
       timepicker: false,
-      format: 'Y/m/d'
+      format: 'Y/m/d',
+      scrollInput: false
     });
   };
 
@@ -87,7 +88,8 @@ class Form {
     $(element).datetimepicker({
       datepicker: false,
       format: 'g:i A',
-      formatTime: 'g:i A'
+      formatTime: 'g:i A',
+      scrollInput: false
     });
   };
 }
