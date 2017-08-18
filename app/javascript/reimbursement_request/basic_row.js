@@ -8,9 +8,11 @@ class BasicRow {
     this.element = $(element);
     this.table_name = this.element.data('table-name');
     this.state = state;
-    this.element.find('.row-sum-input').each((i, input) => this.bindRowSumInput(input))
+    this.element.find('.row-sum-input').each((i, input) => this.bindRowSumInput(input));
     this.element.find('.unique-id').val(this.id);
     this.element.find('[data-toggle="tooltip"]').tooltip();
+    this.element.parents('.table').show();
+    this.bindRemove(this.element.find('.remove_fields'));
     extendObservable(this, {
       row_total: 0
     });
@@ -18,12 +20,21 @@ class BasicRow {
   }
 
   bindRowSumInput = input => {
-    $(input).on('keyup mouseup', (e) => {
+    $(input).on('keyup mouseup', e => {
       let row_sum_input = this.element.find('.row-sum-input');
       let total = Utils.sumInputFloats(row_sum_input);
       this.row_total = total;
-    })
-  }
+    });
+  };
+
+  bindRemove = button => {
+    button.on('click', () => {
+      let tooltip_id = button.attr('aria-describedby');
+      if (tooltip_id) {
+        $(`#${tooltip_id}`).remove();
+      }
+    });
+  };
 }
 
 export default BasicRow;

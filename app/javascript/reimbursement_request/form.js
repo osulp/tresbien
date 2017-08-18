@@ -23,6 +23,11 @@ class Form {
       $('tr.basic').each((i, element) => {
         this.state.basic_rows.push(new BasicRow(this, element, this.state));
       });
+      $('.table').each((i, element) => {
+        if ($(element).find('tbody tr').length > 0) {
+          $(element).show();
+        }
+      });
       this.bindDateTimePicker($('.datepicker'));
       this.bindTimePicker($('.timepicker'));
       autorun(() => {
@@ -50,6 +55,9 @@ class Form {
           this.clearAndRemoveRow(this.state.itinerary_rows, id, 'id');
         } else {
           this.clearAndRemoveRow(this.state.basic_rows, id, 'id');
+        }
+        if (itemToBeRemoved.parents(".table").find("tbody tr").length <= 1) {
+          itemToBeRemoved.parents(".table").hide();
         }
       })
       .on('cocoon:after-insert', '.table', (e, itemInserted) => {
