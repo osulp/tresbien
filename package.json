@@ -21,6 +21,7 @@
     "moment": "^2.18.1",
     "moment-range": "^3.0.3",
     "node-sass": "^4.5.3",
+    "numeral": "^2.0.6",
     "path-complete-extname": "^0.1.0",
     "postcss-cssnext": "^3.0.2",
     "postcss-loader": "^2.0.6",

@@ -1,8 +1,11 @@
 import Utils from '../utils/utils';
 import { extendObservable, autorun } from 'mobx';
+
 import moment from 'moment';
 import { extendMoment } from 'moment-range';
 const Moment = extendMoment(moment);
+
+import * as numeral from 'numeral';
 
 import CityRow from './city_row';
 import ItineraryRow from './itinerary_row';
@@ -37,6 +40,12 @@ class Form {
         this.element.find('.mileage-total').val(this.state.expense_mileage_total);
         this.element.find('.other-expenses-total').val(this.state.expense_other_total);
         this.element.find('.grand-total-input').val(this.state.grand_total);
+        this.element.find('.itineraries-total-label').text(numeral(this.state.itineraries_total).format('$0,0.00'));
+        this.element.find('.accountings-total-label').text(numeral(this.state.accounting_total).format('$0,0.00'));
+        this.element.find('.airfare-total-label').text(numeral(this.state.expense_airfare_total).format('$0,0.00'));
+        this.element.find('.mileage-total-label').text(numeral(this.state.expense_mileage_total).format('$0,0.00'));
+        this.element.find('.other-expenses-total-label').text(numeral(this.state.expense_other_total).format('$0,0.00'));
+        this.element.find('.grand-total-input-label').text(numeral(this.state.grand_total).format('$0,0.00'));
       });
     });
   }

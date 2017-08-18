@@ -1,31 +1,65 @@
-<div class="row">
-  <h5 class="col col-md-12"><%= t('reimbursement_request_form.headers.totals') %></h5>
-</div>
-<div class="row grand-totals">
-  <div class="col col-md-12">
-    <div class="row">
-      <label class="col-form-label col-md-5"><%= t('reimbursement_request_form.totals_labels.accounting') %></label>
-      <%= f.input :accounting_total, label: false, wrapper: false, input_html: { class: "col-md-5 accountings-total grand-total" }, disabled: true  %>
-    </div>
-    <div class="row">
-      <label class="col-form-label col-md-5"><%= t('reimbursement_request_form.totals_labels.other_expenses') %></label>
-      <%= f.input :other_total, label: false, wrapper: false, input_html: { class: "col-md-5 other-expenses-total grand-total" }, disabled: true  %>
-    </div>
-    <div class="row">
-      <label class="col-form-label col-md-5"><%= t('reimbursement_request_form.totals_labels.mileage') %></label>
-      <%= f.input :mileage_total, label: false, wrapper: false, input_html: { class: "col-md-5 mileage-total grand-total" }, disabled: true  %>
-    </div>
-    <div class="row">
-      <label class="col-form-label col-md-5"><%= t('reimbursement_request_form.totals_labels.airfare') %></label>
-      <%= f.input :airfare_total, label: false, wrapper: false, input_html: { class: "col-md-5 airfare-total grand-total" }, disabled: true  %>
-    </div>
-    <div class="row">
-      <label class="col-form-label col-md-5"><%= t('reimbursement_request_form.totals_labels.itinerary') %></label>
-      <%= f.input :itinerary_total, label: false, wrapper: false, input_html: { class: "col-md-5 itineraries-total grand-total", disabled: true } %>
-    </div>
-    <div class="row">
-      <label class="col-form-label col-md-5 grand-total-label"><%= t('reimbursement_request_form.totals_labels.grand_total') %></label>
-      <%= f.input :grand_total, wrapper: false, label: false, input_html: { class: "col-md-5 grand-total-input" }, disabled: true %>
-    </div>
+<div class="card grand-totals col col-md-9">
+  <div class="card-header">
+    <h6><%= t('reimbursement_request_form.headers.totals') %></h6>
   </div>
+  <div class="card-body">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td class="align-right">
+            <label class="col-form-label"><%= t('reimbursement_request_form.totals_labels.accounting') %></label>
+          </td>
+          <td>
+            <span class="accountings-total-label align-middle"></span>
+            <%= f.input :accounting_total, label: false, wrapper: false, input_html: { class: "accountings-total grand-total hidden" }, disabled: true  %>
+          </td>
+        </tr>
+        <tr>
+          <td class="align-right">
+            <label class="col-form-label"><%= t('reimbursement_request_form.totals_labels.airfare') %></label>
+          </td>
+          <td>
+            <span class="airfare-total-label"></span>
+            <%= f.input :airfare_total, label: false, wrapper: false, input_html: { class: "airfare-total grand-total hidden" }, disabled: true  %>
+          </td>
+        </tr>
+        <tr>
+          <td class="align-right">
+            <label class="col-form-label"><%= t('reimbursement_request_form.totals_labels.itinerary') %></label>
+          </td>
+          <td>
+            <span class="itineraries-total-label"></span>
+            <%= f.input :itinerary_total, label: false, wrapper: false, input_html: { class: "itineraries-total grand-total hidden", disabled: true } %>
+          </td>
+        </tr>
+        <tr>
+          <td class="align-right">
+            <label class="col-form-label"><%= t('reimbursement_request_form.totals_labels.mileage') %></label>
+          </td>
+          <td>
+            <span class="mileage-total-label"></span>
+            <%= f.input :mileage_total, label: false, wrapper: false, input_html: { class: "mileage-total grand-total hidden" }, disabled: true  %>
+          </td>
+        </tr>
+        <tr>
+          <td class="align-right">
+            <label class="col-form-label"><%= t('reimbursement_request_form.totals_labels.other_expenses') %></label>
+          </td>
+          <td>
+            <span class="other-expenses-total-label"></span>
+            <%= f.input :other_total, label: false, wrapper: false, input_html: { class: "other-expenses-total grand-total hidden" }, disabled: true  %>
+          </td>
+        </tr>
+        <tr>
+          <td class="align-right grand-total-row">
+            <label class="col-form-label grand-total-label"><%= t('reimbursement_request_form.totals_labels.grand_total') %></label>
+          </td>
+          <td>
+            <span class="grand-total-input-label"></span>
+            <%= f.input :grand_total, wrapper: false, label: false, input_html: { class: "grand-total-input hidden" }, disabled: true %>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+</div>
 </div>

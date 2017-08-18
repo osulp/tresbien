@@ -1,120 +1,137 @@
 // Place all the styles related to the reimbursement_request controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.table {
-  margin-bottom: 0;
-  display: none;
-  thead {
-    tr {
-      th {
-        padding: 0 0 0 0.25rem;
-        border: none;
-      }
-    }
+.reimbursement-request-form {
+  .row {
+    margin-bottom: 20px;
   }
-  tbody {
-    tr {
-      td {
-        padding: 0.25rem 0 0 0.25rem;
-      }
-    }
-  }
-}
 
-.table {
-  tbody {
-    tr.travel-city,
-    tr.travel-itinerary {
-      td {
-        div {
-          input {
-            max-width: 92px;
-          }
-          input.datepicker {
-            width: 120px;
-            max-width: 120px;
-          }
-        }
-        div.travel-city-controls {
-          min-width: 65px;
+  .table {
+    margin-bottom: 0;
+    display: none;
+    thead {
+      tr {
+        th {
+          padding: 0 0 0 0.25rem;
+          border: none;
         }
       }
     }
-    tr.travel-itinerary {
-      td {
-        div {
-          input {
-            max-width: 90px;
-          }
+    tbody {
+      tr {
+        td {
+          padding: 0.25rem 0 0 0.25rem;
         }
       }
     }
   }
-}
 
-.row.grand-totals {
-  label {
-    text-align: right;
-    padding: 0.2rem 0.4rem 0.2rem 0;
+  .table {
+    tbody {
+      tr.travel-city,
+      tr.travel-itinerary {
+        td {
+          div {
+            input {
+              max-width: 92px;
+            }
+            input.datepicker {
+              width: 120px;
+              max-width: 120px;
+            }
+          }
+          div.travel-city-controls {
+            min-width: 65px;
+          }
+        }
+      }
+      tr.travel-itinerary {
+        td {
+          div {
+            input {
+              max-width: 90px;
+            }
+          }
+        }
+      }
+    }
   }
-  input {
-    background-color: transparent;
-    border: none;
-    font-size: $font-size;
-    padding: 0.2rem 0.75rem 0.2rem 0;
+
+  .grand-totals {
+    padding: 0;
+    margin-top: 20px;
+    td {
+      text-align: right;
+      padding: 0 15px 0 0 !important;
+      vertical-align: middle;
+    }
+    .card-header {
+      text-align: center;
+    }
+    .card-body {
+      padding: 0;
+    }
+    .table {
+      margin: 0;
+      padding: 0;
+    }
+    span {
+      text-align: right;
+    }
+    label {
+      padding-left: 15px;
+      text-align: right;
+    }
+    .grand-total-label,
+    .grand-total-input,
+    .grand-total-input-label {
+      font-weight: bold;
+      font-size: $font-size + 0.1rem;
+    }
   }
-  .grand-total-label,
-  .grand-total-input {
-    font-weight: bold;
-    font-size: $font-size + 0.1rem;
+
+  .add_fields {
+    margin: 5px;
   }
-}
 
-.add_fields {
-  margin: 5px;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5 {
-  margin-top: 15px;
-}
-
-.attachment {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.btn-success {
-  margin-top: 25px;
-  margin-bottom: 20px;
-}
-
-.style1 {
-  margin-top: 15px;
-  border-top: 1px solid #c6c6c6;
-}
-
-.flash_messages {
-  width: 500px;
-  margin-top: 35px;
-}
-
-div.has-error {
-  input,
-  select {
-    border: 1px #ff3535 solid;
-    background-color: #ffd9d9;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin-top: 15px;
   }
-  .help-block {
-    color: #ff3535
-  }
-}
 
-.row {
-  margin-bottom: 20px;
+  .attachment {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .btn-success {
+    margin-top: 25px;
+    margin-bottom: 20px;
+  }
+
+  .style1 {
+    margin-top: 15px;
+    border-top: 1px solid #c6c6c6;
+  }
+
+  .flash_messages {
+    width: 500px;
+    margin-top: 35px;
+  }
+
+  div.has-error {
+    input,
+    select {
+      border: 1px #ff3535 solid;
+      background-color: #ffd9d9;
+    }
+    .help-block {
+      color: #ff3535
+    }
+  }
 }
 
 @media print {
