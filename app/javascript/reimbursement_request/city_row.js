@@ -11,11 +11,13 @@ class CityRow {
     this.element.find('.unique-id').val(this.id);
     this.element.find('[data-toggle="tooltip"]').tooltip();
     this.table_name = this.element.data('table-name');
+    this.element.parents('.table').show();
     this.state = state;
     this.bindClick(this.element.find('.add-itineraries'));
+    this.bindRemove(this.element.find('.remove_fields'));
   }
 
-  bindClick = (button) => {
+  bindClick = button => {
     button.on('click', e => {
       e.preventDefault();
       let data = this.getRowData(this.element);
@@ -38,6 +40,15 @@ class CityRow {
           // warn user that there are invalid dates
           console.log('Invalid dates selected.');
         }
+      }
+    });
+  };
+
+  bindRemove = button => {
+    button.on('click', () => {
+      let tooltip_id = button.attr('aria-describedby');
+      if (tooltip_id) {
+        $(`#${tooltip_id}`).remove();
       }
     });
   };
