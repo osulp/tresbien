@@ -1,30 +1,77 @@
-<h2>Reimbursement request submitted</h2>
+<div class="container">
+  <h2>Reimbursement request</h2>
 
-<h3>Traveller Informatin</h3>
-  <%= "Address: #{@reimbursement_request.address}"%><br>
-  <%= "Certifier: #{@reimbursement_request.claimant.full_name}"%>
+  <div class="row print-hide">
+    <div class="col-12">
+      <%= link_to "Edit", edit_reimbursement_request_path(@reimbursement_request.id), class: "btn btn-primary"%>
+      <%= link_to "Print", reimbursement_request_path(@reimbursement_request.id, format: :pdf), class: "btn btn-success" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h3>Traveller Information:</h3>
+      <p><strong>Address: </strong><%= @reimbursement_request.address %></p>
+      <p><strong>Claimant: </strong><%= @reimbursement_request.claimant.full_name %></p>
+    </div>
+  </div>
 
-<h3>Request Information</h3>
-<%= "Identifier: #{@reimbursement_request.identifier}" %><br>
-<%= "Description: #{@reimbursement_request.description}"%><br>
-<%= "Business notes and purpose: #{@reimbursement_request.business_notes_and_purpose}"%>
-<h3>Itinerary</h3>
-<%= "Depart time: #{@reimbursement_request.depart_time} Return time: #{@reimbursement_request.return_time}"%>
-<h4>Cities</h4>
-<% @reimbursement_request.travel_cities.each do |city| %>
-  <%= "From #{city.from_date} to #{city.to_date}"%>
-  <%= "#{city.include_meals?}"%>
-<% end %>
-<h4>Daily Itineraries</h4>
-<h3>Auto Mileage</h3>
-<h3>Airfare</h3>
-<h3>Other expenses</h3>
-<h3>Accounting</h3>
+  <div class="row">
+    <div class="col-12">
+      <h3>Request Information:</h3>
+      <p><strong>Certifier: </strong><%= @reimbursement_request.certifier.full_name %></p>
+      <p><strong>Identifier: </strong><%= @reimbursement_request.identifier %></p>
+      <p><strong>Description: </strong><%= @reimbursement_request.description %></p>
+      <p><strong>Business Notes and Purpose: </strong><%= @reimbursement_request.business_notes_and_purpose %></p>
 
-<br>
-<h3>Attachments</h3>
-<% @reimbursement_request.children.each do |child| %>
-  <%= link_to (image_tag child.attachment.url(:thumb) ), child.attachment.url, target: :_blank %>
-<% end %>
-<% console %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h3>Itinerary:</h3>
+      <div class="row justify-content-center">
+        <p class="col-5 text-center"><strong>Depart Time: </strong><%= get_simple_date_time(@reimbursement_request.depart_time) %></p>
+        <p class="col-5 text-center"><strong>Return Time: </strong><%= get_simple_date_time(@reimbursement_request.return_time) %></p>
+      </div>
+      <%= render partial: "show_table", locals: {title: "Cities", attributes: ["from_date", "to_date", "state", "city", "hotel_rate"], objects: @reimbursement_request.travel_cities, id: "travel-cities" } %>
 
+      <%= render partial: "show_table", locals: {title: "Daily Itineraries", attributes: ["date", "state", "city", "break", "lunch", "dinner", "hotel", "amount"], objects: @reimbursement_request.travel_itineraries, id: "travel-itineraries"  }%>
+
+    </div>
+  </div>
+
+  <%= render partial: "show_table", locals: {title: "Auto Mileage", attributes: ["from_date", "to_date", "from_state", "from_city", "to_state", "to_city", "miles", "notes", "amount"], objects: @reimbursement_request.expense_mileages, id: "expense_mileages" } %>
+
+  <%= render partial: "show_table", locals: {title: "Airfare", attributes: ["from_date", "to_date", "from_location", "to_location", "notes", "amount"], objects: @reimbursement_request.expense_airfares, id: "expense-airfares" } %>
+
+  <%= render partial: "show_table", locals: {
+    title: "Other Expenses", 
+    attributes: ["expense_type", "from_date", "to_date", "notes", "amount"], 
+    objects: @reimbursement_request.expense_others, 
+    id: "expense-airfares", 
+    functions: {"expense_type" => lambda do |expense_other|
+      expense_type = ExpenseType.find(expense_other.expense_type_id) if expense_other.expense_type_id
+      return (expense_type ? expense_type.name : "")
+    end  } } %>
+
+  <%= render partial: "show_table", locals: {title: "Accounting", attributes: ["index", "fund", "organization", "account", "program", "activity", "amount"], objects: @reimbursement_request.accountings, id: "accountings" } %>
+
+  <div class="row">
+    <div class="col-12">
+      <h3>Attachments:</h3>
+      <% if @reimbursement_request.children.count > 0 %>
+        <% @reimbursement_request.children.each do |child| %>
+          <%= link_to (image_tag child.attachment.url(:thumb) ), child.attachment.url, target: :_blank %>
+        <% end %>
+      <% else %>
+        <p>No attachments</p>
+      <% end %>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-12">
+      <h3>Total: <%= @reimbursement_request.grand_total %></h3>
+    </div>
+  </div>
+</div>

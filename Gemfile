@@ -95,3 +95,6 @@ group :development do
   gem 'fasterer'
   gem 'rubocop'
 end
+# Use Wicked PDF for rendering PDF views
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'

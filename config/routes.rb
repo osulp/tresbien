@@ -10,6 +10,9 @@ Rails.application.routes.draw do
     resources :travel_itineraries
   end
 
+  resources :expense_others do
+    resources :expense_types
+  end
   resources :statuses do
     resources :reimbursement_requests
   end

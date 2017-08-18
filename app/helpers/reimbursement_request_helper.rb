@@ -7,4 +7,12 @@ module ReimbursementRequestHelper
   def add_button
     '<span class="glyphicon glyphicon-plus bg-success"></span>'.html_safe
   end
+
+  # returns date formatted as a string in mm/dd/yy format
+  def get_simple_date_time(date)
+    date.strftime("%m/%d/%y, %l:%M %p") unless date.nil?
+  end
+  def get_simple_date(date)
+    date.strftime("%m/%d/%y") unless date.nil?
+  end
 end

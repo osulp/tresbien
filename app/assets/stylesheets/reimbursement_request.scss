@@ -111,3 +111,13 @@ div.has-error {
     color: #ff3535
   }
 }
+
+.row {
+  margin-bottom: 20px;
+}
+
+@media print {
+  .print-hide {
+    display: none;
+  }
+}

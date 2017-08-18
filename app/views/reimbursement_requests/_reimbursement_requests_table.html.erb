@@ -15,7 +15,7 @@
         <tbody>
           <% @reimbursement_requests.each do |reimbursement_request| %>
             <tr>
-              <td><%= link_to reimbursement_request.identifier == "" ? "[No Identifier]" : reimbursement_request.identifier, edit_reimbursement_request_path(reimbursement_request) %></td>
+              <td><%= link_to reimbursement_request.identifier == "" ? "[No Identifier]" : reimbursement_request.identifier, reimbursement_request_path(reimbursement_request) %></td>
               <td><%= reimbursement_request.updated_at
               .in_time_zone("Pacific Time (US & Canada)")
               .strftime("%m/%d/%y") %></td>
