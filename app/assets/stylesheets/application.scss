@@ -1,12 +1,12 @@
 @import "bootstrap";
 @import "font-awesome";
 @import "jquery.datetimepicker.min";
-$font-size: 0.75rem;
+@import "variables";
 @import "reimbursement_request";
 @import "navbar";
 body {
   font-size: $font-size;
-  padding-top: 30px;
+  padding-top: 75px;
 }
 
 .welcome {
@@ -17,8 +17,4 @@ body {
 
 .hidden {
   display: none;
-}
-
-.main {
-  margin-top: 50px;
 }
