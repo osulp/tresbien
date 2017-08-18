@@ -3,6 +3,10 @@
   a.nav-link {
     color: $btn-success;
     border: 1px solid lighten($btn-success, 50%);
+    &:focus {
+      border: 2px solid $btn-success;
+      box-shadow: 0px 0px 2px 1px gray;
+    }
   }
   a.nav-link.active { 
     color: white;
