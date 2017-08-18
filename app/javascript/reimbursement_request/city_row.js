@@ -9,6 +9,7 @@ class CityRow {
     this.form = form;
     this.element = $(element);
     this.element.find('.unique-id').val(this.id);
+    this.element.find('[data-toggle="tooltip"]').tooltip();
     this.table_name = this.element.data('table-name');
     this.state = state;
     this.bindClick(this.element.find('.add-itineraries'));

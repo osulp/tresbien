@@ -10,6 +10,7 @@ class BasicRow {
     this.state = state;
     this.element.find('.row-sum-input').each((i, input) => this.bindRowSumInput(input))
     this.element.find('.unique-id').val(this.id);
+    this.element.find('[data-toggle="tooltip"]').tooltip();
     extendObservable(this, {
       row_total: 0
     });

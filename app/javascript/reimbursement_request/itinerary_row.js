@@ -13,6 +13,7 @@ class ItineraryRow {
     this.state = state;
     this.element.find('.unique-id').val(this.id);
     this.element.find('.sum-input').each((i, input) => this.bindSumInput(input))
+    this.element.find('[data-toggle="tooltip"]').tooltip();
     extendObservable(this, {
       row_total: 0
     });
