@@ -1,0 +1,69 @@
+h2 {
+  font-family: 'Stratum2Web', sans-serif;
+  font-size: 2rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  color: $orange;
+}
+
+h3 {
+  font-family: 'Stratum2Web', sans-serif;
+  font-size: 1.5rem;
+  line-height: 1.6rem;
+  font-weight: 500;
+  color: $orange;
+}
+
+h4 {
+  font-family: 'Open sans', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: $black;
+  text-transform: uppercase;
+}
+
+h5 {
+  font-family: 'Open sans', sans-serif;
+  font-size: 1.1rem;
+  color: $orange;
+  border-bottom: none;
+}
+
+.btn-primary {
+  background-color: $orange;
+  color: $white;
+  border: 1px solid $black;
+}
+
+.btn-primary:hover {
+  background-color: darken($orange, 10%);
+  color: $white;
+  text-decoration: underline;
+}
+
+.btn-success {
+  background: $btn-success;
+  border: 1px solid $black;
+}
+
+.btn-success:hover {
+  background: darken($btn-success, 10%);
+  text-decoration: underline;
+}
+
+.btn-danger {
+  background: $btn-danger;
+  border: 1px solid $black;
+}
+
+.btn-danger:hover {
+  background: darken($btn-danger, 10%);
+  text-decoration: underline;
+  border: 1px solid $black;
+}
+
+a {
+  color: #006A8E;
+  cursor: pointer;
+  font-size: $font-size+.2rem;
+}

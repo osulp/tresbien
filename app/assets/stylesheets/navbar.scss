@@ -1,8 +1,9 @@
 .navbar {
-  background: #d1ecff;
+  background: $orange;
   padding-top: 0px;
   padding-bottom: 0px;
   padding-right: 0px;
+  border-bottom: 3px solid $black;
   .unicorn {
     transition: all .75s 0.25s;
     padding: 3px;
@@ -14,18 +15,26 @@
       transform: rotate(180deg);
     }
   }
+  .welcome {
+    padding-top: 23px;
+    padding-right: 50px;
+    cursor: default;
+    p {
+      font-weight: bold;
+    }
+  }
   .sign-in {
     margin-right: 10px;
   }
   .nav-link {
-    border-left: 1px solid #637890;
+    border-left: .5px solid darken($orange, 10%);
     margin-top: 0px;
     padding-top: 24px;
     padding-bottom: 24px;
-    color: #000;
+    color: $black;
     &:hover {
-      background: #555;
-      color: white;
+      background: rgba(0, 0, 0, 0.85);
+      color: $white;
       cursor: pointer;
     }
   }

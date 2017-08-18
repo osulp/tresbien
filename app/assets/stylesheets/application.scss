@@ -4,17 +4,24 @@
 @import "variables";
 @import "reimbursement_request";
 @import "navbar";
+@import "footer";
+@import "brand";
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   font-size: $font-size;
   padding-top: 75px;
-}
-
-.welcome {
-  padding-top: 23px;
-  padding-right: 50px;
-  cursor: default;
+  margin: 0 0 100px;
+  /* bottom = footer height */
 }
 
 .hidden {
   display: none;
+}
+
+.edit-btn {
+  margin-top: 4px;
 }
