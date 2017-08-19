@@ -9,7 +9,9 @@ class ReimbursementRequestsController < ApplicationController
     @reimbursement_request = ReimbursementRequest.new
   end
 
-  def index; end
+  def index
+    redirect_to root_path()
+  end
 
   def show
     @children = @reimbursement_request.children
@@ -22,7 +24,7 @@ class ReimbursementRequestsController < ApplicationController
           handlers: [:erb],
           formats: [:pdf]
       end
-    end 
+    end
   end
 
   def create
@@ -36,8 +38,6 @@ class ReimbursementRequestsController < ApplicationController
       end
       redirect_to reimbursement_request_path(@reimbursement_request)
     else
-      flash[:alert] = 'Some fields were left blank'
-      puts @reimbursement_request.errors.full_messages.to_s
       render 'new'
     end
   end
