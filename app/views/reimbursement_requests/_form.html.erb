@@ -1,4 +1,4 @@
-<%= simple_form_for @reimbursement_request, url: reimbursement_requests_path, html: { multipart: true, class: 'reimbursement-request-form' } do |f| %>
+<%= simple_form_for @reimbursement_request, html: { multipart: true, class: 'reimbursement-request-form' } do |f| %>
   <div class="row">
     <div class="col col-md-2">
       <%= render partial: 'form_total', locals: { f: f } %>
