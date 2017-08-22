@@ -30,36 +30,25 @@ h5 {
 }
 
 .btn-primary {
-  background-color: $orange;
+  background-color: $addbtn;
   color: $white;
   border: 1px solid $black;
 }
 
 .btn-primary:hover {
-  background-color: darken($orange, 10%);
+  background-color: darken($addbtn, 10%);
   color: $white;
   text-decoration: underline;
 }
 
 .btn-success {
-  background: $btn-success;
+  background: $submit;
   border: 1px solid $black;
 }
 
 .btn-success:hover {
-  background: darken($btn-success, 10%);
+  background: darken($submit, 10%);
   text-decoration: underline;
-}
-
-.btn-danger {
-  background: $btn-danger;
-  border: 1px solid $black;
-}
-
-.btn-danger:hover {
-  background: darken($btn-danger, 10%);
-  text-decoration: underline;
-  border: 1px solid $black;
 }
 
 a {
