@@ -29,13 +29,25 @@ h5 {
   border-bottom: none;
 }
 
+.btn-primary {
+  background-color: $addbtn;
+  color: $white;
+  border: 1px solid $black;
+}
+
+.btn-primary:hover {
+  background-color: darken($addbtn, 10%);
+  color: $white;
+  text-decoration: underline;
+}
+
 .btn-success {
-  background: $btn-success;
+  background: $submit;
   border: 1px solid $black;
 }
 
 .btn-success:hover {
-  background: darken($btn-success, 10%);
+  background: darken($submit, 10%);
   text-decoration: underline;
 }
 
