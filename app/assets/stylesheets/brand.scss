@@ -29,13 +29,23 @@ h5 {
   border-bottom: none;
 }
 
+.btn-primary {
+  background: $s-button;
+  border: 1px solid $black;
+}
+
+.btn-primary:hover {
+  background: darken($s-button, 10%);
+  text-decoration: underline;
+}
+
 .btn-success {
-  background: $btn-success;
+  background: $s-submit;
   border: 1px solid $black;
 }
 
 .btn-success:hover {
-  background: darken($btn-success, 10%);
+  background: darken($s-submit, 10%);
   text-decoration: underline;
 }
 
@@ -44,4 +54,3 @@ a {
   cursor: pointer;
   font-size: $font-size+.2rem;
 }
-
