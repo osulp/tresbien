@@ -29,18 +29,6 @@ h5 {
   border-bottom: none;
 }
 
-.btn-primary {
-  background-color: $orange;
-  color: $white;
-  border: 1px solid $black;
-}
-
-.btn-primary:hover {
-  background-color: darken($orange, 10%);
-  color: $white;
-  text-decoration: underline;
-}
-
 .btn-success {
   background: $btn-success;
   border: 1px solid $black;
@@ -49,17 +37,6 @@ h5 {
 .btn-success:hover {
   background: darken($btn-success, 10%);
   text-decoration: underline;
-}
-
-.btn-danger {
-  background: $btn-danger;
-  border: 1px solid $black;
-}
-
-.btn-danger:hover {
-  background: darken($btn-danger, 10%);
-  text-decoration: underline;
-  border: 1px solid $black;
 }
 
 a {
