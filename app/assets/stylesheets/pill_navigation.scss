@@ -1,0 +1,24 @@
+
+.nav-pills { 
+  a.nav-link {
+    color: $btn-success;
+    border: 1px solid lighten($btn-success, 50%);
+  }
+  a.nav-link.active { 
+    color: white;
+    padding-left: 25px;
+    background-color: $btn-success;
+    animation-duration: .5s;
+    animation-name: popleft;
+  }
+}
+
+@keyframes popleft {
+  from {
+    padding-left: 16px;
+  }
+
+  to {
+    padding-left: 25px;
+  }
+}
