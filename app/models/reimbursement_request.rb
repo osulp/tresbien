@@ -15,7 +15,9 @@ class ReimbursementRequest < ApplicationRecord
   accepts_nested_attributes_for :accountings, :expense_airfares, :expense_mileages, :expense_others, :travel_itineraries, :travel_cities, :claimant, :certifier, :attachments, allow_destroy: true
 
   validates :certifier_id, presence: true
-  validates :identifier, presence: true, length: { is: 15 }
+  # validates :identifier, presence: true, length: { is: 15 }
+
+  before_create :generate_identifier
 
   # Calculate the grand total for the reimbursement request
   def calculate_grand_total
@@ -51,5 +53,15 @@ class ReimbursementRequest < ApplicationRecord
   # return the sum of the amounts of each model in models
   def get_total_sum(models)
     models.map(&:amount).sum
+  end
+
+  def generate_identifier
+    travel = travel_itineraries.to_a.sort_by!(&:date)
+    city_name = travel.first.city
+    city_name = city_name[0...5] if city_name.length > 5
+    state_name = travel.first.state
+    state = CS.get(:us).key(state_name).to_s
+    year = travel.first.date.year.to_s
+    self.identifier = city_name + state + year
   end
 end
