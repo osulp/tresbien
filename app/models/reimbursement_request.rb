@@ -59,6 +59,7 @@ class ReimbursementRequest < ApplicationRecord
     travel = travel_itineraries.to_a.sort_by!(&:date)
     city_name = travel.first.city
     city_name = city_name[0...5] if city_name.length > 5
+    city_name += '0' while city_name.length < 5
     state_name = travel.first.state
     state = CS.get(:us).key(state_name).to_s
     year = travel.first.date.year.to_s
