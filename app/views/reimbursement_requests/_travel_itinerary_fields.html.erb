@@ -1,7 +1,7 @@
 <tr class="nested-fields travel-itinerary" data-table-name="travel-itinerary">
   <td><%= f.input :date, as: :date_picker, label: false %></td>
-  <td><%= f.select :state, CityState.states_for_select, { prompt: "State" }, id: "states-of-country", class: "form-control"  %></td>
-  <td><%= f.select :city, CityState.cities_for_select(f.object.state),{prompt: "City"}, id: "cities-of-state", class: "form-control" %></td>
+  <td><%= f.input :state, as: :cs_state_select, label: false %></td>
+  <td><%= f.input :city, as: :cs_city_select, state: f.object.state, label: false %></td>
   <td><%= f.input :break, label: false, input_html: { class: 'sum-input'} %></td>
   <td><%= f.input :lunch, label: false, input_html: { class: 'sum-input'} %></td>
   <td><%= f.input :dinner, label: false, input_html: { class: 'sum-input'} %></td>

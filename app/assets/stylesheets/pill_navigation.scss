@@ -9,9 +9,26 @@
     }
     border-bottom: none;
     border-radius: 0;
-    i {
-      display: none;
-      padding-right: 10px;
+    i.fa {
+      &.fa-caret-right {
+        display: none;
+        padding-right: 10px;
+      }
+      &.fa-exclamation-circle {
+        display: none;
+        padding-left: 5px;
+      }
+    }
+    &.has-error {
+      &:focus {
+        border: 2px solid $error-red-dark;
+        box-shadow: 0px 0px 2px 1px lightgray;
+      }
+      background-color: $error-red-light;
+      color: $error-red-dark;
+      i.fa.fa-exclamation-circle {
+        display: inline-block;
+      }
     }
   }
   a.nav-link:last-child {
@@ -29,8 +46,14 @@
     background-color: $btn-success;
     animation-duration: .5s;
     animation-name: popleft;
-    i {
-      display: inline-block;
+    i.fa {
+      &.fa-caret-right {
+        display: inline-block;
+      }
+    }
+    &.has-error {
+      background: $error-red-dark;
+      text-color: white;
     }
   }
 }

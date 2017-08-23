@@ -2,7 +2,7 @@ $(document).on('load change', '#states-of-country', function(e) {
   console.log('Querying cities for selected state.');
   var cities_of_state, input_state, state;
   input_state = $(this);
-  cities_of_state = input_state.parent().next().find('#cities-of-state');
+  cities_of_state = input_state.parents("td").first().next().find('#cities-of-state');
   state = this.options[e.target.selectedIndex].id;
   $.ajax({
     url: '/cities/' + $(this).children(':selected').attr('data-abbreviation'),
