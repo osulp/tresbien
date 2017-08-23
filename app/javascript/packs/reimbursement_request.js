@@ -28,7 +28,9 @@ const initialState = observable({
   }
 });
 
-// Global spy to log everything that Mobx is doing for dev purposes
-spy(e => console.log(e));
+document.addEventListener('turbolinks:load', () => {
+  // Global spy to log everything that Mobx is doing for dev purposes
+  spy(e => console.log(e));
 
-let f = new Form('.reimbursement-request-form', initialState);
+  let f = new Form('.reimbursement-request-form', initialState);
+});
