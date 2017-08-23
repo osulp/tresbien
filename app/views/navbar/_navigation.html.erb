@@ -1,25 +1,30 @@
-<nav class="navbar fixed-top">
+<nav class="navbar fixed-top navbar-expand-md" label="site">
   <div class="unicorn toggle-down navbar-brand"><%= image_tag("osulogo.png", size: "110x60") %></div>
-  <ul class="nav">
-    <% if user_signed_in? %>
-      <li class="nav-item welcome">
-        <p>Logged in: <%= current_user.username %></p>
-      </li>
-      <li class="nav-item">
-          <%= link_to "Reimbursement Requests", root_path , class: "nav-link" %>
-      </li>
-      <li class="nav-item">
-        <% if current_user.admin %>
-          <%= link_to "Admin", rails_admin_path , class: "nav-link" %>
-        <% end %>
-      </li>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-options" aria-controls="navbar-options">
+    <span class="fa fa-bars fa-2x" alt="show nav options">
+  </button>
+  <div class="collapse navbar-collapse" id="navbar-options">
+    <ul class="nav ml-auto">
+      <% if user_signed_in? %>
+        <li class="nav-item welcome">
+          <p>Welcome back, <%= current_user.username %></p>
+        </li>
         <li class="nav-item">
-        <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
-      </li>
-    <% else %>
-      <li class="nav-item">
-        <%= link_to "Sign in", new_user_session_path, class:"sign-in btn btn-primary" %>
-      </li>
-    <% end %>
-  </ul>
+          <%= link_to "Reimbursement Requests List", root_path , class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <% if current_user.admin %>
+            <%= link_to "Admin Interface", rails_admin_path , class: "nav-link" %>
+          <% end %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "nav-link" %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "Sign in", new_user_session_path, class:"sign-in btn btn-primary" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 </nav>

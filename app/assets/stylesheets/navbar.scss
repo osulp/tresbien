@@ -20,7 +20,6 @@
     padding-right: 50px;
     cursor: default;
     p {
-      font-weight: bold;
     }
   }
   .sign-in {
@@ -37,5 +36,8 @@
       color: $white;
       cursor: pointer;
     }
+  }
+  .navbar-toggler {
+    margin-right: 25px;
   }
 }
