@@ -141,13 +141,6 @@
   }
 }
 
-.fixed-left {
-  @include media-breakpoint-up(lg) {
-    padding: inherit;
-    max-width: inherit;
-    position: fixed;
-  }
-}
 
 .tab-pane {
   margin-bottom: 20px;
