@@ -119,18 +119,36 @@
   }
 
   .flash_messages {
-    width: 500px;
     margin-top: 35px;
+    width: 60%;
+    h2.panel-title {
+      color: $error-red-dark;
+    }
+    .alert {
+      a.toggle-show {
+        color: $error-red-dark;
+        i {
+          transform: rotate(0deg);
+          transition: .25s;
+        }
+        &[aria-expanded="true"] {
+          i {
+            transform: rotate(180deg);
+            transition: .25s;
+          }
+        }
+      }
+    }
   }
 
   div.has-error {
     input,
     select {
-      border: 1px #ff3535 solid;
-      background-color: #ffd9d9;
+      border: 1px $error-red-dark solid;
+      background-color: $error-red-light;
     }
     .help-block {
-      color: #ff3535
+      color: $error-red-dark;
     }
   }
 }
@@ -149,3 +167,4 @@
 .form-row {
   margin-bottom: 10px;
 }
+

@@ -1,8 +1,8 @@
 <tr class="nested-fields travel-city" data-table-name="travel-city">
   <td><%= f.input :from_date, as: :date_picker, label: false %></td>
   <td><%= f.input :to_date, as: :date_picker, label: false %></td>
-  <td><%= f.select :state, CityState.states_for_select, { prompt: "State" }, id: "states-of-country", class: "form-control", label: false %></td>
-  <td><%= f.select :city, CityState.cities_for_select(f.object.state),{prompt: "City"}, id: "cities-of-state", class: "form-control" %></td>
+  <td><%= f.input :state, as: :cs_state_select, label: false %></td>
+  <td><%= f.input :city, as: :cs_city_select, state: f.object.state, label: false %></td>
   <td><%= f.input :hotel_rate, label: false %></td>
   <td>
     <div class="travel-city-controls">
