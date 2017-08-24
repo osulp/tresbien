@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="col col-lg-9 col-md-9 col-sm-12 tab-content">
-      <%= render "layouts/error", obj: @reimbursement_request%>
+      <%#= render "layouts/error", obj: @reimbursement_request%>
       <div class="tab-pane active" id="request_information_panel">
         <%= render partial: 'form_traveller_information',  locals: { f: f, current_user: current_user, certifiers: @certifiers }  %>
         <%= render partial: 'form_request_information', locals: { f: f } %>
