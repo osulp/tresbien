@@ -7,10 +7,11 @@ class ReimbursementRequestsController < ApplicationController
 
   def new
     @reimbursement_request = ReimbursementRequest.new
+    @reimbursement_request.travel_cities.build
   end
 
   def index
-    redirect_to root_path()
+    redirect_to root_path
   end
 
   def show
@@ -18,11 +19,11 @@ class ReimbursementRequestsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "#{@reimbursement_request.id}",
-          template: "reimbursement_requests/show.html.erb",
-          layout: 'pdf',
-          handlers: [:erb],
-          formats: [:pdf]
+        render pdf: @reimbursement_request.id.to_s,
+               template: 'reimbursement_requests/show.html.erb',
+               layout: 'pdf',
+               handlers: [:erb],
+               formats: [:pdf]
       end
     end
   end
