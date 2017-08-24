@@ -62,7 +62,8 @@ class ReimbursementRequest < ApplicationRecord
     city_name += '0' while city_name.length < 5
     state_name = travel.first.state
     state = CS.get(:us).key(state_name).to_s
-    year = travel.first.date.year.to_s
-    self.identifier = city_name + state + year
+    d = travel.first.date
+    d = d.strftime('%m%d%Y')
+    self.identifier = city_name + state + d
   end
 end
