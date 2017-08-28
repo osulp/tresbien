@@ -16,11 +16,13 @@ class BasicRow {
     extendObservable(this, {
       row_total: 0
     });
+    this.row_total = parseFloat(this.element.find('.row-sum-input').val()).toFixed(2);
     autorun(() => this.element.find('.row-sum-input').val(this.row_total));
+    this.element.find('.row-sum-input').change();
   }
 
   bindRowSumInput = input => {
-    $(input).on('keyup mouseup', e => {
+    $(input).on('keyup mouseup change', e => {
       let row_sum_input = this.element.find('.row-sum-input');
       let total = Utils.sumInputFloats(row_sum_input);
       this.row_total = total;
