@@ -20,6 +20,7 @@ class ItineraryRow {
       row_total: 0
     });
     autorun(() => this.element.find('.row-sum-input').val(this.row_total));
+    this.element.find('.sum-input:first').change();
 
     if (data) {
       this.setRowFields(data);
