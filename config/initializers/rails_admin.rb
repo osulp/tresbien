@@ -1,7 +1,8 @@
-RailsAdmin.config do |config|
+# frozen_string_literal: true
 
+RailsAdmin.config do |config|
   config.authorize_with do
-    redirect_to main_app.root_path unless warden.user.admin ==true
+    redirect_to main_app.root_path unless warden.user.admin == true
   end
 
   ### Popular gems integration
@@ -39,7 +40,7 @@ RailsAdmin.config do |config|
     end
     show_in_app
 
-    config.included_models = ["User", "ExpenseType", "ReimbursementRequest", "Status"] #Added ReimbursementRequest for testing purposes, remove later
+    config.included_models = %w[User ExpenseType]
 
     config.model Status do
       configure :reimbursement_requests do

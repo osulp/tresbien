@@ -8,6 +8,7 @@
 @import "footer";
 @import "brand";
 @import "pill_navigation";
+@import "comments";
 html {
   position: relative;
   min-height: 100%;
@@ -17,7 +18,7 @@ body {
   font-size: $font-size;
   padding-top: 75px;
   margin: 25px 0 100px;
-  /* bottom = footer height 
+  /* bottom = footer height
      top = space under navbar */
 }
 

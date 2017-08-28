@@ -1,0 +1,33 @@
+.comment {
+  list-style: none;
+  padding: 15px;
+  padding-bottom: 8px;
+  border: 1px solid #c6c6c6;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 5px;
+  margin-top: 15px;
+  h5 {
+    color: black;
+  }
+  .date {
+    color: #6e6e6e;
+  }
+  p {
+    font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+  .destroy {
+    border-top: 1px #ababab solid;
+    padding-top: 8px;
+  }
+}
+
+.comment:first-of-type {
+  margin-top: 20px;
+}
+
+.text_area {
+  border-radius: 5px;
+  width: 100%;
+  padding-left: 10px;
+  padding-top: 7px;
+}

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170823211426) do
+ActiveRecord::Schema.define(version: 20170829193134) do
 
   create_table "accountings", force: :cascade do |t|
     t.string "index"
@@ -108,6 +108,16 @@ ActiveRecord::Schema.define(version: 20170823211426) do
     t.index ["certifier_id"], name: "index_reimbursement_requests_on_certifier_id"
     t.index ["claimant_id"], name: "index_reimbursement_requests_on_claimant_id"
     t.index ["status_id"], name: "index_reimbursement_requests_on_status_id"
+  end
+
+  create_table "status_comments", force: :cascade do |t|
+    t.text "comment"
+    t.integer "reimbursement_request_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["reimbursement_request_id"], name: "index_status_comments_on_reimbursement_request_id"
+    t.index ["user_id"], name: "index_status_comments_on_user_id"
   end
 
   create_table "statuses", force: :cascade do |t|

@@ -1,13 +1,15 @@
 
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
+Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
   resources :users
   resources :reimbursement_requests do
-    resources :travel_itineraries
+    post 'comment', to: 'reimbursement_requests#comment'
+    delete 'comment/:id/delete', to: 'reimbursement_requests#delete_comment', as: 'comment_delete'
   end
 
   resources :expense_others do
@@ -19,12 +21,11 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  #makes expense_types root
+  # makes expense_types root
   root 'home#index'
 
   get 'states/:country', to: 'application#states'
   get 'cities/:state/:country', to: 'application#cities'
-
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

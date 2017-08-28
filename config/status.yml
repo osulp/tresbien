@@ -1,0 +1,17 @@
+draft:
+  order: 1
+  default: true
+  name: Draft
+submitted:
+  order: 2
+  default: false
+  name: Submitted
+approved:
+  order: 3
+  default: false
+  name: Approved
+declined:
+  order: 4
+  default: false
+  name: Declined
+
