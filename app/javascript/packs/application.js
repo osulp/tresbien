@@ -7,6 +7,7 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 require('./city_state');
+require('./error_styling');
 require('./unicorn');
 require('./tab_nav');
 require('./tooltips');
