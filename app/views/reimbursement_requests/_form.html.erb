@@ -20,8 +20,16 @@
       <%= render partial: 'form_airfare', locals: { f: f } %>
       <%= render partial: 'form_mileage', locals: { f: f } %>
       <%= render partial: 'form_attachments', locals: { f: f } %>
-      <div class="form-row style1">
+      <div class="form-row submit-row justify-content-between">
+        <a class="btn btn-default btn-primary next-prev-nav visibility-hidden" id="prev-tab" href=#>
+          <i class="fa fa-chevron-left"></i>
+          Prev
+        </a>
         <%= f.button :submit, class: "btn btn-success " %>
+        <a class="btn btn-default btn-primary next-prev-nav" id="next-tab" href=#>
+          Next
+          <i class="fa fa-chevron-right"></i>
+        </a>
       </div>
     </div>
   </div>

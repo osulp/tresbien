@@ -119,14 +119,22 @@
     margin-bottom: 10px;
   }
 
-  .btn-success {
-    margin-top: 25px;
-    margin-bottom: 20px;
-  }
-
-  .style1 {
+  .submit-row {
     margin-top: 15px;
     border-top: 1px solid #c6c6c6;
+    .btn {
+      margin-top: 25px;
+      margin-bottom: 20px;
+      &.btn-primary {
+        padding: 8px 20px;
+        .fa-chevron-left {
+          margin-right: 5px;
+        }
+        .fa-chevron-right {
+          margin-left: 5px;
+        }
+      }
+    }
   }
 
   .flash_messages {
@@ -179,3 +187,6 @@
   margin-bottom: 10px;
 }
 
+.visibility-hidden {
+  visibility: hidden;
+}
