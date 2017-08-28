@@ -31,6 +31,17 @@
       tr.travel-city,
       tr.travel-itinerary {
         td {
+          .form-group {
+            margin-bottom: 0;
+          }
+          .international-travel {
+            margin-top: 0.3rem;
+            color: $orange;
+            &:hover {
+              cursor: pointer;
+              color: $black;
+            }
+          }
           div {
             input {
               max-width: 92px;
