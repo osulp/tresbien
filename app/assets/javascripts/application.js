@@ -15,7 +15,7 @@
 //= require popper
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require turbolinks
+// require turbolinks
 //= require city_state
 //= require tooltips
 //= require unicorn

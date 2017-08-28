@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170810162621) do
+ActiveRecord::Schema.define(version: 20170823211426) do
 
   create_table "accountings", force: :cascade do |t|
     t.string "index"
@@ -66,13 +66,13 @@ ActiveRecord::Schema.define(version: 20170810162621) do
   end
 
   create_table "expense_others", force: :cascade do |t|
-    t.integer "expense_type_id"
     t.datetime "from_date"
     t.datetime "to_date"
     t.text "notes"
     t.float "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "expense_type_id"
     t.integer "reimbursement_request_id"
     t.index ["expense_type_id"], name: "index_expense_others_on_expense_type_id"
     t.index ["reimbursement_request_id"], name: "index_expense_others_on_reimbursement_request_id"
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(version: 20170810162621) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "reimbursement_request_id"
+    t.string "country"
     t.index ["reimbursement_request_id"], name: "index_travel_cities_on_reimbursement_request_id"
   end
 
@@ -142,6 +143,7 @@ ActiveRecord::Schema.define(version: 20170810162621) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "reimbursement_request_id"
+    t.string "country"
     t.index ["reimbursement_request_id"], name: "index_travel_itineraries_on_reimbursement_request_id"
   end
 

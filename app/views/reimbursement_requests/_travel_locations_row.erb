@@ -1,0 +1,7 @@
+<div class="row">
+  <div class="col col-12">
+    <%= f.input :country, as: :cs_country_select, country: f.object.country, label: false, input_html: {  class: f.object.country == "United States" ? "hidden": "" } %>
+    <%= f.input :state, as: :cs_state_select, state: f.object.state, country: f.object.country, label: false %>
+    <%= f.input :city, as: :cs_city_select, city: f.object.city, state: f.object.state, country: f.object.country, label: false %>
+  </div>
+</div>

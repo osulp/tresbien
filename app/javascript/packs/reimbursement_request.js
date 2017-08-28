@@ -28,9 +28,11 @@ const initialState = observable({
   }
 });
 
-document.addEventListener('turbolinks:load', () => {
+let ready = () => {
   // Global spy to log everything that Mobx is doing for dev purposes
+  console.log("Ready fired, starting app.");
   spy(e => console.log(e));
-
   let f = new Form('.reimbursement-request-form', initialState);
-});
+};
+
+$(document).ready(ready);

@@ -56,11 +56,12 @@ class CityRow {
   getRowData = tr => {
     let from_date = $(tr.find('input.datepicker')[0]).val();
     let to_date = $(tr.find('input.datepicker')[1]).val();
+    let country = tr.find('select#countries-of-world').val();
     let state = tr.find('select#states-of-country').val();
     let city = tr.find('select#cities-of-state').val();
     let hotel_rate = tr.find('.reimbursement_request_travel_cities_hotel_rate > input').val();
     let travel_city_id = tr.find('input.travel-city-id').prop('id');
-    return { from_date, to_date, state, city, hotel_rate, travel_city_id };
+    return { from_date, to_date, state, city, hotel_rate, travel_city_id, country };
   };
 }
 

@@ -48,9 +48,13 @@ class ItineraryRow {
     this.element.find('input.datepicker:first').val(data.day.format('YYYY/MM/DD'));
     this.element.find('.reimbursement_request_travel_itineraries_hotel > input').val(data.hotel_rate).change();
     this.element.find('input.travel-city-id').val(data.travel_city_id);
-    this.element.find('select#states-of-country').val(data.state).change();
+    this.element.find('select#countries-of-world').val(data.country).change();
+    this.element.find('select#countries-of-world').show();
     setTimeout(() => {
-      this.element.find('select#cities-of-state').val(data.city);
+      this.element.find('select#states-of-country').val(data.state).change();
+      setTimeout(() => {
+        this.element.find('select#cities-of-state').val(data.city);
+      }, 1000);
     }, 1000);
   };
 }

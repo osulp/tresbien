@@ -17,15 +17,13 @@ Rails.application.routes.draw do
     resources :reimbursement_requests
   end
 
-  resources :city_state
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   #makes expense_types root
   root 'home#index'
 
   get 'states/:country', to: 'application#states'
-  get 'cities/:state', to: 'application#cities'
+  get 'cities/:state/:country', to: 'application#cities'
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

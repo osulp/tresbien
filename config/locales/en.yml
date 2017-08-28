@@ -40,6 +40,7 @@ en:
       remove_mileage: "Remove Mileage Line"
       remove_travel_city: "Remove City and Related Itineraries"
       remove_travel_itinerary: "Remove Daily Itinerary Line"
+      international_travel: "Change Country of Travel"
     buttons:
       add_accounting: "Add Accounting Line"
       add_expense_airfares: "Add Airfare"

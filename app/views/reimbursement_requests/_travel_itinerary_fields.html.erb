@@ -1,7 +1,6 @@
 <tr class="nested-fields travel-itinerary" data-table-name="travel-itinerary">
   <td><%= f.input :date, as: :date_picker, label: false %></td>
-  <td><%= f.input :state, as: :cs_state_select, label: false %></td>
-  <td><%= f.input :city, as: :cs_city_select, state: f.object.state, label: false %></td>
+  <td><%= render partial: 'travel_locations_row', locals: { f: f } %></td>
   <td><%= f.input :break, label: false, input_html: { class: 'sum-input'} %></td>
   <td><%= f.input :lunch, label: false, input_html: { class: 'sum-input'} %></td>
   <td><%= f.input :dinner, label: false, input_html: { class: 'sum-input'} %></td>

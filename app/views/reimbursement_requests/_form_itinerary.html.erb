@@ -3,7 +3,7 @@
     <div class="form-row">
       <h3><%= t('reimbursement_request_form.headers.cities_travelled') %></h3>
     </div>
-    <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "State", "City", "Hotel Daily Rate", ""], id: "cities_travelled" } do %>
+    <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "Location", "Hotel Daily Rate", ""], id: "cities_travelled" } do %>
       <%= f.simple_fields_for :travel_cities do |travel_city| %>
         <%= render partial: "travel_city_fields", locals: { f: travel_city, object: f } %>
       <% end %>
@@ -22,7 +22,7 @@
     <div class="form-row">
       <h4><%= t('reimbursement_request_form.headers.daily_itineraries') %></h4>
     </div>
-    <%= render layout: "nested_fields_table", locals: { attributes: ["Date", "State", "City", "Breakfast", "Lunch", "Dinner", "Hotel", "Amount", ""], id: "daily_itineraries", total_class: "itineraries-total" } do %>
+    <%= render layout: "nested_fields_table", locals: { attributes: ["Date", "Location", "Breakfast", "Lunch", "Dinner", "Hotel", "Amount", ""], id: "daily_itineraries", total_class: "itineraries-total" } do %>
       <%= f.simple_fields_for :travel_itineraries do |travel_itinerary| %>
         <%= render "travel_itinerary_fields", f: travel_itinerary %>
       <% end %>
