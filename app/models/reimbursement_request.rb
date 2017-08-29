@@ -54,16 +54,43 @@ class ReimbursementRequest < ApplicationRecord
   def get_total_sum(models)
     models.map(&:amount).sum
   end
-
+  
+  # sets the identifier to the first 5/6 chars of the city name, the first 2 chars of the state abbr and mmddyyyy; always returns 15 chars
   def generate_identifier
-    travel = travel_itineraries.to_a.sort_by!(&:date)
-    city_name = travel.first.city
-    city_name = city_name[0...5] if city_name.length > 5
-    city_name += '0' while city_name.length < 5
-    state_name = travel.first.state
-    state = CS.get(:us).key(state_name).to_s
-    d = travel.first.date
-    d = d.strftime('%m%d%Y')
-    self.identifier = city_name + state + d
+    travel = get_first_travel_itinerary
+    country = get_country_abbreviation(travel)
+    state = get_truncated_state(travel, country)
+    city_name = get_truncated_city_name(travel, state)
+    date = get_date(travel)
+    self.identifier = city_name + state + date
+  end
+
+  # returns the reimbursement request's travel itineraries sorted by date
+  def get_first_travel_itinerary
+    travel_itineraries.to_a.sort_by!(&:date).first
+  end
+
+  # returns the country abbreviation for the country stored in the first travel itinerary
+  def get_country_abbreviation(first_itinerary)
+    CS.countries.key(first_itinerary.country)
+  end
+
+  # returns the first two characters of the state abbreviation for the first travel itinerary in travel_itineraries
+  def get_truncated_state(first_itinerary, country)
+    CS.get(country).key(first_itinerary.state).to_s[0...2]
+  end
+
+  # sets the state name to a string of max_length chars, padded by zeros if necessary
+  def get_truncated_city_name(first_itinerary, state)
+    max_length = (state.length == 1 ? 5 : 6)
+    city_name = first_itinerary.city
+    city_name = city_name.delete(" ")[0...max_length]
+    city_name += '0' while city_name.length < max_length
+    return city_name
+  end
+
+  # returns the date of the first travel itinerary parsed as mmddyyyy
+  def get_date(first_itinerary)
+    first_itinerary.date.strftime('%m%d%Y')
   end
 end
