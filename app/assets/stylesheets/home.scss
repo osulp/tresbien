@@ -1,0 +1,12 @@
+table {
+  tbody {
+    tr {
+      &.approved {
+        background-color: $reindeer-moss; 
+      }
+      &.denied {
+        background-color: $error-red-light;
+      }
+    }
+  }
+}
