@@ -17,7 +17,7 @@ module ReimbursementRequestHelper
   end
 
   def get_table_row_class(reimbursement_request)
-    class_string += reimbursement_request.status.name.downcase + " "
+    class_string = reimbursement_request.status.name.downcase + " "
     class_string += "claimant " if user_signed_in? and reimbursement_request.claimant_id == current_user.id
     class_string += "certifier " if user_signed_in? and reimbursement_request.certifier_id == current_user.id
     class_string += "other-user " if user_signed_in? and reimbursement_request.certifier_id != current_user.id and reimbursement_request.claimant_id != current_user.id

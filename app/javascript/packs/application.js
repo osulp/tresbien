@@ -12,3 +12,4 @@ require('./unicorn');
 require('./tab_nav');
 require('./tooltips');
 require('./reimbursement_request');
+require('./home_table_filters');
