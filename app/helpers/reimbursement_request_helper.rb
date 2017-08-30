@@ -11,6 +11,9 @@ module ReimbursementRequestHelper
     '<span class="glyphicon glyphicon-plus bg-success"></span>'.html_safe
   end
 
+  def get_request_title(reimbursement_request) 
+    "#{reimbursement_request.travel_cities.first.from_date.strftime('%e %B %Y')}: #{reimbursement_request.travel_cities.first.city}, #{reimbursement_request.travel_cities.first.state}  (#{CS.countries.key(reimbursement_request.travel_cities.first.country).to_s})"
+  end
   # returns date formatted as a string in mm/dd/yy format
   def get_simple_date_time(date)
     date&.strftime('%m/%d/%y, %l:%M %p')
