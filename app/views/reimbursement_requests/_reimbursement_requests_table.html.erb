@@ -1,31 +1,37 @@
 <div class="row">
   <div class="col-12">
     <% if user_signed_in? and @reimbursement_requests %>
-      <h2>Reimbursement Requests</h2>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Identifier</th>
-            <th>Last Edit</th>
-            <th>Claimant</th>
-            <th>Certifier</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @reimbursement_requests.each do |reimbursement_request| %>
-            <tr class="<%= get_table_row_class(reimbursement_request) %>" >
-              <td><%= link_to reimbursement_request.identifier == "" ? "[No Identifier]" : reimbursement_request.identifier, reimbursement_request_path(reimbursement_request) %></td>
-              <td><%= reimbursement_request.updated_at
-              .in_time_zone("Pacific Time (US & Canada)")
-              .strftime("%m/%d/%y") %></td>
-              <td><%= reimbursement_request.claimant.full_name  if reimbursement_request.claimant %></td>
-              <td><%= reimbursement_request.certifier.full_name if reimbursement_request.certifier %></td>
-              <td><%= reimbursement_request.status ? reimbursement_request.status.name : "Pending" %></td>
+      <div class="row">
+        <h2>Reimbursement Requests</h2>
+      </div>
+      <%= render partial: "reimbursement_requests/table_filters" %>
+      <div class="row">
+        <h3>Table</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Identifier</th>
+              <th>Last Edit</th>
+              <th>Claimant</th>
+              <th>Certifier</th>
+              <th>Status</th>
             </tr>
-          <% end %>
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            <% @reimbursement_requests.each do |reimbursement_request| %>
+              <tr class="<%= get_table_row_class(reimbursement_request) %>" >
+                <td><%= link_to reimbursement_request.identifier == "" ? "[No Identifier]" : reimbursement_request.identifier, reimbursement_request_path(reimbursement_request) %></td>
+                <td><%= reimbursement_request.updated_at
+                .in_time_zone("Pacific Time (US & Canada)")
+                .strftime("%m/%d/%y") %></td>
+                <td><%= reimbursement_request.claimant.full_name  if reimbursement_request.claimant %></td>
+                <td><%= reimbursement_request.certifier.full_name if reimbursement_request.certifier %></td>
+                <td><%= reimbursement_request.status ? reimbursement_request.status.name : "Pending" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     <% else %>
       <p>Sign in to view reimbursement requests</p>
     <% end %>
