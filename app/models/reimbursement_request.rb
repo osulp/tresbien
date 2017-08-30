@@ -83,11 +83,11 @@ class ReimbursementRequest < ApplicationRecord
 
   # sets the state name to a string of max_length chars, padded by zeros if necessary
   def get_truncated_city_name(first_itinerary, state)
-    max_length = (state.length == 1 ? 5 : 6)
+    max_length = (state.length == 1 ? 6 : 5)
     city_name = first_itinerary.city
-    city_name = city_name.delete(" ")[0...max_length]
+    city_name = city_name.delete(' ')[0...max_length]
     city_name += '0' while city_name.length < max_length
-    return city_name
+    city_name
   end
 
   # returns the date of the first travel itinerary parsed as mmddyyyy
