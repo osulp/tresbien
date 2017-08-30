@@ -11,10 +11,12 @@ class ReimbursementRequestsController < ApplicationController
   end
 
   def index
+    @status_comments = StatusComment.all
     redirect_to root_path
   end
 
   def show
+    @status_comments = @reimbursement_request.status_comments
     @children = @reimbursement_request.children
     respond_to do |format|
       format.html
@@ -53,6 +55,20 @@ class ReimbursementRequestsController < ApplicationController
     end
   end
 
+  def comment
+    reimbursement_request = ReimbursementRequest.find(params[:reimbursement_request_id])
+    reimbursement_request.status_comments << StatusComment.create(comment: params[:status_comment][:comment], user: current_user)
+    reimbursement_request.save
+    redirect_to reimbursement_request_path(reimbursement_request)
+  end
+
+  def delete_comment
+    reimbursement_request = ReimbursementRequest.find(params[:reimbursement_request_id])
+    status_comment = StatusComment.find(params[:id])
+    status_comment.destroy
+    redirect_to reimbursement_request_path(reimbursement_request)
+  end
+
   private
 
   def reimbursement_request_params
@@ -74,6 +90,7 @@ class ReimbursementRequestsController < ApplicationController
       :non_resident_alien,
       :business_notes_and_purpose,
       :address,
+      :status_comment,
       accountings_attributes: %i[id fund organization account program activity amount _destroy],
       expense_airfares_attributes: %i[id from_date to_date from_location to_location notes amount _destroy],
       expense_mileages_attributes: %i[id from_date to_date from_city from_state to_city to_state miles round_trip notes amount _destroy],

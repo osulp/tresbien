@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  comment: MyText
+  reimbursement_request: one
+
+two:
+  comment: MyText
+  reimbursement_request: two
