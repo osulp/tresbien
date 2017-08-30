@@ -4,7 +4,6 @@ class ReimbursementRequest < ApplicationRecord
   attr_accessor :accounting_total, :airfare_total, :mileage_total, :itinerary_total, :other_total
   belongs_to :claimant, class_name: 'User'
   belongs_to :certifier, class_name: 'User'
-  belongs_to :status, inverse_of: :reimbursement_requests
   has_many :accountings
   has_many :expense_airfares
   has_many :expense_mileages
@@ -19,6 +18,8 @@ class ReimbursementRequest < ApplicationRecord
   validate :includes_travel_city
 
   before_create :generate_identifier
+  after_initialize :set_defaults, unless: :persisted?
+  # The set_defaults will only work if the object is new
 
   # Calculate the grand total for the reimbursement request
   def calculate_grand_total
@@ -50,6 +51,10 @@ class ReimbursementRequest < ApplicationRecord
   end
 
   private
+
+  def set_defaults
+    self.status ||= 'draft'
+  end
 
   # return the sum of the amounts of each model in models
   def get_total_sum(models)

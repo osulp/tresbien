@@ -1,0 +1,5 @@
+  <%= f.input :status,
+      collection: @statuses.sort_by {|k,v| v["order"]},
+      label_method: lambda { |o| o[1]["name"] },
+      value_method: lambda { |o| o[0] },
+      selected: @reimbursement_request.status %>

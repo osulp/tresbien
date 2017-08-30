@@ -26,6 +26,7 @@
           Prev
         </a>
         <%= f.button :submit, class: "btn btn-success " %>
+        <%= render partial: "status", locals: { f: f }%>
         <a class="btn btn-default btn-primary next-prev-nav" id="next-tab" href=#>
           Next
           <i class="fa fa-chevron-right"></i>
