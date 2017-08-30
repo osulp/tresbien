@@ -15,8 +15,6 @@
 //= require popper
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require tooltips
-//= require unicorn
 //= require cocoon
 //= require jquery.datetimepicker.full.min.js
 //= require jquery_nested_form
