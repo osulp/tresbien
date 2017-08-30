@@ -10,7 +10,7 @@
         <table class="table">
           <thead>
             <tr>
-              <th>Identifier</th>
+              <th>Request</th>
               <th>Last Edit</th>
               <th>Claimant</th>
               <th>Certifier</th>
@@ -20,7 +20,7 @@
           <tbody>
             <% @reimbursement_requests.each do |reimbursement_request| %>
               <tr class="<%= get_table_row_class(reimbursement_request) %>" >
-                <td><%= link_to reimbursement_request.identifier == "" ? "[No Identifier]" : reimbursement_request.identifier, reimbursement_request_path(reimbursement_request) %></td>
+                <td><%= link_to reimbursement_request.identifier == "" ? "[No Identifier]" : get_request_title(reimbursement_request), reimbursement_request_path(reimbursement_request) %></td>
                 <td><%= reimbursement_request.updated_at
                 .in_time_zone("Pacific Time (US & Canada)")
                 .strftime("%m/%d/%y") %></td>
