@@ -10,7 +10,7 @@ isLastTab = function(tab) {
   if (tab.next().length == 0) {
     return true;
   } else {
-    return false; 
+    return false;
   }
 }
 
@@ -21,6 +21,14 @@ $(document).ready(function() {
       $(this).addClass("has-error");
     }
   });
+
+  $("#error-body ul li").each((i, element) => {
+    let panel_href_value = $(element).data('target-nav-panel');
+    if (panel_href_value !== undefined) {
+      $(`nav > .nav-link[href='#${panel_href_value}']`).addClass('has-error');
+    }
+  });
+
 }).on('click', '.next-prev-nav', function(e) {
   e.preventDefault();
   currentTabLink = $(".nav-link.active");
@@ -32,8 +40,12 @@ $(document).ready(function() {
 }).on('show.bs.tab hide.bs.tab', 'a.nav-link', function(e) {
   if (isFirstTab($(this))) {
     $('#prev-tab').toggleClass('visibility-hidden');
-  } 
+  }
   if (isLastTab($(this))) {
     $('#next-tab').toggleClass('visibility-hidden');
   }
+});
+
+$(document).on('change', '#error-body', () => {
+
 });

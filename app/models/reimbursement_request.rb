@@ -96,6 +96,6 @@ class ReimbursementRequest < ApplicationRecord
   end
 
   def includes_travel_city
-    errors.add(:base, 'Must have at least one city travelled in the itinerary.') if travel_cities.empty? || travel_cities.all?(&:marked_for_destruction?)
+    errors.add(:base, 'Must have at least one city travelled in the itinerary.', target_nav_panel_href: 'itinerary_panel') if travel_cities.empty? || travel_cities.all?(&:marked_for_destruction?)
   end
 end
