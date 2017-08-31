@@ -6,11 +6,12 @@
       </div>
       <div class="panel-body" id="error-body">
         <ul>
-          <% obj.errors.messages[:base].each do |msg| %>
-            <li><%= msg %></li>
+          <% obj.errors.details[:base].each do |e| %>
+            <li data-target-nav-panel="<%= e[:target_nav_panel_href] || '' %>"><%= e[:error] %></li>
           <% end %>
         </ul>
       </div>
     </div>
   </div>
 <% end %>
+<%= console %>
