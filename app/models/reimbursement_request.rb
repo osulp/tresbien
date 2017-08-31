@@ -16,7 +16,7 @@ class ReimbursementRequest < ApplicationRecord
   accepts_nested_attributes_for :accountings, :expense_airfares, :expense_mileages, :expense_others, :travel_itineraries, :travel_cities, :claimant, :certifier, :attachments, allow_destroy: true
 
   validates :certifier_id, presence: true
-  # validates :identifier, presence: true, length: { is: 15 }
+  validate :includes_travel_city
 
   before_create :generate_identifier
 
@@ -55,7 +55,7 @@ class ReimbursementRequest < ApplicationRecord
   def get_total_sum(models)
     models.map(&:amount).sum
   end
-  
+
   # sets the identifier to the first 5/6 chars of the city name, the first 2 chars of the state abbr and mmddyyyy; always returns 15 chars
   def generate_identifier
     travel = get_first_travel_itinerary
@@ -93,5 +93,9 @@ class ReimbursementRequest < ApplicationRecord
   # returns the date of the first travel itinerary parsed as mmddyyyy
   def get_date(first_itinerary)
     first_itinerary.date.strftime('%m%d%Y')
+  end
+
+  def includes_travel_city
+    errors.add(:base, 'Must have at least one city travelled in the itinerary.') if travel_cities.empty? || travel_cities.all?(&:marked_for_destruction?)
   end
 end
