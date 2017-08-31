@@ -36,6 +36,8 @@ class ReimbursementRequestsController < ApplicationController
     @reimbursement_request.claimant = current_user if user_signed_in?
     @reimbursement_request.certifier = User.find(params.dig(:reimbursement_request, :certifier_id)) unless params.dig(:reimbursement_request, :certifier_id)
     if @reimbursement_request.save
+      # This should send email
+      CertifierMailer.certify_request(@reimbursement_request).deliver_now
       params[:attachments]&.each do |file|
         @reimbursement_request.attachments.create(attachment: file)
       end
@@ -45,7 +47,9 @@ class ReimbursementRequestsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @reimbursement_request = ReimbursementRequest.find(params[:id])
+  end
 
   def update
     if @reimbursement_request.update(reimbursement_request_params)

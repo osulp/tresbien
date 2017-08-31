@@ -1,3 +1,4 @@
+
 <div class="row">
   <div class="card w-100 bg-orange text-white">
     <div class="card-body">
@@ -39,16 +40,16 @@
             <div class="dropdown col">
               <a class="dropdown-toggle" data-toggle="dropdown" href=# aria-haspopup="true" aria-expanded="false">By status</a>
               <div class="dropdown-menu">
-                <% Status.all.each do |status| %>
+                <% APPLICATION_CONFIG[:statuses].each_pair do |k, status|%>
                   <div class="form-check dropdown-item">
                     <label class="form-check-label">
-                      <input class="form-check-input filter " data-filter-target=<%= status.name.downcase %> type="checkbox" value="" checked>
-                      <%= status.name %>
+                      <input class="form-check-input filter   " data-filter-target=<%= status["name"].downcase %> type="checkbox" value="" checked>
+                      <%= status["name"] %>
                     </label>
                   </div>
                 <% end %>
               </div>
-            </div>
+              </div>
           </div>
         </div>
       </div>
