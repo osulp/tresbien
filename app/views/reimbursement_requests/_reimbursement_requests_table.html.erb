@@ -1,14 +1,13 @@
 <div class="row">
-  <div class="col-12">
+  <div class="col-12 request-table-row">
     <% if user_signed_in? and @reimbursement_requests %>
       <div class="row">
         <h2>Reimbursement Requests</h2>
       </div>
       <%= render partial: "reimbursement_requests/table_filters" %>
       <div class="row">
-        <h3>Table</h3>
         <table class="table">
-          <thead>
+          <thead class="thead-default">
             <tr>
               <th>Request</th>
               <th>Last Edit</th>
@@ -20,7 +19,7 @@
           <tbody>
             <% @reimbursement_requests.each do |reimbursement_request| %>
               <tr class="<%= get_table_row_class(reimbursement_request) %>" >
-                <td><%= link_to reimbursement_request.identifier == "" ? "[No Identifier]" : get_request_title(reimbursement_request), reimbursement_request_path(reimbursement_request) %></td>
+                <td><%= link_to get_request_title(reimbursement_request), reimbursement_request_path(reimbursement_request) %></td>
                 <td><%= reimbursement_request.updated_at
                 .in_time_zone("Pacific Time (US & Canada)")
                 .strftime("%m/%d/%y") %></td>
