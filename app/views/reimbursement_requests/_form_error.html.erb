@@ -1,0 +1,16 @@
+<% if obj.errors.messages[:base].present?%>
+  <div class="flash_messages">
+    <div class="alert alert-danger">
+      <div class="panel-heading">
+        <h2 class="panel-title">There was a problem saving this request.</h2>
+      </div>
+      <div class="panel-body" id="error-body">
+        <ul>
+          <% obj.errors.messages[:base].each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+<% end %>
