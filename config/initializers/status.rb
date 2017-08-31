@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-STATUS = YAML.load_file("#{Rails.root}/config/status.yml")[Rails.env]
+::APPLICATION_CONFIG = { statuses: YAML.load_file(Rails.root.join('config/status.yml')) }.freeze

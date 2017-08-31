@@ -1,9 +1,10 @@
+
 <div class="row">
   <div class="card w-100 bg-orange text-white">
     <div class="card-body">
       <div class="row justify-content-between">
         <h3 class="col-md-5 col-sm-3">
-          Filter 
+          Filter
         </h3>
         <div class="col-md-4 col-sm-9">
           <div class="row justify-content-end">
@@ -20,7 +21,7 @@
                   <% if current_user.certifier %>
                     <div class="form-check dropdown-item">
                       <label class="form-check-label">
-                        <input class="form-check-input filter certifier" data-filter-target="certifier" type="checkbox" value="" checked> 
+                        <input class="form-check-input filter certifier" data-filter-target="certifier" type="checkbox" value="" checked>
                         Requests where I am the certifier
                       </label>
                     </div>
@@ -39,16 +40,16 @@
             <div class="dropdown col">
               <a class="dropdown-toggle" data-toggle="dropdown" href=# aria-haspopup="true" aria-expanded="false">By status</a>
               <div class="dropdown-menu">
-                <% Status.all.each do |status| %>
+                <% APPLICATION_CONFIG[:statuses].each_pair do |k, status|%>
                   <div class="form-check dropdown-item">
                     <label class="form-check-label">
-                      <input class="form-check-input filter " data-filter-target=<%= status.name.downcase %> type="checkbox" value="" checked>
-                      <%= status.name %>
+                      <input class="form-check-input filter   " data-filter-target=<%= status["name"].downcase %> type="checkbox" value="" checked>
+                      <%= status["name"] %>
                     </label>
                   </div>
                 <% end %>
               </div>
-            </div>
+              </div>
           </div>
         </div>
       </div>

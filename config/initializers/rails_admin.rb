@@ -42,12 +42,6 @@ RailsAdmin.config do |config|
 
     config.included_models = %w[User ExpenseType]
 
-    config.model Status do
-      configure :reimbursement_requests do
-        hide
-      end
-    end
-
     ## With an audit adapter, you can add:
     # history_index
     # history_show

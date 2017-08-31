@@ -4,6 +4,7 @@ class ReimbursementRequestsController < ApplicationController
   before_action :set_reimbursement_request, only: %i[show edit update]
   before_action :set_certifiers, only: %i[new create edit update]
   before_action :set_expense_types, only: %i[new create edit update]
+  before_action :set_statuses, only: %i[new create edit update]
 
   def new
     @reimbursement_request = ReimbursementRequest.new
@@ -34,8 +35,9 @@ class ReimbursementRequestsController < ApplicationController
     @reimbursement_request = ReimbursementRequest.create(reimbursement_request_params)
     @reimbursement_request.claimant = current_user if user_signed_in?
     @reimbursement_request.certifier = User.find(params.dig(:reimbursement_request, :certifier_id)) unless params.dig(:reimbursement_request, :certifier_id)
-    @reimbursement_request.status = Status.order(:order).first
     if @reimbursement_request.save
+      # This should send email
+      CertifierMailer.certify_request(@reimbursement_request).deliver_now
       params[:attachments]&.each do |file|
         @reimbursement_request.attachments.create(attachment: file)
       end
@@ -45,7 +47,9 @@ class ReimbursementRequestsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @reimbursement_request = ReimbursementRequest.find(params[:id])
+  end
 
   def update
     if @reimbursement_request.update(reimbursement_request_params)
@@ -91,6 +95,7 @@ class ReimbursementRequestsController < ApplicationController
       :business_notes_and_purpose,
       :address,
       :status_comment,
+      :status,
       accountings_attributes: %i[id fund organization account program activity amount _destroy],
       expense_airfares_attributes: %i[id from_date to_date from_location to_location notes amount _destroy],
       expense_mileages_attributes: %i[id from_date to_date from_city from_state to_city to_state miles round_trip notes amount _destroy],
@@ -106,6 +111,10 @@ class ReimbursementRequestsController < ApplicationController
 
   def set_certifiers
     @certifiers = User.where(certifier: true)
+  end
+
+  def set_statuses
+    @statuses = APPLICATION_CONFIG[:statuses]
   end
 
   def set_expense_types
