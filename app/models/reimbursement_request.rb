@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ReimbursementRequest < ApplicationRecord
+  scope :user_claimant_requests, -> (user_id) { where claimant_id: user_id }
+  scope :user_certifier_requests, -> (user_id) { where certifier_id: user_id }
   attr_accessor :accounting_total, :airfare_total, :mileage_total, :itinerary_total, :other_total, :file_attachments
   belongs_to :claimant, class_name: 'User'
   belongs_to :certifier, class_name: 'User'
