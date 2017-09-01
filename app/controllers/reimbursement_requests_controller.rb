@@ -38,7 +38,7 @@ class ReimbursementRequestsController < ApplicationController
     if @reimbursement_request.save
       # This should send email
       CertifierMailer.certify_request(@reimbursement_request).deliver_now
-      params[:attachments]&.each do |file|
+      params[:file_attachments].each do |file|
         @reimbursement_request.attachments.create(attachment: file)
       end
       redirect_to reimbursement_request_path(@reimbursement_request)
@@ -77,7 +77,6 @@ class ReimbursementRequestsController < ApplicationController
 
   def reimbursement_request_params
     params.require(:reimbursement_request).permit(
-      :attachments,
       :identifier,
       :description,
       :claimant_id,
@@ -96,6 +95,7 @@ class ReimbursementRequestsController < ApplicationController
       :address,
       :status_comment,
       :status,
+      file_attachments: [],
       accountings_attributes: %i[id fund organization account program activity amount _destroy],
       expense_airfares_attributes: %i[id from_date to_date from_location to_location notes amount _destroy],
       expense_mileages_attributes: %i[id from_date to_date from_city from_state to_city to_state miles round_trip notes amount _destroy],
