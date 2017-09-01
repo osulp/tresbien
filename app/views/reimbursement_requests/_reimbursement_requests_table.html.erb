@@ -25,7 +25,7 @@
                 .strftime("%m/%d/%y") %></td>
                 <td><%= reimbursement_request.claimant.full_name  if reimbursement_request.claimant %></td>
                 <td><%= reimbursement_request.certifier.full_name if reimbursement_request.certifier %></td>
-                <td><%= reimbursement_request.status.humanize %></td>
+                <td><i class="fa <%= get_status_icon(reimbursement_request.status) %>" aria-hidden="true"></i><%= reimbursement_request.status.humanize %> </td>
               </tr>
             <% end %>
           </tbody>

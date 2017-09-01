@@ -30,4 +30,18 @@ module ReimbursementRequestHelper
     class_string += 'other-user ' if user_signed_in? && reimbursement_request.certifier_id != current_user.id && reimbursement_request.claimant_id != current_user.id
     class_string.html_safe
   end
+
+  def get_status_icon(status) 
+    if status == 'Draft' || status == 'draft'
+      return 'fa-pencil-square-o'
+    elsif status == 'Submitted' || status == 'submitted'
+      return 'fa-dot-circle-o'
+    elsif status == 'Approved' || status == 'approved'
+      return 'fa-check-circle-o' 
+    elsif status == 'Declined' || status == 'declined'
+      return 'fa-times-circle-o'
+    else 
+      return 'fa-shower'
+    end 
+  end
 end

@@ -3,10 +3,24 @@ table {
   tbody {
     tr {
       &.approved {
-        background-color: $reindeer-moss; 
+        td:last-child {
+          color: $submit;
+        }
       }
-      &.denied {
-        background-color: $error-red-light;
+      &.declined {
+        td:last-child {
+          color: $error-red-dark;
+        }
+      }
+      &.submitted {
+        td:last-child {
+          color: $btn-success;
+        }
+      }
+      td {
+        .fa {
+          margin-right: 5px;
+        }
       }
     }
   }
