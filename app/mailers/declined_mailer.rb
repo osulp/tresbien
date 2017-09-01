@@ -8,4 +8,3 @@ class DeclinedMailer < ApplicationMailer
     mail(to: @certifier.email, subject: 'certify this request')
   end
 end
-end
