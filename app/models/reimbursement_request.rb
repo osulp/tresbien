@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ReimbursementRequest < ApplicationRecord
-  attr_accessor :accounting_total, :airfare_total, :mileage_total, :itinerary_total, :other_total
+  attr_accessor :accounting_total, :airfare_total, :mileage_total, :itinerary_total, :other_total, :file_attachments
   belongs_to :claimant, class_name: 'User'
   belongs_to :certifier, class_name: 'User'
   has_many :accountings
@@ -12,11 +12,11 @@ class ReimbursementRequest < ApplicationRecord
   has_many :travel_itineraries
   has_many :attachments
   has_many :status_comments
-  accepts_nested_attributes_for :accountings, :expense_airfares, :expense_mileages, :expense_others, :travel_itineraries, :travel_cities, :claimant, :certifier, :attachments, allow_destroy: true
+  accepts_nested_attributes_for :accountings, :expense_airfares, :expense_mileages, :expense_others, :travel_itineraries, :travel_cities, :claimant, :certifier, allow_destroy: true
 
   validates :certifier_id, presence: true
   validate :includes_travel_city
-
+  after_validation :warn_attachments
   before_create :generate_identifier
   after_initialize :set_defaults, unless: :persisted?
   # The set_defaults will only work if the object is new
@@ -102,5 +102,9 @@ class ReimbursementRequest < ApplicationRecord
 
   def includes_travel_city
     errors.add(:base, 'Must have at least one city travelled in the itinerary.', target_nav_panel_href: 'itinerary_panel') if travel_cities.empty? || travel_cities.all?(&:marked_for_destruction?)
+  end
+
+  def warn_attachments
+    errors.add(:base, 'Your uploaded files were not saved. Please select the files again.', target_nav_panel_href: 'attachments_panel') if !errors.empty? && !file_attachments.empty?
   end
 end

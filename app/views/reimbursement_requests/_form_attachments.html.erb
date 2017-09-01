@@ -4,7 +4,7 @@
       <h3><%= t('reimbursement_request_form.headers.attachments')%></h3>
     </div>
     <div class="form-row">
-      <%= file_field_tag "attachments[]", type: :file, multiple: true, class: "attachment" %>
+      <%= f.input 'file_attachments', as: :file,  input_html:{multiple: true, class: "attachment"} %>
     </div>
   </div>
 </div>
