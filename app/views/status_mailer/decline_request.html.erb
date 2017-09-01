@@ -1,0 +1,10 @@
+<h1><%=@claimant.full_name.split.second%>,</h1>
+
+<p>
+  The Reimbursement Request that you have submitted has been declined.
+</p>
+<p> Please edit your Reimbursement Request and re-submit it. </p>
+
+<h2><%= link_to @reimbursement_request.identifier, @reimbursement_request %></h2>
+
+

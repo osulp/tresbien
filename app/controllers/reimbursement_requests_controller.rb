@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ReimbursementRequestsController < ApplicationController
-  before_action :set_reimbursement_request, only: %i[show edit update]
+  before_action :set_reimbursement_request, only: %i[show edit update approve decline]
   before_action :set_certifiers, only: %i[new create edit update]
   before_action :set_expense_types, only: %i[new create edit update]
   before_action :set_statuses, only: %i[new create edit update]
@@ -23,22 +23,23 @@ class ReimbursementRequestsController < ApplicationController
       format.html
       format.pdf do
         render pdf: @reimbursement_request.id.to_s,
-               template: 'reimbursement_requests/show.html.erb',
-               layout: 'pdf',
-               handlers: [:erb],
-               formats: [:pdf]
+          template: 'reimbursement_requests/show.html.erb',
+          layout: 'pdf',
+          handlers: [:erb],
+          formats: [:pdf]
       end
     end
   end
 
   def create
     @reimbursement_request = ReimbursementRequest.create(reimbursement_request_params)
+    @reimbursement_request.status = params[:status]
     @reimbursement_request.claimant = current_user if user_signed_in?
     @reimbursement_request.certifier = User.find(params.dig(:reimbursement_request, :certifier_id)) unless params.dig(:reimbursement_request, :certifier_id)
     if @reimbursement_request.save
-      # This should send email
-      CertifierMailer.certify_request(@reimbursement_request).deliver_now
-      params[:file_attachments].each do |file|
+      StatusMailer.certify_request(@reimbursement_request).deliver_now if @reimbursement_request.status == 'submitted'
+
+      params[:attachments]&.each do |file|
         @reimbursement_request.attachments.create(attachment: file)
       end
       redirect_to reimbursement_request_path(@reimbursement_request)
@@ -48,15 +49,36 @@ class ReimbursementRequestsController < ApplicationController
   end
 
   def edit
-    @reimbursement_request = ReimbursementRequest.find(params[:id])
   end
 
   def update
+    old_status = @reimbursement_request.status
+    @reimbursement_request.status = params[:status]
     if @reimbursement_request.update(reimbursement_request_params)
+      case @reimbursement_request.status
+        when 'declined'
+          decline_request
+        when'approved'
+          approve_request
+        when 'submitted'
+          old_status == 'draft' ? submit_request : resubmit_request
+      end
       redirect_to @reimbursement_request, notice: 'Your reimbursement request was updated.'
     else
       render :edit
     end
+  end
+
+  def approve
+    @reimbursement_request.update(status: 'approved')
+    approve_request
+    redirect_to reimbursement_request_path(@reimbursement_request)
+  end
+
+  def decline
+    @reimbursement_request.update(status: 'declined')
+    decline_request
+    redirect_to reimbursement_request_path(@reimbursement_request)
   end
 
   def comment
@@ -66,11 +88,27 @@ class ReimbursementRequestsController < ApplicationController
     redirect_to reimbursement_request_path(reimbursement_request)
   end
 
+  def decline_request
+    StatusMailer.decline_request(@reimbursement_request).deliver_now
+  end
+
+  def approve_request
+    StatusMailer.approve_request(@reimbursement_request).deliver_now
+  end
+
+  def submit_request
+    StatusMailer.submit_request(@reimbursement_request).deliver_now
+  end
+
+  def resubmit_request
+    StatusMailer.resubmit_request(@reimbursement_request).deliver_now
+  end
+
   def delete_comment
     reimbursement_request = ReimbursementRequest.find(params[:reimbursement_request_id])
     status_comment = StatusComment.find(params[:id])
     status_comment.destroy
-    redirect_to reimbursement_request_path(reimbursement_request)
+    redirect_to reimbursement_requests_path(reimbursement_request)
   end
 
   private

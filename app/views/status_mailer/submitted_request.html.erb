@@ -1,0 +1,11 @@
+<h1>Hey <%=@reimbursement_request.certifier.full_name.split.second%>,</h1>
+
+<p>
+  This is the new Reimbursement Request that needs reviewing.
+</p>
+
+<h2><%= link_to @reimbursement_request.claimant.full_name.split.second +" "+ @reimbursement_request.updated_at
+                .in_time_zone("Pacific Time (US & Canada)")
+                .strftime("%m/%d/%y"), @reimbursement_request %></h2>
+
+

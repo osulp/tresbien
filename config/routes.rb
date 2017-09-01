@@ -24,6 +24,9 @@ Rails.application.routes.draw do
   # makes expense_types root
   root 'home#index'
 
+  patch 'reimbursement_requests/:id/approve', to: 'reimbursement_requests#approve', as: 'approve_reimbursement_request' 
+  patch 'reimbursement_requests/:id/decline', to: 'reimbursement_requests#decline', as: 'decline_reimbursement_request' 
+
   get 'states/:country', to: 'application#states'
   get 'cities/:state/:country', to: 'application#cities'
 
