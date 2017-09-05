@@ -1,65 +1,63 @@
 <div class="card grand-totals col">
   <div class="card-header">
-    <h6><%= t('reimbursement_request_form.headers.totals') %></h6>
+    <h2 class="h5"><%= t('reimbursement_request_form.headers.totals') %></h2>
   </div>
   <div class="card-body">
-    <table class="table">
-      <tbody>
-        <tr>
-          <td class="align-right">
-            <label class="col-form-label"><%= t('reimbursement_request_form.totals_labels.accounting') %></label>
-          </td>
-          <td>
-            <span class="accountings-total-label align-middle"></span>
-            <%= f.input :accounting_total, label: false, wrapper: false, input_html: { class: "accountings-total grand-total hidden" }, disabled: true  %>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-right">
-            <label class="col-form-label"><%= t('reimbursement_request_form.totals_labels.airfare') %></label>
-          </td>
-          <td>
-            <span class="airfare-total-label"></span>
-            <%= f.input :airfare_total, label: false, wrapper: false, input_html: { class: "airfare-total grand-total hidden" }, disabled: true  %>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-right">
-            <label class="col-form-label"><%= t('reimbursement_request_form.totals_labels.itinerary') %></label>
-          </td>
-          <td>
-            <span class="itineraries-total-label"></span>
-            <%= f.input :itinerary_total, label: false, wrapper: false, input_html: { class: "itineraries-total grand-total hidden", disabled: true } %>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-right">
-            <label class="col-form-label"><%= t('reimbursement_request_form.totals_labels.mileage') %></label>
-          </td>
-          <td>
-            <span class="mileage-total-label"></span>
-            <%= f.input :mileage_total, label: false, wrapper: false, input_html: { class: "mileage-total grand-total hidden" }, disabled: true  %>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-right">
-            <label class="col-form-label"><%= t('reimbursement_request_form.totals_labels.other_expenses') %></label>
-          </td>
-          <td>
-            <span class="other-expenses-total-label"></span>
-            <%= f.input :other_total, label: false, wrapper: false, input_html: { class: "other-expenses-total grand-total hidden" }, disabled: true  %>
-          </td>
-        </tr>
-        <tr>
-          <td class="align-right grand-total-row">
-            <label class="col-form-label grand-total-label"><%= t('reimbursement_request_form.totals_labels.grand_total') %></label>
-          </td>
-          <td>
-            <span class="grand-total-input-label"></span>
-            <%= f.input :grand_total, wrapper: false, label: false, input_html: { class: "grand-total-input hidden" }, disabled: true %>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="container-flex">
+      <div class="row">
+        <div class="col-7 align-right text-right align-self-center">
+          <label class="col-form-label"><%= t('reimbursement_request_form.totals_labels.accounting') %></label>
+        </div>
+        <div class="col-5 text-left align-self-center">
+          <span class="accountings-total-label align-middle"></span>
+          <%= f.input :accounting_total, label: false, wrapper: false, input_html: { class: "accountings-total grand-total hidden" }, disabled: true  %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-7 text-right align-self-center">
+          <label class="col-form-label"><%= t('reimbursement_request_form.totals_labels.airfare') %></label>
+        </div>
+        <div class="col-5 text-left align-self-center">
+          <span class="airfare-total-label"></span>
+          <%= f.input :airfare_total, label: false, wrapper: false, input_html: { class: "airfare-total grand-total hidden" }, disabled: true  %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-7 text-right align-self-center">
+          <label class="col-form-label"><%= t('reimbursement_request_form.totals_labels.itinerary') %></label>
+        </div>
+        <div class="col-5 text-left align-self-center">
+          <span class="itineraries-total-label"></span>
+          <%= f.input :itinerary_total, label: false, wrapper: false, input_html: { class: "itineraries-total grand-total hidden", disabled: true } %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-7 text-right align-self-center">
+          <label class="col-form-label"><%= t('reimbursement_request_form.totals_labels.mileage') %></label>
+        </div>
+        <div class="col-5 text-left align-self-center">
+          <span class="mileage-total-label"></span>
+          <%= f.input :mileage_total, label: false, wrapper: false, input_html: { class: "mileage-total grand-total hidden" }, disabled: true  %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-7 text-right align-self-center">
+          <label class="col-form-label"><%= t('reimbursement_request_form.totals_labels.other_expenses') %></label>
+        </div>
+        <div class="col-5 text-left align-self-center">
+          <span class="other-expenses-total-label"></span>
+          <%= f.input :other_total, label: false, wrapper: false, input_html: { class: "other-expenses-total grand-total hidden" }, disabled: true  %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-7 text-right align-self-center grand-total-row">
+          <label class="col-form-label grand-total-label"><%= t('reimbursement_request_form.totals_labels.grand_total') %></label>
+        </div>
+        <div class="col-5 text-left align-self-center">
+          <span class="grand-total-input-label"></span>
+          <%= f.input :grand_total, wrapper: false, label: false, input_html: { class: "grand-total-input hidden" }, disabled: true %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

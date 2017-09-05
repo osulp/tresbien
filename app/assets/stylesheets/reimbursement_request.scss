@@ -12,8 +12,8 @@
     thead {
       tr {
         th {
-          padding: 0 0 0 0.25rem;
           border: none;
+          padding: 0 0 0 0.25rem;
         }
       }
     }
@@ -71,34 +71,24 @@
   .grand-totals {
     padding: 0;
     margin-top: 20px;
-    td {
-      text-align: right;
-      padding: 0 15px 0 0 !important;
-      vertical-align: middle;
-    }
-    .card-header {
-      text-align: center;
-    }
     .card-body {
       padding: 0;
-    }
-    .table {
-      margin: 0;
-      padding: 0;
-      display: table;
-    }
-    span {
-      text-align: right;
-    }
-    label {
-      padding-left: 15px;
-      text-align: right;
     }
     .grand-total-label,
     .grand-total-input,
     .grand-total-input-label {
       font-weight: bold;
       font-size: $font-size + 0.1rem;
+    }
+    .card-header {
+      text-align: center;
+    }
+    .row {
+      margin: 0px 0px 5px 0px;
+      border-bottom: 1px solid $bs-gray-light;
+      &:last-child {
+        border-bottom: none;
+      }
     }
   }
 
