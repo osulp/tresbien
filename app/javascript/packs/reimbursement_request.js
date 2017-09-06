@@ -5,8 +5,10 @@ import Utils from '../utils/utils'
 const initialState = observable({
   city_rows: [],
   itinerary_rows: [],
+  above_per_diem_rows: [],
   basic_rows: [],
   itinerary_days_queue: [],
+  above_per_diem_queue: [],
   get itineraries_total() {
     return this.itinerary_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
   },

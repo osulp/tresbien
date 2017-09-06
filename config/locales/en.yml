@@ -34,6 +34,7 @@ en:
   reimbursement_request_form:
     tooltips:
       add_daily_itineraries: "Add Daily Itineraries"
+      generate_other_expense: "Generate Other Expense Row"
       remove_accounting: "Remove an Accounting Line"
       remove_airfare: "Removes an Airfare Line"
       remove_expense_other: "Remove Other Expense Line"
@@ -49,6 +50,7 @@ en:
       add_other_expenses: "Add Other Expenses"
       add_travel_city: "Add City"
       add_daily_itinerary: "Add Itinerary"
+      add_over_per_diem: "Add Over Per Diem"
     headers:
       accounting: "Accounting"
       airfare: "Airfare"

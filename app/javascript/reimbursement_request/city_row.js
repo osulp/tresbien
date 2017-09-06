@@ -1,4 +1,5 @@
 import Utils from '../utils/utils';
+import { extendObservable, autorun } from 'mobx';
 import moment from 'moment';
 import { extendMoment } from 'moment-range';
 const Moment = extendMoment(moment);
@@ -10,12 +11,33 @@ class CityRow {
     this.element = $(element);
     this.element.find('.unique-id').val(this.id);
     this.element.find('[data-toggle="tooltip"]').tooltip();
+    this.travel_city_id = this.element.find('.travel-city-id').attr('id');
     this.table_name = this.element.data('table-name');
     this.element.parents('.table').show();
     this.state = state;
+    this.element.find('.sum-input').each((i, input) => this.bindSumInput(input));
     this.bindClick(this.element.find('.add-itineraries'));
     this.bindRemove(this.element.find('.remove_fields'));
+    extendObservable(this, {
+      row_total: 0
+    });
+    autorun(() => this.element.find('.row-sum-input').val(this.row_total));
+    this.element.find('.sum-input').change();
   }
+
+  bindSumInput = input => {
+    $(input).on('keyup mouseup change', e => {
+      let row_sum_input = this.element.find('.row-sum-input');
+      let sum_inputs = this.element.find('.sum-input');
+      let total = Utils.sumInputFloats(sum_inputs);
+      this.row_total = total;
+      $('.travel-itinerary').each((i, row) => {
+        if ($(row).find('.travel-city-id').val() == this.travel_city_id) {
+          $(row).find('.per-diem-rate').val(this.row_total);
+        }
+      });
+    });
+  };
 
   bindClick = button => {
     button.on('click', e => {
@@ -61,7 +83,8 @@ class CityRow {
     let city = tr.find('select#cities-of-state').val();
     let hotel_rate = tr.find('.reimbursement_request_travel_cities_hotel_rate > input').val();
     let travel_city_id = tr.find('input.travel-city-id').prop('id');
-    return { from_date, to_date, state, city, hotel_rate, travel_city_id, country };
+    let per_diem = tr.find('.reimbursement_request_travel_cities_per_diem > input').val();
+    return { from_date, to_date, state, city, hotel_rate, per_diem, travel_city_id, country };
   };
 }
 

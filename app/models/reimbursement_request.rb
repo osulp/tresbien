@@ -17,8 +17,7 @@ class ReimbursementRequest < ApplicationRecord
   has_many :travel_itineraries
   has_many :attachments
   has_many :status_comments
-  accepts_nested_attributes_for :accountings, :description, :expense_airfares, :expense_mileages, :expense_others, :travel_itineraries, :travel_cities, :claimant, :certifier, allow_destroy: true
-
+  accepts_nested_attributes_for :accountings, :expense_airfares, :expense_mileages, :expense_others, :expense_non_per_diems, :expense_above_per_diems, :travel_itineraries, :travel_cities, :claimant, :certifier, allow_destroy: true
   validates :certifier_id, presence: true
   validate :includes_travel_city
   validates :business_notes_and_purpose, length: { maximum: 250 }
