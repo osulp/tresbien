@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ReimbursementRequestsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_reimbursement_request, only: %i[show edit update approve decline]
   before_action :set_certifiers, only: %i[new create edit update]
   before_action :set_expense_types, only: %i[new create edit update]
