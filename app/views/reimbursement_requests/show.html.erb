@@ -67,8 +67,7 @@
       <% end %>
     </div>
   </div>
-
-
+  <%= render partial: "change_status_form" if @reimbursement_request.certifier_id == current_user.id %>
   <div class="row">
     <div class="col-12">
       <h3>Total: <%= @reimbursement_request.grand_total %></h3>
