@@ -1,4 +1,4 @@
-table {
+table.reimbursement-requests-table {
   margin-top: 20px;
   tbody {
     tr {
@@ -25,24 +25,25 @@ table {
     }
   }
 }
-.card {
-  box-shadow: 0px 1px 5px gray;
-  &.bg-orange {
-    background-color: $btn-success; 
-  }
-  &.text-white {
-    h3 {
-      color: white;
+.request-table-row {
+  .card {
+    box-shadow: 0px 1px 5px gray;
+    &.bg-blue {
+      background-color: $btn-success; 
     }
-    a {
-      color: white;
+    &.text-white {
+      h3 {
+        color: white;
+      }
+      a {
+        color: white;
+      }
     }
-  }
-  .card-body {
-    padding: 10px 15px;
-    h3, p, a {
-      margin-bottom: 0px;
+    .card-body {
+      padding: 10px 15px;
+      h3, p, a {
+        margin-bottom: 0px;
+      }
     }
   }
 }
-
