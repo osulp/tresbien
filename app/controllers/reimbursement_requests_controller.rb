@@ -38,8 +38,10 @@ class ReimbursementRequestsController < ApplicationController
     @reimbursement_request.claimant = current_user if user_signed_in?
     @reimbursement_request.certifier = User.find(params.dig(:reimbursement_request, :certifier_id)) unless params.dig(:reimbursement_request, :certifier_id)
     if @reimbursement_request.save
-      StatusMailer.certify_request(@reimbursement_request).deliver_now if @reimbursement_request.status == 'submitted'
-
+      if @reimbursement_request.status == 'submitted'
+        submit_request
+        certify_request
+      end
       params[:attachments]&.each do |file|
         @reimbursement_request.attachments.create(attachment: file)
       end
@@ -57,12 +59,13 @@ class ReimbursementRequestsController < ApplicationController
     @reimbursement_request.status = params[:status]
     if @reimbursement_request.update(reimbursement_request_params)
       case @reimbursement_request.status
-        when 'declined'
-          decline_request
-        when'approved'
-          approve_request
-        when 'submitted'
-          old_status == 'draft' ? submit_request : resubmit_request
+      when 'declined'
+        decline_request
+      when'approved'
+        approve_request
+      when 'submitted'
+        old_status == 'draft' ? certify_request : resubmit_request
+        submit_request
       end
       redirect_to @reimbursement_request, notice: 'Your reimbursement request was updated.'
     else
@@ -99,6 +102,10 @@ class ReimbursementRequestsController < ApplicationController
 
   def submit_request
     StatusMailer.submit_request(@reimbursement_request).deliver_now
+  end
+
+  def certify_request
+    StatusMailer.certify_request(@reimbursement_request).deliver_now
   end
 
   def resubmit_request
