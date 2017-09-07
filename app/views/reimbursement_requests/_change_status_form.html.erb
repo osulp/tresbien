@@ -1,13 +1,19 @@
-<div class="print-hide">
-  <div class="row">
-    <div class="col-12">
-      <h3>Change Status:</h3>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <%= link_to "Approve", approve_reimbursement_request_path(@reimbursement_request), method: :patch, class: 'btn btn-success btn-lg' %>
-      <%= link_to "Deny", decline_reimbursement_request_path(@reimbursement_request), method: :patch, class: 'btn btn-danger btn-lg' %>
+<div class="row print-hide justify-content-center">
+  <div class="col-lg-6 col-12">
+    <div class="card bg-light mb-3">
+      <div class="card-body">
+        <div class="print-hide">
+          <div class="row justify-content-center">
+            <h3>Change Status:</h3>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-6 d-flex justify-content-around">
+              <%= link_to "Approve", approve_reimbursement_request_path(@reimbursement_request), method: :patch, class: 'btn btn-success btn-lg' if @reimbursement_request.status != 'approved' %>
+              <%= link_to "Deny", decline_reimbursement_request_path(@reimbursement_request), method: :patch, class: 'btn btn-danger btn-lg' if @reimbursement_request.status != 'declined' %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

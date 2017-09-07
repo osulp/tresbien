@@ -1,0 +1,21 @@
+.show {
+  .badge {
+    color: white;
+    &.draft {
+      background-color: $bs-gray-dark;  
+    }
+    &.submitted {
+      background-color: $btn-success;
+    }
+    &.declined {
+      background-color: $error-red-dark;
+    }
+    &.approved {
+      background-color: $submit;
+    }
+  }
+
+  .row {
+    margin-bottom: 20px;
+  }
+}
