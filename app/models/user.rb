@@ -10,6 +10,10 @@ class User < ApplicationRecord
   validates :username, presence: true
   validates :email, presence: true
 
+  def can_manage(reimbursement_request)
+    reimbursement_request.certifier.id == self.id
+  end
+
   # Sets email and pidm attributes for current_user
   # If a user is created manually in the database but email and pidm fields are left blank,
   # this will set those fields for that user

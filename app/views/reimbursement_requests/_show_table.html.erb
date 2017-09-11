@@ -8,7 +8,7 @@
         <thead>
           <tr>
             <% attributes.each do |attr| %>
-              <th><%= attr.humanize %></th>
+              <th><%= attr.titlecase %></th>
             <% end %>
           </tr>
         </thead>
@@ -17,15 +17,15 @@
             <tr>
               <% attributes.each do |attr| %>
                 <td>
-                  <% if local_assigns[:functions] and functions.has_key?(attr) %>
-                    <%= functions[attr].call(obj) %> 
+                  <% if local_assigns[:functions] && functions.has_key?(attr) %>
+                    <%= functions[attr].call(obj) %>
                   <% else %>
-                    <%= obj.send(attr) and attr.include?("date") ? get_simple_date_time(obj.send(attr)) : obj.send(attr) %>
+                    <%= obj.send(attr) %>
+                  <% end %>
                 </td>
               <% end %>
-            <% end %>
             </tr>
-          <% end %> 
+          <% end %>
         </tbody>
       </table>
     <% end %>

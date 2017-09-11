@@ -3,7 +3,7 @@
 class ReimbursementRequest < ApplicationRecord
   scope :user_claimant_requests, -> (user_id) { where claimant_id: user_id }
   scope :user_certifier_requests, -> (user_id) { where certifier_id: user_id }
-  attr_accessor :accounting_total, :airfare_total, :mileage_total, :itinerary_total, :other_total, :file_attachments
+  attr_accessor :file_attachments
   belongs_to :claimant, class_name: 'User'
   belongs_to :certifier, class_name: 'User'
   has_many :accountings
@@ -20,6 +20,7 @@ class ReimbursementRequest < ApplicationRecord
   validate :includes_travel_city
   after_validation :warn_attachments
   before_create :generate_identifier
+  before_save :calculate_grand_total
   after_initialize :set_defaults, unless: :persisted?
   # The set_defaults will only work if the object is new
 
@@ -107,6 +108,7 @@ class ReimbursementRequest < ApplicationRecord
   end
 
   def warn_attachments
+    return if file_attachments.nil?
     errors.add(:base, 'Your uploaded files were not saved. Please select the files again.', target_nav_panel_href: 'attachments_panel') if !errors.empty? && !file_attachments.empty?
   end
 end
