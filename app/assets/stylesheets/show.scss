@@ -2,19 +2,18 @@
   .badge {
     color: white;
     &.draft {
-      background-color: $bs-gray-dark;  
+      background-color: $bs-gray-dark;
     }
     &.submitted {
-      background-color: $btn-success;
+      background-color: $nav-blue;
     }
     &.declined {
       background-color: $error-red-dark;
     }
     &.approved {
-      background-color: $submit;
+      background-color: $new-and-submit-btn;
     }
   }
-
   .row {
     margin-bottom: 20px;
   }
