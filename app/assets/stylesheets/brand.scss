@@ -30,24 +30,24 @@ h5 {
 }
 
 .btn-primary {
-  background-color: $addbtn;
+  background-color: $add-and-save-btn;
   color: $white;
   border: 1px solid $black;
 }
 
 .btn-primary:hover {
-  background-color: darken($addbtn, 10%);
+  background-color: darken($add-and-save-btn, 10%);
   color: $white;
   text-decoration: underline;
 }
 
 .btn-success {
-  background: $submit;
+  background: $new-and-submit-btn;
   border: 1px solid $black;
 }
 
 .btn-success:hover {
-  background: darken($submit, 10%);
+  background: darken($new-and-submit-btn, 10%);
   text-decoration: underline;
 }
 

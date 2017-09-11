@@ -4,7 +4,7 @@ table.reimbursement-requests-table {
     tr {
       &.approved {
         td:last-child {
-          color: $submit;
+          color: $new-and-submit-btn;
         }
       }
       &.declined {
@@ -14,7 +14,7 @@ table.reimbursement-requests-table {
       }
       &.submitted {
         td:last-child {
-          color: $btn-success;
+          color: $nav-blue;
         }
       }
       td {
@@ -25,11 +25,12 @@ table.reimbursement-requests-table {
     }
   }
 }
+
 .request-table-row {
   .card {
     box-shadow: 0px 1px 5px gray;
     &.bg-blue {
-      background-color: $btn-success; 
+      background-color: $nav-blue;
     }
     &.text-white {
       h3 {
@@ -41,7 +42,9 @@ table.reimbursement-requests-table {
     }
     .card-body {
       padding: 10px 15px;
-      h3, p, a {
+      h3,
+      p,
+      a {
         margin-bottom: 0px;
       }
     }

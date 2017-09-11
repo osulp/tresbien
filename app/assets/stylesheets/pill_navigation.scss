@@ -1,10 +1,9 @@
-
-.nav-pills { 
+.nav-pills {
   a.nav-link {
-    color: $btn-success;
-    border: 1px solid $btn-success-light;
+    color: $nav-blue;
+    border: 1px solid lighten($nav-blue, 50%);
     &:focus {
-      border: 2px solid $btn-success;
+      border: 2px solid $nav-blue;
       box-shadow: 0px 0px 2px 1px gray;
     }
     border-bottom: none;
@@ -32,11 +31,11 @@
     }
   }
   a.nav-link:last-child {
-    border-bottom: 1px solid $btn-success-light;
+    border-bottom: 1px solid lighten($nav-blue, 50%);
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
     &:focus {
-      border-bottom: 2px solid $btn-success;
+      border-bottom: 2px solid $nav-blue;
     }
     &.has-error:focus {
       border-bottom: 2px solid $error-red-dark;
@@ -46,10 +45,10 @@
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
   }
-  a.nav-link.active { 
+  a.nav-link.active {
     color: white;
     padding-left: 25px;
-    background-color: $btn-success;
+    background-color: $nav-blue;
     animation-duration: .5s;
     animation-name: popleft;
     i.fa {
@@ -59,7 +58,7 @@
     }
     &.has-error {
       background: $error-red-dark;
-      text-color: white;
+      font: white;
     }
   }
 }
@@ -68,7 +67,6 @@
   from {
     padding-left: 16px;
   }
-
   to {
     padding-left: 25px;
   }
