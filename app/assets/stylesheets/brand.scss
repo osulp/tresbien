@@ -29,45 +29,28 @@ h5 {
 }
 
 .btn-primary {
-  background-color: $add-and-save-btn;
+  background-color: $addbtn;
   color: $white;
-  border: 2px solid darken($add-and-save-btn, 5%);
+  border: 1px solid $black;
 }
 
 .btn-primary:hover {
-  background-color: lighten($add-and-save-btn, 10%);
+  background-color: darken($addbtn, 10%);
   color: $white;
-  cursor: pointer;
-  border: 2px solid $add-and-save-btn;
+  text-decoration: underline;
 }
 
 .btn-success {
-  background: $new-and-submit-btn;
-  color: $white;
-  border: 2px solid darken($new-and-submit-btn, 5%);
+  background: $submit;
+  border: 1px solid $black;
 }
 
 .btn-success:hover {
-  background: lighten($new-and-submit-btn, 10%);
-  color: $white;
-  cursor: pointer;
-  border: 2px solid $new-and-submit-btn;
-}
-
-.btn-danger {
-  background: $error-red-dark;
-  color: $white;
-  border: 2px solid darken($error-red-dark, 10%);
-}
-
-.btn-danger:hover {
-  background: lighten($error-red-dark, 5%);
-  color: $white;
-  cursor: pointer;
-  border: 2px solid $error-red-dark;
+  background: darken($submit, 10%);
+  text-decoration: underline;
 }
 
 a {
-  color: $new-and-submit-btn;
+  color: #006A8E;
   cursor: pointer; // font-size: $font-size+.1rem;
 }
