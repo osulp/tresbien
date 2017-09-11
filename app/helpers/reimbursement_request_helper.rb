@@ -11,7 +11,7 @@ module ReimbursementRequestHelper
     '<span class="glyphicon glyphicon-plus bg-success"></span>'.html_safe
   end
 
-  def get_request_title(reimbursement_request) 
+  def get_request_title(reimbursement_request)
     "#{reimbursement_request.travel_cities.first.from_date.strftime('%e %B %Y')}: #{reimbursement_request.travel_cities.first.city}, #{reimbursement_request.travel_cities.first.state}  (#{CS.countries.key(reimbursement_request.travel_cities.first.country).to_s})"
   end
   # returns date formatted as a string in mm/dd/yy format
@@ -23,6 +23,13 @@ module ReimbursementRequestHelper
     date&.strftime('%m/%d/%y')
   end
 
+  def get_attribute_value(obj, attr)
+    val = obj.send(attr)
+    return '' unless val
+
+    val
+  end
+
   def get_table_row_class(reimbursement_request)
     class_string = reimbursement_request.status.downcase + ' '
     class_string += 'claimant ' if user_signed_in? && reimbursement_request.claimant_id == current_user.id
@@ -31,17 +38,17 @@ module ReimbursementRequestHelper
     class_string.html_safe
   end
 
-  def get_status_icon(status) 
+  def get_status_icon(status)
     if status == 'Draft' || status == 'draft'
       return 'fa-pencil-square-o'
     elsif status == 'Submitted' || status == 'submitted'
       return 'fa-dot-circle-o'
     elsif status == 'Approved' || status == 'approved'
-      return 'fa-check-circle-o' 
+      return 'fa-check-circle-o'
     elsif status == 'Declined' || status == 'declined'
       return 'fa-times-circle-o'
-    else 
+    else
       return 'fa-shower'
-    end 
+    end
   end
 end

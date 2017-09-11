@@ -1,10 +1,8 @@
 <div class="container show">
-  <h2 class="mb-4">Reimbursement request</h2>
-
   <div class="row">
     <div class="col-12">
-      <h3>Request Information:</h3>
-      <p><strong>Status: </strong><span class="badge <%=@reimbursement_request.status %>"><%= @reimbursement_request.status.titlecase %></span></p>
+      <h3>Request Details <span class="badge <%=@reimbursement_request.status %>"><%= @reimbursement_request.status.titlecase %></span></h3>
+      <p></p>
       <p><strong>Claimant: </strong><%= @reimbursement_request.claimant.full_name %></p>
       <p><strong>Certifier: </strong><%= @reimbursement_request.certifier.full_name %></p>
       <p><strong>Description: </strong><%= @reimbursement_request.description %></p>
@@ -14,10 +12,30 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <%= render partial: "show_table", locals: {title: "Cities", attributes: ["from_date", "to_date", "state", "city", "hotel_rate"], objects: @reimbursement_request.travel_cities, id: "travel-cities" } %>
-
-      <%= render partial: "show_table", locals: {title: "Daily Itineraries", attributes: ["date", "state", "city", "break", "lunch", "dinner", "hotel", "amount"], objects: @reimbursement_request.travel_itineraries, id: "travel-itineraries"  }%>
-
+      <%= render partial: "show_table",
+        locals: {
+          title: "Cities",
+          attributes: ["from_date", "to_date", "country", "state", "city", "hotel_rate"],
+          objects: @reimbursement_request.travel_cities, id: "travel-cities",
+          functions: {
+            "from_date" => lambda do |obj| get_simple_date(obj['from_date']) end,
+            "to_date" => lambda do |obj| get_simple_date(obj['to_date']) end,
+            "hotel_rate" => lambda do |obj| number_to_currency(obj['hotel_rate'], precision: 2) end
+          }
+      } %>
+      <%= render partial: "show_table",
+        locals: {
+          title: "Daily Itineraries", attributes: ["date", "country", "state", "city", "break", "lunch", "dinner", "hotel", "amount"],
+          objects: @reimbursement_request.travel_itineraries, id: "travel-itineraries",
+          functions: {
+            "date" => lambda do |obj| get_simple_date(obj['date']) end,
+            "break" => lambda do |obj| number_to_currency(obj['break'], precision: 2) end,
+            "lunch" => lambda do |obj| number_to_currency(obj['lunch'], precision: 2) end,
+            "dinner" => lambda do |obj| number_to_currency(obj['dinner'], precision: 2) end,
+            "hotel" => lambda do |obj| number_to_currency(obj['hotel'], precision: 2) end,
+            "amount" => lambda do |obj| number_to_currency(obj['amount'], precision: 2) end
+          }
+      } %>
     </div>
   </div>
 
@@ -26,17 +44,48 @@
     attributes: ["expense_type", "from_date", "to_date", "notes", "amount"],
     objects: @reimbursement_request.expense_others,
     id: "expense-airfares",
-    functions: {"expense_type" => lambda do |expense_other|
-      expense_type = ExpenseType.find(expense_other.expense_type_id) if expense_other.expense_type_id
-      return (expense_type ? expense_type.name : "")
-    end  } } %>
+    functions: {
+      "expense_type" => lambda do |expense_other|
+        expense_type = ExpenseType.find(expense_other.expense_type_id) if expense_other.expense_type_id
+        return (expense_type ? expense_type.name : "")
+      end,
+      "from_date" => lambda do |obj| get_simple_date(obj['from_date']) end,
+      "to_date" => lambda do |obj| get_simple_date(obj['to_date']) end,
+      "amount" => lambda do |obj| number_to_currency(obj['amount'], precision: 2) end
+    }
+  } %>
 
-  <%= render partial: "show_table", locals: {title: "Auto Mileage", attributes: ["from_date", "to_date", "from_state", "from_city", "to_state", "to_city", "miles", "notes", "amount"], objects: @reimbursement_request.expense_mileages, id: "expense_mileages" } %>
-
-  <%= render partial: "show_table", locals: {title: "Airfare", attributes: ["from_date", "to_date", "from_location", "to_location", "notes", "amount"], objects: @reimbursement_request.expense_airfares, id: "expense-airfares" } %>
-
-
-  <%= render partial: "show_table", locals: {title: "Accounting", attributes: ["index", "fund", "organization", "account", "program", "activity", "amount"], objects: @reimbursement_request.accountings, id: "accountings" } %>
+  <%= render partial: "show_table", locals: {
+    title: "Auto Mileage",
+    attributes: ["from_date", "to_date", "from_state", "from_city", "to_state", "to_city", "miles", "notes", "amount"],
+    objects: @reimbursement_request.expense_mileages,
+    id: "expense_mileages",
+    functions: {
+      "from_date" => lambda do |obj| get_simple_date(obj['from_date']) end,
+      "to_date" => lambda do |obj| get_simple_date(obj['to_date']) end,
+      "amount" => lambda do |obj| number_to_currency(obj['amount'], precision: 2) end
+    }
+  } %>
+  <%= render partial: "show_table", locals: {
+    title: "Airfare",
+    attributes: ["from_date", "to_date", "from_location", "to_location", "notes", "amount"],
+    objects: @reimbursement_request.expense_airfares,
+    id: "expense-airfares",
+    functions: {
+      "from_date" => lambda do |obj| get_simple_date(obj['from_date']) end,
+      "to_date" => lambda do |obj| get_simple_date(obj['to_date']) end,
+      "amount" => lambda do |obj| number_to_currency(obj['amount'], precision: 2) end
+    }
+  } %>
+  <%= render partial: "show_table", locals: {
+    title: "Accounting",
+    attributes: ["index", "fund", "organization", "account", "program", "activity", "amount"],
+    objects: @reimbursement_request.accountings,
+    id: "accountings",
+    functions: {
+      "amount" => lambda do |obj| number_to_currency(obj['amount'], precision: 2) end
+    }
+  } %>
 
   <div class="row">
     <div class="col-12">
@@ -52,19 +101,29 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <h3>Total: <%= @reimbursement_request.grand_total %></h3>
+      <h3>Total: <%= number_to_currency(@reimbursement_request.grand_total, precision: 2) %></h3>
     </div>
   </div>
-  <div class="row print-hide">
-    <div class="col-4 d-flex justify-content-between">
-      <h3 class="align-self-center">Update Form:</h3>
-      <div>
-        <%= link_to "Edit", edit_reimbursement_request_path(@reimbursement_request.id), class: "btn btn-primary edit-btn btn-lg align-self-center"%>
-        <%= link_to "Print", reimbursement_request_path(@reimbursement_request.id, format: :pdf), class: "btn btn-success btn-lg align-self-center" %>
-      </div>
+  <div class="row list-inline">
+    <% if current_user.can_manage(@reimbursement_request) %>
+      <%= link_to("Approve",
+        approve_reimbursement_request_path(@reimbursement_request),
+        method: :patch,
+        class: 'col btn btn-success btn-lg list-inline-item') if @reimbursement_request.status != 'approved' %>
+      <%= link_to("Deny",
+        decline_reimbursement_request_path(@reimbursement_request),
+        method: :patch,
+        class: 'col btn btn-danger btn-lg list-inline-item') if @reimbursement_request.status != 'declined' %>
+    <% end %>
+    <div class='col col-4 align-self-end'>
+      <%= link_to("Edit", edit_reimbursement_request_path(@reimbursement_request.id), class: "btn btn-primary edit-btn btn-lg align-self-center list-inline-item") %>
+      <%= link_to("Export as PDF",
+        reimbursement_request_path(@reimbursement_request.id, format: :pdf),
+        class: "btn btn-light btn-lg align-self-center list-inline-item ",
+        :'data-toggle' => 'tooltip',
+        :'data-placement' => 'top',
+        title: t('reimbursement_request_form.tooltips.export_pdf')) %>
     </div>
   </div>
-  <%= render partial: "change_status_form" if @reimbursement_request.certifier_id == current_user.id %>
-  <hr class="my-4 print-hide">
   <%= render 'status_comment'%>
 </div>

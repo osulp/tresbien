@@ -96,10 +96,42 @@ class Form {
   bindDateTimePicker = element => {
     $(element).datetimepicker({
       timepicker: false,
-      format: 'Y/m/d',
-      scrollInput: false
+      format: 'Y-m-d',
+      scrollInput: false,
+      onShow: (current_time, $input) => {
+        let row = $input.parents('tr');
+        let { from_date, to_date } = this.getDateInputs(row);
+        if (this.isFromDate($input)) {
+          let max_date = false;
+          if (to_date.val() !== '') {
+            // prevent selection from anything in the past
+            max_date = to_date.datetimepicker('getValue');
+          }
+          $(from_date).datetimepicker('setOptions', {
+            minDate: false,
+            maxDate: max_date
+          });
+        } else {
+          let min_date = false;
+          if (from_date.val() !== '') {
+            // set from_date to the date selected, and prevent selection from anything in the future
+            min_date = from_date.datetimepicker('getValue');
+          }
+          $(to_date).datetimepicker('setOptions', {
+            minDate: min_date,
+            maxDate: false
+          });
+        }
+      }
     });
   };
+
+  getDateInputs = row => {
+    return { from_date: $(row).find('input.datepicker[name*="from_date"]'), to_date: $(row).find('input.datepicker[name*="to_date"]') };
+  }
+  isFromDate = element => {
+    return (element.attr('name').indexOf('from_date') > -1);
+  }
 
   bindTimePicker = element => {
     $(element).datetimepicker({
