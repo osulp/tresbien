@@ -3,7 +3,6 @@
 </div>
 <div class="form-row">
   <span class="col col-md-3">Name: <%= current_user.full_name if user_signed_in? %></span>
-  <%= f.input :non_resident_alien, wrapper_html: { class: "col" } %>
 </div>
 <div class="form-row">
   <%= f.input :certifier_id,
