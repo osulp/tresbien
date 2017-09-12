@@ -2,6 +2,12 @@
   <h3>Request Information</h3>
 </div>
 <div class="row">
-  <%= f.input :description, as: :text, wrapper_html: { class: "col" } %>
-  <%= f.input :business_notes_and_purpose, wrapper_html: { class: "col" } %>
+  <div class="col">
+    <%= f.input :description_id,
+        collection: @descriptions.sort_by(&:name),
+        label_method: lambda { |e| e.name },
+        value_method: lambda { |e| e.id },
+        label: 'Why did you travel?'  %>
+    </div>
+  <%= f.input :business_notes_and_purpose, placeholder: 'Explain what happened on your trip.', wrapper_html: { class: "col" }, hint: "250 character maximum" %>
 </div>

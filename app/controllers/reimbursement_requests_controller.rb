@@ -6,6 +6,7 @@ class ReimbursementRequestsController < ApplicationController
   before_action :set_certifiers, only: %i[new create edit update]
   before_action :set_expense_types, only: %i[new create edit update]
   before_action :set_statuses, only: %i[new create edit update]
+  before_action :set_descriptions, only: %i[new create edit update]
 
   def new
     @reimbursement_request = ReimbursementRequest.new
@@ -24,10 +25,10 @@ class ReimbursementRequestsController < ApplicationController
       format.html
       format.pdf do
         render pdf: @reimbursement_request.id.to_s,
-          template: 'reimbursement_requests/show.html.erb',
-          layout: 'pdf',
-          handlers: [:erb],
-          formats: [:pdf]
+               template: 'reimbursement_requests/show.html.erb',
+               layout: 'pdf',
+               handlers: [:erb],
+               formats: [:pdf]
       end
     end
   end
@@ -37,6 +38,7 @@ class ReimbursementRequestsController < ApplicationController
     @reimbursement_request.status = params[:status]
     @reimbursement_request.claimant = current_user if user_signed_in?
     @reimbursement_request.certifier = User.find(params.dig(:reimbursement_request, :certifier_id)) unless params.dig(:reimbursement_request, :certifier_id)
+    @reimbursement_request.description = Description.find(params.dig(:reimbursement_request, :description_id)) unless params.dig(:reimbursement_request, :description_id)
     if @reimbursement_request.save
       if @reimbursement_request.status == 'submitted'
         submit_request
@@ -51,17 +53,17 @@ class ReimbursementRequestsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     old_status = @reimbursement_request.status
     @reimbursement_request.status = params[:status]
+    @reimbursement_request.description = Description.find(params.dig(:reimbursement_request, :description_id)) unless params.dig(:reimbursement_request, :description_id)
     if @reimbursement_request.update(reimbursement_request_params)
       case @reimbursement_request.status
       when 'declined'
         decline_request
-      when'approved'
+      when 'approved'
         approve_request
       when 'submitted'
         old_status == 'draft' ? certify_request : resubmit_request
@@ -124,9 +126,9 @@ class ReimbursementRequestsController < ApplicationController
   def reimbursement_request_params
     params.require(:reimbursement_request).permit(
       :identifier,
-      :description,
       :claimant_id,
       :certifier_id,
+      :description_id,
       :itinerary_total,
       :mileage_total,
       :airfare_total,
@@ -165,6 +167,10 @@ class ReimbursementRequestsController < ApplicationController
 
   def set_expense_types
     @expense_types = ExpenseType.where(active: true)
+  end
+
+  def set_descriptions
+    @descriptions = Description.where(active: true)
   end
 
   # converts all date and time params into valid formats

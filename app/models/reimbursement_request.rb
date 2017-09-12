@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class ReimbursementRequest < ApplicationRecord
-  scope :user_claimant_requests, -> (user_id) { where claimant_id: user_id }
-  scope :user_certifier_requests, -> (user_id) { where certifier_id: user_id }
+  scope :user_claimant_requests, ->(user_id) { where claimant_id: user_id }
+  scope :user_certifier_requests, ->(user_id) { where certifier_id: user_id }
   attr_accessor :file_attachments
   belongs_to :claimant, class_name: 'User'
   belongs_to :certifier, class_name: 'User'
+  belongs_to :description
   has_many :accountings
   has_many :expense_airfares
   has_many :expense_mileages
@@ -16,10 +17,11 @@ class ReimbursementRequest < ApplicationRecord
   has_many :travel_itineraries
   has_many :attachments
   has_many :status_comments
-  accepts_nested_attributes_for :accountings, :expense_airfares, :expense_mileages, :expense_others, :travel_itineraries, :travel_cities, :claimant, :certifier, allow_destroy: true
+  accepts_nested_attributes_for :accountings, :description, :expense_airfares, :expense_mileages, :expense_others, :travel_itineraries, :travel_cities, :claimant, :certifier, allow_destroy: true
 
   validates :certifier_id, presence: true
   validate :includes_travel_city
+  validates :business_notes_and_purpose, length: { maximum: 250 }
   after_validation :warn_attachments
   before_create :generate_identifier
   before_save :calculate_grand_total
