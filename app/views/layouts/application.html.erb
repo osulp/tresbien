@@ -10,6 +10,7 @@
   <body class="container-fluid">
     <%= render "navbar/navigation" %>
     <main id="main-content">
+    <%= render partial: 'layouts/flash_messages' %>
     <%= yield %>
     </main>
     <%= render "footer/footer"%>

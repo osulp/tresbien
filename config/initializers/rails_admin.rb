@@ -42,6 +42,24 @@ RailsAdmin.config do |config|
 
     config.included_models = %w[User ExpenseType]
 
+    config.model "User" do
+      object_label_method do
+        :full_name_label
+      end
+      edit do
+        field :email
+        field :full_name
+        field :osu_id do
+          label "OSU ID"
+        end
+        field :activity_code do
+          label "Activity Code"
+        end
+        field :admin
+        field :certifier
+      end
+    end
+
     ## With an audit adapter, you can add:
     # history_index
     # history_show

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830222318) do
+ActiveRecord::Schema.define(version: 20170912174018) do
 
   create_table "accountings", force: :cascade do |t|
     t.string "index"
@@ -168,7 +168,8 @@ ActiveRecord::Schema.define(version: 20170830222318) do
     t.integer "pidm"
     t.boolean "certifier", default: false
     t.string "full_name"
-    t.integer "index_code"
+    t.string "activity_code"
+    t.string "osu_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

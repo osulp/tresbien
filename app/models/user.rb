@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  include UserAdmin
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   # devise :database_authenticatable, :registerable,
@@ -12,6 +11,14 @@ class User < ApplicationRecord
 
   def can_manage(reimbursement_request)
     reimbursement_request.certifier.id == self.id
+  end
+
+  def required_fields?
+    !self.osu_id.blank? && !self.activity_code.blank?
+  end
+
+  def full_name_label
+    "#{self.full_name}"
   end
 
   # Sets email and pidm attributes for current_user
