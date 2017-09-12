@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912174018) do
+ActiveRecord::Schema.define(version: 20170912211137) do
 
   create_table "accountings", force: :cascade do |t|
     t.string "index"
@@ -104,7 +104,6 @@ ActiveRecord::Schema.define(version: 20170912174018) do
     t.boolean "non_resident_alien"
     t.text "business_notes_and_purpose"
     t.string "address"
-    t.integer "status_id"
     t.string "status"
     t.index ["certifier_id"], name: "index_reimbursement_requests_on_certifier_id"
     t.index ["claimant_id"], name: "index_reimbursement_requests_on_claimant_id"
