@@ -9,6 +9,8 @@ class ReimbursementRequest < ApplicationRecord
   has_many :accountings
   has_many :expense_airfares
   has_many :expense_mileages
+  has_many :expense_non_per_diems, -> { where( travel_itinerary_id: nil)}. class_name: "ExpenseOther"
+  has_many :expense_above_per_diems, -> { where( "travel_itinerary_id IS NOT NULL" ) }, class_name: "ExpenseOther"
   has_many :expense_others
   has_many :travel_cities
   has_many :travel_itineraries
