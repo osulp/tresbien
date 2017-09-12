@@ -5,15 +5,20 @@
   <td><%= f.input :lunch, label: false, input_html: { class: 'sum-input'} %></td>
   <td><%= f.input :dinner, label: false, input_html: { class: 'sum-input'} %></td>
   <td><%= f.input :hotel, label: false, input_html: { class: 'hotel sum-input' } %></td>
-  <td><%= f.input :amount, label: false, input_html: { disabled: true, class: "row-sum-input" } %></td>
+  <td><%= f.input :amount, label: false, error_html: {}, input_html: { readonly: true, class: "row-sum-input" } %>
+  </td>
   <td>
+    <%= f.input :per_diem, as: :hidden, label: false, input_html: { class: "per-diem-rate" } %>
     <input type='hidden' class='travel-city-id' />
     <input type='hidden' class='unique-id' />
+    <a class='add-other-expenses btn btn-primary btn-sm hidden' data-toggle='tooltip' data-placement='top' title='<%= t('reimbursement_request_form.tooltips.generate_other_expense') %>' href='#'>
+      <i class="fa fa-plus fa-2x"></i>
+    </a>
     <%= link_to_remove_association f,
-        class: "btn btn-danger btn-sm",
-        "data-toggle" => 'tooltip',
-        "data-placement" => 'top',
-        title: t('reimbursement_request_form.tooltips.remove_travel_itinerary')  do %>
+      class: "btn btn-danger btn-sm",
+      "data-toggle" => 'tooltip',
+      "data-placement" => 'top',
+      title: t('reimbursement_request_form.tooltips.remove_travel_itinerary')  do %>
       <i class="fa fa-trash-o fa-2x"></i>
     <% end %>
   </td>

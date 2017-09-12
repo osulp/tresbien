@@ -3,38 +3,69 @@
     <div class="form-row">
       <h3><%= t('reimbursement_request_form.headers.cities_travelled') %></h3>
     </div>
-    <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "Location", "Hotel Daily Rate", ""], id: "cities_travelled" } do %>
+    <div class="form-row">
+      <div class="col-xl-7 col-lg-8 col-md-12">
+        <p>
+        To fill out the meals and hotel rate categories, check the OSU Business Affairs tables for <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_us" target="_blank">Domestic</a> or <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_foreign" target="_blank">International</a> travel, as appropriate. 
+        </p> 
+        <p>
+        The total amount for a daily itinerary should not exceed the sum of the per diem rate for that city. If your itinerary row total is greater than the corresponding per diem rate, you will be prompted to generate a separate expense row for the extra amount.
+        </p>
+      </div> </div>
+    <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "Location", "Meals Daily Rate", "Hotel Daily Rate", "Per Diem Rate", ""], id: "cities_travelled" } do %>
       <%= f.simple_fields_for :travel_cities do |travel_city| %>
         <%= render partial: "travel_city_fields", locals: { f: travel_city, object: f } %>
       <% end %>
     <% end %>
-    <div class="form-row">
+    <div class="form-row add-row">
       <%= link_to_add_association  f, :travel_cities,
-          class: 'btn btn-primary btn-sm',
-          render_options: { locals: { object: f }},
-          'data-association-insertion-node' => '#cities_travelled tbody',
-          'data-association-insertion-method' => 'append' do %>
-            <i class="fa fa-plus-square-o"></i>
-            <span><%= t('reimbursement_request_form.buttons.add_travel_city') %></span>
+        class: 'btn btn-primary btn-sm',
+        render_options: { locals: { object: f }},
+        'data-association-insertion-node' => '#cities_travelled tbody',
+        'data-association-insertion-method' => 'append' do %>
+        <i class="fa fa-plus-square-o"></i>
+        <span><%= t('reimbursement_request_form.buttons.add_travel_city') %></span>
       <% end %>
     </div>
 
     <div class="form-row">
+      <div class="col">
       <h4><%= t('reimbursement_request_form.headers.daily_itineraries') %></h4>
+      </div>
     </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["Date", "Location", "Breakfast", "Lunch", "Dinner", "Hotel", "Amount", ""], id: "daily_itineraries", total_class: "itineraries-total" } do %>
       <%= f.simple_fields_for :travel_itineraries do |travel_itinerary| %>
         <%= render "travel_itinerary_fields", f: travel_itinerary %>
       <% end %>
     <% end %>
-    <div class="form-row">
+    <div class="form-row add-row">
       <%= link_to_add_association f, :travel_itineraries,
-          class: 'btn btn-primary btn-sm',
-          id: "add_travel_itinerary",
-          'data-association-insertion-node' => '#daily_itineraries tbody',
-          'data-association-insertion-method' => 'append' do %>
-            <i class="fa fa-plus-square-o"></i>
-            <span><%= t('reimbursement_request_form.buttons.add_daily_itinerary') %></span>
+        class: 'btn btn-primary btn-sm',
+        id: "add_travel_itinerary",
+        'data-association-insertion-node' => '#daily_itineraries tbody',
+        'data-association-insertion-method' => 'append' do %>
+        <i class="fa fa-plus-square-o"></i>
+        <span><%= t('reimbursement_request_form.buttons.add_daily_itinerary') %></span>
+      <% end %>
+    </div>
+    <div class="form-row">
+      <div class="col">
+      <h4>Expenses Above Per Diem</h4>
+      </div>
+    </div>
+      <%= render layout: "nested_fields_table", locals: { attributes: ["Date", "Notes", "Amount", ""], id: "expense_above_per_diems", total_class: "other-expenses-total" } do %>
+        <%= f.simple_fields_for :expense_above_per_diems do |expense_other| %>
+          <%= render "expense_above_per_diem_fields", f: expense_other %>
+        <% end %>
+      <% end %>
+    <div class="form-row add-row">
+      <%= link_to_add_association f, :expense_above_per_diems,
+        class: 'hidden btn btn-primary btn-sm',
+        id: "add_over_per_diem", 
+        'data-association-insertion-node' => '#expense_above_per_diems tbody',
+        'data-association-insertion-method' => 'append',
+        partial: 'expense_above_per_diem_fields' do %>
+        <i class="fa fa-plus-square-o"></i>
       <% end %>
     </div>
   </div>

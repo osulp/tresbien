@@ -4,16 +4,17 @@
       <h3><%= t('reimbursement_request_form.headers.other_expenses')%></h3>
     </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["Expense Type", "From", "To", "Notes", "Amount", ""], id: "other_expenses", total_class: "other-expenses-total" } do %>
-      <%= f.simple_fields_for :expense_others do |expense_other| %>
+      <%= f.simple_fields_for :expense_non_per_diems do |expense_other| %>
         <%= render "expense_other_fields", f: expense_other %>
       <% end %>
     <% end %>
     <div class="form-row">
-      <%= link_to_add_association f, :expense_others,
+      <%= link_to_add_association f, :expense_non_per_diems,
           class: 'btn btn-primary btn-sm',
           id: "add_expense_other",
           'data-association-insertion-node' => '#other_expenses tbody',
-          'data-association-insertion-method' => 'append' do %>
+          'data-association-insertion-method' => 'append',
+          partial: "expense_other_fields" do %>
             <i class="fa fa-plus-square-o"></i>
             <span><%= t('reimbursement_request_form.buttons.add_other_expense') %></span>
       <% end %>

@@ -10,6 +10,7 @@ import * as numeral from 'numeral';
 import CityRow from './city_row';
 import ItineraryRow from './itinerary_row';
 import BasicRow from './basic_row';
+import AbovePerDiemRow from './above_per_diem_row';
 
 class Form {
   constructor(selector, state) {
@@ -22,6 +23,9 @@ class Form {
       });
       $('tr.travel-itinerary').each((i, element) => {
         this.state.itinerary_rows.push(new ItineraryRow(this, element, this.state));
+      });
+      $('tr.above-per-diem').each((i, element) => {
+        this.state.above_per_diem_rows.push(new AbovePerDiemRow(this, element, this.state));
       });
       $('tr.basic').each((i, element) => {
         this.state.basic_rows.push(new BasicRow(this, element, this.state));
@@ -61,7 +65,11 @@ class Form {
           // reset citiesTravelled to exclude the travel_city_id which was clicked to be removed
           this.clearAndRemoveRow(this.state.city_rows, id, 'id');
         } else if (itemToBeRemoved.hasClass('travel-itinerary')) {
+          let travel_itinerary_id = $(itemToBeRemoved).find('input.unique-id').val();
+          $('tr.above-per-diem').find(`input.${travel_itinerary_id}`).parents('tr').find('.remove_fields').click();
           this.clearAndRemoveRow(this.state.itinerary_rows, id, 'id');
+        } else if (itemToBeRemoved.hasClass('above-per-diem')) {
+          this.clearAndRemoveRow(this.state.above_per_diem_rows, id, 'id');
         } else {
           this.clearAndRemoveRow(this.state.basic_rows, id, 'id');
         }
@@ -79,6 +87,9 @@ class Form {
           this.state.itinerary_rows.push(new ItineraryRow(this, itemInserted, this.state, data));
         } else if (itemInserted.hasClass('travel-city')) {
           this.state.city_rows.push(new CityRow(this, itemInserted, this.state));
+        } else if (itemInserted.hasClass('above-per-diem')) {
+          let data = this.state.above_per_diem_queue.splice(0, 1)[0];
+          this.state.above_per_diem_rows.push(new AbovePerDiemRow(this, itemInserted, this.state, data));
         } else {
           this.state.basic_rows.push(new BasicRow(this, itemInserted, this.state));
         }

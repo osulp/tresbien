@@ -147,9 +147,10 @@ class ReimbursementRequestsController < ApplicationController
       accountings_attributes: %i[id fund organization account program activity amount _destroy],
       expense_airfares_attributes: %i[id from_date to_date from_location to_location notes amount _destroy],
       expense_mileages_attributes: %i[id from_date to_date from_city from_state to_city to_state miles round_trip notes amount _destroy],
-      expense_others_attributes: %i[id expense_type_id from_date to_date notes amount _destroy],
-      travel_itineraries_attributes: %i[id country city state break lunch dinner hotel amount date _destroy],
-      travel_cities_attributes: %i[id from_date to_date country city state include_meals hotel_rate _destroy]
+      expense_non_per_diems: %i[id expense_type_id from_date to_date notes amount _destroy],
+      expense_above_per_diems_attributes: %i[id expense_type_id from_date to_date notes amount above_per_diem_expense _destroy],
+      travel_itineraries_attributes: %i[id country city state break lunch dinner hotel amount date per_diem _destroy],
+      travel_cities_attributes: %i[id from_date to_date country city state include_meals meals hotel_rate per_diem _destroy]
     )
   end
 

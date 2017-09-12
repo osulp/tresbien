@@ -2,7 +2,9 @@
   <td><%= f.input :from_date, as: :date_picker, label: false %></td>
   <td><%= f.input :to_date, as: :date_picker, label: false %></td>
   <td><%= render partial: 'travel_locations_row', locals: { f: f } %></td>
-  <td><%= f.input :hotel_rate, label: false %></td>
+  <td><%= f.input :meals, label: false, input_html: { class: "sum-input" } %></td>
+  <td><%= f.input :hotel_rate, label: false, input_html: { class: "sum-input" } %></td>
+  <td><%= f.input :per_diem, label: false, input_html: { readonly: true, class: "row-sum-input" } %></td>
   <td>
     <div class="travel-city-controls">
       <%= f.input :id, as: :hidden, wrapper: false, input_html: { class: "travel-city-id" } %>
