@@ -1,10 +1,10 @@
 <tr class="nested-fields basic" data-table-name="accounting">
-  <td><%= f.input :index, label: false, input_html: { value: current_user ? current_user.index_code : ''  }  %></td>
+  <td><%= f.input :index, label: false %></td>
   <td><%= f.input :fund, label: false %></td>
   <td><%= f.input :organization, label: false  %></td>
   <td><%= f.input :account, label: false %></td>
   <td><%= f.input :program, label: false  %></td>
-  <td><%= f.input :activity, label: false  %></td>
+  <td><%= f.input :activity, label: false, input_html: { value: current_user ? current_user.activity_code : ''  }  %></td>
   <td><%= f.input :amount, label: false, input_html: { class: "row-sum-input" }  %></td>
   <td>
     <input type='hidden' class='unique-id' />

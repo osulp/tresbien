@@ -6,7 +6,10 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions'
   }
-  resources :users
+
+  get 'user/set_id', to: 'users#set_id'
+  patch 'user/update', to: 'users#update'
+
   resources :reimbursement_requests do
     post 'comment', to: 'reimbursement_requests#comment'
     delete 'comment/:id/delete', to: 'reimbursement_requests#delete_comment', as: 'comment_delete'
@@ -24,8 +27,8 @@ Rails.application.routes.draw do
   # makes expense_types root
   root 'home#index'
 
-  patch 'reimbursement_requests/:id/approve', to: 'reimbursement_requests#approve', as: 'approve_reimbursement_request' 
-  patch 'reimbursement_requests/:id/decline', to: 'reimbursement_requests#decline', as: 'decline_reimbursement_request' 
+  patch 'reimbursement_requests/:id/approve', to: 'reimbursement_requests#approve', as: 'approve_reimbursement_request'
+  patch 'reimbursement_requests/:id/decline', to: 'reimbursement_requests#decline', as: 'decline_reimbursement_request'
 
   get 'states/:country', to: 'application#states'
   get 'cities/:state/:country', to: 'application#cities'
