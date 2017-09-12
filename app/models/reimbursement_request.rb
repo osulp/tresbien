@@ -10,8 +10,8 @@ class ReimbursementRequest < ApplicationRecord
   has_many :accountings
   has_many :expense_airfares
   has_many :expense_mileages
-  has_many :expense_non_per_diems, -> { where( travel_itinerary_id: nil)}. class_name: "ExpenseOther"
-  has_many :expense_above_per_diems, -> { where( "travel_itinerary_id IS NOT NULL" ) }, class_name: "ExpenseOther"
+  has_many :expense_non_per_diems, -> { where( travel_itinerary_id: nil ) }, class_name: 'ExpenseOther'
+  has_many :expense_above_per_diems, -> { where( 'travel_itinerary_id IS NOT NULL' ) }, class_name: 'ExpenseOther'
   has_many :expense_others
   has_many :travel_cities
   has_many :travel_itineraries
@@ -21,11 +21,13 @@ class ReimbursementRequest < ApplicationRecord
   validates :certifier_id, presence: true
   validate :includes_travel_city
   validates :business_notes_and_purpose, length: { maximum: 250 }
+
   after_validation :warn_attachments
   before_create :generate_identifier
   before_save :calculate_grand_total
-  after_initialize :set_defaults, unless: :persisted?
+
   # The set_defaults will only work if the object is new
+  after_initialize :set_defaults, unless: :persisted?
 
   # Calculate the grand total for the reimbursement request
   def calculate_grand_total
