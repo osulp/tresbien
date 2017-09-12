@@ -35,6 +35,11 @@ ActiveRecord::Schema.define(version: 20170912211137) do
     t.index ["reimbursement_request_id"], name: "index_attachments_on_reimbursement_request_id"
   end
 
+  create_table "descriptions", force: :cascade do |t|
+    t.string "name"
+    t.boolean "active"
+  end
+
   create_table "expense_airfares", force: :cascade do |t|
     t.datetime "from_date"
     t.datetime "to_date"
@@ -87,7 +92,6 @@ ActiveRecord::Schema.define(version: 20170912211137) do
 
   create_table "reimbursement_requests", force: :cascade do |t|
     t.string "identifier"
-    t.text "description"
     t.float "itinerary_total"
     t.float "mileage_total"
     t.float "airfare_total"
@@ -105,8 +109,10 @@ ActiveRecord::Schema.define(version: 20170912211137) do
     t.text "business_notes_and_purpose"
     t.string "address"
     t.string "status"
+    t.integer "description_id"
     t.index ["certifier_id"], name: "index_reimbursement_requests_on_certifier_id"
     t.index ["claimant_id"], name: "index_reimbursement_requests_on_claimant_id"
+    t.index ["description_id"], name: "index_reimbursement_requests_on_description_id"
   end
 
   create_table "status_comments", force: :cascade do |t|

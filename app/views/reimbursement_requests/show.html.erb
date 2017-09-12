@@ -5,9 +5,8 @@
       <p></p>
       <p><strong>Claimant: </strong><%= @reimbursement_request.claimant.full_name %></p>
       <p><strong>Certifier: </strong><%= @reimbursement_request.certifier.full_name %></p>
-      <p><strong>Description: </strong><%= @reimbursement_request.description %></p>
+      <p><strong>Description: </strong><%= @reimbursement_request.description.name %></p>
       <p><strong>Business Notes and Purpose: </strong><%= @reimbursement_request.business_notes_and_purpose %></p>
-
     </div>
   </div>
   <div class="row">
