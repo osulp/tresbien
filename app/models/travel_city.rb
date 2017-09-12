@@ -2,6 +2,7 @@
 
 class TravelCity < ApplicationRecord
   belongs_to :reimbursement_request
+  has_many :travel_itineraries, inverse_of: :travel_city
   validates :from_date, presence: true
   validates :to_date, presence: true
   validates :hotel_rate, presence: true
