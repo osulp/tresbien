@@ -6,11 +6,10 @@
     </div>
     <div class="col col-md-9 col-sm-12 tab-content">
       <%= render "form_error", obj: @reimbursement_request %>
-      <div class="tab-pane active" id="request_information_panel">
-        <%= render partial: 'form_traveller_information',  locals: { f: f, current_user: current_user, certifiers: @certifiers }  %>
-        <%= render partial: 'form_request_information', locals: { f: f } %>
+      <%= render partial: 'form_traveller_information',  locals: { f: f, current_user: current_user, certifiers: @certifiers }  %>
+      <div class="tab-pane active" id="itinerary_panel">
+        <%= render partial: 'form_itinerary', locals: { f: f } %>
       </div>
-      <%= render partial: 'form_itinerary', locals: { f: f } %>
       <%= render partial: 'form_other_expenses', locals: { f: f } %>
       <%= render partial: 'form_accounting', locals: { f: f } %>
       <%= render partial: 'form_airfare', locals: { f: f } %>
