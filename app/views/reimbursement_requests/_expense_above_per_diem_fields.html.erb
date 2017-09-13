@@ -1,6 +1,6 @@
 <tr class="nested-fields above-per-diem" data-table-name="expense-above-per-diem">
   <td>
-    <%= f.input :expense_type_id, input_html: { value: ExpenseType.where(name: "Above Per Diem").first.id }, wrapper_html: {class: "hidden" } %>
+    <%= f.input :expense_type_id, input_html: { value: ExpenseType.above_per_diem.pluck(:id).first }, wrapper_html: {class: "hidden" } %>
     <%= f.input :from_date, as: :date_picker, label: false, input_html: { class: "from-date" }, wrapper_html: { class: "hidden" } %>
     <%= f.input :to_date, as: :date_picker, label: false, input_html: { class: "to-date", readonly: true } %>
   </td>
