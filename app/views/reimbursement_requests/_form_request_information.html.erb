@@ -9,5 +9,5 @@
         value_method: lambda { |e| e.id },
         label: 'Why did you travel?'  %>
     </div>
-  <%= f.input :business_notes_and_purpose, placeholder: 'Explain what happened on your trip.', wrapper_html: { class: "col" }, hint: "250 character maximum" %>
+  <%= f.input :business_notes_and_purpose, id: "myTextarea", placeholder: 'Explain what happened on your trip.', wrapper_html: { class: "col" }, maxlength: "250", hint: "250 character maximum" %>
 </div>
