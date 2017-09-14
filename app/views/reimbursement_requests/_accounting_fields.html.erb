@@ -1,11 +1,12 @@
 <tr class="nested-fields basic" data-table-name="accounting">
   <td><%= f.input :index, label: false %></td>
   <td><%= f.input :fund, label: false %></td>
-  <td><%= f.input :organization, label: false  %></td>
   <td><%= f.input :account, label: false %></td>
-  <td><%= f.input :program, label: false  %></td>
   <td><%= f.input :activity, label: false, input_html: { value: current_user ? current_user.activity_code : ''  }  %></td>
-  <td><%= f.input :amount, label: false, input_html: { class: "row-sum-input" }  %></td>
+  <td><%= f.input :amount, label: false, input_html: { class: "row-sum-input" }  %>
+      <%= f.input :organization, label: false, as: :hidden, input_html:{ value: current_user ? current_user.organization.id : ' '}%>
+      <%= f.input :program, label: false, as: :hidden, input_html: { value: current_user ? current_user.organization.program_code : ''  }  %>
+  </td>
   <td>
     <input type='hidden' class='unique-id' />
     <%= link_to_remove_association f,
@@ -17,3 +18,4 @@
     <% end %>
   </td>
 </tr>
+<%=console%>

@@ -6,19 +6,20 @@ class User < ApplicationRecord
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :trackable, :validatable
   devise :cas_authenticatable
+  belongs_to :organization
   validates :username, presence: true
   validates :email, presence: true
 
   def can_manage(reimbursement_request)
-    reimbursement_request.certifier.id == self.id
+    reimbursement_request.certifier.id == id
   end
 
   def required_fields?
-    !self.osu_id.blank? && !self.activity_code.blank?
+    !osu_id.blank? && !activity_code.blank?
   end
 
   def full_name_label
-    "#{self.full_name}"
+    full_name.to_s
   end
 
   # Sets email and pidm attributes for current_user

@@ -40,9 +40,9 @@ RailsAdmin.config do |config|
     end
     show_in_app
 
-    config.included_models = %w[User ExpenseType Description]
+    config.included_models = %w[User ExpenseType Description Organization]
 
-    config.model "User" do
+    config.model 'User' do
       object_label_method do
         :full_name_label
       end
@@ -50,10 +50,13 @@ RailsAdmin.config do |config|
         field :email
         field :full_name
         field :osu_id do
-          label "OSU ID"
+          label 'OSU ID'
         end
         field :activity_code do
-          label "Activity Code"
+          label 'Activity Code'
+        end
+        field :organization do
+          label 'Organization'
         end
         field :admin
         field :certifier

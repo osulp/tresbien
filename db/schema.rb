@@ -91,6 +91,11 @@ ActiveRecord::Schema.define(version: 20170918180647) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "organizations", force: :cascade do |t|
+    t.string "organization_code"
+    t.string "program_code"
+  end
+
   create_table "reimbursement_requests", force: :cascade do |t|
     t.string "identifier"
     t.float "itinerary_total"
@@ -179,7 +184,10 @@ ActiveRecord::Schema.define(version: 20170918180647) do
     t.string "full_name"
     t.string "activity_code"
     t.string "osu_id"
+    t.integer "organization_id"
+    t.integer "organizations_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["organizations_id"], name: "index_users_on_organizations_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
