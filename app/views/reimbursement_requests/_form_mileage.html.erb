@@ -3,7 +3,7 @@
     <div class="form-row">
       <h3><%= t('reimbursement_request_form.headers.auto_mileage')%></h3>
     </div>
-    <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "From State", "From City", "To State", "To City", "Round Trip?", "Miles", "Notes", "Amount", ""], id: "mileage", total_class: "mileage-total" } do %>
+    <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "Location (From)", "Location (To)",  "Distance (Miles)", "Round Trip?", "Notes", "Amount", ""], id: "mileage", total_class: "mileage-total" } do %>
       <%= f.simple_fields_for :expense_mileages do |expense_milage| %>
         <%= render "expense_mileage_fields", f: expense_milage %>
       <% end %>

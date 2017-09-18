@@ -11,6 +11,7 @@ import CityRow from './city_row';
 import ItineraryRow from './itinerary_row';
 import BasicRow from './basic_row';
 import AbovePerDiemRow from './above_per_diem_row';
+import MileageRow from './mileage_row';
 
 class Form {
   constructor(selector, state) {
@@ -26,6 +27,9 @@ class Form {
       });
       $('tr.above-per-diem').each((i, element) => {
         this.state.above_per_diem_rows.push(new AbovePerDiemRow(this, element, this.state));
+      });
+      $('tr.mileage').each((i, element) => {
+        this.state.basic_rows.push(new MileageRow(this, element, this.state));
       });
       $('tr.basic').each((i, element) => {
         this.state.basic_rows.push(new BasicRow(this, element, this.state));
@@ -90,6 +94,8 @@ class Form {
         } else if (itemInserted.hasClass('above-per-diem')) {
           let data = this.state.above_per_diem_queue.splice(0, 1)[0];
           this.state.above_per_diem_rows.push(new AbovePerDiemRow(this, itemInserted, this.state, data));
+        } else if (itemInserted.hasClass('mileage')) {
+          this.state.basic_rows.push(new MileageRow(this, itemInserted, this.state));
         } else {
           this.state.basic_rows.push(new BasicRow(this, itemInserted, this.state));
         }

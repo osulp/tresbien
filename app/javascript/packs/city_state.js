@@ -1,7 +1,7 @@
 $(document).on('load change', '#states-of-country', function(e) {
   console.log('Querying cities for selected state.');
-  var cities_of_state = $(this).parents('tr').find('#cities-of-state');
-  var country = $(this).parents('tr').find('#countries-of-world').children(':selected').data('abbreviation');
+  var cities_of_state = $(this).parents('td').find('#cities-of-state');
+  var country = $(this).parents('td').find('#countries-of-world').children(':selected').data('abbreviation');
   var state = $(this).children(':selected').data('abbreviation');
   var state_value = $(this).children(':selected').val();
   $.ajax({
