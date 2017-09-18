@@ -1,21 +1,35 @@
-<tr class="nested-fields basic" data-table-name="expense-mileage">
+<tr class="nested-fields mileage" data-table-name="expense-mileage">
   <td><%=f.input :from_date, as: :date_picker, label: false %></td>
   <td><%= f.input :to_date, as: :date_picker, label: false %></td>
-  <td><%= f.input :from_state, as: :cs_state_select, label: false %></td>
-  <td><%= f.input :from_city, as: :cs_city_select, state: f.object.from_state, label: false %>
-  <td><%= f.input :to_state, as: :cs_state_select, label: false %></td>
-  <td><%= f.input :to_city, as: :cs_city_select, state: f.object.to_state, label: false %>
-  <td><%= f.input :round_trip, label: false %></td>
+  <td>
+    <div class="row">
+      <div class="col col-12">
+        <%= f.input :country, as: :cs_country_select, label: false, wrapper_html: {  class: "hidden"} %>
+        <%= f.input :from_state, as: :cs_state_select, label: false %>
+        <%= f.input :from_city, as: :cs_city_select, state: f.object.from_state, label: false %>
+      </div>
+    </div>
+  </td>
+  <td>
+    <div class="row">
+      <div class="col col-12">
+        <%= f.input :country, as: :cs_country_select, label: false, wrapper_html: {  class: "hidden"} %>
+        <%= f.input :to_state, as: :cs_state_select, label: false %>
+        <%= f.input :to_city, as: :cs_city_select, state: f.object.from_state, label: false %>
+      </div>
+    </div>
+  </td>
   <td><%= f.input :miles, label: false %></td>
+  <td><%= f.input :round_trip, label: false, input_html: { class: "round-trip-checkbox" }  %></td>
   <td><%= f.input :notes, label: false, as: :string %></td>
   <td><%= f.input :amount, label: false, input_html: { class: "row-sum-input" } %></td>
   <td>
     <input type='hidden' class='unique-id' />
     <%= link_to_remove_association f,
-        class: "btn btn-danger btn-sm",
-        "data-toggle" => 'tooltip',
-        "data-placement" => 'top',
-        title: t('reimbursement_request_form.tooltips.remove_mileage')  do %>
+      class: "btn btn-danger btn-sm",
+      "data-toggle" => 'tooltip',
+      "data-placement" => 'top',
+      title: t('reimbursement_request_form.tooltips.remove_mileage')  do %>
       <i class="fa fa-trash-o fa-2x"></i>
     <% end %>
   </td>
