@@ -1,6 +1,12 @@
 <tr class="nested-fields travel-itinerary" data-table-name="travel-itinerary">
-  <td><%= f.input :date, as: :date_picker, label: false %></td>
-  <td><%= render partial: 'travel_locations_row', locals: { f: f } %></td>
+  <td>
+    <span class='date-label'><%= f.object.date.nil? ? '' : f.object.date.strftime("%Y-%m-%d") %></span>
+    <%= f.input :date, as: :hidden, label: false, input_html: { class: 'date' } %>
+    <%= f.input :country, as: :hidden, label: false, input_html: { class: 'country' } %>
+    <%= f.input :state, as: :hidden, label: false, input_html: { class: 'state' } %>
+    <%= f.input :city, as: :hidden, label: false, input_html: { class: 'city' } %>
+  </td>
+  <td><span class='location-label'><%= f.object.location_label %></span></td>
   <td><%= f.input :break, label: false, input_html: { class: 'sum-input'} %></td>
   <td><%= f.input :lunch, label: false, input_html: { class: 'sum-input'} %></td>
   <td><%= f.input :dinner, label: false, input_html: { class: 'sum-input'} %></td>

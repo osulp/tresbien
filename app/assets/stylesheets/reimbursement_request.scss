@@ -86,6 +86,16 @@
       }
     }
   }
+  #expense_above_per_diems {
+    tbody {
+      tr {
+        td:first-child,
+        td:last-child {
+          width: 120px;
+        }
+      }
+    }
+  }
   .grand-totals {
     padding: 0;
     margin-top: 20px;

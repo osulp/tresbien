@@ -42,11 +42,12 @@ class AbovePerDiemRow {
   };
 
   setRowFields = data => {
-    this.element.find('input.from-date').val(data.date.format("YYYY/MM/DD"));
-    this.element.find('input.to-date').val(data.date.format("YYYY/MM/DD"));
+    this.element.find('.date').text(data.date.format("YYYY-MM-DD"));
+    this.element.find('input.from-date').val(data.date.format("YYYY-MM-DD"));
+    this.element.find('input.to-date').val(data.date.format("YYYY-MM-DD"));
     this.element.find('input.travel-itinerary-id').addClass(data.travel_itinerary_id);
     this.element.find('input.row-sum-input').val(data.amount);
-    this.element.find('div.reimbursement_request_expense_above_per_diems_notes > input').val(`Expenses above per diem on ${data.date.format("YYYY/MM/DD")} in ${data.city}, ${data.state}`);
+    this.element.find('input.notes').val(`Expenses above per diem on ${data.date.format("YYYY-MM-DD")} in ${data.city}, ${data.state}`);
   };
 
 }
