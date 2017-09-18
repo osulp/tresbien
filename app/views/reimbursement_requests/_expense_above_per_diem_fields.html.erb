@@ -1,21 +1,15 @@
 <tr class="nested-fields above-per-diem" data-table-name="expense-above-per-diem">
   <td>
+    <span class='date'><%= f.object.from_date.nil? ? '' : f.object.from_date.strftime("%Y-%m-%d") %></span>
     <%= f.input :expense_type_id, input_html: { value: ExpenseType.above_per_diem.pluck(:id).first }, wrapper_html: {class: "hidden" } %>
-    <%= f.input :from_date, as: :date_picker, label: false, input_html: { class: "from-date" }, wrapper_html: { class: "hidden" } %>
-    <%= f.input :to_date, as: :date_picker, label: false, input_html: { class: "to-date", readonly: true } %>
+    <%= f.input :from_date, as: :hidden, input_html: { class: 'from-date' } %>
+    <%= f.input :to_date, as: :hidden, input_html: { class: 'to-date' } %>
   </td>
-  <td><%= f.input :notes, label: false, as: :string, input_html: { readonly: true }%></td>
-  <td><%= f.input :amount, label: false, input_html: { class: "row-sum-input", readonly: true } %></td>
+  <td><%= f.input :notes, label: false, as: :string, input_html: { class: "notes" }%></td>
   <td>
+    <%= f.input :amount, label: false, input_html: { class: "row-sum-input", readonly: true } %>
     <input type='hidden' class='travel-itinerary-id' />
     <input type='hidden' class='unique-id' />
     <%= f.input :above_per_diem_expense, label: false, input_html: { checked: true }, wrapper_html: { class: "hidden" } %>
-    <%= link_to_remove_association f,
-      class: "btn btn-danger btn-sm",
-      "data-toggle" => 'tooltip',
-      "data-placement" => 'top',
-      title: t('reimbursement_request_form.tooltips.remove_expense_other')  do %>
-      <i class="fa fa-trash-o fa-2x"></i>
-    <% end %>
   </td>
 </tr>

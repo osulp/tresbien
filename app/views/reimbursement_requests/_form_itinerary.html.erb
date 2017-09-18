@@ -6,8 +6,8 @@
     <div class="form-row">
       <div class="col-xl-7 col-lg-8 col-md-12">
         <p>
-        To fill out the meals and hotel rate categories, check the OSU Business Affairs tables for <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_us" target="_blank">Domestic</a> or <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_foreign" target="_blank">International</a> travel, as appropriate. 
-        </p> 
+        To fill out the meals and hotel rate categories, check the OSU Business Affairs tables for <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_us" target="_blank">Domestic</a> or <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_foreign" target="_blank">International</a> travel, as appropriate.
+        </p>
         <p>
         The total amount for a daily itinerary should not exceed the sum of the per diem rate for that city. If your itinerary row total is greater than the corresponding per diem rate, you will be prompted to generate a separate expense row for the extra amount.
         </p>
@@ -38,7 +38,7 @@
         <%= render "travel_itinerary_fields", f: travel_itinerary %>
       <% end %>
     <% end %>
-    <div class="form-row add-row">
+    <div class="form-row add-row hidden">
       <%= link_to_add_association f, :travel_itineraries,
         class: 'btn btn-primary btn-sm',
         id: "add_travel_itinerary",
@@ -53,15 +53,15 @@
       <h4>Expenses Above Per Diem</h4>
       </div>
     </div>
-      <%= render layout: "nested_fields_table", locals: { attributes: ["Date", "Notes", "Amount", ""], id: "expense_above_per_diems", total_class: "other-expenses-total" } do %>
-        <%= f.simple_fields_for :expense_above_per_diems do |expense_other| %>
-          <%= render "expense_above_per_diem_fields", f: expense_other %>
-        <% end %>
+    <%= render layout: "nested_fields_table", locals: { attributes: ["Date", "Notes", "Amount"], id: "expense_above_per_diems", total_class: "other-expenses-total" } do %>
+      <%= f.simple_fields_for :expense_others do |expense_other| %>
+        <%= render "expense_above_per_diem_fields", f: expense_other %>
       <% end %>
-    <div class="form-row add-row">
-      <%= link_to_add_association f, :expense_above_per_diems,
-        class: 'hidden btn btn-primary btn-sm',
-        id: "add_over_per_diem", 
+    <% end %>
+    <div class="form-row add-row hidden">
+      <%= link_to_add_association f, :expense_others,
+        class: 'btn-primary btn-sm',
+        id: "add_over_per_diem",
         'data-association-insertion-node' => '#expense_above_per_diems tbody',
         'data-association-insertion-method' => 'append',
         partial: 'expense_above_per_diem_fields' do %>

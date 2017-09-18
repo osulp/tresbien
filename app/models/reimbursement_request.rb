@@ -10,14 +10,12 @@ class ReimbursementRequest < ApplicationRecord
   has_many :accountings
   has_many :expense_airfares
   has_many :expense_mileages
-  has_many :expense_non_per_diems, -> { where(travel_itinerary_id: nil) }, class_name: 'ExpenseOther'
-  has_many :expense_above_per_diems, -> { where('travel_itinerary_id IS NOT NULL') }, class_name: 'ExpenseOther'
   has_many :expense_others
   has_many :travel_cities
   has_many :travel_itineraries
   has_many :attachments
   has_many :status_comments
-  accepts_nested_attributes_for :accountings, :expense_airfares, :expense_mileages, :expense_others, :expense_non_per_diems, :expense_above_per_diems, :travel_itineraries, :travel_cities, :claimant, :certifier, allow_destroy: true
+  accepts_nested_attributes_for :accountings, :expense_airfares, :expense_mileages, :expense_others, :travel_itineraries, :travel_cities, allow_destroy: true
   validates :certifier_id, presence: true
   validate :includes_travel_city
   validates :business_notes_and_purpose, length: { maximum: 250 }

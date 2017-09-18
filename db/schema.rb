@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912211137) do
+ActiveRecord::Schema.define(version: 20170918180647) do
 
   create_table "accountings", force: :cascade do |t|
     t.string "index"
@@ -80,10 +80,8 @@ ActiveRecord::Schema.define(version: 20170912211137) do
     t.integer "expense_type_id"
     t.integer "reimbursement_request_id"
     t.boolean "above_per_diem_expense", default: false
-    t.integer "travel_itinerary_id"
     t.index ["expense_type_id"], name: "index_expense_others_on_expense_type_id"
     t.index ["reimbursement_request_id"], name: "index_expense_others_on_reimbursement_request_id"
-    t.index ["travel_itinerary_id"], name: "index_expense_others_on_travel_itinerary_id"
   end
 
   create_table "expense_types", force: :cascade do |t|
@@ -158,9 +156,7 @@ ActiveRecord::Schema.define(version: 20170912211137) do
     t.integer "reimbursement_request_id"
     t.string "country"
     t.float "per_diem"
-    t.integer "travel_city_id"
     t.index ["reimbursement_request_id"], name: "index_travel_itineraries_on_reimbursement_request_id"
-    t.index ["travel_city_id"], name: "index_travel_itineraries_on_travel_city_id"
   end
 
   create_table "users", force: :cascade do |t|

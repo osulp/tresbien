@@ -37,22 +37,22 @@ class ItineraryRow {
       let data = this.getRowData(this.element);
       let date = Moment(data.date);
       this.state.above_per_diem_queue.push(Object.assign({}, data, {date}));
-      $('#add_over_per_diem').click(); 
+      $('#add_over_per_diem').click();
       this.element.find('.row-sum-input').val(this.per_diem);
       this.element.find('.sum-input').first().change();
     });
   }
 
   bindSumInput = input => {
-    $(input).on('keyup mouseup change', e => {
+    $(input).on('keyup change', e => {
       this.per_diem = parseFloat(this.element.find('.per-diem-rate').val());
       let row_sum_input = this.element.find('.row-sum-input');
       let sum_inputs = this.element.find('.sum-input');
       let total = Utils.sumInputFloats(sum_inputs);
       this.row_total = total;
       if ($(`input.${this.id}`).length) {
-        $(`input.${this.id}`).parent().prev().find('.row-sum-input').val(Math.max(0, this.row_total - this.per_diem));
-        row_sum_input.val(Math.min(this.per_diem, this.row_total)); 
+        $(`input.${this.id}`).parents('tr').find('.row-sum-input').val(Math.max(0, this.row_total - this.per_diem));
+        row_sum_input.val(Math.min(this.per_diem, this.row_total));
       }
       if (parseFloat(this.element.find('.row-sum-input').val()) > (this.per_diem)) {
         this.element.find('.add-other-expenses').removeClass('hidden');
@@ -80,25 +80,22 @@ class ItineraryRow {
   };
 
   setRowFields = data => {
-    this.element.find('input.datepicker:first').val(data.day.format('YYYY/MM/DD'));
+    this.element.find('input.date').val(data.day.format('YYYY-MM-DD'));
+    this.element.find('.date-label').text(data.day.format('YYYY-MM-DD'));
     this.element.find('.reimbursement_request_travel_itineraries_hotel > input').val(data.hotel_rate).change();
     this.element.find('input.travel-city-id').val(data.travel_city_id);
     this.element.find('input.per-diem-rate').val(data.per_diem);
-    this.element.find('select#countries-of-world').val(data.country).change();
-    this.element.find('select#countries-of-world').show();
-    setTimeout(() => {
-      this.element.find('select#states-of-country').val(data.state).change();
-      setTimeout(() => {
-        this.element.find('select#cities-of-state').val(data.city);
-      }, 1000);
-    }, 1000);
+    this.element.find('input.city').val(data.city);
+    this.element.find('input.country').val(data.country);
+    this.element.find('input.state').val(data.state);
+    this.element.find('.location-label').text(`${data.city}, ${data.state} (${data.country})`);
   };
 
   getRowData = tr => {
-    let date = ($(tr.find('input.date_picker')[0]).val());
-    let country = tr.find('select#countries-of-world').val();
-    let state = tr.find('select#states-of-country').val();
-    let city = tr.find('select#cities-of-state').val();
+    let date = tr.find('input.date').val();
+    let country = tr.find('input.country').val();
+    let state = tr.find('input.state').val();
+    let city = tr.find('input.city').val();
     let travel_itinerary_id = tr.find('input.unique-id').val();
     let amount = this.row_total - this.per_diem;
     return { date, country, state, city, amount, travel_itinerary_id };
