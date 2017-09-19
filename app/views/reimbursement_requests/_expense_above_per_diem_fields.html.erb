@@ -1,4 +1,4 @@
-<tr class="nested-fields above-per-diem" data-table-name="expense-above-per-diem">
+<tr class="nested-fields above-per-diem" data-table-name="expense-other">
   <td>
     <span class='date'><%= f.object.from_date.nil? ? '' : f.object.from_date.strftime("%Y-%m-%d") %></span>
     <%= f.input :expense_type_id, input_html: { value: ExpenseType.above_per_diem.pluck(:id).first }, wrapper_html: {class: "hidden" } %>

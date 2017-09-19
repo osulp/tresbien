@@ -52,7 +52,7 @@ class ItineraryRow {
       this.row_total = total;
       if ($(`input.${this.id}`).length) {
         $(`input.${this.id}`).parents('tr').find('.row-sum-input').val(Math.max(0, this.row_total - this.per_diem));
-        row_sum_input.val(Math.min(this.per_diem, this.row_total));
+        this.row_total = Math.min(this.per_diem, this.row_total);
       }
       if (parseFloat(this.element.find('.row-sum-input').val()) > (this.per_diem)) {
         this.element.find('.add-other-expenses').removeClass('hidden');
@@ -76,7 +76,16 @@ class ItineraryRow {
       if (tooltip_id) {
         $(`#${tooltip_id}`).remove();
       }
+      this.destroy();
     });
+  };
+
+  destroy = () => {
+    let above_per_diem = this.state.above_per_diem_rows.filter(a => a.travel_itinerary_id === this.id)[0];
+    above_per_diem.destroy();
+    this.state.above_per_diem_rows = this.state.above_per_diem_rows.filter(a => a.travel_itinerary_id !== this.id);
+    this.state.itinerary_rows = this.state.itinerary_rows.filter(i => i.id !== this.id);
+    this.element.remove();
   };
 
   setRowFields = data => {
