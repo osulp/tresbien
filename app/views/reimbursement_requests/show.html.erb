@@ -103,7 +103,7 @@
       <h3>Total: <%= number_to_currency(@reimbursement_request.grand_total, precision: 2) %></h3>
     </div>
   </div>
-  <div class="row list-inline">
+  <div class="row list-inline print-hide">
     <% if current_user.can_manage(@reimbursement_request) %>
       <%= link_to("Approve",
         approve_reimbursement_request_path(@reimbursement_request),
