@@ -17,6 +17,8 @@ class TravelItinerary < ApplicationRecord
   private
 
   def calculate_amount
-    self.amount = (self.break.to_f + self.lunch.to_f + self.dinner.to_f + self.hotel.to_f).round(2)
+
+    total = (self.break.to_f + self.lunch.to_f + self.dinner.to_f + self.hotel.to_f).round(2)
+    self.amount = [total, self.per_diem].min
   end
 end

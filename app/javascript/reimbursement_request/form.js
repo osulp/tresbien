@@ -68,12 +68,6 @@ class Form {
           $('tr.travel-itinerary').find(`input.travel-city-id[value="${travel_city_id}"]`).parents('tr').find('.remove_fields').click();
           // reset citiesTravelled to exclude the travel_city_id which was clicked to be removed
           this.clearAndRemoveRow(this.state.city_rows, id, 'id');
-        } else if (itemToBeRemoved.hasClass('travel-itinerary')) {
-          let travel_itinerary_id = $(itemToBeRemoved).find('input.unique-id').val();
-          $('tr.above-per-diem').find(`input.${travel_itinerary_id}`).parents('tr').find('.remove_fields').click();
-          this.clearAndRemoveRow(this.state.itinerary_rows, id, 'id');
-        } else if (itemToBeRemoved.hasClass('above-per-diem')) {
-          this.clearAndRemoveRow(this.state.above_per_diem_rows, id, 'id');
         } else {
           this.clearAndRemoveRow(this.state.basic_rows, id, 'id');
         }

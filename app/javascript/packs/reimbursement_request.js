@@ -19,14 +19,16 @@ const initialState = observable({
     return this.basic_rows.filter(r => r.table_name === 'expense-airfare').map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
   },
   get expense_other_total() {
-    return this.basic_rows.filter(r => r.table_name === 'expense-other').map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
+    let basic_rows_total = this.basic_rows.filter(r => r.table_name === 'expense-other').map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
+    return this.above_per_diem_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0) + basic_rows_total;
   },
   get expense_mileage_total() {
     return this.basic_rows.filter(r => r.table_name === 'expense-mileage').map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
   },
   get grand_total() {
     let itineraries_total = this.itinerary_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
-    return this.basic_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0) + itineraries_total;
+    let above_per_diem_total = this.above_per_diem_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
+    return this.basic_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0) + itineraries_total + above_per_diem_total;
   }
 });
 

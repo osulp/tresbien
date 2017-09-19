@@ -18,14 +18,15 @@ class AbovePerDiemRow {
     });
     this.row_total = parseFloat(this.element.find('.row-sum-input').val()).toFixed(2);
     autorun(() => this.element.find('.row-sum-input').val(this.row_total));
-    this.element.find('.row-sum-input').change();
     if (data) {
       this.setRowFields(data);
+      this.travel_itinerary_id = data.travel_itinerary_id;
     }
+    this.element.find('.row-sum-input').change();
   }
 
   bindRowSumInput = input => {
-    $(input).on('keyup mouseup change', e => {
+    $(input).on('keyup change', e => {
       let row_sum_input = this.element.find('.row-sum-input');
       let total = Utils.sumInputFloats(row_sum_input);
       this.row_total = total;
@@ -39,6 +40,10 @@ class AbovePerDiemRow {
         $(`#${tooltip_id}`).remove();
       }
     });
+  };
+
+  destroy = () => {
+    this.element.remove();
   };
 
   setRowFields = data => {

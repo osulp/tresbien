@@ -4,7 +4,7 @@
       <h3><%= t('reimbursement_request_form.headers.other_expenses')%></h3>
     </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["Expense Type", "From", "To", "Notes", "Amount", ""], id: "other_expenses", total_class: "other-expenses-total" } do %>
-      <%= f.simple_fields_for :expense_others do |expense_other| %>
+      <%= f.simple_fields_for :expense_others, f.object.expense_others.not_above_per_diem do |expense_other| %>
         <%= render "expense_other_fields", f: expense_other %>
       <% end %>
     <% end %>

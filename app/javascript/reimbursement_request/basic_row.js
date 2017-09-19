@@ -22,7 +22,7 @@ class BasicRow {
   }
 
   bindRowSumInput = input => {
-    $(input).on('keyup mouseup change', e => {
+    $(input).on('keyup change', e => {
       let row_sum_input = this.element.find('.row-sum-input');
       let total = Utils.sumInputFloats(row_sum_input);
       this.row_total = total;
