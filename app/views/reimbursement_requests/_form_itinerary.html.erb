@@ -4,12 +4,9 @@
       <h3><%= t('reimbursement_request_form.headers.cities_travelled') %></h3>
     </div>
     <div class="form-row">
-      <div class="col-xl-7 col-lg-8 col-md-12">
+      <div class="col-xl-7 col-lg-8 col-md-12 alert alert-info">
         <p>
-        To fill out the meals and hotel rate categories, check the OSU Business Affairs tables for <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_us" target="_blank">Domestic</a> or <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_foreign" target="_blank">International</a> travel, as appropriate.
-        </p>
-        <p>
-        The total amount for a daily itinerary should not exceed the sum of the per diem rate for that city. If your itinerary row total is greater than the corresponding per diem rate, you will be prompted to generate a separate expense row for the extra amount.
+        You can find your maximum daily meal and hotel rates by checking the business affairs tables for <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_us" target="_blank">domestic</a> or <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_foreign" target="_blank">international</a> travel. If you require reimbursement above the maximum rate on any given day, you will be prompted to generate an expense row for the extra amount.
         </p>
       </div> </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "Location", "Meals Daily Rate", "Hotel Daily Rate", "Per Diem Rate", ""], id: "cities_travelled" } do %>

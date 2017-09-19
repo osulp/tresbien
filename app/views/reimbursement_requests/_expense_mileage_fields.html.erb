@@ -22,7 +22,7 @@
   <td><%= f.input :miles, label: false %></td>
   <td><%= f.input :round_trip, label: false, input_html: { class: "round-trip-checkbox" }  %></td>
   <td><%= f.input :notes, label: false, as: :string %></td>
-  <td><%= f.input :amount, label: false, input_html: { class: "row-sum-input" } %></td>
+  <td><%= f.input :amount, label: false, input_html: { class: "row-sum-input", readonly: true} %></td>
   <td>
     <input type='hidden' class='unique-id' />
     <%= link_to_remove_association f,

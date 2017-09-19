@@ -30,6 +30,7 @@ class MileageRow extends BasicRow {
       } else {
         row_sum_input.val(0);
       }
+      row_sum_input.change();
     });
   };
 }
