@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :validate_user, except: %i[set_id update]
   before_action :require_fields, only: [:update]
-  before_action :set_user
+  before_action :set_fields
 
   def set_id; end
 
@@ -29,11 +29,12 @@ class UsersController < ApplicationController
     redirect_to user_set_id_path unless flash[:error].nil?
   end
 
-  def set_user
+  def set_fields
     @user = User.find(current_user.id)
+    @organizations = Organization.all.sort_by(&:name)
   end
 
   def user_params
-    params.require(:user).permit(:osu_id, :activity_code)
+    params.require(:user).permit(:osu_id, :activity_code, :organization_id)
   end
 end

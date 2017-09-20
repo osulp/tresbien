@@ -6,7 +6,7 @@ class User < ApplicationRecord
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :trackable, :validatable
   devise :cas_authenticatable
-  belongs_to :organization
+  belongs_to :organization, optional: true
   validates :username, presence: true
   validates :email, presence: true
 
@@ -15,7 +15,7 @@ class User < ApplicationRecord
   end
 
   def required_fields?
-    !osu_id.blank? && !activity_code.blank?
+    !osu_id.blank? && !activity_code.blank? && !organization.nil?
   end
 
   def full_name_label
