@@ -7,3 +7,4 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 ExpenseType.create name: 'Above Per Diem'
+Organization.create name: 'The Valley Library', organization_code: '112010', program_code: '30001'
