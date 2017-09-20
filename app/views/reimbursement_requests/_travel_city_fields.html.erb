@@ -7,8 +7,7 @@
   <td><%= f.input :per_diem, label: false, input_html: { readonly: true, class: "row-sum-input" } %></td>
   <td>
     <div class="travel-city-controls">
-      <%= f.input :id, as: :hidden, wrapper: false, input_html: { class: "travel-city-id" } %>
-      <input type='hidden' class='unique-id' />
+      <%= f.input_field :client_id, as: :hidden, class: 'client-id' %>
       <a class='add-itineraries btn btn-primary btn-sm' data-toggle='tooltip' data-placement='top' title='<%= t('reimbursement_request_form.tooltips.add_daily_itineraries') %>' href='#'>
         <i class="fa fa-calendar-plus-o fa-2x"></i>
       </a>
@@ -22,3 +21,5 @@
     </div>
   </td>
 </tr>
+<%= f.input_field :_destroy, as: :hidden, class: 'destroy', value:'false' %>
+<%= f.input_field :id, as: :hidden %>

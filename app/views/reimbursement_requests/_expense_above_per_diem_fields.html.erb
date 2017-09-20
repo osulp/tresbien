@@ -1,4 +1,4 @@
-<tr class="nested-fields above-per-diem" data-table-name="expense-other">
+<tr class="nested-fields above-per-diem " data-table-name="expense-other">
   <td>
     <span class='date'><%= f.object.from_date.nil? ? '' : f.object.from_date.strftime("%Y-%m-%d") %></span>
     <%= f.input :expense_type_id, input_html: { value: ExpenseType.above_per_diem.pluck(:id).first }, wrapper_html: {class: "hidden" } %>
@@ -8,8 +8,9 @@
   <td><%= f.input :notes, label: false, as: :string, input_html: { class: "notes" }%></td>
   <td>
     <%= f.input :amount, label: false, input_html: { class: "row-sum-input", readonly: true } %>
-    <input type='hidden' class='travel-itinerary-id' />
+    <%= f.input :client_id, as: :hidden, input_html: { class: "client-id" } %>
     <input type='hidden' class='unique-id' />
     <%= f.input :above_per_diem_expense, label: false, input_html: { checked: true }, wrapper_html: { class: "hidden" } %>
   </td>
 </tr>
+<%= f.input_field :_destroy, as: :hidden, class: 'destroy', value:'false' %>
