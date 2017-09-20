@@ -10,11 +10,10 @@ class ItineraryRow {
     this.form = form;
     this.element = $(element);
     this.table_name = this.element.data('table-name');
+    this.destroy_element = this.element.next('.destroy');
     this.state = state;
     this.button = this.element.find('.add-other-expenses');
     this.per_diem = parseFloat(this.element.find('.per-diem-rate').val());
-    this.element.find('.unique-id').val(this.id);
-    this.element.find('.sum-input').each((i, input) => this.bindSumInput(input));
     this.element.find('[data-toggle="tooltip"]').tooltip();
     this.element.parents('.table').show();
     this.bindRemove(this.element.find('.remove_fields'));
@@ -23,13 +22,14 @@ class ItineraryRow {
       row_total: 0
     });
     autorun(() => this.element.find('.row-sum-input').val(this.row_total));
-    this.element.find('.sum-input:first').change();
-
     if (data) {
       this.setRowFields(data);
     }
+    this.element.find('.sum-input').each((i, input) => this.bindSumInput(input));
     this.element.find('.sum-input').first().change();
   }
+
+  client_id = () => this.element.find('.client-id').val()
 
   bindClick = button => {
     button.on('click', e => {
@@ -50,8 +50,9 @@ class ItineraryRow {
       let sum_inputs = this.element.find('.sum-input');
       let total = Utils.sumInputFloats(sum_inputs);
       this.row_total = total;
-      if ($(`input.${this.id}`).length) {
-        $(`input.${this.id}`).parents('tr').find('.row-sum-input').val(Math.max(0, this.row_total - this.per_diem));
+      let above_per_diem_row = this.abovePerDiemRow();
+      if(above_per_diem_row.length > 0) {
+        above_per_diem_row.find('.row-sum-input').val(Math.max(0, this.row_total - this.per_diem));
         this.row_total = Math.min(this.per_diem, this.row_total);
       }
       if (parseFloat(this.element.find('.row-sum-input').val()) > (this.per_diem)) {
@@ -70,6 +71,15 @@ class ItineraryRow {
     });
   };
 
+  abovePerDiemRow = () => {
+    let data = this.getRowData(this.element);
+    return $('#expense_above_per_diems')
+      .find(`.from-date[value^="${data.date}"]`)
+      .parents('tr')
+      .find(`input.client-id[value="${this.client_id()}"]`)
+      .parents('tr');
+  }
+
   bindRemove = button => {
     button.on('click', () => {
       let tooltip_id = button.attr('aria-describedby');
@@ -81,11 +91,14 @@ class ItineraryRow {
   };
 
   destroy = () => {
-    let above_per_diem = this.state.above_per_diem_rows.filter(a => a.travel_itinerary_id === this.id)[0];
-    above_per_diem.destroy();
-    this.state.above_per_diem_rows = this.state.above_per_diem_rows.filter(a => a.travel_itinerary_id !== this.id);
+    let data = this.getRowData(this.element);
+    let above_per_diems = this.state.above_per_diem_rows.filter(a => a.client_id() === this.client_id() && Moment(a.date()).isSame(Moment(data.date)));
+    if (above_per_diems.length) {
+      above_per_diems[0].destroy();
+    }
     this.state.itinerary_rows = this.state.itinerary_rows.filter(i => i.id !== this.id);
     this.element.remove();
+    this.destroy_element.val('true');
   };
 
   setRowFields = data => {
@@ -97,6 +110,7 @@ class ItineraryRow {
     this.element.find('input.city').val(data.city);
     this.element.find('input.country').val(data.country);
     this.element.find('input.state').val(data.state);
+    this.element.find('input.client-id').val(data.client_id);
     this.element.find('.location-label').text(`${data.city}, ${data.state} (${data.country})`);
   };
 
@@ -105,9 +119,9 @@ class ItineraryRow {
     let country = tr.find('input.country').val();
     let state = tr.find('input.state').val();
     let city = tr.find('input.city').val();
-    let travel_itinerary_id = tr.find('input.unique-id').val();
+    let client_id = this.client_id();
     let amount = this.row_total - this.per_diem;
-    return { date, country, state, city, amount, travel_itinerary_id };
+    return { date, country, state, city, amount, client_id };
   }
 }
 

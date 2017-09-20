@@ -19,14 +19,16 @@ class Form {
       this.element = $(selector);
       this.state = state;
       this.bindCocoonEvents();
-      $('tr.travel-city').each((i, element) => {
-        this.state.city_rows.push(new CityRow(this, element, this.state));
+      // Should be executed prior to the travel-itinerary rows
+      $('tr.above-per-diem').each((i, element) => {
+        this.state.above_per_diem_rows.push(new AbovePerDiemRow(this, element, this.state));
       });
+      // Should be executed prior to travel-city rows
       $('tr.travel-itinerary').each((i, element) => {
         this.state.itinerary_rows.push(new ItineraryRow(this, element, this.state));
       });
-      $('tr.above-per-diem').each((i, element) => {
-        this.state.above_per_diem_rows.push(new AbovePerDiemRow(this, element, this.state));
+      $('tr.travel-city').each((i, element) => {
+        this.state.city_rows.push(new CityRow(this, element, this.state));
       });
       $('tr.mileage').each((i, element) => {
         this.state.basic_rows.push(new MileageRow(this, element, this.state));
@@ -61,15 +63,9 @@ class Form {
   bindCocoonEvents = () => {
     $(document)
       .on('cocoon:before-remove', '.table', (e, itemToBeRemoved) => {
-        let id = $(itemToBeRemoved).find('.unique-id').val();
-        if (itemToBeRemoved.hasClass('travel-city')) {
-          let travel_city_id = $(itemToBeRemoved).find('input.travel-city-id').prop('id');
-          // find all of the travel itineraries related to this city and remove them
-          $('tr.travel-itinerary').find(`input.travel-city-id[value="${travel_city_id}"]`).parents('tr').find('.remove_fields').click();
-          // reset citiesTravelled to exclude the travel_city_id which was clicked to be removed
-          this.clearAndRemoveRow(this.state.city_rows, id, 'id');
-        } else {
-          this.clearAndRemoveRow(this.state.basic_rows, id, 'id');
+        if (!itemToBeRemoved.hasClass('travel-city') && !itemToBeRemoved.hasClass('travel-itinerary')) {
+          let id = $(itemToBeRemoved).find('.unique-id').val();
+          this.state.basic_rows = this.basic_rows.filter(b => b.id !== id);
         }
         if (itemToBeRemoved.parents(".table").find("tbody tr").length <= 1) {
           itemToBeRemoved.parents(".table").hide();
@@ -94,14 +90,6 @@ class Form {
           this.state.basic_rows.push(new BasicRow(this, itemInserted, this.state));
         }
       });
-  };
-
-  clearAndRemoveRow = (state_collection, id, comparison_field) => {
-    let row = state_collection.find(c => c[comparison_field] === id);
-    if (row.row_total !== undefined) {
-      row.row_total = 0;
-    }
-    state_collection = state_collection.filter(c => c[comparison_field] !== id);
   };
 
   bindDateTimePicker = element => {

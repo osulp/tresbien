@@ -11,19 +11,24 @@ class CityRow {
     this.element = $(element);
     this.element.find('.unique-id').val(this.id);
     this.element.find('[data-toggle="tooltip"]').tooltip();
-    this.travel_city_id = this.element.find('.travel-city-id').attr('id');
     this.table_name = this.element.data('table-name');
+    this.destroy_element = this.element.next('.destroy');
     this.element.parents('.table').show();
     this.state = state;
-    this.element.find('.sum-input').each((i, input) => this.bindSumInput(input));
     this.bindClick(this.element.find('.add-itineraries'));
     this.bindRemove(this.element.find('.remove_fields'));
+    if (this.client_id() == '' || this.client_id() == 0) {
+      this.element.find('.client-id').val(this.id);
+    }
     extendObservable(this, {
       row_total: 0
     });
     autorun(() => this.element.find('.row-sum-input').val(this.row_total));
+    this.element.find('.sum-input').each((i, input) => this.bindSumInput(input));
     this.element.find('.sum-input').change();
   }
+
+  client_id = () => this.element.find('.client-id').val()
 
   bindSumInput = input => {
     $(input).on('keyup mouseup change', e => {
@@ -43,8 +48,8 @@ class CityRow {
     button.on('click', e => {
       e.preventDefault();
       let data = this.getRowData(this.element);
-      if (this.state.itinerary_rows.find(c => c.travel_city_id == data.travel_city_id)) {
-        console.log(`Travel City Itineraries ${data.travel_city_id} already added to form.`);
+      if (this.state.itinerary_rows.find(c => c.client_id() == data.client_id)) {
+        console.log(`Travel City Itineraries ${data.client_id} already added to form.`);
       } else {
         let from_date = Moment(data.from_date);
         let to_date = Moment(data.to_date);
@@ -72,7 +77,16 @@ class CityRow {
       if (tooltip_id) {
         $(`#${tooltip_id}`).remove();
       }
+      this.destroy();
     });
+  };
+
+  destroy = () => {
+    let itinerary_rows = this.state.itinerary_rows.filter(i => i.client_id() === this.client_id());
+    itinerary_rows.forEach(i => i.destroy());
+    this.state.city_rows = this.state.city_rows.filter(i => i.id !== this.id);
+    this.element.remove();
+    this.destroy_element.val('true');
   };
 
   getRowData = tr => {
@@ -82,9 +96,9 @@ class CityRow {
     let state = tr.find('select#states-of-country').val();
     let city = tr.find('select#cities-of-state').val();
     let hotel_rate = tr.find('.reimbursement_request_travel_cities_hotel_rate > input').val();
-    let travel_city_id = tr.find('input.travel-city-id').prop('id');
     let per_diem = tr.find('.reimbursement_request_travel_cities_per_diem > input').val();
-    return { from_date, to_date, state, city, hotel_rate, per_diem, travel_city_id, country };
+    let client_id = this.client_id();
+    return { from_date, to_date, state, city, hotel_rate, per_diem, client_id, country };
   };
 }
 

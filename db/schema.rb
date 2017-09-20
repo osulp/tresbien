@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170920173410) do
+ActiveRecord::Schema.define(version: 20170920200222) do
 
   create_table "accountings", force: :cascade do |t|
     t.string "index"
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(version: 20170920173410) do
     t.string "country"
     t.string "meals"
     t.string "per_diem"
+    t.string "client_id"
     t.index ["reimbursement_request_id"], name: "index_travel_cities_on_reimbursement_request_id"
   end
 
@@ -189,6 +190,7 @@ ActiveRecord::Schema.define(version: 20170920173410) do
     t.string "osu_id"
     t.integer "organization_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["organization_id"], name: "index_users_on_organization_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 

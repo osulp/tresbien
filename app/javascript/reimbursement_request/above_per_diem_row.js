@@ -7,8 +7,8 @@ class AbovePerDiemRow {
     this.form = form;
     this.element = $(element);
     this.table_name = this.element.data('table-name');
+    this.destroy_element = this.element.next('.destroy');
     this.state = state;
-    this.element.find('.row-sum-input').each((i, input) => this.bindRowSumInput(input));
     this.element.find('.unique-id').val(this.id);
     this.element.find('[data-toggle="tooltip"]').tooltip();
     this.element.parents('.table').show();
@@ -20,10 +20,13 @@ class AbovePerDiemRow {
     autorun(() => this.element.find('.row-sum-input').val(this.row_total));
     if (data) {
       this.setRowFields(data);
-      this.travel_itinerary_id = data.travel_itinerary_id;
     }
+    this.element.find('.row-sum-input').each((i, input) => this.bindRowSumInput(input));
     this.element.find('.row-sum-input').change();
   }
+
+  client_id = () => this.element.find('.client-id').val()
+  date = () => this.element.find('.from-date').val()
 
   bindRowSumInput = input => {
     $(input).on('keyup change', e => {
@@ -39,22 +42,24 @@ class AbovePerDiemRow {
       if (tooltip_id) {
         $(`#${tooltip_id}`).remove();
       }
+      this.destroy();
     });
   };
 
   destroy = () => {
     this.element.remove();
+    this.destroy_element.val('true');
+    this.state.above_per_diem_rows = this.state.above_per_diem_rows.filter(a => a.id !== this.id);
   };
 
   setRowFields = data => {
     this.element.find('.date').text(data.date.format("YYYY-MM-DD"));
     this.element.find('input.from-date').val(data.date.format("YYYY-MM-DD"));
     this.element.find('input.to-date').val(data.date.format("YYYY-MM-DD"));
-    this.element.find('input.travel-itinerary-id').addClass(data.travel_itinerary_id);
     this.element.find('input.row-sum-input').val(data.amount);
     this.element.find('input.notes').val(`Expenses above per diem on ${data.date.format("YYYY-MM-DD")} in ${data.city}, ${data.state}`);
+    this.element.find('.client-id').val(data.client_id);
   };
-
 }
 
 export default AbovePerDiemRow;

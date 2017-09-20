@@ -14,8 +14,7 @@
   <td><%= f.input :amount, label: false, error_html: {}, input_html: { readonly: true, class: "row-sum-input" } %></td>
   <td>
     <%= f.input :per_diem, as: :hidden, label: false, input_html: { class: "per-diem-rate" } %>
-    <input type='hidden' class='travel-city-id' />
-    <input type='hidden' class='unique-id' />
+    <%= f.input_field :client_id, as: :hidden, class: 'client-id' %>
     <a class='add-other-expenses btn btn-primary btn-sm hidden' data-toggle='tooltip' data-placement='top' title='<%= t('reimbursement_request_form.tooltips.generate_other_expense') %>' href='#'>
       <i class="fa fa-plus fa-2x"></i>
     </a>
@@ -28,3 +27,4 @@
     <% end %>
   </td>
 </tr>
+<%= f.input_field :_destroy, as: :hidden, class: 'destroy', value:'false' %>
