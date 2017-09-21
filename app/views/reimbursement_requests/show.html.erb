@@ -14,17 +14,18 @@
       <%= render partial: "show_table",
         locals: {
           title: "Cities",
-          attributes: ["from_date", "to_date", "country", "state", "city", "hotel_rate"],
+          attributes: ["from_date", "to_date", "location", "hotel_rate"],
           objects: @reimbursement_request.travel_cities, id: "travel-cities",
           functions: {
             "from_date" => lambda do |obj| get_simple_date(obj['from_date']) end,
             "to_date" => lambda do |obj| get_simple_date(obj['to_date']) end,
+            "location" => lambda do |obj| "#{obj['city']}, #{obj['state']} (#{obj['country']})" end,
             "hotel_rate" => lambda do |obj| number_to_currency(obj['hotel_rate'], precision: 2) end
           }
       } %>
       <%= render partial: "show_table",
         locals: {
-          title: "Daily Itineraries", attributes: ["date", "country", "state", "city", "break", "lunch", "dinner", "hotel", "amount"],
+          title: "Daily Itineraries", attributes: ["date", "location", "break", "lunch", "dinner", "hotel", "amount"],
           objects: @reimbursement_request.travel_itineraries, id: "travel-itineraries",
           functions: {
             "date" => lambda do |obj| get_simple_date(obj['date']) end,
@@ -32,6 +33,7 @@
             "lunch" => lambda do |obj| number_to_currency(obj['lunch'], precision: 2) end,
             "dinner" => lambda do |obj| number_to_currency(obj['dinner'], precision: 2) end,
             "hotel" => lambda do |obj| number_to_currency(obj['hotel'], precision: 2) end,
+            "location" => lambda do |obj| "#{obj['city']}, #{obj['state']} (#{obj['country']})" end,
             "amount" => lambda do |obj| number_to_currency(obj['amount'], precision: 2) end
           }
       } %>
