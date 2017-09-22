@@ -58,6 +58,7 @@ RailsAdmin.config do |config|
         field :organization do
           label 'Organization'
         end
+
         field :admin
         field :certifier
       end
