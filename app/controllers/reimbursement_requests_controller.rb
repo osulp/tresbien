@@ -123,8 +123,8 @@ class ReimbursementRequestsController < ApplicationController
   private
 
   def attach_files
-    params[:reimbursement_request][:file_attachments]&.each do |file|
-      @reimbursement_request.attachments.create(attachment: file)
+    params[:file_ids]&.each do |id|
+      @reimbursement_request.attachments << Attachment.find(id)
     end
   end
 
@@ -148,7 +148,6 @@ class ReimbursementRequestsController < ApplicationController
       :address,
       :status_comment,
       :status,
-      file_attachments: [],
       accountings_attributes: %i[id index fund organization account program activity amount _destroy],
       expense_airfares_attributes: %i[id from_date to_date from_location to_location notes amount _destroy],
       expense_mileages_attributes: %i[id from_date to_date from_city from_state to_city to_state miles round_trip notes amount _destroy],

@@ -14,3 +14,4 @@ require('./tooltips');
 require('./reimbursement_request');
 require('./home_table_filters');
 require('./purpose');
+require('./dropzone');

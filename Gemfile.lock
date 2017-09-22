@@ -156,6 +156,8 @@ GEM
     devise_cas_authenticatable (1.10.2)
       devise (>= 1.2.0)
       rubycas-client (>= 2.2.1)
+    dropzonejs-rails (0.8.1)
+      rails (> 3.1)
     equalizer (0.0.11)
     erubi (1.6.1)
     execjs (2.7.0)
@@ -392,6 +394,7 @@ DEPENDENCIES
   devise
   devise-guests (~> 0.5)
   devise_cas_authenticatable
+  dropzonejs-rails
   fasterer
   fastri
   font-awesome-rails

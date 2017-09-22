@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   get 'user/set_id', to: 'users#set_id'
   patch 'user/update', to: 'users#update'
+  post 'files/upload', to: 'files#upload'
 
   resources :reimbursement_requests do
     post 'comment', to: 'reimbursement_requests#comment'

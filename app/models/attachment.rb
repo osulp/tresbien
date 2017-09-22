@@ -1,5 +1,6 @@
 class Attachment < ApplicationRecord
-  belongs_to :reimbursement_request
+  # reimbursement_request is optional as the file uploading is asynch and happens prior to creating the reimbursement request
+  belongs_to :reimbursement_request, optional: true
 
   # has_attached_file :attachments,
   #                   path: "rails_root/public/attachments/:id/:filename",

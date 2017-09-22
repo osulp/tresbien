@@ -5,14 +5,13 @@
     </div>
     <div class="form-row">
     <div class="alert alert-info" role="alert">
-      <p>Attach all of your files at once. Only the files listed next to the 'Choose Files' button will be saved.</p>
       <p>If you are a non resident alien, please attach your <strong>I-94</strong> to this reimbursement request.<br>
         Please email your business office for more details.
       </p>
       </div>
     </div>
     <div class="form-row">
-      <%= f.input 'file_attachments', as: :file, label: false,  input_html:{multiple: true, class: "attachment"} %>
+      <div id="file_uploader" class="dropzone"></div>
     </div>
   </div>
 </div>
