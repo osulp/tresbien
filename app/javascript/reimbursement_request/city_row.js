@@ -26,6 +26,10 @@ class CityRow {
     autorun(() => this.element.find('.row-sum-input').val(this.row_total));
     this.element.find('.sum-input').each((i, input) => this.bindSumInput(input));
     this.element.find('.sum-input').change();
+
+    if (this.state.itinerary_rows.find(c => c.client_id() == this.client_id())) {
+      this.element.find('.add-itineraries').addClass('hidden');
+    }
   }
 
   client_id = () => this.element.find('.client-id').val()
