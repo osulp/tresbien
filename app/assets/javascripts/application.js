@@ -18,6 +18,7 @@
 //= require cocoon
 //= require jquery.datetimepicker.full.min.js
 //= require jquery_nested_form
+//= require dropzone
 
 // Make sure this is always last
 //= require_tree .
