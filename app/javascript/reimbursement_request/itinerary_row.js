@@ -104,6 +104,7 @@ class ItineraryRow {
   setRowFields = data => {
     this.element.find('input.date').val(data.day.format('YYYY-MM-DD'));
     this.element.find('.date-label').text(data.day.format('YYYY-MM-DD'));
+    this.element.find('.sum-input').each((i, input) => $(input).val(0));
     this.element.find('.reimbursement_request_travel_itineraries_hotel > input').val(data.hotel_rate).change();
     this.element.find('input.travel-city-id').val(data.travel_city_id);
     this.element.find('input.per-diem-rate').val(data.per_diem);

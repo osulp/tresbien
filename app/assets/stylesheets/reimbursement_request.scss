@@ -89,6 +89,20 @@
           .form-group {
             margin-bottom: 0px;
           }
+          .boolean {
+            div.checkbox {
+              padding: 0px;
+              width: 100%;
+              label {
+                width: 100%;
+                input {
+                  height: 20px;
+                  width: 100%;
+                  margin: 7px 0px;
+                }
+              }
+            }
+          }
         }
       }
     }
