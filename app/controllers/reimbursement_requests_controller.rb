@@ -44,9 +44,7 @@ class ReimbursementRequestsController < ApplicationController
         submit_request
         certify_request
       end
-      params[:attachments]&.each do |file|
-        @reimbursement_request.attachments.create(attachment: file)
-      end
+      attach_files
       redirect_to reimbursement_request_path(@reimbursement_request)
     else
       render :new
@@ -69,6 +67,7 @@ class ReimbursementRequestsController < ApplicationController
         old_status == 'draft' ? certify_request : resubmit_request
         submit_request
       end
+      attach_files
       redirect_to @reimbursement_request, notice: 'Your reimbursement request was updated.'
     else
       render :edit
@@ -122,6 +121,12 @@ class ReimbursementRequestsController < ApplicationController
   end
 
   private
+
+  def attach_files
+    params[:reimbursement_request][:file_attachments]&.each do |file|
+      @reimbursement_request.attachments.create(attachment: file)
+    end
+  end
 
   def reimbursement_request_params
     params.require(:reimbursement_request).permit(
