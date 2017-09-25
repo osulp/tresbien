@@ -3,7 +3,7 @@
     <div class="form-row">
       <h3><%= t('reimbursement_request_form.headers.accounting')%></h3>
     </div>
-<%= render layout: "nested_fields_table", locals: { attributes: ["Index", "Fund", "Account", "Activity", "Amount"], id: "accountings", total_class: "accountings-total" } do %>      <%= f.simple_fields_for :accountings do |accounting| %>
+<%= render layout: "nested_fields_table", locals: { attributes: ["Index", "Account", "Amount"], id: "accountings", total_class: "accountings-total" } do %>      <%= f.simple_fields_for :accountings do |accounting| %>
         <%= render "accounting_fields", f: accounting %>
       <% end %>
     <% end %>

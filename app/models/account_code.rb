@@ -1,0 +1,2 @@
+class AccountCode < ApplicationRecord
+end

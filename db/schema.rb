@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170920200222) do
+ActiveRecord::Schema.define(version: 20170925165957) do
+
+  create_table "account_codes", force: :cascade do |t|
+    t.string "name"
+    t.string "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "accountings", force: :cascade do |t|
     t.string "index"
@@ -96,6 +103,7 @@ ActiveRecord::Schema.define(version: 20170920200222) do
     t.string "organization_code"
     t.string "program_code"
     t.string "name"
+    t.string "fund"
   end
 
   create_table "reimbursement_requests", force: :cascade do |t|
