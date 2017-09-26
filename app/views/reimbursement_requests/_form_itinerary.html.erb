@@ -7,7 +7,10 @@
       <div class="alert alert-info" role="alert">
         <strong>Please note</strong>
         <p>
-        You can find your maximum daily meal and hotel rates by checking the business affairs tables for <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_us" target="_blank">domestic</a> or <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_foreign" target="_blank">international</a> travel. If you require reimbursement above the maximum rate on any given day, you will be prompted to generate an expense row for the extra amount.
+        You can find your maximum daily meal and hotel rates by checking the business affairs tables for <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_us" target="_blank">domestic</a> or <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_foreign" target="_blank">international</a> travel. 
+        </p>
+        <p>
+        You can claim up to the sum of the meal daily rate and hotel daily rate each day. If you require reimbursement above the maximum rate on any given day, you can claim the extra amount separately.
         </p>
       </div>
     </div>
@@ -47,9 +50,15 @@
         <span><%= t('reimbursement_request_form.buttons.add_daily_itinerary') %></span>
       <% end %>
     </div>
-    <div class="form-row">
-      <div class="col">
-      <h4>Expenses Above Per Diem</h4>
+    <div class="form-row justify-content-left">
+      <div class="col-auto">
+        <h4>Expenses Above Per Diem</h4>
+      </div>
+      <div class="col-8 alert alert-warning alert-dismissible alert-inline fade hidden" role="alert">
+        If you need reimbursement above per diem, you should explain why in the business notes and purpose
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
     </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["Date", "Notes", "Amount"], id: "expense_above_per_diems", total_class: "other-expenses-total" } do %>

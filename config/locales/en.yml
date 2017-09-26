@@ -34,7 +34,7 @@ en:
   reimbursement_request_form:
     tooltips:
       add_daily_itineraries: "Add Daily Itineraries"
-      generate_other_expense: "Generate Other Expense Row"
+      generate_other_expense:  "Claim extra amount in another row"
       remove_accounting: "Remove an Accounting Line"
       remove_airfare: "Removes an Airfare Line"
       remove_expense_other: "Remove Other Expense Line"

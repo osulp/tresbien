@@ -3,7 +3,6 @@
   padding-top: 0px;
   padding-bottom: 0px;
   padding-right: 0px;
-  border-bottom: 3px solid $black;
   .logo {
     transition: all .75s 0.25s;
     padding: 3px;
@@ -40,6 +39,9 @@
       color: $white;
       cursor: pointer;
     }
+  }
+  p {
+    color: $white;
   }
   .navbar-toggler {
     margin-right: 25px;

@@ -193,6 +193,20 @@
       max-width: 200px;
     }
   }
+  .form-row {
+    h4 {
+      padding-right: 2rem;
+    }
+    .alert-inline {
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+      justify-content: space-between;
+      button.close {
+        position: static; 
+      }
+    }
+  }
 }
 
 @media print {
@@ -237,9 +251,62 @@
     font-weight: bold;
   }
   .reimbursement_request_business_notes_and_purpose {
+    .notes-warning {
+      display: none;
+      &.show {
+        display: inline-block;
+        opacity: 100;
+        animation-duration: .8s;
+        animation-name: popup;
+        margin-left: .5rem;
+      }
+      &.hidden {
+        display: inline-block;
+        opacity: 0;
+        animation-duration: .8s;
+        animation-name: popout;
+      }
+      .slideout {
+        font-size: $font-size-base;
+        font-family: $font-family-base;
+        font-weight: normal;
+        margin-left: .5rem;
+      }
+    }
     .help-block {
       font-size: 14px;
       color: #aaa;
     }
+    .form-control.text {
+      &.warn {
+        box-shadow: 0px 0px 1px 1px $bs-orange;
+      }
+    }
+  }
+}
+
+@keyframes popup {
+  from {
+    transform: scale(0.2, 0.2);
+  }
+
+  50% {
+    transform: scale(1.2, 1.2);
+  }
+
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes popout {
+  from {
+    transform: scale(1, 1);
+    opacity: 100;
+  }
+
+  to {
+    transform: scale(.2, .2);
+    opacity: 0;
   }
 }

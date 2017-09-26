@@ -9,7 +9,7 @@
         <p>Only fill this out if you bought your own plane ticket.</p>
       </div>
     </div>
-    <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "From Airport", "To Airport", "Notes", "Amount", ""], id: "airfare", total_class: "airfare-total" } do %>
+    <%= render layout: "nested_fields_table", locals: { attributes: ["From Date", "To Date", "From Airport", "To Airport", "Notes", "Amount", ""], id: "airfare", total_class: "airfare-total" } do %>
       <%= f.simple_fields_for :expense_airfares do |expense_airfare| %>
         <%= render "expense_airfare_fields", f: expense_airfare %>
       <% end %>
