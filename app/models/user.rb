@@ -10,8 +10,6 @@ class User < ApplicationRecord
   validates :username, presence: true
   validates :email, presence: true
   validates :full_name, presence: true
-  validates :osu_id, presence: true
-  validates :activity_code, presence: true
 
   def can_manage(reimbursement_request)
     reimbursement_request.certifier.id == id
