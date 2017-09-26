@@ -3,10 +3,7 @@
     <div class="form-row">
       <h3><%= t('reimbursement_request_form.headers.cities_travelled') %></h3>
     </div>
-    <div class="form-row">
-      <div class="col-xl-7 col-lg-8 col-md-12">
-
-    <div class="form-row">
+    <div class="col-xl-7 col-md-12">
       <div class="alert alert-info" role="alert">
         <strong>Please note</strong>
         <p>
@@ -14,7 +11,6 @@
         </p>
       </div>
     </div>
-      </div> </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "Location", "Meals Daily Rate", "Hotel Daily Rate", "Per Diem Rate", ""], id: "cities_travelled" } do %>
       <%= f.simple_fields_for :travel_cities do |travel_city| %>
         <%= render partial: "travel_city_fields", locals: { f: travel_city, object: f } %>

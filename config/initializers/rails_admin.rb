@@ -56,11 +56,24 @@ RailsAdmin.config do |config|
           label 'Activity Code'
         end
         field :organization do
-          label 'Organization'
+          inline_add false
+          inline_edit false
         end
 
         field :admin
         field :certifier
+      end
+    end
+
+    config.model 'Organization' do
+      edit do
+        field :name
+        field :organization_code
+        field :program_code
+        field :fund
+        field :users do
+          inline_add false
+        end
       end
     end
 
