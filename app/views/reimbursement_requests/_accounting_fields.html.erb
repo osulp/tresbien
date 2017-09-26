@@ -1,20 +1,25 @@
 <tr class="nested-fields basic" data-table-name="accounting">
   <td><%= f.input :index, label: false %></td>
-  <td><%= f.input :fund, label: false %></td>
-  <td><%= f.input :account, label: false %></td>
-  <td><%= f.input :activity, label: false, input_html: { value: current_user ? current_user.activity_code : ''  }  %></td>
-  <td><%= f.input :amount, label: false, input_html: { class: "row-sum-input" }  %>
-      <%= f.input :organization, label: false, as: :hidden, input_html:{ value: current_user ? current_user.organization.id : ' '}%>
-      <%= f.input :program, label: false, as: :hidden, input_html: { value: current_user ? current_user.organization.program_code : ''  }  %>
-  </td>
   <td>
-    <input type='hidden' class='unique-id' />
-    <%= link_to_remove_association f,
-        class: "btn btn-danger btn-sm",
-        "data-toggle" => 'tooltip',
-        "data-placement" => 'top',
-        title: t('reimbursement_request_form.tooltips.remove_accounting')  do %>
-      <i class="fa fa-trash-o fa-2x"></i>
-    <% end %>
-  </td>
+    <%= f.input :account, label: false,
+      collection: @account_codes,
+      label_method: lambda { |c| "#{c.code} -- #{c.name}" },
+      value_method: lambda { |c| c.code }
+    %>
+</td>
+<td><%= f.input :amount, label: false, input_html: { class: "row-sum-input" }  %></td>
+<td>
+  <input type='hidden' class='unique-id' />
+  <%= f.input :fund, label: false, input_html: { value: current_user ? current_user.organization.fund : ' ' }, wrapper_html: { class: 'hidden' } %>
+  <%= f.input :organization, label: false, as: :hidden, input_html:{ value: current_user ? current_user.organization.organization_code : ' '}%>
+  <%= f.input :program, label: false, as: :hidden, input_html: { value: current_user ? current_user.organization.program_code : ''  }  %>
+  <%= f.input :activity, label: false, input_html: { value: current_user ? current_user.activity_code : ''}, wrapper_html: { class: "hidden"  }  %>
+  <%= link_to_remove_association f,
+    class: "btn btn-danger btn-sm",
+    "data-toggle" => 'tooltip',
+    "data-placement" => 'top',
+    title: t('reimbursement_request_form.tooltips.remove_accounting')  do %>
+    <i class="fa fa-trash-o fa-2x"></i>
+  <% end %>
+</td>
 </tr>

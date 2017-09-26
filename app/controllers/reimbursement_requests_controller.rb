@@ -4,6 +4,7 @@ class ReimbursementRequestsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_reimbursement_request, only: %i[show edit update approve decline]
   before_action :set_certifiers, only: %i[new create edit update]
+  before_action :set_account_codes, only: %i[new create edit update]
   before_action :set_expense_types, only: %i[new create edit update]
   before_action :set_statuses, only: %i[new create edit update]
   before_action :set_descriptions, only: %i[new create edit update]
@@ -167,6 +168,10 @@ class ReimbursementRequestsController < ApplicationController
 
   def set_statuses
     @statuses = APPLICATION_CONFIG[:statuses]
+  end
+
+  def set_account_codes
+    @account_codes = AccountCode.all
   end
 
   def set_expense_types
