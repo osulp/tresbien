@@ -3,14 +3,12 @@
     <div class="form-row">
       <h3><%= t('reimbursement_request_form.headers.cities_travelled') %></h3>
     </div>
-    <div class="col-xl-7 col-md-12">
       <div class="alert alert-info" role="alert">
         <strong>Please note</strong>
         <p>
         You can find your maximum daily meal and hotel rates by checking the business affairs tables for <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_us" target="_blank">domestic</a> or <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_foreign" target="_blank">international</a> travel. If you require reimbursement above the maximum rate on any given day, you will be prompted to generate an expense row for the extra amount.
         </p>
       </div>
-    </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "Location", "Meals Daily Rate", "Hotel Daily Rate", "Per Diem Rate", ""], id: "cities_travelled" } do %>
       <%= f.simple_fields_for :travel_cities do |travel_city| %>
         <%= render partial: "travel_city_fields", locals: { f: travel_city, object: f } %>
