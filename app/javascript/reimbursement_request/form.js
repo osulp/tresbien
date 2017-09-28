@@ -68,7 +68,7 @@ class Form {
       .on('cocoon:before-remove', '.table', (e, itemToBeRemoved) => {
         if (!itemToBeRemoved.hasClass('travel-city') && !itemToBeRemoved.hasClass('travel-itinerary')) {
           let id = $(itemToBeRemoved).find('.unique-id').val();
-          this.state.basic_rows = this.basic_rows.filter(b => b.id !== id);
+          this.state.basic_rows = this.state.basic_rows.filter(b => b.id !== id);
         }
         if (itemToBeRemoved.parents(".table").find("tbody tr").length <= 1) {
           itemToBeRemoved.parents(".table").hide();
