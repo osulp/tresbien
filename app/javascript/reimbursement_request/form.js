@@ -41,8 +41,11 @@ class Form {
           $(element).show();
         }
       });
+      this.element.find('.notes-warning').find('.slideout').toggle('slide');
+      this.bindSlideOut(this.element.find('.notes-warning'));
       this.bindDateTimePicker($('.datepicker'));
       this.bindTimePicker($('.timepicker'));
+      this.bindHideNotesWarning(this.element.find('#reimbursement_request_business_notes_and_purpose'));
       autorun(() => {
         this.element.find('.itineraries-total').val(this.state.itineraries_total);
         this.element.find('.accountings-total').val(this.state.accounting_total);
@@ -72,6 +75,8 @@ class Form {
         }
       })
       .on('cocoon:after-insert', '.table', (e, itemInserted) => {
+        this.element.find('.notes-warning').removeClass('hidden').addClass('show');
+        this.element.find('.reimbursement_request_business_notes_and_purpose > textarea').addClass('warn');
         this.bindDateTimePicker($(e.target).find('.datepicker'));
         this.bindTimePicker($(e.target).find('.timepicker'));
 
@@ -92,6 +97,13 @@ class Form {
       });
   };
 
+  bindHideNotesWarning = element => {
+    element.on('keyup', (e) => {
+      element.prev().find('.notes-warning').removeClass('show').addClass('hidden');
+    }).on('mouseenter', (e) => {
+      element.removeClass('warn');
+    });
+  }
   bindDateTimePicker = element => {
     $(element).datetimepicker({
       timepicker: false,
@@ -125,6 +137,11 @@ class Form {
     });
   };
 
+  bindSlideOut = element => {
+    element.on('mouseenter mouseleave', (e) => {
+      element.find('.slideout').toggle('slide');
+    });
+  }
   getDateInputs = row => {
     return { from_date: $(row).find('input.datepicker[name*="from_date"]'), to_date: $(row).find('input.datepicker[name*="to_date"]') };
   }

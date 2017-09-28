@@ -23,6 +23,7 @@ class AbovePerDiemRow {
     }
     this.element.find('.row-sum-input').each((i, input) => this.bindRowSumInput(input));
     this.element.find('.row-sum-input').change();
+    this.showNotesWarning();
   }
 
   client_id = () => this.element.find('.client-id').val()
@@ -60,6 +61,15 @@ class AbovePerDiemRow {
     this.element.find('input.notes').val(`Expenses above per diem on ${data.date.format("YYYY-MM-DD")} in ${data.city}, ${data.state}`);
     this.element.find('.client-id').val(data.client_id);
   };
+
+  showNotesWarning = () => {
+    alert = this.element.parents('.form-row').prev().find('.alert');
+    if (alert.length) {
+      alert.removeClass('hidden');
+      alert.addClass('show');
+    }
+  }
+  
 }
 
 export default AbovePerDiemRow;
