@@ -67,7 +67,7 @@ class ReimbursementRequestsController < ApplicationController
         old_status == 'draft' ? certify_request : resubmit_request
         submit_request
       end
-      attach_files
+      synch_files
       redirect_to @reimbursement_request, notice: 'Your reimbursement request was updated.'
     else
       render :edit
@@ -125,6 +125,17 @@ class ReimbursementRequestsController < ApplicationController
   def attach_files
     params[:file_ids]&.each do |id|
       @reimbursement_request.attachments << Attachment.find(id)
+    end
+  end
+
+  def synch_files
+    file_ids = params[:file_ids] || []
+    existing_file_ids = @reimbursement_request.attachments.pluck(:id)
+    existing_file_ids.each do |id|
+      @reimbursement_request.attachments.delete(id) unless file_ids.include?(id)
+    end
+    file_ids.each do |id|
+      @reimbursement_request.attachments << Attachment.find(id) unless existing_file_ids.include?(id)
     end
   end
 

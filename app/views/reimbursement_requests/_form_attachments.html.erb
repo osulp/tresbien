@@ -1,7 +1,7 @@
 <div id="attachments_panel" class="form-row tab-pane">
   <div class="col col-12">
     <div class="form-row">
-      <h3><%= t('reimbursement_request_form.headers.attachments')%></h3>
+      <h3><%= t('reimbursement_request_form.headers.attachments') %></h3>
     </div>
     <div class="form-row">
     <div class="alert alert-info" role="alert">
@@ -9,6 +9,17 @@
         Please email your business office for more details.
       </p>
       </div>
+    </div>
+    <div class="form-row">
+      <% if @reimbursement_request.attachments.count > 0 %>
+        <% @reimbursement_request.attachments.each do |child| %>
+          <div class="delete-attachment" style="padding=10px">
+            <%= link_to (image_tag child.attachment.url(:thumb) ), child.attachment.url, target: :_blank %>
+            <input name="file_ids[]" value=<%= child.attachment.instance.id %> type="hidden"/>
+            <button type="button" class="btn btn-danger delete-attachment-btn">Delete</button>
+          </div>
+        <% end %>
+      <% end %>
     </div>
     <div class="form-row">
       <div id="file_uploader" class="dropzone"></div>

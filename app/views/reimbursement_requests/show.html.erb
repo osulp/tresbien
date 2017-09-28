@@ -93,8 +93,9 @@
       <h3>Attachments:</h3>
       <% if @reimbursement_request.attachments.count > 0 %>
         <% @reimbursement_request.attachments.each do |a| %>
-          <%= link_to (image_tag a.attachment.url(:thumb) ), a.attachment.url, target: :_blank %>
+          <%= image_tag a.attachment.url(:thumb), target: :_blank, class: "openModal hover-shadow", "data-id"=>a.id %>
         <% end %>
+        <%= render partial: "reimbursement_requests/lightbox" %>
       <% else %>
         <p>No attachments</p>
       <% end %>
@@ -128,3 +129,5 @@
   </div>
   <%= render 'status_comment'%>
 </div>
+
+
