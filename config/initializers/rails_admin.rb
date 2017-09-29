@@ -71,6 +71,7 @@ RailsAdmin.config do |config|
         field :organization_code
         field :program_code
         field :fund
+        field :vendor_payment_address
         field :users do
           inline_add false
         end
