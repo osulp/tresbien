@@ -75,12 +75,14 @@ gem "webpacker", github: "rails/webpacker"
 
 gem 'dropzonejs-rails'
 
+# Use Wicked PDF for rendering PDF views
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -97,6 +99,18 @@ group :development do
   gem 'fasterer'
   gem 'rubocop'
 end
-# Use Wicked PDF for rendering PDF views
-gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+
+group :test do
+  gem 'coveralls'
+  gem 'rspec_junit_formatter'
+  gem 'rspec'
+  gem 'rspec-mocks'
+  gem 'simplecov'
+  gem 'webmock'
+  gem 'poltergeist'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'equivalent-xml'
+  gem 'selenium-webdriver'
+  gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
+end
