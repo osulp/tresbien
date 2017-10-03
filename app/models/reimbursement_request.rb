@@ -3,7 +3,6 @@
 class ReimbursementRequest < ApplicationRecord
   scope :user_claimant_requests, ->(user_id) { where claimant_id: user_id }
   scope :user_certifier_requests, ->(user_id) { where certifier_id: user_id }
-  attr_accessor :file_attachments
   belongs_to :claimant, class_name: 'User'
   belongs_to :certifier, class_name: 'User'
   belongs_to :description
@@ -21,7 +20,6 @@ class ReimbursementRequest < ApplicationRecord
   validates :business_notes_and_purpose, length: { maximum: 250 }
   validates :description_id, presence: true
 
-  after_validation :warn_attachments
   before_create :generate_identifier
   before_save :calculate_grand_total
 
@@ -30,31 +28,12 @@ class ReimbursementRequest < ApplicationRecord
 
   # Calculate the grand total for the reimbursement request
   def calculate_grand_total
-    set_totals
-    self.grand_total = totals.sum
-  end
-
-  # set individual totals for each child model
-  def set_totals
     self.accounting_total = get_total_sum(accountings)
     self.airfare_total = get_total_sum(expense_airfares)
     self.mileage_total = get_total_sum(expense_mileages)
     self.itinerary_total = get_total_sum(travel_itineraries)
     self.other_total = get_total_sum(expense_others)
-  end
-
-  # return an array of all totals; not useful for changing these values
-  def totals
-    [accounting_total, airfare_total, mileage_total, other_total, itinerary_total]
-  end
-
-  # return an array of all models; not useful for changing these values
-  def models
-    [accountings, expense_airfares, expense_mileages, expense_others, travel_itineraries, attachments]
-  end
-
-  def children
-    @children ||= attachments.all
+    self.grand_total = [accounting_total, airfare_total, mileage_total, other_total, itinerary_total].sum
   end
 
   private
@@ -109,10 +88,5 @@ class ReimbursementRequest < ApplicationRecord
 
   def includes_travel_city
     errors.add(:base, 'Must have at least one city travelled in the itinerary.', target_nav_panel_href: 'itinerary_panel') if travel_cities.empty? || travel_cities.all?(&:marked_for_destruction?)
-  end
-
-  def warn_attachments
-    return if file_attachments.nil?
-    errors.add(:base, 'Your uploaded files were not saved. Please select the files again.', target_nav_panel_href: 'attachments_panel') if !errors.empty? && !file_attachments.empty?
   end
 end

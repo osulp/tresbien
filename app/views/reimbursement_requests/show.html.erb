@@ -91,9 +91,9 @@
   <div class="row">
     <div class="col-12">
       <h3>Attachments:</h3>
-      <% if @reimbursement_request.children.count > 0 %>
-        <% @reimbursement_request.children.each do |child| %>
-          <%= link_to (image_tag child.attachment.url(:thumb) ), child.attachment.url, target: :_blank %>
+      <% if @reimbursement_request.attachments.count > 0 %>
+        <% @reimbursement_request.attachments.each do |a| %>
+          <%= link_to (image_tag a.attachment.url(:thumb) ), a.attachment.url, target: :_blank %>
         <% end %>
       <% else %>
         <p>No attachments</p>
