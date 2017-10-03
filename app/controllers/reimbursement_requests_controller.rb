@@ -21,7 +21,6 @@ class ReimbursementRequestsController < ApplicationController
 
   def show
     @status_comments = @reimbursement_request.status_comments
-    @children = @reimbursement_request.children
     respond_to do |format|
       format.html
       format.pdf do

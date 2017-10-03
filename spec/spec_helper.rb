@@ -3,6 +3,7 @@ require 'simplecov'
 require 'capybara/rspec'
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([SimpleCov::Formatter::HTMLFormatter, Coveralls::SimpleCov::Formatter])
+SimpleCov.add_filter ['config']
 SimpleCov.start
 
 require 'capybara/poltergeist'
