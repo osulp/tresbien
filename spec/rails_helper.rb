@@ -3,8 +3,10 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
-require 'spec_helper'
+require 'devise'
+# require 'spec_helper'
 require 'rspec/rails'
+require 'support/request_spec_helper'
 require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost: true)
 
@@ -75,4 +77,6 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end
+  # config.include Devise::Test::ControllerHelpers, type: :request
+  # config.include RequestSpecHelper, type: :request
 end

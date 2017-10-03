@@ -186,6 +186,11 @@ GEM
       nokogiri (>= 1.4.3)
     erubi (1.6.1)
     execjs (2.7.0)
+    factory_girl (4.8.1)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.8.0)
+      factory_girl (~> 4.8.0)
+      railties (>= 3.0.0)
     fasterer (0.3.2)
       colorize (~> 0.7)
       ruby_parser (~> 3.7)
@@ -476,6 +481,7 @@ DEPENDENCIES
   devise_cas_authenticatable
   dropzonejs-rails
   equivalent-xml
+  factory_girl_rails
   fasterer
   fastri
   font-awesome-rails
