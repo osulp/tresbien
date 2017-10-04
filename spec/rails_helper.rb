@@ -7,6 +7,7 @@ require 'devise'
 # require 'spec_helper'
 require 'rspec/rails'
 require 'support/request_spec_helper'
+require 'support/factory_girl'
 require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost: true)
 
