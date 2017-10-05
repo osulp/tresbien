@@ -1,0 +1,17 @@
+
+
+<% @reimbursement_request.attachments.each do |child| %>
+
+  <div class="attachment-<%= child.id %> modal">
+
+      <span class="close cursor"><i class="fa fa-window-close" aria-hidden="true"></i></span>
+      <div class="modal-content">
+        <div class="mySlides">
+          <%= image_tag child.attachment(:large), style:"width:100%", "data-id"=>child.id %>
+        </div>
+      </div>
+
+  </div>
+<% end %>
+
+
