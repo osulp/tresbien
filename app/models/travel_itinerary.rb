@@ -3,7 +3,7 @@
 class TravelItinerary < ApplicationRecord
   belongs_to :reimbursement_request, inverse_of: :travel_itineraries
   validates :date, presence: true
-  validates :break, presence: true
+  validates :breakfast, presence: true
   validates :lunch, presence: true
   validates :dinner, presence: true
   validates :hotel, presence: true
@@ -18,7 +18,7 @@ class TravelItinerary < ApplicationRecord
 
   def calculate_amount
 
-    total = (self.break.to_f + self.lunch.to_f + self.dinner.to_f + self.hotel.to_f).round(2)
+    total = (self.breakfast.to_f + self.lunch.to_f + self.dinner.to_f + self.hotel.to_f).round(2)
     self.amount = [total, self.per_diem].min
   end
 end

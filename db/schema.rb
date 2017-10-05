@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929143309) do
+ActiveRecord::Schema.define(version: 20171004213801) do
 
   create_table "account_codes", force: :cascade do |t|
     t.string "name"
@@ -163,7 +163,7 @@ ActiveRecord::Schema.define(version: 20170929143309) do
     t.datetime "date"
     t.string "city"
     t.string "state"
-    t.string "break"
+    t.string "breakfast"
     t.string "lunch"
     t.string "dinner"
     t.string "hotel"

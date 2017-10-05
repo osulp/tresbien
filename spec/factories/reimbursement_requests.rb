@@ -24,7 +24,7 @@ FactoryGirl.define do
     city "Portland"
     state "Oregon"
     country "United States"
-    break "20"
+    breakfast "20"
     lunch "20"
     dinner "20"
     hotel "60"
@@ -56,8 +56,8 @@ FactoryGirl.define do
     # end
     description
     after(:build) do |request, evaluator|
-      create_list(:travel_city, 1, reimbursement_request: request)
       create_list(:travel_itinerary, 1, reimbursement_request: request)
+      create_list(:travel_city, 1, reimbursement_request: request)
     end
   end
 end
