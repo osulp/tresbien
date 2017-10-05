@@ -1,6 +1,7 @@
 <%= simple_form_for @reimbursement_request, html: { multipart: true, class: 'reimbursement-request-form' } do |f| %>
   <div class="row">
     <div class="col-xl-3 col-lg-4 col-md-12 side-pane">
+      <a href="#form" class="skip-main"> Skip to form </a>
       <%= render partial: 'tab_navigation' %>
       <%= render partial: 'form_total', locals: { f: f } %>
     </div>
