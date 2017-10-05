@@ -105,7 +105,7 @@ class ItineraryRow {
     let meals_rate = data.per_diem - data.hotel_rate;
     this.element.find('input.date').val(data.day.format('YYYY-MM-DD'));
     this.element.find('.date-label').text(data.day.format('YYYY-MM-DD'));
-    this.element.find('.reimbursement_request_travel_itineraries_break > input').val(meals_rate / 4);
+    this.element.find('.reimbursement_request_travel_itineraries_breakfast > input').val(meals_rate / 4);
     this.element.find('.reimbursement_request_travel_itineraries_lunch > input').val(meals_rate / 4);
     this.element.find('.reimbursement_request_travel_itineraries_dinner > input').val(meals_rate / 2);
     this.element.find('.reimbursement_request_travel_itineraries_hotel > input').val(data.hotel_rate).change();
