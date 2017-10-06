@@ -117,7 +117,9 @@ img.demo {
 }
 
 img.hover-shadow {
-  transition: 0.2s
+  transition: 0.2s;
+  margin: 5px;
+  border: 1px #d0d0d0 solid;
 }
 
 .hover-shadow:hover {
