@@ -4,7 +4,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
+    cas_sessions: 'my_cas'
   }
 
   get 'user/set_id', to: 'users#set_id'

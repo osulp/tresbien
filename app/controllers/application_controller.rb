@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :set_country_sym, only: [:cities, :states]
-  before_action :validate_user
+  before_action :redirect_to_sign_in, unless: :user_signed_in?
 
   def cities
     render json: CS.cities(params[:state], @country_sym).to_json
@@ -23,5 +23,11 @@ class ApplicationController < ActionController::Base
       flash[:error] = "Required user details are missing, please update."
       redirect_to user_set_id_path
     end
+  end
+
+  private
+
+  def redirect_to_sign_in
+    redirect_to new_user_session_path
   end
 end
