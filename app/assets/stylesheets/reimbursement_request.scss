@@ -203,9 +203,12 @@
       padding: 0 2rem;
       justify-content: space-between;
       button.close {
-        position: static; 
+        position: static;
       }
     }
+  }
+  .side-pane {
+    margin-bottom: 2rem;
   }
 }
 
