@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user, aliases: ['claimant'] do
     full_name "Ross, Bob"
-    email "bross@oregonstate.edu"
+    email { "bross#{rand(1000000000).to_s}@oregonstate.edu" }
     username 'bross'
     pidm '111111'
     activity_code 'AB123'

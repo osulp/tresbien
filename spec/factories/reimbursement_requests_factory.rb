@@ -55,7 +55,7 @@ FactoryGirl.define do
     notes "Here's an other expense"
     amount 64.4
     expense_type
-    above_per_diem false
+    above_per_diem_expense false
     client_id "123"
   end
   factory :expense_mileage do
@@ -79,12 +79,20 @@ FactoryGirl.define do
     active true
   end
   factory :reimbursement_request do
-    business_notes_and_purpose "First I did the thing in one place and then I did the thing in another place"
+    transient do
+      num_travel_itineraries 1
+      num_travel_cities 1
+      num_accountings 1
+      num_expense_others 1
+      num_expense_mileages 1
+      num_expense_airfares 1
+    end
     claimant
     certifier
     description
+    business_notes_and_purpose "First I did the thing in one place and then I did the thing in another place"
     after(:build) do |request, evaluator|
-      request.travel_itineraries = [build(:travel_itinerary)]
+      request.travel_itineraries = (1..evaluator.num_travel_itineraries).to_a.map { build(:travel_itinerary) }
       request.travel_cities = [build(:travel_city)]
       request.accountings = [build(:accounting)]
       request.expense_others = [build(:expense_other)]

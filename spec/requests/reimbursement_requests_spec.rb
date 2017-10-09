@@ -1,16 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe "ReimbursementRequests", type: :request do
-  let(:org) { Organization.new() }
-  let(:user_admin) { User.new(osu_id: "111111", activity_code: "222", organization: org)}
-  describe "test" do
-    it "creates a reimbursement request" do
-      rr = create(:reimbursement_request)
-      expect(rr.travel_cities.count).to eq 1
-    end
+  before(:all) do
+    @user = create :user
+    login_as(@user, :scope => :user)
   end
   describe "GET /reimbursement_requests" do
     it "redirects to root path" do
+      get reimbursement_requests_path
+      expect(request).to redirect_to(root_path)
+    end
+  end
+  describe "GET /reimbursement_requests/new" do
+    it "renders new template" do
+      post reimbursement_requests_path, params: attributes_for(:reimbursement_request)
 
     end
   end

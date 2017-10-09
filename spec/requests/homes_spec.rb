@@ -5,10 +5,10 @@ RSpec.describe "Home", type: :request do
   let(:user_admin) { User.new(osu_id: "111111", activity_code: "222", organization: org)}
   describe "GET index" do
     context "when not logged in" do
-      it "redirects to login" do
-        get root_path
-        expect(response).to redirect_to new_user_session_path
-      end
+      # it "redirects to login" do
+      #   get root_path
+      #   expect(response).to redirect_to new_user_session_path
+      # end
     end
     context "when logged in with required fields compelete" do
       # before do

@@ -78,6 +78,6 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
   end
-  # config.include Devise::Test::ControllerHelpers, type: :request
-  # config.include RequestSpecHelper, type: :request
+  config.include Warden::Test::Helpers
+  config.include RequestSpecHelper, type: :request
 end
