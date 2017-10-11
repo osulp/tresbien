@@ -8,6 +8,9 @@ FactoryGirl.define do
     (1..500).to_a.sample.days.from_now
   end
   factory :travel_city do
+    transient do
+      reimbursement_request { create(:reimbursement_request) }
+    end
     from_date { generate(:date) }
     to_date { generate(:to_date) }
     city "Portland"
@@ -20,6 +23,9 @@ FactoryGirl.define do
     client_id "0"
   end
   factory :travel_itinerary do
+    transient do
+      reimbursement_request { create(:reimbursement_request) }
+    end
     date { generate(:date) }
     city "Portland"
     state "Oregon"
@@ -33,6 +39,9 @@ FactoryGirl.define do
     client_id "0"
   end
   factory :accounting do
+    transient do
+      reimbursement_request { create(:reimbursement_request) }
+    end
     index "123"
     fund "0110011"
     organization "123456789"
@@ -42,6 +51,9 @@ FactoryGirl.define do
     amount 24.0
   end
   factory :expense_airfare do
+    transient do
+      reimbursement_request { create(:reimbursement_request) }
+    end
     from_date { generate(:date)}
     to_date {generate(:to_date)}
     from_location "PDX"
@@ -50,6 +62,9 @@ FactoryGirl.define do
     amount 90.5
   end
   factory :expense_other do
+    transient do
+      reimbursement_request { create(:reimbursement_request) }
+    end
     from_date { generate(:date)}
     to_date {generate(:to_date)}
     notes "Here's an other expense"
@@ -59,6 +74,9 @@ FactoryGirl.define do
     client_id "123"
   end
   factory :expense_mileage do
+    transient do
+      reimbursement_request { create(:reimbursement_request) }
+    end
     from_date { generate(:date)}
     to_date {generate(:to_date)}
     from_city "Corvallis"
@@ -91,7 +109,10 @@ FactoryGirl.define do
     certifier
     description
     business_notes_and_purpose "First I did the thing in one place and then I did the thing in another place"
-    after(:build) do |request, evaluator|
+    # travel_itineraries { [create(:travel_itinerary, reimbursement_request: reimbursement_request)] }
+    # travel_city { [create(:travel_city)] }
+    before(:build) do |request, evaluator|
+      travel_itineraries = [build(:travel_itinerary, reimbursement_request: request)] 
       request.travel_itineraries = (1..evaluator.num_travel_itineraries).to_a.map { build(:travel_itinerary) }
       request.travel_cities = [build(:travel_city)]
       request.accountings = [build(:accounting)]
