@@ -1,7 +1,7 @@
 <tr class="nested-fields basic" data-table-name="expense-other">
   <td>
     <%= f.input :expense_type_id,
-        collection: @expense_types,
+        collection: @expense_types.not_above_per_diem,
         label_method: lambda { |e| e.name },
         value_method: lambda { |e| e.id },
         label: false  %>
