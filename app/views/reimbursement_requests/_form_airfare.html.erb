@@ -6,7 +6,8 @@
     <div class="form-row">
       <div class="alert alert-info" role="alert">
         <strong>Please note</strong>
-        <p>Only fill this out if you bought your own plane ticket, and make sure you explain why you are claiming this in the <strong> business notes and purpose</strong></p>
+        <p>Only fill this out if you bought your own plane ticket, and make sure you explain why you are claiming this in the <strong> business notes and purpose</strong> section above.</p>
+        <p>If one ticket was purchased for a round trip, only use one line to indicate that ticket.</p>
       </div>
     </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["From Date", "To Date", "From Airport", "To Airport", "Notes", "Amount", ""], id: "airfare", total_class: "airfare-total" } do %>
