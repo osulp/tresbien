@@ -40,7 +40,7 @@ RailsAdmin.config do |config|
     end
     show_in_app
 
-    config.included_models = %w[User ExpenseType Description Organization]
+    config.included_models = %w[User ExpenseType Description Organization AccountCode]
 
     config.model 'User' do
       object_label_method do
