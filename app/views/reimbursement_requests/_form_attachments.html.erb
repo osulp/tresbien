@@ -12,13 +12,21 @@
     </div>
     <div class="form-row">
       <% if @reimbursement_request.attachments.count > 0 %>
-        <% @reimbursement_request.attachments.each do |child| %>
-          <div class="delete-attachment" style="padding=10px">
-            <%= link_to (image_tag child.attachment.url(:thumb) ), child.attachment.url, target: :_blank %>
-            <input name="file_ids[]" value=<%= child.attachment.instance.id %> type="hidden"/>
+        <% @reimbursement_request.attachments.each do |a| %>
+
+          <div class="delete-attachment">
+
+
+            <%= image_tag a.attachment.url(:thumb), target: :_blank, class: "openModal hover-shadow", "data-id"=>a.id %>
+
+            <input name="file_ids[]" value=<%= a.attachment.instance.id %> type="hidden"/>
+
             <button type="button" class="btn btn-danger delete-attachment-btn">Delete</button>
+
+
           </div>
         <% end %>
+        <%= render partial: "reimbursement_requests/lightbox" %>
       <% end %>
     </div>
     <div class="form-row">
