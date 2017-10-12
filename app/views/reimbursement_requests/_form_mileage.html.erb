@@ -3,6 +3,13 @@
     <div class="form-row">
       <h3><%= t('reimbursement_request_form.headers.auto_mileage')%></h3>
     </div>
+    <div class="form-row">
+      <div class="alert alert-info" role="alert">
+        <strong>Please note</strong>
+        <p>The dates should be inclusive of the entire time you used your private automobile, so if I drove it to the airport, parked it, then drove it back at the end of the trip my from date would be: 07/29/15 and my to date would be: 08/05/15.</p>
+        <p>You will need to look up how many miles you traveled, the fields do not auto populate.</p>
+      </div>
+    </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "Location (From)", "Location (To)",  "Distance (Miles)", "Round Trip?", "Notes", "Amount", ""], id: "mileage", total_class: "mileage-total" } do %>
       <%= f.simple_fields_for :expense_mileages do |expense_milage| %>
         <%= render "expense_mileage_fields", f: expense_milage %>

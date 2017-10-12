@@ -8,7 +8,7 @@
   </td>
   <td><%= f.input :from_date, as: :date_picker, label: false %></td>
   <td><%= f.input :to_date, as: :date_picker, label: false %></td>
-  <td><%= f.input :notes, label: false, as: :string%></td>
+  <td><%= f.input :notes, label: false, as: :string, placeholder: 'Details about the expense' %></td>
   <td><%= f.input :amount, label: false, input_html: { class: "row-sum-input" } %></td>
   <td>
     <input type='hidden' class='unique-id' />

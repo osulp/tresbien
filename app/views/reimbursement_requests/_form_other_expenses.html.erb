@@ -3,6 +3,12 @@
     <div class="form-row">
       <h3><%= t('reimbursement_request_form.headers.other_expenses')%></h3>
     </div>
+    <div class="form-row">
+      <div class="alert alert-info" role="alert">
+        <strong>Please note</strong>
+        <p>Explain all expenses you claim. If the expense is larger, such as a rental car, make a note about this in the <strong> business notes and purpose</strong> section above. If the expense is smaller, such as buying wifi, just make a note in the row it is in.     </p>
+      </div>
+    </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["Expense Type", "From", "To", "Notes", "Amount", ""], id: "other_expenses", total_class: "other-expenses-total" } do %>
       <%= f.simple_fields_for :expense_others, f.object.expense_others.not_above_per_diem do |expense_other| %>
         <%= render "expense_other_fields", f: expense_other %>
