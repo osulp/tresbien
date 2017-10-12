@@ -36,6 +36,11 @@
                   <% end %>
                 </div>
               </div>
+            <% elsif user_signed_in? && (!current_user.certifier && !current_user.admin) %>
+              <div class="hidden">
+                <input class="filter" data-filter-target="certifier" checked type="checkbox">
+                <input class="filter" data-filter-target="claimant" checked type="checkbox">
+              </div>
             <% end %>
             <div class="dropdown col">
               <a class="dropdown-toggle" data-toggle="dropdown" href=# aria-haspopup="true" aria-expanded="false">By status</a>
