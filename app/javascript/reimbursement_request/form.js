@@ -48,13 +48,11 @@ class Form {
       this.bindHideNotesWarning(this.element.find('#reimbursement_request_business_notes_and_purpose'));
       autorun(() => {
         this.element.find('.itineraries-total').val(this.state.itineraries_total);
-        this.element.find('.accountings-total').val(this.state.accounting_total);
         this.element.find('.airfare-total').val(this.state.expense_airfare_total);
         this.element.find('.mileage-total').val(this.state.expense_mileage_total);
         this.element.find('.other-expenses-total').val(this.state.expense_other_total);
         this.element.find('.grand-total-input').val(this.state.grand_total);
         this.element.find('.itineraries-total-label').text(numeral(this.state.itineraries_total).format('$0,0.00'));
-        this.element.find('.accountings-total-label').text(numeral(this.state.accounting_total).format('$0,0.00'));
         this.element.find('.airfare-total-label').text(numeral(this.state.expense_airfare_total).format('$0,0.00'));
         this.element.find('.mileage-total-label').text(numeral(this.state.expense_mileage_total).format('$0,0.00'));
         this.element.find('.other-expenses-total-label').text(numeral(this.state.expense_other_total).format('$0,0.00'));
@@ -91,8 +89,10 @@ class Form {
           this.state.above_per_diem_rows.push(new AbovePerDiemRow(this, itemInserted, this.state, data));
         } else if (itemInserted.hasClass('mileage')) {
           this.state.basic_rows.push(new MileageRow(this, itemInserted, this.state));
-        } else {
+        } else if (itemInserted.hasClass('basic')) {
           this.state.basic_rows.push(new BasicRow(this, itemInserted, this.state));
+        } else {
+          $(itemInserted).parents('table').show();
         }
       });
   };

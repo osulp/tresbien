@@ -12,9 +12,6 @@ const initialState = observable({
   get itineraries_total() {
     return this.itinerary_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
   },
-  get accounting_total() {
-    return this.basic_rows.filter(r => r.table_name === 'accounting').map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
-  },
   get expense_airfare_total() {
     return this.basic_rows.filter(r => r.table_name === 'expense-airfare').map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
   },

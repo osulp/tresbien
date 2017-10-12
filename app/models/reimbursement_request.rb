@@ -28,12 +28,11 @@ class ReimbursementRequest < ApplicationRecord
 
   # Calculate the grand total for the reimbursement request
   def calculate_grand_total
-    self.accounting_total = get_total_sum(accountings)
     self.airfare_total = get_total_sum(expense_airfares)
     self.mileage_total = get_total_sum(expense_mileages)
     self.itinerary_total = get_total_sum(travel_itineraries)
     self.other_total = get_total_sum(expense_others)
-    self.grand_total = [accounting_total, airfare_total, mileage_total, other_total, itinerary_total].sum
+    self.grand_total = [airfare_total, mileage_total, other_total, itinerary_total].sum
   end
 
   private

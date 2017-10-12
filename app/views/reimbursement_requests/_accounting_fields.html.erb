@@ -1,4 +1,4 @@
-<tr class="nested-fields basic" data-table-name="accounting">
+<tr class="nested-fields" data-table-name="accounting">
   <td><%= f.input :index, label: false %></td>
   <td>
     <%= f.input :account, label: false,
@@ -7,7 +7,7 @@
       value_method: lambda { |c| c.code }
     %>
 </td>
-<td><%= f.input :amount, label: false, input_html: { class: "row-sum-input" }  %></td>
+<td><%= f.input :amount, label: false %></td>
 <td>
   <input type='hidden' class='unique-id' />
   <%= f.input :fund, label: false, input_html: { value: current_user ? current_user.organization.fund : ' ' }, wrapper_html: { class: 'hidden' } %>
