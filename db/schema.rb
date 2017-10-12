@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929143309) do
+ActiveRecord::Schema.define(version: 20171012161127) do
 
   create_table "account_codes", force: :cascade do |t|
     t.string "name"
@@ -113,7 +113,6 @@ ActiveRecord::Schema.define(version: 20170929143309) do
     t.float "mileage_total"
     t.float "airfare_total"
     t.float "other_total"
-    t.float "accounting_total"
     t.float "grand_total"
     t.float "claiming_total"
     t.datetime "created_at", null: false
