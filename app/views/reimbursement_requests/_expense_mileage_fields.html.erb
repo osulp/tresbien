@@ -4,18 +4,16 @@
   <td>
     <div class="row">
       <div class="col col-12">
-        <%= f.input :country, as: :cs_country_select, label: false, wrapper_html: {  class: "hidden"} %>
-        <%= f.input :from_state, as: :cs_state_select, label: false %>
-        <%= f.input :from_city, as: :cs_city_select, state: f.object.from_state, label: false %>
+        <%= f.input :from_state, as: :cs_us_state_select, state: f.object.to_state, label: false %>
+        <%= f.input :from_city, as: :cs_city_select, state: f.object.from_state, city: f.object.from_city, label: false %>
       </div>
     </div>
   </td>
   <td>
     <div class="row">
       <div class="col col-12">
-        <%= f.input :country, as: :cs_country_select, label: false, wrapper_html: {  class: "hidden"} %>
-        <%= f.input :to_state, as: :cs_state_select, label: false %>
-        <%= f.input :to_city, as: :cs_city_select, state: f.object.from_state, label: false %>
+        <%= f.input :to_state, as: :cs_us_state_select, state: f.object.from_state, label: false %>
+        <%= f.input :to_city, as: :cs_city_select, state: f.object.from_state, city: f.object.from_city, label: false %>
       </div>
     </div>
   </td>
