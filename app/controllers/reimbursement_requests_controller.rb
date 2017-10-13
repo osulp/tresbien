@@ -15,12 +15,10 @@ class ReimbursementRequestsController < ApplicationController
   end
 
   def index
-    @status_comments = StatusComment.all
     redirect_to root_path
   end
 
   def show
-    @status_comments = @reimbursement_request.status_comments
     respond_to do |format|
       format.html
       format.pdf do
@@ -86,13 +84,6 @@ class ReimbursementRequestsController < ApplicationController
     redirect_to reimbursement_request_path(@reimbursement_request)
   end
 
-  def comment
-    reimbursement_request = ReimbursementRequest.find(params[:reimbursement_request_id])
-    reimbursement_request.status_comments << StatusComment.create(comment: params[:status_comment][:comment], user: current_user)
-    reimbursement_request.save
-    redirect_to reimbursement_request_path(reimbursement_request)
-  end
-
   def decline_request
     StatusMailer.decline_request(@reimbursement_request).deliver_now
   end
@@ -111,13 +102,6 @@ class ReimbursementRequestsController < ApplicationController
 
   def resubmit_request
     StatusMailer.resubmit_request(@reimbursement_request).deliver_now
-  end
-
-  def delete_comment
-    reimbursement_request = ReimbursementRequest.find(params[:reimbursement_request_id])
-    status_comment = StatusComment.find(params[:id])
-    status_comment.destroy
-    redirect_to reimbursement_requests_path(reimbursement_request)
   end
 
   private
@@ -157,7 +141,6 @@ class ReimbursementRequestsController < ApplicationController
       :non_resident_alien,
       :business_notes_and_purpose,
       :address,
-      :status_comment,
       :status,
       accountings_attributes: %i[id index fund organization account program activity amount _destroy],
       expense_airfares_attributes: %i[id from_date to_date from_location to_location notes amount _destroy],

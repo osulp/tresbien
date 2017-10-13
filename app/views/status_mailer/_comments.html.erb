@@ -1,4 +1,0 @@
-<h2>Comments:</h2>
-<% comments.order(created_at: :desc).each do |comment| %>
-  <p><strong><%= comment.user.full_name%> (<%= comment.created_at.localtime.strftime("%m/%d/%y %l:%M %p") %>):</strong> <%= comment.comment %></p>
-<% end %>

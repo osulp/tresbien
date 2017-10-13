@@ -6,7 +6,6 @@ class StatusMailer < ApplicationMailer
     @claimant = reimbursement_request.claimant
     @certifier = reimbursement_request.certifier
     @status = reimbursement_request.status
-    @comments = @reimbursement_request.status_comments
     mail(to: @claimant.email, subject: 'Your Reimbursement Request has been approved')
   end
 
@@ -15,7 +14,6 @@ class StatusMailer < ApplicationMailer
     @claimant = reimbursement_request.claimant
     @certifier = reimbursement_request.certifier
     @status = reimbursement_request.status
-    @comments = @reimbursement_request.status_comments
     mail(to: @certifier.email, subject: 'Reimbursement request is ready for approval')
   end
 
@@ -24,7 +22,6 @@ class StatusMailer < ApplicationMailer
     @claimant = reimbursement_request.claimant
     @certifier = reimbursement_request.certifier
     @status = reimbursement_request.status
-    @comments = @reimbursement_request.status_comments
     mail(to: @claimant.email, subject: 'Your Reimbursement Request has been Denied')
   end
 
@@ -33,7 +30,6 @@ class StatusMailer < ApplicationMailer
     @claimant = reimbursement_request.claimant
     @certifier = reimbursement_request.certifier
     @status = reimbursement_request.status
-    @comments = @reimbursement_request.status_comments
     mail(to: @certifier.email, subject: 'Reimbursement Request Re-Submitted')
   end
 
@@ -42,7 +38,6 @@ class StatusMailer < ApplicationMailer
     @claimant = reimbursement_request.claimant
     @certifier = reimbursement_request.certifier
     @status = reimbursement_request.status
-    @comments = @reimbursement_request.status_comments
     mail(to: @claimant.email, subject: "Your reimbursement request has been submitted")
   end
 end
