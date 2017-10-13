@@ -1,0 +1,17 @@
+.delete-attachment {
+  min-height: 164px;
+  max-width: 110px;
+  margin: 5px;
+  padding: 2px;
+  border: 1px #CECECE solid;
+  border-radius: 5px;
+  .delete-attachment-btn {
+    width: 90%;
+    margin: 5px;
+  }
+  img {
+    object-fit: cover;
+    width: 93px;
+    height: 103px;
+  }
+}

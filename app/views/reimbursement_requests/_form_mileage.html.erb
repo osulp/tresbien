@@ -5,9 +5,11 @@
     </div>
     <div class="form-row">
       <div class="alert alert-info" role="alert">
-        <strong>Please note</strong>
+        <h3><i class="fa fa-bell bell animated bounceIn" aria-hidden="true"></i> Please note</h3>
         <p>The dates should be inclusive of the entire time you used your private automobile, so if I drove it to the airport, parked it, then drove it back at the end of the trip my from date would be: 07/29/15 and my to date would be: 08/05/15.</p>
-        <p>You will need to look up how many miles you traveled, the fields do not auto populate.</p>
+        <p>You will need to find how many miles you traveled, the fields do not auto populate.</p>
+        <p><a href="http://fa.oregonstate.edu/sites/fa.oregonstate.edu/files/Baff/Travel/osu_odot_2015_mileagechart.pdf" target="_blank">OSU Mileage Chart for Oregon Cities</p>
+        <a href="http://fa.oregonstate.edu/fis-manual/400-expenditures/411-travel/411-02-ground-transportation" target="_blank">411-02 Ground Transportation</a>
       </div>
     </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "Location (From)", "Location (To)",  "Distance (Miles)", "Round Trip?", "Notes", "Amount", ""], id: "mileage", total_class: "mileage-total" } do %>

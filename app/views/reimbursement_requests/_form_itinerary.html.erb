@@ -4,15 +4,19 @@
       <h3><%= t('reimbursement_request_form.headers.cities_travelled') %></h3>
     </div>
       <div class="alert alert-info" role="alert">
-        <strong>Please note</strong>
+        <h3><i class="fa fa-bell animated bounce" aria-hidden="true"></i> Please note</h3>
         <p>
-        You can find your maximum daily meal and hotel rates by checking the business affairs tables for <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_us" target="_blank">domestic</a> or <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_foreign" target="_blank">international</a> travel. 
+        You can find your maximum daily <strong>Meal Per Diem</strong> and <strong>Hotel Rate Per Diem</strong> by checking the business affairs tables for <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_us" target="_blank">domestic</a> or <a href="http://oregonstate.edu/dept/fa/businessaffairs/travel/tres/per_diem_foreign" target="_blank">international</a> travel.
+        If you went to more than one city, be sure to use the <strong><i class="fa fa-plus-square-o"></i>Add City</strong> button.
+        Find the city or cities you went traveled to, and enter the <strong>Per Diems</strong>.
         </p>
         <p>
-        You can claim up to the sum of the meal daily rate and hotel daily rate each day. If you require reimbursement above the maximum rate on any given day, you can claim the extra amount separately.
+        You can claim up to the sum of the meal daily rate and hotel daily rate each day. If you spent more than the maximum rate on any given day, you can claim the extra amount separately by clicking on the <i class="fa fa-plus"></i> button. This will create a seperate expense for the Over Per Diem amount.
         </p>
+        <p><a href="http://fa.oregonstate.edu/fis-manual/400-expenditures/411-travel/411-04-meals" target="_blank">411-04 Meals</a></p>
+        <p><a href="http://fa.oregonstate.edu/fis-manual/400-expenditures/411-travel/411-03-lodging" target="_blank">411-03 Lodging</a></p>
       </div>
-    <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "Location", "Meals Daily Rate", "Hotel Daily Rate", "Per Diem Rate", ""], id: "cities_travelled" } do %>
+    <%= render layout: "nested_fields_table", locals: { attributes: ["From", "To", "Location", "Meals Per Diem", "Hotel Per Diem", "Total Per Diem", ""], id: "cities_travelled" } do %>
       <%= f.simple_fields_for :travel_cities do |travel_city| %>
         <%= render partial: "travel_city_fields", locals: { f: travel_city, object: f } %>
       <% end %>

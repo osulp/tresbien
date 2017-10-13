@@ -5,26 +5,21 @@
     </div>
     <div class="form-row">
     <div class="alert alert-info" role="alert">
-      <strong>Please note</strong>
-      <p>If you are a non resident alien, please attach your <strong>I-94</strong> to this reimbursement request, for more details email your <a href="http://fa.oregonstate.edu/osu-shared-services">business office</a>. If you work for the Valley library, contact the <a href="http://fa.oregonstate.edu/uabc">University Administrative Business Center</a>. </p>
+      <h3><i class="fa fa-bell bell animated lightSpeedIn" aria-hidden="true"></i> Please note</h3>
+      <p>If you are a non resident alien, please attach your <strong>I-94</strong> to this reimbursement request, for more details email your <a href="http://fa.oregonstate.edu/osu-shared-services" target="_blank">business office</a>. If you work for the Valley Library, contact the <a href="http://fa.oregonstate.edu/uabc" target="_blank">University Administrative Business Center</a>. </p>
       <p><strong>Receipts:</strong> Attach these as PDF documents. You can do this by scanning them, or using a mobile app on your smartphone. Consider the TinyScanner app. You will still need to turn in a physical copy of your receipts. Please tape them to a piece of paper and use a paperclip to fasten them.</p>
       <p><strong>Digital Receipts:</strong> Forward these to your travel Certifier. </p>
+      <p>If you traveled Internationally include a screenshot () from <a href="https://www.oanda.com/currency/converter/" target="_blank">OANDA Currency Converter</a></strong>.</p>
+      <p><a href="http://fa.oregonstate.edu/fis-manual/400-expenditures/411-travel/411-08-receipt-requirements" target="_blank">411-08: Receipt Requirements</a></p>
       </div>
     </div>
     <div class="form-row">
       <% if @reimbursement_request.attachments.count > 0 %>
         <% @reimbursement_request.attachments.each do |a| %>
-
           <div class="delete-attachment">
-
-
             <%= image_tag a.attachment.url(:thumb), target: :_blank, class: "openModal hover-shadow", "data-id"=>a.id %>
-
             <input name="file_ids[]" value=<%= a.attachment.instance.id %> type="hidden"/>
-
             <button type="button" class="btn btn-danger delete-attachment-btn">Delete</button>
-
-
           </div>
         <% end %>
         <%= render partial: "reimbursement_requests/lightbox" %>
