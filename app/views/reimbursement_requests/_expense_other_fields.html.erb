@@ -1,9 +1,9 @@
-<tr class="nested-fields basic" data-table-name="expense-other">
+<tr class="nested-fields expense-other" data-table-name="expense-other">
   <td>
+    <% options = @expense_types.not_above_per_diem.map { |g| [g.name, g.id, {'data-account-code' => g.account_code }]} %>
     <%= f.input :expense_type_id,
-        collection: @expense_types.not_above_per_diem,
-        label_method: lambda { |e| e.name },
-        value_method: lambda { |e| e.id },
+        collection: options,
+        input_html: { class: 'expense-type' },
         label: false  %>
   </td>
   <td><%= f.input :from_date, as: :date_picker, label: false %></td>
@@ -21,3 +21,5 @@
     <% end %>
   </td>
 </tr>
+<%= f.input_field :_destroy, as: :hidden, class: 'destroy', value:'false' %>
+<%= f.input_field :id, as: :hidden %>

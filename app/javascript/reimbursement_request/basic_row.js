@@ -7,6 +7,7 @@ class BasicRow {
     this.form = form;
     this.element = $(element);
     this.table_name = this.element.data('table-name');
+    this.destroy_element = this.element.next('.destroy');
     this.state = state;
     this.element.find('.row-sum-input').each((i, input) => this.bindRowSumInput(input));
     this.element.find('.unique-id').val(this.id);
@@ -35,8 +36,15 @@ class BasicRow {
       if (tooltip_id) {
         $(`#${tooltip_id}`).remove();
       }
+      this.destroy();
     });
   };
+
+  destroy = () => {
+    this.state.basic_rows = this.state.basic_rows.filter(i => i.id !== this.id);
+    this.element.remove();
+    this.destroy_element.val('true');
+  }
 }
 
 export default BasicRow;

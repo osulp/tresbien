@@ -7,10 +7,12 @@ const Moment = extendMoment(moment);
 
 import * as numeral from 'numeral';
 
-import CityRow from './city_row';
-import ItineraryRow from './itinerary_row';
-import BasicRow from './basic_row';
 import AbovePerDiemRow from './above_per_diem_row';
+import AccountingRow from './accounting_row';
+import BasicRow from './basic_row';
+import CityRow from './city_row';
+import ExpenseOtherRow from './expense_other_row';
+import ItineraryRow from './itinerary_row';
 import MileageRow from './mileage_row';
 
 class Form {
@@ -32,6 +34,9 @@ class Form {
       });
       $('tr.mileage').each((i, element) => {
         this.state.basic_rows.push(new MileageRow(this, element, this.state));
+      });
+      $('tr.expense-other').each((i, element) => {
+        this.state.expense_other_rows.push(new ExpenseOtherRow(this, element, this.state));
       });
       $('tr.basic').each((i, element) => {
         this.state.basic_rows.push(new BasicRow(this, element, this.state));
@@ -64,10 +69,6 @@ class Form {
   bindCocoonEvents = () => {
     $(document)
       .on('cocoon:before-remove', '.table', (e, itemToBeRemoved) => {
-        if (!itemToBeRemoved.hasClass('travel-city') && !itemToBeRemoved.hasClass('travel-itinerary')) {
-          let id = $(itemToBeRemoved).find('.unique-id').val();
-          this.state.basic_rows = this.state.basic_rows.filter(b => b.id !== id);
-        }
         if (itemToBeRemoved.parents(".table").find("tbody tr").length <= 1) {
           itemToBeRemoved.parents(".table").hide();
         }
@@ -91,6 +92,12 @@ class Form {
           this.state.basic_rows.push(new MileageRow(this, itemInserted, this.state));
         } else if (itemInserted.hasClass('basic')) {
           this.state.basic_rows.push(new BasicRow(this, itemInserted, this.state));
+        } else if (itemInserted.hasClass('expense-other')) {
+          this.state.expense_other_rows.push(new ExpenseOtherRow(this, itemInserted, this.state));
+        } else if (itemInserted.hasClass('accounting')) {
+          // grab and remove the top accounting row data and init a new object
+          let data = this.state.accounting_rows_queue.splice(0, 1)[0];
+          this.state.accounting_rows.push(new AccountingRow(this, itemInserted, this.state, data));
         } else {
           $(itemInserted).parents('table').show();
         }

@@ -7,8 +7,11 @@ const initialState = observable({
   itinerary_rows: [],
   above_per_diem_rows: [],
   basic_rows: [],
+  expense_other_rows: [],
+  accounting_rows: [],
   itinerary_days_queue: [],
   above_per_diem_queue: [],
+  accounting_rows_queue: [],
   get itineraries_total() {
     return this.itinerary_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
   },
@@ -16,8 +19,8 @@ const initialState = observable({
     return this.basic_rows.filter(r => r.table_name === 'expense-airfare').map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
   },
   get expense_other_total() {
-    let basic_rows_total = this.basic_rows.filter(r => r.table_name === 'expense-other').map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
-    return this.above_per_diem_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0) + basic_rows_total;
+    let rows_total = this.expense_other_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
+    return this.above_per_diem_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0) + rows_total;
   },
   get expense_mileage_total() {
     return this.basic_rows.filter(r => r.table_name === 'expense-mileage').map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
@@ -25,7 +28,8 @@ const initialState = observable({
   get grand_total() {
     let itineraries_total = this.itinerary_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
     let above_per_diem_total = this.above_per_diem_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
-    return this.basic_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0) + itineraries_total + above_per_diem_total;
+    let expense_other_total = this.expense_other_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
+    return this.basic_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0) + expense_other_total + itineraries_total + above_per_diem_total;
   }
 });
 
