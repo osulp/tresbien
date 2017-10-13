@@ -1,5 +1,6 @@
 @import "bootstrap";
 @import "font-awesome";
+@import "animate";
 @import "jquery.datetimepicker.min";
 @import "dropzone/dropzone";
 @import "variables";
@@ -12,6 +13,7 @@
 @import "pill_navigation";
 @import "comments";
 @import "lightbox";
+@import "delete_attachment";
 html {
   position: relative;
   min-height: 100%;
