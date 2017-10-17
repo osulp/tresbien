@@ -39,10 +39,13 @@ class CityRow {
       let row_sum_input = this.element.find('.row-sum-input');
       let sum_inputs = this.element.find('.sum-input');
       let total = Utils.sumInputFloats(sum_inputs);
+      let hotel_rate = this.element.find('.reimbursement_request_travel_cities_hotel_rate > input').val();
       this.row_total = total;
       $('.travel-itinerary').each((i, row) => {
         if ($(row).find('.travel-city-id').val() == this.travel_city_id) {
           $(row).find('.per-diem-rate').val(this.row_total);
+          $(row).find('.hotel.sum-input').val(hotel_rate);
+          $(row).find('.hotel.sum-input').change();
         }
       });
     });
