@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   post 'files/upload', to: 'files#upload'
 
   resources :reimbursement_requests do
-    post 'comment', to: 'reimbursement_requests#comment'
-    delete 'comment/:id/delete', to: 'reimbursement_requests#delete_comment', as: 'comment_delete'
+    # post 'comment', to: 'reimbursement_requests#comment'
+    # delete 'comment/:id/delete', to: 'reimbursement_requests#delete_comment', as: 'comment_delete'
   end
 
   resources :expense_others do
