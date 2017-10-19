@@ -2,7 +2,8 @@
 
 module ReimbursementRequestHelper
   def get_request_title(reimbursement_request)
-    "#{reimbursement_request.travel_cities.first.from_date.strftime('%e %B %Y')}: #{reimbursement_request.travel_cities.first.city}, #{reimbursement_request.travel_cities.first.state}  (#{CS.countries.key(reimbursement_request.travel_cities.first.country).to_s})"
+    itinerary = reimbursement_request.get_first_travel_itinerary
+    "#{itinerary.date.strftime('%e %B %Y')}: #{itinerary.city}, #{itinerary.state}  (#{CS.countries.key(itinerary.country).to_s})"
   end
 
   def get_simple_date(date)

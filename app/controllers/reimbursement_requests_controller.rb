@@ -12,6 +12,7 @@ class ReimbursementRequestsController < ApplicationController
   def new
     @reimbursement_request = ReimbursementRequest.new
     @reimbursement_request.travel_cities.build
+    @reimbursement_request.accountings.build
   end
 
   def index

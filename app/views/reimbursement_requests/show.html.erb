@@ -13,20 +13,8 @@
     <div class="col-12">
       <%= render partial: "show_table",
         locals: {
-          title: "Cities",
-          attributes: ["from_date", "to_date", "location", "hotel_rate"],
-          objects: @reimbursement_request.travel_cities, id: "travel-cities",
-          functions: {
-            "from_date" => lambda do |obj| get_simple_date(obj['from_date']) end,
-            "to_date" => lambda do |obj| get_simple_date(obj['to_date']) end,
-            "location" => lambda do |obj| "#{obj['city']}, #{obj['state']} (#{obj['country']})" end,
-            "hotel_rate" => lambda do |obj| number_to_currency(obj['hotel_rate'], precision: 2) end
-          }
-      } %>
-      <%= render partial: "show_table",
-        locals: {
           title: "Daily Itineraries", attributes: ["date", "location", "break", "lunch", "dinner", "hotel", "amount"],
-          objects: @reimbursement_request.travel_itineraries, id: "travel-itineraries",
+          objects: @reimbursement_request.travel_itineraries.sort_by(&:date), id: "travel-itineraries",
           functions: {
             "date" => lambda do |obj| get_simple_date(obj['date']) end,
             "break" => lambda do |obj| number_to_currency(obj['break'], precision: 2) end,
@@ -43,7 +31,7 @@
   <%= render partial: "show_table", locals: {
     title: "Other Expenses",
     attributes: ["expense_type", "from_date", "to_date", "notes", "amount"],
-    objects: @reimbursement_request.expense_others,
+    objects: @reimbursement_request.expense_others.sort_by(&:from_date),
     id: "expense-airfares",
     functions: {
       "expense_type" => lambda do |expense_other|
@@ -59,7 +47,7 @@
   <%= render partial: "show_table", locals: {
     title: "Auto Mileage",
     attributes: ["from_date", "to_date", "from_state", "from_city", "to_state", "to_city", "miles", "notes", "amount"],
-    objects: @reimbursement_request.expense_mileages,
+    objects: @reimbursement_request.expense_mileages.sort_by(&:from_date),
     id: "expense_mileages",
     functions: {
       "from_date" => lambda do |obj| get_simple_date(obj['from_date']) end,
@@ -70,7 +58,7 @@
   <%= render partial: "show_table", locals: {
     title: "Airfare",
     attributes: ["from_date", "to_date", "from_location", "to_location", "notes", "amount"],
-    objects: @reimbursement_request.expense_airfares,
+    objects: @reimbursement_request.expense_airfares.sort_by(&:from_date),
     id: "expense-airfares",
     functions: {
       "from_date" => lambda do |obj| get_simple_date(obj['from_date']) end,
