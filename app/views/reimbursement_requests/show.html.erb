@@ -76,7 +76,7 @@
     }
   } %>
 
-  <div class="row">
+  <div class="row print-hide">
     <div class="col-12">
       <h3>Attachments:</h3>
       <% if @reimbursement_request.attachments.count > 0 %>
@@ -105,14 +105,18 @@
         method: :patch,
         class: 'col btn btn-danger btn-lg list-inline-item') if @reimbursement_request.status != 'declined' %>
     <% end %>
-    <div class='col col-4 align-self-end'>
+    <div class='col col-4 d-flex align-self-center flex-nowrap'>
       <%= link_to("Edit", edit_reimbursement_request_path(@reimbursement_request.id), class: "btn btn-primary edit-btn btn-lg align-self-center list-inline-item") %>
-      <%= link_to("Export as PDF",
+      <%= link_to(
         reimbursement_request_path(@reimbursement_request.id, format: :pdf),
         class: "btn btn-light btn-lg align-self-center list-inline-item ",
+        id: "pdf-export-button",
         :'data-toggle' => 'tooltip',
         :'data-placement' => 'top',
-        title: t('reimbursement_request_form.tooltips.export_pdf')) %>
+        title: t('reimbursement_request_form.tooltips.export_pdf')) do %>
+          <p>Export as PDF</p>
+          <i class="fa fa-spin fa-2x fa-cog hidden" label="loading"></i>
+        <% end %>
     </div>
   </div>
 </div>

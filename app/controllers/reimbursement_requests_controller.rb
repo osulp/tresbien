@@ -23,11 +23,34 @@ class ReimbursementRequestsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: @reimbursement_request.id.to_s,
-               template: 'reimbursement_requests/show.html.erb',
-               layout: 'pdf',
-               handlers: [:erb],
-               formats: [:pdf]
+        # pdf = WickedPdf.new.pdf_from_string(render_to_string(template: "reimbursement_requests/show", layout: "pdf", formats: :html))
+        pdf = CombinePDF.new
+        pdf << CombinePDF.parse(
+          WickedPdf.new.pdf_from_string(
+            render_to_string(
+              template: "reimbursement_requests/show.html.erb",
+              layout: "pdf",
+              handlers: [:erb],
+              formats: [:pdf]
+            )
+          )
+        )
+        @image_attachments = []
+        @reimbursement_request.attachments.each do |attachment|
+          if (/image\/(png|gif|jpg)/.match(attachment.attachment_content_type))
+            @image_attachments << attachment
+          elsif (/application\/pdf/.match(attachment.attachment_content_type))
+            pdf << CombinePDF.parse(
+              WickedPdf.new.pdf_from_string(
+                render_to_string(template: 'attachments/pdf', layout: 'pdf')))
+            pdf << CombinePDF.load(attachment.attachment.path)
+            @image_attachments.clear
+          end
+        end
+        pdf << CombinePDF.parse(
+          WickedPdf.new.pdf_from_string(
+            render_to_string(template: 'attachments/pdf', layout: 'pdf'))) unless @image_attachments.empty?
+        send_data pdf.to_pdf, disposition: 'inline', type: 'application/pdf'
       end
     end
   end
@@ -142,6 +165,7 @@ class ReimbursementRequestsController < ApplicationController
       :non_resident_alien,
       :business_notes_and_purpose,
       :address,
+      :status_comment,
       :status,
       accountings_attributes: %i[id index fund organization account program activity amount _destroy],
       expense_airfares_attributes: %i[id from_date to_date from_location to_location notes amount _destroy],

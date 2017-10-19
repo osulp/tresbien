@@ -1,0 +1,7 @@
+<% @image_attachments.each do |attachment| %>
+  <div class="row image-row">
+    <div class="col">
+      <%= image_tag (attachment.attachment.path) %>
+    </div>
+  </div>
+<% end %>
