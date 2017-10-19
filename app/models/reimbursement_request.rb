@@ -15,7 +15,8 @@ class ReimbursementRequest < ApplicationRecord
   has_many :attachments
   accepts_nested_attributes_for :accountings, :expense_airfares, :expense_mileages, :expense_others, :travel_itineraries, :travel_cities, allow_destroy: true
   validates :certifier_id, presence: true
-  validate :includes_travel_city
+  validate :includes_travel_itinerary
+  validate :includes_accounting
   validates :business_notes_and_purpose, length: { maximum: 250 }
   validates :description_id, presence: true
 
@@ -32,6 +33,11 @@ class ReimbursementRequest < ApplicationRecord
     self.itinerary_total = get_total_sum(travel_itineraries)
     self.other_total = get_total_sum(expense_others)
     self.grand_total = [airfare_total, mileage_total, other_total, itinerary_total].sum
+  end
+
+  # returns the reimbursement request's travel itineraries sorted by date
+  def get_first_travel_itinerary
+    travel_itineraries.to_a.sort_by!(&:date).first
   end
 
   private
@@ -53,11 +59,6 @@ class ReimbursementRequest < ApplicationRecord
     city_name = get_truncated_city_name(travel, state)
     date = get_date(travel)
     self.identifier = city_name + state + date
-  end
-
-  # returns the reimbursement request's travel itineraries sorted by date
-  def get_first_travel_itinerary
-    travel_itineraries.to_a.sort_by!(&:date).first
   end
 
   # returns the country abbreviation for the country stored in the first travel itinerary
@@ -84,7 +85,11 @@ class ReimbursementRequest < ApplicationRecord
     first_itinerary.date.strftime('%m%d%Y')
   end
 
-  def includes_travel_city
-    errors.add(:base, 'Must have at least one city travelled in the itinerary.', target_nav_panel_href: 'itinerary_panel') if travel_cities.empty? || travel_cities.all?(&:marked_for_destruction?)
+  def includes_travel_itinerary
+    errors.add(:base, 'Must have at least one daily itinerary.', target_nav_panel_href: 'itinerary_panel') if travel_itineraries.empty? || travel_itineraries.all?(&:marked_for_destruction?)
+  end
+
+  def includes_accounting
+    errors.add(:base, 'Must have at least one accounting record.', target_nav_panel_href: 'accounting_panel') if accountings.empty? || accountings.all?(&:marked_for_destruction?)
   end
 end

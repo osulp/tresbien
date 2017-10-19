@@ -7,4 +7,11 @@ class TravelCity < ApplicationRecord
   validates :hotel_rate, presence: true
   validates :state, presence: true
   validates :city, presence: true
+
+  after_initialize :set_defaults
+
+  def set_defaults
+    self.hotel_rate ||= 0
+    self.meals ||= 0
+  end
 end

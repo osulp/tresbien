@@ -64,8 +64,8 @@
       </div>
     </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["Date", "Notes", "Amount"], id: "expense_above_per_diems", total_class: "other-expenses-total" } do %>
-      <%= f.simple_fields_for :expense_others, f.object.expense_others.above_per_diem do |expense_other| %>
-        <%= render "expense_above_per_diem_fields", f: expense_other %>
+      <%= f.simple_fields_for :expense_others do |expense_other| %>
+        <%= render "expense_above_per_diem_fields", f: expense_other if expense_other.object.above_per_diem_expense %>
       <% end %>
     <% end %>
     <div class="form-row add-row hidden">

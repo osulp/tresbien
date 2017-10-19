@@ -32,7 +32,7 @@ class CityRow {
     }
   }
 
-  client_id = () => this.element.find('.client-id').val()
+  client_id() { return this.element.find('.client-id').val(); }
 
   bindSumInput = input => {
     $(input).on('keyup mouseup change', e => {
@@ -42,7 +42,7 @@ class CityRow {
       let hotel_rate = this.element.find('.reimbursement_request_travel_cities_hotel_rate > input').val();
       this.row_total = total;
       $('.travel-itinerary').each((i, row) => {
-        if ($(row).find('.travel-city-id').val() == this.travel_city_id) {
+        if ($(row).find('.client-id').val() == this.client_id()) {
           $(row).find('.per-diem-rate').val(this.row_total);
           $(row).find('.hotel.sum-input').val(hotel_rate);
           $(row).find('.hotel.sum-input').change();
@@ -58,24 +58,45 @@ class CityRow {
       if (this.state.itinerary_rows.find(c => c.client_id() == data.client_id)) {
         console.log(`Travel City Itineraries ${data.client_id} already added to form.`);
       } else {
-        let from_date = Moment(data.from_date);
-        let to_date = Moment(data.to_date);
-        if (from_date.isValid() && to_date.isValid()) {
+        this.from_date = Moment(data.from_date);
+        this.to_date = Moment(data.to_date);
+        let valid = this.validate();
+        if ( valid.state && valid.city && valid.from_date && valid.to_date ) {
           // calculate the number of days between fromDate and toDate
           // add to citiesTravelledItineraryDaysQueue for each day
           // then "click" the add travel itinerary button for each day, so that the click event handler
           //   will iterate through each of the citiesTravelledItineraryDaysQueue items to update its rows
-          let range = Moment.range(from_date, to_date);
+          let range = Moment.range(this.from_date, this.to_date);
           let days = Array.from(range.by('days'));
           days.forEach(day => this.state.itinerary_days_queue.push(Object.assign({}, data, { day })));
           days.forEach(day => $('#add_travel_itinerary').click());
           $(button).addClass('hidden');
         } else {
           // warn user that there are invalid dates
-          console.log('Invalid dates selected.');
+          if (!valid.state) {
+            this.element.find('.cs_state_select').addClass('has-error');
+          }
+          if (!valid.city) {
+            this.element.find('.cs_city_select').addClass('has-error');
+          }
+          if (!valid.from_date) {
+            this.element.find('.reimbursement_request_travel_cities_from_date').addClass('has-error');
+          }
+          if (!valid.to_date) {
+            this.element.find('.reimbursement_request_travel_cities_to_date').addClass('has-error');
+          }
         }
       }
     });
+  };
+
+  validate = () => {
+    return {
+      state: this.element.find('.cs_state_select select').val() !== '',
+      city: this.element.find('.cs_city_select select').val() !== '',
+      from_date: this.from_date.isValid(),
+      to_date: this.to_date.isValid()
+    }
   };
 
   bindRemove = button => {
