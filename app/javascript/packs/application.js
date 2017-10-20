@@ -17,3 +17,4 @@ require('./purpose');
 require('./dropzone');
 require('./attachments');
 require('./lightbox');
+require('./before_unload_dialog');
