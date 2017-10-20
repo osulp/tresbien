@@ -10,7 +10,7 @@ class AccountingRow extends BasicRow {
       row_total: 0
     });
     autorun(() => this.element.find('.account-code').val(this.account_code));
-    autorun(() => this.element.find('.accounting-row-total').val(this.row_total));
+    autorun(() => this.element.find('.accounting-row-total').val(parseFloat(this.row_total.toFixed(2))));
     if (data) {
       this.expense_row_id = data.expense_row_id;
       this.account_code = data.account_code;
@@ -23,7 +23,7 @@ class AccountingRow extends BasicRow {
       this.account_code = data.account_code;
     }
     if (data.row_total !== undefined){
-      this.row_total = data.row_total;
+      this.row_total = parseFloat(data.row_total.toFixed(2));
     }
   };
 
