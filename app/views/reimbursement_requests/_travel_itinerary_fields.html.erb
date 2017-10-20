@@ -1,19 +1,19 @@
 <tr class="nested-fields travel-itinerary" data-table-name="travel-itinerary">
   <td>
     <span class='date-label'><%= f.object.date.nil? ? '' : f.object.date.strftime("%Y-%m-%d") %></span>
-    <%= f.input :date, as: :hidden, label: false, input_html: { class: 'date' } %>
+    <%= f.input :date, as: :hidden, label: false, input_html: { class: 'date', value: f.object.date ? f.object.date.to_date : '' } %>
     <%= f.input :country, as: :hidden, label: false, input_html: { class: 'country' } %>
     <%= f.input :state, as: :hidden, label: false, input_html: { class: 'state' } %>
     <%= f.input :city, as: :hidden, label: false, input_html: { class: 'city' } %>
   </td>
   <td><span class='location-label'><%= f.object.location_label %></span></td>
-  <td><%= f.input :break, label: false, input_html: { class: 'sum-input'} %></td>
-  <td><%= f.input :lunch, label: false, input_html: { class: 'sum-input'} %></td>
-  <td><%= f.input :dinner, label: false, input_html: { class: 'sum-input'} %></td>
-  <td><%= f.input :hotel, label: false, input_html: { class: 'hotel sum-input' } %></td>
-  <td><%= f.input :amount, label: false, error_html: {}, input_html: { readonly: true, class: "row-sum-input" } %></td>
+  <td><%= f.input :break, label: false, input_html: { class: 'sum-input', value: number_with_precision(f.object.break, precision: 2)} %></td>
+  <td><%= f.input :lunch, label: false, input_html: { class: 'sum-input', value: number_with_precision(f.object.lunch, precision: 2)} %></td>
+  <td><%= f.input :dinner, label: false, input_html: { class: 'sum-input', value: number_with_precision(f.object.dinner, precision: 2)} %></td>
+  <td><%= f.input :hotel, label: false, input_html: { class: 'hotel sum-input', value: number_with_precision(f.object.hotel, precision: 2) } %></td>
+  <td><%= f.input :amount, label: false, error_html: {}, input_html: { readonly: true, class: "row-sum-input" , value: number_with_precision(f.object.amount, precision: 2)} %></td>
   <td>
-    <%= f.input :per_diem, as: :hidden, label: false, input_html: { class: "per-diem-rate" } %>
+    <%= f.input :per_diem, as: :hidden, label: false, input_html: { class: "per-diem-rate", value: number_with_precision(f.object.per_diem, precision: 2) } %>
     <%= f.input_field :client_id, as: :hidden, class: 'client-id' %>
     <a class='add-other-expenses btn btn-primary btn-sm hidden' data-toggle='tooltip' data-placement='top' title='<%= t('reimbursement_request_form.tooltips.generate_other_expense') %>' href='#'>
       <i class="fa fa-plus fa-2x"></i>

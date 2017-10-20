@@ -1,6 +1,6 @@
 <tr class="nested-fields mileage" data-table-name="expense-mileage">
-  <td><%=f.input :from_date, as: :date_picker, label: false %></td>
-  <td><%= f.input :to_date, as: :date_picker, label: false %></td>
+  <td><%= f.input :from_date, as: :date_picker, label: false, input_html: { value: f.object.from_date ? f.object.from_date.to_date : '' } %></td>
+  <td><%= f.input :to_date, as: :date_picker, label: false, input_html: { value: f.object.to_date ? f.object.to_date.to_date : '' }  %></td>
   <td>
     <div class="row">
       <div class="col col-12">
@@ -20,7 +20,7 @@
   <td><%= f.input :miles, label: false %></td>
   <td><%= f.input :round_trip, label: false, input_html: { class: "round-trip-checkbox" }  %></td>
   <td><%= f.input :notes, label: false, as: :string %></td>
-  <td><%= f.input :amount, label: false, input_html: { class: "row-sum-input", readonly: true} %></td>
+  <td><%= f.input :amount, label: false, input_html: { class: "row-sum-input", readonly: true, value: number_with_precision(f.object.amount, precision: 2)} %></td>
   <td>
     <input type='hidden' class='unique-id' />
     <%= link_to_remove_association f,

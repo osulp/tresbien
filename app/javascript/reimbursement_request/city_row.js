@@ -23,7 +23,7 @@ class CityRow {
     extendObservable(this, {
       row_total: 0
     });
-    autorun(() => this.element.find('.row-sum-input').val(this.row_total));
+    autorun(() => this.element.find('.row-sum-input').val(this.row_total.toFixed(2)));
     this.element.find('.sum-input').each((i, input) => this.bindSumInput(input));
     this.element.find('.sum-input').change();
 
@@ -39,8 +39,8 @@ class CityRow {
       let row_sum_input = this.element.find('.row-sum-input');
       let sum_inputs = this.element.find('.sum-input');
       let total = Utils.sumInputFloats(sum_inputs);
-      let hotel_rate = this.element.find('.reimbursement_request_travel_cities_hotel_rate > input').val();
-      this.row_total = total;
+      let hotel_rate = parseFloat(this.element.find('.reimbursement_request_travel_cities_hotel_rate > input').val()).toFixed(2);
+      this.row_total = parseFloat(total.toFixed(2));
       $('.travel-itinerary').each((i, row) => {
         if ($(row).find('.client-id').val() == this.client_id()) {
           $(row).find('.per-diem-rate').val(this.row_total);

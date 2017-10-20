@@ -1,13 +1,13 @@
 <tr class="nested-fields travel-city" data-table-name="travel-city">
-  <td><%= f.input :from_date, as: :date_picker, label: false %></td>
-  <td><%= f.input :to_date, as: :date_picker, label: false %></td>
+  <td><%= f.input :from_date, as: :date_picker, label: false, input_html: { value: f.object.from_date ? f.object.from_date.to_date : '' } %></td>
+  <td><%= f.input :to_date, as: :date_picker, label: false, input_html: { value: f.object.to_date ? f.object.to_date.to_date : '' } %></td>
   <td><%= render partial: 'travel_locations_row', locals: { f: f } %>
       <a class='add-itineraries btn btn-primary btn-sm' data-toggle='tooltip' data-placement='top' title='<%= t('reimbursement_request_form.tooltips.add_daily_itineraries') %>' href='#'>
         <i class="fa fa-calendar-plus-o"><span class="itinerary-button"> Create Itineraries</span></i>
       </a></td>
-  <td><%= f.input :meals, label: false, input_html: { class: "sum-input" } %></td>
-  <td><%= f.input :hotel_rate, label: false, input_html: { class: "sum-input" } %></td>
-  <td><%= f.input :per_diem, label: false, input_html: { readonly: true, class: "row-sum-input" } %></td>
+  <td><%= f.input :meals, label: false, input_html: { class: "sum-input", value: number_with_precision(f.object.meals, precision: 2) } %></td>
+  <td><%= f.input :hotel_rate, label: false, input_html: { class: "sum-input", value: number_with_precision(f.object.hotel_rate, precision: 2) } %></td>
+  <td><%= f.input :per_diem, label: false, input_html: { readonly: true, class: "row-sum-input", value: number_with_precision(f.object.per_diem, precision: 2) } %></td>
   <td>
     <div class="travel-city-controls">
       <%= f.input_field :client_id, as: :hidden, class: 'client-id' %>
