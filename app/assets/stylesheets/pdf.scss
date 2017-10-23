@@ -1,7 +1,9 @@
 @import 'bootstrap';
-
 .row {
   margin-bottom: 20px;
+  &.image-row {
+    margin-bottom: 80px;
+  }
 }
 
 .print-hide {
