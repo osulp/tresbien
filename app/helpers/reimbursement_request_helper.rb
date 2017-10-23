@@ -3,7 +3,7 @@
 module ReimbursementRequestHelper
   def get_request_title(reimbursement_request)
     itinerary = reimbursement_request.get_first_travel_itinerary
-    "#{itinerary.date.strftime('%e %B %Y')}: #{itinerary.city}, #{itinerary.state}  (#{CS.countries.key(itinerary.country).to_s})"
+    "#{itinerary.date.strftime('%e %B %Y')}: #{itinerary.city}, #{itinerary.state}  (#{CS.countries.key(itinerary.country)})"
   end
 
   def get_simple_date(date)
@@ -18,17 +18,21 @@ module ReimbursementRequestHelper
     class_string.html_safe
   end
 
+  def new_record_class(reimbursement_request)
+    reimbursement_request.new_record? ? 'new-record' : ''
+  end
+
   def get_status_icon(status)
     if status == 'Draft' || status == 'draft'
-      return 'fa-pencil-square-o'
+      'fa-pencil-square-o'
     elsif status == 'Submitted' || status == 'submitted'
-      return 'fa-dot-circle-o'
+      'fa-dot-circle-o'
     elsif status == 'Approved' || status == 'approved'
-      return 'fa-check-circle-o'
+      'fa-check-circle-o'
     elsif status == 'Declined' || status == 'declined'
-      return 'fa-times-circle-o'
+      'fa-times-circle-o'
     else
-      return 'fa-shower'
+      'fa-shower'
     end
   end
 end

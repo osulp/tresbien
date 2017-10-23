@@ -7,7 +7,7 @@ RSpec.describe ReimbursementRequest, type: :model do
   end
   let(:travel_city) { TravelCity.new(from_date: Date.today, to_date: Date.today, hotel_rate: 100, city: 'Las Vegas', state: 'NV') { |t| t.save!(validate: false) } }
   let(:accounting) { Accounting.new(index: '123', fund: '123', organization: '123', account: '123', program: '123', activity: '123', amount: 123 ) { |a| a.save!(validate: false) } }
-  let(:travel_itinerary) { TravelItinerary.new(date: Date.today, break: 10, lunch: 10, dinner: 20, hotel: 100, per_diem: 120, city: 'Las Vegas', state: 'NV' ) { |t| t.save!(validate: false) } }
+  let(:travel_itinerary) { TravelItinerary.new(date: Date.today, break: 10, lunch: 10, dinner: 20, hotel: 100, per_diem: 150, city: 'Las Vegas', state: 'NV' ) { |t| t.save!(validate: false) } }
   let(:description) { Description.create(name: 'Bob Ross was the best ever.', active: true) }
   let(:reimbursement_request) do
     ReimbursementRequest.create(
@@ -22,5 +22,12 @@ RSpec.describe ReimbursementRequest, type: :model do
   it 'includes a travel city and an accounting line' do
     reimbursement_request.validate!
     expect(reimbursement_request.errors.full_messages.length).to eq 0
+  end
+
+  context 'with an expense above per diem' do
+    let(:travel_itinerary) { TravelItinerary.new(date: Date.today, break: 10, lunch: 10, dinner: 20, hotel: 100, per_diem: 10, city: 'Las Vegas', state: 'NV' ) { |t| t.save!(validate: false) } }
+    it 'fails validation' do
+      expect {reimbursement_request.validate!}.to raise_error(ActiveRecord::RecordInvalid)
+    end
   end
 end

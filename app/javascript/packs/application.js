@@ -18,3 +18,4 @@ require('./dropzone');
 require('./attachments');
 require('./lightbox');
 require('./pdf_load_icon')
+require('./before_unload_dialog');

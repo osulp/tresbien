@@ -21,7 +21,7 @@ class ItineraryRow {
     extendObservable(this, {
       row_total: 0
     });
-    autorun(() => this.element.find('.row-sum-input').val(this.row_total));
+    autorun(() => this.element.find('.row-sum-input').val(this.row_total.toFixed(2)));
     if (data) {
       this.setRowFields(data);
     }
@@ -36,8 +36,10 @@ class ItineraryRow {
       e.preventDefault();
       let data = this.getRowData(this.element);
       let date = Moment(data.date);
-      this.state.above_per_diem_queue.push(Object.assign({}, data, {date}));
-      $('#add_over_per_diem').click();
+      if (this.state.above_per_diem_rows.find(a => a.client_id() == this.client_id()) === undefined) {
+        this.state.above_per_diem_queue.push(Object.assign({}, data, { date }));
+        $('#add_over_per_diem').click();
+      }
       this.element.find('.row-sum-input').val(this.per_diem);
       this.element.find('.sum-input').first().change();
     });
@@ -49,11 +51,11 @@ class ItineraryRow {
       let row_sum_input = this.element.find('.row-sum-input');
       let sum_inputs = this.element.find('.sum-input');
       let total = Utils.sumInputFloats(sum_inputs);
-      this.row_total = total;
+      this.row_total = parseFloat(total.toFixed(2));
       let above_per_diem_row = this.abovePerDiemRow();
       if(above_per_diem_row.length > 0) {
-        above_per_diem_row.find('.row-sum-input').val(Math.max(0, this.row_total - this.per_diem));
-        this.row_total = Math.min(this.per_diem, this.row_total);
+        above_per_diem_row.find('.row-sum-input').val(Math.max(0, this.row_total - this.per_diem).toFixed(2));
+        this.row_total = parseFloat(Math.min(this.per_diem, this.row_total).toFixed(2));
       }
       if (parseFloat(this.element.find('.row-sum-input').val()) > (this.per_diem)) {
         this.element.find('.add-other-expenses').removeClass('hidden');
@@ -105,10 +107,10 @@ class ItineraryRow {
     let meals_rate = data.per_diem - data.hotel_rate;
     this.element.find('input.date').val(data.day.format('YYYY-MM-DD'));
     this.element.find('.date-label').text(data.day.format('YYYY-MM-DD'));
-    this.element.find('.reimbursement_request_travel_itineraries_break > input').val(meals_rate / 4);
-    this.element.find('.reimbursement_request_travel_itineraries_lunch > input').val(meals_rate / 4);
-    this.element.find('.reimbursement_request_travel_itineraries_dinner > input').val(meals_rate / 2);
-    this.element.find('.reimbursement_request_travel_itineraries_hotel > input').val(data.hotel_rate).change();
+    this.element.find('.reimbursement_request_travel_itineraries_break > input').val((meals_rate / 4).toFixed(2));
+    this.element.find('.reimbursement_request_travel_itineraries_lunch > input').val((meals_rate / 4).toFixed(2));
+    this.element.find('.reimbursement_request_travel_itineraries_dinner > input').val((meals_rate / 2).toFixed(2));
+    this.element.find('.reimbursement_request_travel_itineraries_hotel > input').val(parseFloat(data.hotel_rate).toFixed(2)).change();
     this.element.find('input.travel-city-id').val(data.travel_city_id);
     this.element.find('input.per-diem-rate').val(data.per_diem);
     this.element.find('input.city').val(data.city);

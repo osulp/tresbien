@@ -2,14 +2,13 @@
   <td>
     <span class='date'><%= f.object.from_date.nil? ? '' : f.object.from_date.strftime("%Y-%m-%d") %></span>
     <%= f.input :expense_type_id, input_html: { value: ExpenseType.above_per_diem.pluck(:id).first }, wrapper_html: {class: "hidden" } %>
-    <%= f.input :from_date, as: :hidden, input_html: { class: 'from-date' } %>
-    <%= f.input :to_date, as: :hidden, input_html: { class: 'to-date' } %>
+    <%= f.input :from_date, as: :hidden, input_html: { class: 'from-date', value: f.object.from_date ? f.object.from_date.to_date : '' } %>
+    <%= f.input :to_date, as: :hidden, input_html: { class: 'to-date', value: f.object.to_date ? f.object.to_date.to_date : '' } %>
   </td>
   <td><%= f.input :notes, label: false, as: :string, input_html: { class: "notes" }%></td>
   <td>
-    <%= f.input :amount, label: false, input_html: { class: "row-sum-input", readonly: true } %>
+    <%= f.input :amount, label: false, input_html: { class: "row-sum-input", readonly: true, value: number_with_precision(f.object.amount, precision: 2) } %>
     <%= f.input :client_id, as: :hidden, input_html: { class: "client-id" } %>
-    <input type='hidden' class='unique-id' />
     <%= f.input :above_per_diem_expense, label: false, input_html: { checked: true }, wrapper_html: { class: "hidden" } %>
   </td>
 </tr>
