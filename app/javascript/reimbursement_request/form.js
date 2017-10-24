@@ -35,11 +35,15 @@ class Form {
       $('tr.mileage').each((i, element) => {
         this.state.basic_rows.push(new MileageRow(this, element, this.state));
       });
-      $('tr.expense-other').each((i, element) => {
-        this.state.expense_other_rows.push(new ExpenseOtherRow(this, element, this.state));
-      });
       $('tr.basic').each((i, element) => {
         this.state.basic_rows.push(new BasicRow(this, element, this.state));
+      });
+      // Should be executed prior to the expense-other rows
+      $('tr.accounting').each((i, element) => {
+        this.state.accounting_rows.push(new AccountingRow(this, element, this.state));
+      });
+      $('tr.expense-other').each((i, element) => {
+        this.state.expense_other_rows.push(new ExpenseOtherRow(this, element, this.state));
       });
       $('.table').each((i, element) => {
         if ($(element).find('tbody tr').length > 0) {
@@ -51,6 +55,7 @@ class Form {
       this.bindDateTimePicker($('.datepicker'));
       this.bindTimePicker($('.timepicker'));
       this.bindHideNotesWarning(this.element.find('#reimbursement_request_business_notes_and_purpose'));
+      this.bindSubmitButtons();
       autorun(() => {
         this.element.find('.itineraries-total').val(this.state.itineraries_total);
         this.element.find('.airfare-total').val(this.state.expense_airfare_total);
@@ -67,8 +72,7 @@ class Form {
   }
 
   bindCocoonEvents = () => {
-    $(document)
-      .on('cocoon:before-remove', '.table', (e, itemToBeRemoved) => {
+    $(document).on('cocoon:before-remove', '.table', (e, itemToBeRemoved) => {
         if (itemToBeRemoved.parents(".table").find("tbody tr").length <= 1) {
           itemToBeRemoved.parents(".table").hide();
         }
@@ -164,6 +168,30 @@ class Form {
       scrollInput: false
     });
   };
+
+  bindSubmitButtons = () => {
+    let buttons = $("button[type='submit'");
+    buttons.on('click', e => {
+      $(e.currentTarget).popover('hide');
+      $(e.currentTarget).popover('dispose');
+      //check accounting rows total vs grand total and error if they do not match
+      if (this.state.accountings_total !== this.state.grand_total) {
+        $(e.currentTarget).popover({
+          content: `Accounting Total: <b>$${this.state.accountings_total}</b><br/>Reimbursement Total: <b>$${this.state.grand_total}</b><br/><br/>Accounting entries and reimbursement totals <b>must match</b> before saving the request.`,
+          placement: 'top',
+          title: 'Accounting Reimbursement Error',
+          trigger: 'focus',
+          html: true,
+          delay: {
+            "show": 300,
+            "hide": 10
+          }
+        });
+        $(e.currentTarget).popover('toggle');
+        e.preventDefault();
+      }
+    });
+  }
 }
 
 export default Form;

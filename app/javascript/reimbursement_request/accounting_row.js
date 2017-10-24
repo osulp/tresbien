@@ -9,14 +9,36 @@ class AccountingRow extends BasicRow {
       account_code: '',
       row_total: 0
     });
-    autorun(() => this.element.find('.account-code').val(this.account_code));
-    autorun(() => this.element.find('.accounting-row-total').val(parseFloat(this.row_total.toFixed(2))));
     if (data) {
-      this.expense_row_id = data.expense_row_id;
+      this.element.find('.client-id').val(data.client_id);
       this.account_code = data.account_code;
       this.row_total = data.row_total;
+    } else {
+      if (this.client_id() === '') {
+        this.element.find('.client-id').val(this.id);
+      }
+      if (this.element.find('.account-code').val() !== '') {
+        this.account_code = this.element.find('.account-code').val();
+      }
+      let val = this.element.find('.accounting-row-total').val();
+      if (isNaN(val)) {
+        this.row_total = 0;
+      } else {
+        this.row_total = parseFloat(parseFloat(val).toFixed(2));
+      }
     }
+    autorun(() => this.element.find('.account-code').val(this.account_code));
+    autorun(() => this.element.find('.accounting-row-total').val(this.row_total));
+    this.bindRowInput(this.element.find('.accounting-row-total'));
   }
+
+  client_id = () => this.element.find('.client-id').val()
+
+  bindRowInput = input => {
+    input.on('keyup mouseup', e => {
+      this.row_total = parseFloat(parseFloat(input.val()).toFixed(2));
+    });
+  };
 
   update = (data) => {
     if (data.account_code) {
@@ -28,7 +50,7 @@ class AccountingRow extends BasicRow {
   };
 
   destroy = () => {
-    this.state.accounting_rows = this.state.accounting_rows.filter(i => i.id !== this.id);
+    this.state.accounting_rows = this.state.accounting_rows.filter(i => i.client_id() !== this.client_id());
     this.element.remove();
     this.destroy_element.val('true');
   }

@@ -5,6 +5,7 @@ class MileageRow extends BasicRow {
     super(form, element, state);
     this.bindRoundTripCheckbox(this.element.find('input.round-trip-checkbox'));
     this.bindMileageSumInput(this.element.find('.reimbursement_request_expense_mileages_miles > input'));
+    this.element.find('.reimbursement_request_expense_mileages_miles > input').change();
   };
 
   bindRoundTripCheckbox = checkbox => {
@@ -24,13 +25,11 @@ class MileageRow extends BasicRow {
 
   bindMileageSumInput = input => {
     input.on('keyup mouseup change', e => {
-      let row_sum_input = this.element.find('.row-sum-input');
-      if (!isNaN(parseFloat(input.val()))) {
-        row_sum_input.val((parseFloat(input.val()) * .54).toFixed(2));
+      if (isNaN(parseFloat(input.val()))) {
+        this.row_total = 0;
       } else {
-        row_sum_input.val(0);
+        this.row_total = parseFloat((input.val() * 0.54).toFixed(2));
       }
-      row_sum_input.change();
     });
   };
 }

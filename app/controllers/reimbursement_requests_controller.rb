@@ -167,7 +167,7 @@ class ReimbursementRequestsController < ApplicationController
       :address,
       :status_comment,
       :status,
-      accountings_attributes: %i[id index fund organization account program activity amount _destroy],
+      accountings_attributes: %i[id index fund organization account program activity amount client_id _destroy],
       expense_airfares_attributes: %i[id from_date to_date from_location to_location notes amount _destroy],
       expense_mileages_attributes: %i[id from_date to_date from_city from_state to_city to_state miles round_trip notes amount _destroy],
       expense_others_attributes: %i[id expense_type_id from_date to_date notes amount above_per_diem_expense client_id _destroy],

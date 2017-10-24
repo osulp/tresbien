@@ -10,7 +10,7 @@
 </td>
 <td><%= f.input :amount, label: false, input_html: { class: 'accounting-row-total' } %></td>
 <td>
-  <input type='hidden' class='unique-id' />
+  <%= f.input :client_id, as: :hidden, input_html: { class: "client-id" } %>
   <%= f.input :fund, label: false, input_html: { value: current_user ? current_user.organization.fund : ' ' }, wrapper_html: { class: 'hidden' } %>
   <%= f.input :organization, label: false, as: :hidden, input_html:{ value: current_user ? current_user.organization.organization_code : ' '}%>
   <%= f.input :program, label: false, as: :hidden, input_html: { value: current_user ? current_user.organization.program_code : ''  }  %>
