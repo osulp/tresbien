@@ -8,6 +8,7 @@ class AbovePerDiemRow {
     this.element = $(element);
     this.table_name = this.element.data('table-name');
     this.destroy_element = this.element.next('.destroy');
+    this.row_sum_input = this.element.find('.row-sum-input');
     this.state = state;
     this.element.find('[data-toggle="tooltip"]').tooltip();
     this.element.parents('.table').show();
@@ -15,12 +16,13 @@ class AbovePerDiemRow {
     extendObservable(this, {
       row_total: 0
     });
-    autorun(() => this.element.find('.row-sum-input').val(this.row_total.toFixed(2)));
     if (data) {
       this.setRowFields(data);
+    } else {
+      this.row_total = parseFloat(this.row_sum_input.val());
     }
-    this.element.find('.row-sum-input').each((i, input) => this.bindRowSumInput(input));
-    this.element.find('.row-sum-input').change();
+    autorun(() => this.row_sum_input.val(this.row_total.toFixed(2)));
+    this.bindRowSumInput(this.row_sum_input);
     this.showNotesWarning();
   }
 
@@ -29,8 +31,7 @@ class AbovePerDiemRow {
 
   bindRowSumInput = input => {
     $(input).on('keyup change', e => {
-      let row_sum_input = this.element.find('.row-sum-input');
-      let total = Utils.sumInputFloats(row_sum_input);
+      let total = Utils.sumInputFloats(input);
       this.row_total = parseFloat(total.toFixed(2));
     });
   };
@@ -55,7 +56,7 @@ class AbovePerDiemRow {
     this.element.find('.date').text(data.date.format("YYYY-MM-DD"));
     this.element.find('input.from-date').val(data.date.format("YYYY-MM-DD"));
     this.element.find('input.to-date').val(data.date.format("YYYY-MM-DD"));
-    this.element.find('input.row-sum-input').val(parseFloat(data.amount).toFixed(2));
+    this.row_sum_input.val(parseFloat(data.amount).toFixed(2));
     this.element.find('input.notes').val(`Expenses above per diem on ${data.date.format("YYYY-MM-DD")} in ${data.city}, ${data.state}`);
     this.element.find('.client-id').val(data.client_id);
   };

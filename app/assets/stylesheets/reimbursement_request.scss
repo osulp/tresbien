@@ -288,6 +288,11 @@
   }
 }
 
+.popover > h3 {
+  background-color: $error-red-dark;
+  color: $error-red-light;
+}
+
 @keyframes popup {
   from {
     transform: scale(0.2, 0.2);

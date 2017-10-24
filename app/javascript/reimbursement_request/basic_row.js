@@ -10,15 +10,14 @@ class BasicRow {
     this.destroy_element = this.element.next('.destroy');
     this.state = state;
     this.element.find('.row-sum-input').each((i, input) => this.bindRowSumInput(input));
-    this.element.find('.unique-id').val(this.id);
     this.element.find('[data-toggle="tooltip"]').tooltip();
     this.element.parents('.table').show();
     this.bindRemove(this.element.find('.remove_fields'));
     extendObservable(this, {
       row_total: 0
     });
-    autorun(() => this.element.find('.row-sum-input').val(this.row_total));
     this.element.find('.row-sum-input').change();
+    autorun(() => this.element.find('.row-sum-input').val(this.row_total));
   }
 
   bindRowSumInput = input => {

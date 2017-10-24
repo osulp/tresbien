@@ -12,6 +12,9 @@ const initialState = observable({
   itinerary_days_queue: [],
   above_per_diem_queue: [],
   accounting_rows_queue: [],
+  get accountings_total() {
+    return this.accounting_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
+  },
   get itineraries_total() {
     return this.itinerary_rows.map(i => i.row_total).reduce((sum, val) => parseFloat((sum + val).toFixed(2)), 0);
   },
