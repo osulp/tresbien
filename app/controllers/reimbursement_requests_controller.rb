@@ -38,9 +38,9 @@ class ReimbursementRequestsController < ApplicationController
         )
         @image_attachments = []
         @reimbursement_request.attachments.each do |attachment|
-          if (/image\/(png|gif|jpg)/.match(attachment.attachment_content_type))
+          if attachment.is_image?
             @image_attachments << attachment
-          elsif (/application\/pdf/.match(attachment.attachment_content_type))
+          elsif attachment.is_pdf?
             pdf << CombinePDF.parse(
               WickedPdf.new.pdf_from_string(
                 render_to_string(template: 'attachments/pdf', layout: 'pdf')))
