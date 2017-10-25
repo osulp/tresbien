@@ -8,15 +8,17 @@ RSpec.describe ReimbursementRequestHelper, type: :helper do
   let(:claimant) { user }
   let(:certifier) { user }
   let(:travel_city) { TravelCity.new(from_date: Date.today, to_date: Date.today, hotel_rate: 100, city: 'Las Vegas', state: 'NV', country: 'United States') { |t| t.save!(validate: false) } }
-  let(:travel_itinerary) { TravelItinerary.new(date: Date.today, break: 10, lunch: 10, dinner: 20, hotel: 100, per_diem: 120, city: 'Las Vegas', state: 'NV', country: 'United States' ) { |t| t.save!(validate: false) } }
+  let(:travel_itinerary) { TravelItinerary.new(date: Date.today, break: 10, lunch: 10, dinner: 20, hotel: 100, per_diem: 140, city: 'Las Vegas', state: 'NV', country: 'United States' ) { |t| t.save!(validate: false) } }
   let(:description) { Description.create(name: 'Bob Ross was the best ever.', active: true) }
+  let(:accounting) { Accounting.create(index: 'abc', fund: 'abc', organization: 'abc', account: 'abc', program: 'abc', activity: 'abc', amount: 123) { |a| a.save!(validate: false) } }
   let(:reimbursement_request) do
     ReimbursementRequest.create(
       claimant: claimant,
       certifier: certifier,
       description: description,
       travel_cities: [travel_city],
-      travel_itineraries: [travel_itinerary])
+      travel_itineraries: [travel_itinerary],
+      accountings: [accounting])
   end
 
   before do
@@ -77,6 +79,46 @@ RSpec.describe ReimbursementRequestHelper, type: :helper do
     end
     it 'returns a declined icon class' do
       expect(helper.get_status_icon('declined')).to eq 'fa-times-circle-o'
+    end
+  end
+
+  describe '#new_record_class' do
+    it 'returns the an empty class name for created requests' do
+      expect(helper.new_record_class(reimbursement_request)).to eq ''
+    end
+    context 'with a new record' do
+      let(:reimbursement_request) do
+        ReimbursementRequest.new(
+          claimant: claimant,
+          certifier: certifier,
+          description: description,
+          travel_cities: [travel_city],
+          travel_itineraries: [travel_itinerary])
+      end
+      it 'returns the class name' do
+        expect(helper.new_record_class(reimbursement_request)).to eq 'new-record'
+      end
+    end
+  end
+  describe '#claimant_name' do
+    let(:claimant) do
+      User.new(email: 'test2@example.com', full_name: 'Ronald Jenkees', admin: false) { |u| u.save!(validate: false) }
+    end
+    it 'returns the claimants name for created requests' do
+      expect(helper.claimant_name(reimbursement_request)).to eq claimant.full_name
+    end
+    context 'with a new record' do
+      let(:reimbursement_request) do
+        ReimbursementRequest.new(
+          claimant: claimant,
+          certifier: certifier,
+          description: description,
+          travel_cities: [travel_city],
+          travel_itineraries: [travel_itinerary])
+      end
+      it 'returns the class name' do
+        expect(helper.claimant_name(reimbursement_request)).to eq user.full_name
+      end
     end
   end
 end
