@@ -2,7 +2,7 @@
   <div class="form-row">
       <div class="col col-md-3">
         <label>Name</label>
-        <p class="lead" id="name"> <%= current_user.full_name if user_signed_in? %> </p>
+        <p class="lead" id="name"> <%= claimant_name(f.object) %> </p>
       </div>
     <div class="col col-md-3">
     <%= f.input :certifier_id,

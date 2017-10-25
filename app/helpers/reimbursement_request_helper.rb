@@ -22,6 +22,10 @@ module ReimbursementRequestHelper
     reimbursement_request.new_record? ? 'new-record' : ''
   end
 
+  def claimant_name(reimbursement_request)
+    reimbursement_request.new_record? ? current_user.full_name : reimbursement_request.claimant.full_name
+  end
+
   def get_status_icon(status)
     if status == 'Draft' || status == 'draft'
       'fa-pencil-square-o'
