@@ -49,6 +49,7 @@ RailsAdmin.config do |config|
       edit do
         field :email
         field :full_name
+        field :username
         field :osu_id do
           label 'OSU ID'
         end
