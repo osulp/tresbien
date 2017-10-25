@@ -8,6 +8,7 @@ class ReimbursementRequestsController < ApplicationController
   before_action :set_expense_types, only: %i[new create edit update]
   before_action :set_statuses, only: %i[new create edit update]
   before_action :set_descriptions, only: %i[new create edit update]
+  before_action :redirect_unless_claimant_or_admin, only: %i[show edit update approve decline]
 
   def new
     @reimbursement_request = ReimbursementRequest.new
@@ -209,17 +210,22 @@ class ReimbursementRequestsController < ApplicationController
 
   def parse_date_params(params)
     params.each do |param_key, param_val|
-      puts 'parsing params'
       if param_val && param_val.respond_to?('each_pair')
         parse_date_params(param_val)
       else
         if param_key.to_s.include? 'date'
           param_val = DateTime.strptime(param_val, '%m/%d/%d').to_date
-          puts "converted #{param_key} value to #{param_val}"
         elsif param_key.to_s.include? 'time'
           param_val = param_val.to_time
         end
       end
+    end
+  end
+
+  def redirect_unless_claimant_or_admin
+    if !current_user.admin && @reimbursement_request.claimant != current_user
+      flash[:error] = "You are not authorized to view this reimbursement request."
+      redirect_to root_path
     end
   end
 end
