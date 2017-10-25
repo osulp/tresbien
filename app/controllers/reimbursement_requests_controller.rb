@@ -44,7 +44,7 @@ class ReimbursementRequestsController < ApplicationController
             pdf << CombinePDF.parse(
               WickedPdf.new.pdf_from_string(
                 render_to_string(template: 'attachments/pdf', layout: 'pdf')))
-            pdf << CombinePDF.load(attachment.attachment.path)
+            pdf << CombinePDF.load(attachment.attachment.path, allow_optional_content: true)
             @image_attachments.clear
           end
         end
