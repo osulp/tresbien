@@ -61,7 +61,7 @@ class ItineraryRow {
         this.element.find('.add-other-expenses').removeClass('hidden');
         this.element.find('.row-sum-input').parent().addClass('has-error');
         if (!this.element.find('.row-sum-input').next().length) {
-          this.element.find('.row-sum-input').parent().append('<span class="help-block">can\'t be greater than per diem rate</span>');
+          this.element.find('.row-sum-input').parent().append('<span class="help-block">Amount exceeds per diem</span>');
         }
       } else {
         if (this.element.find('.reimbursement_request_travel_itineraries_amount > .help-block').length) {
