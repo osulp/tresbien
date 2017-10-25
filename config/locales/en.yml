@@ -31,6 +31,7 @@
 
 en:
   hello: "Hello world"
+  sub_nav_header: "Tresbien @ Oregon State University Libraries and Press"
   reimbursement_request_form:
     tooltips:
       add_daily_itineraries: "Add Daily Itineraries"
