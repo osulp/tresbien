@@ -10,4 +10,12 @@ class Attachment < ApplicationRecord
   # do_not_validate_attachment_file_type :file
   has_attached_file :attachment, styles: { thumb: ['100x100>', :jpg], medium: ['300x300>', :jpg], large: ['1000x1000>', :jpg] }, default_url: '/images/:style/missing.png'
   validates_attachment_content_type :attachment, content_type: [/png\Z/, /jpe?g\Z/, /gif\Z/, /application\/pdf/]
+
+  def is_image?
+    /image\/(png|gif|jpg|jpeg)/.match(attachment_content_type)
+  end
+
+  def is_pdf?
+    /application\/pdf/.match(attachment_content_type)
+  end
 end
