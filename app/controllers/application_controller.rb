@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_country_sym, only: [:cities, :states]
   before_action :redirect_to_sign_in, unless: :user_signed_in?
+  before_action :set_application_configurations
 
   def cities
     render json: CS.cities(params[:state], @country_sym).to_json
@@ -25,9 +26,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  private
-
   def redirect_to_sign_in
     redirect_to new_user_session_path
+  end
+
+  def set_application_configurations
+    @contact_email = ApplicationConfiguration.contact_email.pluck(:value).first
   end
 end

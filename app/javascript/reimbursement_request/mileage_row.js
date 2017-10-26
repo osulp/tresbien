@@ -3,6 +3,8 @@ import BasicRow from './basic_row';
 class MileageRow extends BasicRow {
   constructor(form, element, state) {
     super(form, element, state);
+    // cents/mile for mileage reimbursement calculations, sourced and rendered from a configuration on the server
+    this.mileage_reimbursement_rate = parseFloat(this.element.find('.mileage-reimbursement-rate').val());
     this.bindRoundTripCheckbox(this.element.find('input.round-trip-checkbox'));
     this.bindMileageSumInput(this.element.find('.reimbursement_request_expense_mileages_miles > input'));
     this.element.find('.reimbursement_request_expense_mileages_miles > input').change();
@@ -28,7 +30,7 @@ class MileageRow extends BasicRow {
       if (isNaN(parseFloat(input.val()))) {
         this.row_total = 0;
       } else {
-        this.row_total = parseFloat((input.val() * 0.54).toFixed(2));
+        this.row_total = parseFloat((input.val() * this.mileage_reimbursement_rate).toFixed(2));
       }
     });
   };

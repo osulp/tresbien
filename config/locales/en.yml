@@ -47,7 +47,7 @@ en:
     buttons:
       add_accounting: "Add Accounting Line"
       add_expense_airfares: "Add Airfare"
-      add_expense_milages: "Add Milage"
+      add_expense_mileages: "Add Mileage"
       add_other_expenses: "Add Other Expenses"
       add_travel_city: "Add City"
       add_daily_itinerary: "Add Itinerary"
