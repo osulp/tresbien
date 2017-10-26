@@ -26,10 +26,14 @@ class ItineraryRow {
       this.setRowFields(data);
     }
     this.element.find('.sum-input').each((i, input) => this.bindSumInput(input));
-    this.element.find('.sum-input').first().change();
+    this.inputChange();
   }
 
   client_id = () => this.element.find('.client-id').val()
+
+  inputChange = () => {
+    this.element.find('.sum-input').last().change();
+  }
 
   bindClick = button => {
     button.on('click', e => {

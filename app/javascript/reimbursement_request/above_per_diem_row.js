@@ -49,7 +49,9 @@ class AbovePerDiemRow {
   destroy = () => {
     this.element.remove();
     this.destroy_element.val('true');
-    this.state.above_per_diem_rows = this.state.above_per_diem_rows.filter(a => a.client_id !== this.client_id());
+    this.state.above_per_diem_rows = this.state.above_per_diem_rows.filter(a => a.client_id() !== this.client_id());
+    let itinerary_rows = this.state.itinerary_rows.filter(i => i.client_id() === this.client_id());
+    itinerary_rows.forEach(i => i.inputChange());
   };
 
   setRowFields = data => {
@@ -68,7 +70,6 @@ class AbovePerDiemRow {
       alert.addClass('show');
     }
   }
-
 }
 
 export default AbovePerDiemRow;
