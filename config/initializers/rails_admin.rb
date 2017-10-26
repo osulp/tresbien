@@ -36,7 +36,7 @@ RailsAdmin.config do |config|
     show
     edit
     delete do
-      only ['ReimbursementRequest']
+      only %w[ReimbursementRequest ApplicationConfiguration]
     end
     show_in_app
 
@@ -68,6 +68,7 @@ RailsAdmin.config do |config|
 
     config.model 'Organization' do
       edit do
+        field :active
         field :name
         field :organization_code
         field :program_code
