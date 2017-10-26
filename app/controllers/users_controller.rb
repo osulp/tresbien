@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
   def set_fields
     @user = User.find(current_user.id)
-    @organizations = Organization.all.sort_by(&:name)
+    @organizations = Organization.active.sort_by(&:name)
   end
 
   def user_params
