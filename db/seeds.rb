@@ -19,8 +19,8 @@ end
 attributes = [
   { name: 'Employee Domestic Travel', code: '39115'} ,
   { name: 'Employee International Travel', code: '39615'} ,
-  { name: 'Non-employee Domestic Travel', code: '39117'} ,
-  { name: 'Non-employee International Travel', code: '39645'}
+  { name: 'Non-Employee Domestic Travel', code: '39117'} ,
+  { name: 'Non-Employee International Travel', code: '39645'}
 ]
 attributes.each do |attrs|
   AccountCode.create(attrs) unless AccountCode.exists?(name: attrs[:name])
