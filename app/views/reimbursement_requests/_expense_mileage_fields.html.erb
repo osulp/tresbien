@@ -23,6 +23,7 @@
   <td><%= f.input :amount, label: false, input_html: { class: "row-sum-input", readonly: true, value: number_with_precision(f.object.amount, precision: 2)} %></td>
   <td>
     <input type='hidden' class='unique-id' />
+    <%= f.input_field :mileage_rate, as: :hidden, class: 'mileage-reimbursement-rate', value: number_with_precision(f.object.mileage_rate_or_default, precision: 3) %>
     <%= link_to_remove_association f,
       class: "btn btn-danger btn-sm",
       "data-toggle" => 'tooltip',
