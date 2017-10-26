@@ -2,6 +2,8 @@
 
 class Organization < ApplicationRecord
   has_many :users
+
+  validates :name, uniqueness: true
   validates :organization_code, presence: true
   validates :program_code, presence: true
   validates :fund, presence: true

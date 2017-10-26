@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171026143540) do
+ActiveRecord::Schema.define(version: 20171026155955) do
 
   create_table "account_codes", force: :cascade do |t|
     t.string "name"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 20171026143540) do
     t.string "name"
     t.string "fund"
     t.string "vendor_payment_address"
+    t.boolean "active", default: true
   end
 
   create_table "reimbursement_requests", force: :cascade do |t|
