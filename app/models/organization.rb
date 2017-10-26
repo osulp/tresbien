@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Organization < ApplicationRecord
+  scope :active, -> { where(active: true) }
   has_many :users
 
   validates :name, uniqueness: true
