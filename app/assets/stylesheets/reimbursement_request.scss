@@ -114,7 +114,7 @@
     tbody {
       tr {
         td:first-child,
-        td:last-child {
+        td.amount {
           width: 120px;
         }
       }
