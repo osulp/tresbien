@@ -45,7 +45,7 @@ class ReimbursementRequest < ApplicationRecord
     path = get_or_create_banner_data_file_path
     File.open(File.join(path, "#{identifier}.csv"), 'w+') do |f|
       accountings.each do |a|
-        line = sprintf('%<vendor_id>s,%<vendor_payment_address>s,%<invoice_number>s,%<invoice_date>s,%<index_code>s,%<fund_code>s,%<activity_code>s,"%<description>s",%<amount>.2f,%<discount_amount>s',
+        line = sprintf('%<vendor_id>s,%<vendor_payment_address>s,%<invoice_number>s,%<invoice_date>s,%<index_code>s,%<fund_code>s,%<account_code>s,%<activity_code>s,"%<description>s",%<amount>.2f,%<discount_amount>s',
           get_banner_data_for_account(a))
         f.puts line
       end
@@ -70,6 +70,7 @@ class ReimbursementRequest < ApplicationRecord
       invoice_date: get_first_travel_itinerary.date.strftime('%d-%^b-%Y'),
       index_code: a.index,
       fund_code: a.fund,
+      account_code: a.account,
       activity_code: a.activity,
       description: description.name,
       amount: a.amount,
