@@ -7,16 +7,16 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '24f155e9e8bf6259936c9b96c39580f98cd498051c55638d3a0db07579373de8b485f85333d73a4bea7ea8c41754ab442bc8107acd4fe999bd7ce37744ea0c58'
-  
+
   #CAS Setup
-  config.cas_base_url = "https://login.oregonstate.edu/cas"
-  config.cas_validate_url = "https://login.oregonstate.edu/cas/samlValidate"
+  config.cas_base_url = ENV['CAS_BASE_URL']
+  config.cas_validate_url = ENV['CAS_VALIDATE_URL']
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'noreply@oregonstate.edu' 
+  config.mailer_sender = 'noreply@oregonstate.edu'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

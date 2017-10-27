@@ -20,7 +20,6 @@ module Tresbien
     # -- all .rb files in that directory are automatically loaded.
     config.assets.paths << Rails.root.join('vendor', 'assets')
 
-    config.rubycas.cas_base_url = 'https://login.oregonstate.edu/cas'
     # load and inject local_env.yml key/values into ENV
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'local_env.yml')
@@ -30,5 +29,7 @@ module Tresbien
         end
       end
     end
+
+    config.rubycas.cas_base_url = ENV['CAS_BASE_URL']
   end
 end
