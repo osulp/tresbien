@@ -45,3 +45,7 @@ set :passenger_restart_with_touch, true
 set :nvm_type, :user # or :system, depends on your nvm setup
 set :nvm_node, 'v6.9.5'
 set :nvm_map_bins, %w{node npm yarn}
+
+namespace :deploy do
+  after :finishing, :seed
+end
