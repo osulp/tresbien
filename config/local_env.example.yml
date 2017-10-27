@@ -1,0 +1,5 @@
+BANNER_CSV_FILE_PATH: 'tmp/banner_csv'
+CAS_BASE_URL: 'https://login.oregonstate.edu/cas'
+CAS_VALIDATE_URL: 'https://login.oregonstate.edu/cas/samlValidate'
+SERVER_HOST: 'http://localhost'
+SECRET_KEY_BASE: 'bobross1234bobross1234BOBROSS1234BOBROSS1234'

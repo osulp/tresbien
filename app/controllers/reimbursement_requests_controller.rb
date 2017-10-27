@@ -3,11 +3,7 @@
 class ReimbursementRequestsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_reimbursement_request, only: %i[show edit update approve decline]
-  before_action :set_certifiers, only: %i[new create edit update]
-  before_action :set_account_codes, only: %i[new create edit update]
-  before_action :set_expense_types, only: %i[new create edit update]
-  before_action :set_statuses, only: %i[new create edit update]
-  before_action :set_descriptions, only: %i[new create edit update]
+  before_action :set_related_models, only: %i[new create edit update]
   before_action :redirect_unless_claimant_or_admin, only: %i[show edit update approve decline]
 
   def new
@@ -24,7 +20,6 @@ class ReimbursementRequestsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        # pdf = WickedPdf.new.pdf_from_string(render_to_string(template: "reimbursement_requests/show", layout: "pdf", formats: :html))
         pdf = CombinePDF.new
         pdf << CombinePDF.parse(
           WickedPdf.new.pdf_from_string(
@@ -66,6 +61,7 @@ class ReimbursementRequestsController < ApplicationController
       if @reimbursement_request.status == 'submitted'
         submit_request
         certify_request
+        @reimbursement_request.export_as_banner_csv
       end
       attach_files
       redirect_to reimbursement_request_path(@reimbursement_request)
@@ -109,6 +105,8 @@ class ReimbursementRequestsController < ApplicationController
     redirect_to reimbursement_request_path(@reimbursement_request)
   end
 
+  private
+
   def decline_request
     StatusMailer.decline_request(@reimbursement_request).deliver_now
   end
@@ -128,8 +126,6 @@ class ReimbursementRequestsController < ApplicationController
   def resubmit_request
     StatusMailer.resubmit_request(@reimbursement_request).deliver_now
   end
-
-  private
 
   def attach_files
     params[:file_ids]&.each do |id|
@@ -181,23 +177,11 @@ class ReimbursementRequestsController < ApplicationController
     @reimbursement_request = ReimbursementRequest.find(params[:id])
   end
 
-  def set_certifiers
+  def set_related_models
     @certifiers = User.where(certifier: true)
-  end
-
-  def set_statuses
     @statuses = APPLICATION_CONFIG[:statuses]
-  end
-
-  def set_account_codes
     @account_codes = AccountCode.all
-  end
-
-  def set_expense_types
     @expense_types = ExpenseType.where(active: true)
-  end
-
-  def set_descriptions
     @descriptions = Description.where(active: true)
   end
 

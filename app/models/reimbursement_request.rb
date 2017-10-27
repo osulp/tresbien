@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'fileutils'
 
 class ReimbursementRequest < ApplicationRecord
   scope :user_claimant_requests, ->(user_id) { where claimant_id: user_id }
@@ -40,7 +41,41 @@ class ReimbursementRequest < ApplicationRecord
     travel_itineraries.to_a.sort_by!(&:date).first
   end
 
+  def export_as_banner_csv
+    path = get_or_create_banner_data_file_path
+    File.open(File.join(path, "#{identifier}.csv"), 'w+') do |f|
+      accountings.each do |a|
+        line = sprintf('%<vendor_id>s,%<vendor_payment_address>s,%<invoice_number>s,%<invoice_date>s,%<index_code>s,%<fund_code>s,%<activity_code>s,"%<description>s",%<amount>.2f,%<discount_amount>s',
+          get_banner_data_for_account(a))
+        f.puts line
+      end
+    end
+  end
+
   private
+
+  def get_or_create_banner_data_file_path
+    banner_csv_file_dirname = File.expand_path(ENV['BANNER_CSV_FILE_PATH'])
+    unless File.directory? banner_csv_file_dirname
+      FileUtils.mkdir_p banner_csv_file_dirname
+    end
+    banner_csv_file_dirname
+  end
+
+  def get_banner_data_for_account(a)
+    {
+      vendor_id: claimant.osu_id,
+      vendor_payment_address: claimant.organization.vendor_payment_address,
+      invoice_number: identifier,
+      invoice_date: get_first_travel_itinerary.date.strftime('%d-%^b-%Y'),
+      index_code: a.index,
+      fund_code: a.fund,
+      activity_code: a.activity,
+      description: description.name,
+      amount: a.amount,
+      discount_amount: ''
+    }
+  end
 
   def set_defaults
     self.status ||= 'draft'
