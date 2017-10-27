@@ -61,7 +61,6 @@ class ReimbursementRequestsController < ApplicationController
       if @reimbursement_request.status == 'submitted'
         submit_request
         certify_request
-        @reimbursement_request.export_as_banner_csv
       end
       attach_files
       redirect_to reimbursement_request_path(@reimbursement_request)
@@ -82,6 +81,7 @@ class ReimbursementRequestsController < ApplicationController
         decline_request
       when 'approved'
         approve_request
+        @reimbursement_request.export_as_banner_csv
       when 'submitted'
         old_status == 'draft' ? certify_request : resubmit_request
         submit_request
@@ -96,6 +96,7 @@ class ReimbursementRequestsController < ApplicationController
   def approve
     @reimbursement_request.update(status: 'approved')
     approve_request
+    @reimbursement_request.export_as_banner_csv
     redirect_to reimbursement_request_path(@reimbursement_request)
   end
 
