@@ -39,6 +39,12 @@ test:
   compile: true
   public_output_path: packs-test
 
+staging:
+  <<: *default
+
+  # Staging demands on precompilation of packs prior to booting for performance.
+  compile: false
+
 production:
   <<: *default
 
