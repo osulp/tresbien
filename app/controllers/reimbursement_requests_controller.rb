@@ -96,6 +96,7 @@ class ReimbursementRequestsController < ApplicationController
   def approve
     @reimbursement_request.update(status: 'approved')
     approve_request
+    @reimbursement_request.export_as_banner_csv
     redirect_to reimbursement_request_path(@reimbursement_request)
   end
 
