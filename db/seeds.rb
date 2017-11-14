@@ -11,7 +11,7 @@ attributes.each do |attrs|
   ExpenseType.where(attrs).first_or_create
 end
 
-attributes = [{ name: 'The Valley Library', organization_code: '112010', program_code: '30001', fund: '001100', vendor_payment_address: 'VP/1'}]
+attributes = [{ name: 'The Valley Library', organization_code: '112000', program_code: '30001', fund: '001100', vendor_payment_address: 'VP1'}]
 attributes.each do |attrs|
   Organization.create(attrs) unless Organization.exists?(name: attrs[:name])
 end
