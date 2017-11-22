@@ -6,7 +6,7 @@
     <div class="form-row">
       <div class="alert alert-info" role="alert">
         <h3><i class="fa fa-bell bell animated bounce" aria-hidden="true"></i> Please note</h3>
-        <p>If you are using multiple indexes to pay for your travel, then you have to input the amount that is being charged to each index.</p>
+        <p>The application will attempt to automatically detect if you need to utilize multiple account codes for your reimbursement. If you paid for your conference registration, supplies and services (such as paper or other materials), or you hosted guests as part of your travel, then these will appear as additional lines in the accounting section. Please identify the amounts that you paid for these specific items on those accounting lines. All other expenses will go on your travel account line (39115, 39615, etc).</p>
       </div>
     </div>
     <%= render layout: "nested_fields_table", locals: { attributes: ["Index", "Account", "Amount"], id: "accountings", total_class: "accountings-total" } do %>
