@@ -20,13 +20,29 @@
       label: 'Why did you travel?'  %>
     </div>
   </div>
-  <div class="reimbursement_request_business_notes_and_purpose">
-    <%= f.input :business_notes_and_purpose,
-                class:"reimbursement_request_business_notes_and_purpose",
-                id: "review_text",
-                placeholder: 'Briefly explain what happened on your trip.',
-                maxlength: "250",
-                label: "Business notes and purpose <span class='badge badge-warning notes-warning'><i class='fa fa-exclamation'></i><span class='slideout font-weight-normal'>Make sure to explain all of your expenses below</span></span>".html_safe,
-                hint: "0/250 characters" %>
+  <div class="form-row">
+    <div class="col col-md-3" style="padding-top: 5px;" >
+      <%= f.input :depart_time,
+        collection: request_times, 
+        input_html: { class: 'col col-md-6' },
+        label_html: { class: 'col col-md-5' },
+        label: 'Depart Time',
+        wrapper_html: { class: 'row' } %>
+      <%= f.input :return_time,
+        collection: request_times,
+        input_html: { class: 'col col-md-6' },
+        label_html: { class: 'col col-md-5' },
+        label: 'Return Time',
+        wrapper_html: { class: 'row' } %>
+    </div>
+    <div class="reimbursement_request_business_notes_and_purpose col col-md-9">
+      <%= f.input :business_notes_and_purpose,
+                  class:"reimbursement_request_business_notes_and_purpose",
+                  id: "review_text",
+                  placeholder: 'Briefly explain what happened on your trip.',
+                  maxlength: "250",
+                  label: "Business notes and purpose <span class='badge badge-warning notes-warning'><i class='fa fa-exclamation'></i><span class='slideout font-weight-normal'>Make sure to explain all of your expenses below</span></span>".html_safe,
+                  hint: "0/250 characters" %>
+    </div>
   </div>
 </div>

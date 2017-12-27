@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171026155955) do
+ActiveRecord::Schema.define(version: 20171227173909) do
 
   create_table "account_codes", force: :cascade do |t|
     t.string "name"
@@ -130,8 +130,8 @@ ActiveRecord::Schema.define(version: 20171026155955) do
     t.datetime "updated_at", null: false
     t.integer "claimant_id"
     t.integer "certifier_id"
-    t.time "depart_time"
-    t.time "return_time"
+    t.string "depart_time"
+    t.string "return_time"
     t.boolean "non_resident_alien"
     t.text "business_notes_and_purpose"
     t.string "address"
