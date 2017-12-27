@@ -40,6 +40,10 @@ module ReimbursementRequestHelper
     end
   end
 
+  def invoice_number(request)
+    request.invoice_number.blank? ? "-- Not Assigned --" : request.invoice_number
+  end
+
   def request_times
     [
       '12:00am',

@@ -1,7 +1,10 @@
 <div class="container show">
   <div class="row">
+    <h3 class="col-6">Request Details <span class="badge <%=@reimbursement_request.status %>"><%= @reimbursement_request.status.titlecase %></span></h3>
+    <h3 class="col-6">Invoice Number <span class="badge draft"><%= invoice_number(@reimbursement_request) %></span></h3>
+  </div>
+  <div class="row">
     <div class="col-12">
-      <h3>Request Details <span class="badge <%=@reimbursement_request.status %>"><%= @reimbursement_request.status.titlecase %></span></h3>
       <p></p>
       <p><strong>Claimant: </strong><%= @reimbursement_request.claimant.full_name %></p>
       <p><strong>Certifier: </strong><%= @reimbursement_request.certifier.full_name %></p>

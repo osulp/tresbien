@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171227173909) do
+ActiveRecord::Schema.define(version: 20171227205731) do
 
   create_table "account_codes", force: :cascade do |t|
     t.string "name"
@@ -137,6 +137,7 @@ ActiveRecord::Schema.define(version: 20171227173909) do
     t.string "address"
     t.string "status"
     t.integer "description_id"
+    t.string "invoice_number"
     t.index ["certifier_id"], name: "index_reimbursement_requests_on_certifier_id"
     t.index ["claimant_id"], name: "index_reimbursement_requests_on_claimant_id"
     t.index ["description_id"], name: "index_reimbursement_requests_on_description_id"
