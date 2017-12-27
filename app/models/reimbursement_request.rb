@@ -45,7 +45,7 @@ class ReimbursementRequest < ApplicationRecord
     path = get_or_create_banner_data_file_path
     File.open(File.join(path, "#{identifier}.csv"), 'w+') do |f|
       accountings.each do |a|
-        line = sprintf('%<vendor_id>s,%<vendor_payment_address>s,%<invoice_number>s,%<invoice_date>s,%<index_code>s,%<fund_code>s,%<account_code>s,%<activity_code>s,"%<description>s",%<amount>.2f,%<discount_amount>s',
+        line = sprintf('%<vendor_id>s,%<identifier>s,%<vendor_payment_address>s,%<invoice_date>s,%<discount_code>s,%<index_code>s,%<fund_code>s,%<account_code>s,%<activity_code>s,"%<description>s",%<amount>.2f,%<discount_amount>s',
           get_banner_data_for_account(a))
         f.puts line
       end
@@ -62,19 +62,25 @@ class ReimbursementRequest < ApplicationRecord
     banner_csv_file_dirname
   end
 
+  ##
+  # Generate the proper data for an account line in the CSV export. Business rules expressed;
+  # 1. An exported line should have either index and account code OR fund and account but not both index & fund with the account.
+  # 2. Prefer exporting index and account (reimbursement style) vs fund and account (travel advance style)
+  # 3. Discount code is purposefully hardcoded to 19 for Banner import loader compatibility
   def get_banner_data_for_account(a)
     {
       vendor_id: claimant.osu_id,
       vendor_payment_address: claimant.organization.vendor_payment_address,
-      invoice_number: identifier,
+      identifier: identifier,
       invoice_date: get_first_travel_itinerary.date.strftime('%d-%^b-%Y'),
       index_code: a.index,
-      fund_code: a.fund,
+      fund_code: a.index.empty? ? a.fund : '',
       account_code: a.account,
       activity_code: a.activity,
       description: description.name,
       amount: a.amount,
-      discount_amount: ''
+      discount_amount: '',
+      discount_code: '19'
     }
   end
 
