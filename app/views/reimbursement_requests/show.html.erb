@@ -18,7 +18,7 @@
     <div class="col-12">
       <%= render partial: "show_table",
         locals: {
-          title: "Daily Itineraries", attributes: ["date", "location", "break", "lunch", "dinner", "hotel", "amount"],
+          title: "Daily Itineraries", attributes: ["date", "location", "break", "lunch", "dinner", "hotel", "percentage", "amount"],
           objects: @reimbursement_request.travel_itineraries.sort_by(&:date), id: "travel-itineraries",
           functions: {
             "date" => lambda do |obj| get_simple_date(obj['date']) end,
@@ -27,6 +27,7 @@
             "dinner" => lambda do |obj| number_to_currency(obj['dinner'], precision: 2) end,
             "hotel" => lambda do |obj| number_to_currency(obj['hotel'], precision: 2) end,
             "location" => lambda do |obj| "#{obj['city']}, #{obj['state']} (#{obj['country']})" end,
+            "percentage" => lambda do |obj| "#{obj['percentage']}%" end,
             "amount" => lambda do |obj| number_to_currency(obj['amount'], precision: 2) end
           }
       } %>
@@ -95,8 +96,13 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-12">
-      <h3>Total: <%= number_to_currency(@reimbursement_request.grand_total, precision: 2) %></h3>
+    <div class="col-4">
+      <h3 style="text-align: right;">Grand Total:</h3>
+      <h3 style="text-align: right;">Reimbursement Request Total:</h3>
+    </div>
+    <div class="col-4">
+      <h3><%= number_to_currency(@reimbursement_request.grand_total, precision: 2) %></h3>
+      <h3><%= number_to_currency(@reimbursement_request.accounting_total, precision: 2) %></h3>
     </div>
   </div>
   <div class="row list-inline print-hide">

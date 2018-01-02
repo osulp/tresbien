@@ -36,6 +36,10 @@ class ReimbursementRequest < ApplicationRecord
     self.grand_total = [airfare_total, mileage_total, other_total, itinerary_total].sum
   end
 
+  def accounting_total
+    get_total_sum(accountings)
+  end
+
   # returns the reimbursement request's travel itineraries sorted by date
   def get_first_travel_itinerary
     travel_itineraries.to_a.sort_by!(&:date).first

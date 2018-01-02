@@ -14,6 +14,7 @@ class ItineraryRow {
     this.state = state;
     this.button = this.element.find('.add-other-expenses');
     this.per_diem = parseFloat(this.element.find('.per-diem-rate').val());
+    this.percentage = parseFloat(this.element.find('.percentage').val());
     this.element.find('[data-toggle="tooltip"]').tooltip();
     this.element.parents('.table').show();
     this.bindRemove(this.element.find('.remove_fields'));
@@ -26,6 +27,7 @@ class ItineraryRow {
       this.setRowFields(data);
     }
     this.element.find('.sum-input').each((i, input) => this.bindSumInput(input));
+    this.element.find('.percentage').each((i, input) => this.bindSumInput(input));
     this.inputChange();
   }
 
@@ -52,15 +54,13 @@ class ItineraryRow {
   bindSumInput = input => {
     $(input).on('keyup change', e => {
       this.per_diem = parseFloat(this.element.find('.per-diem-rate').val());
-      let row_sum_input = this.element.find('.row-sum-input');
+      this.percentage = parseFloat(this.element.find('.percentage').val());
       let sum_inputs = this.element.find('.sum-input');
-      let total = Utils.sumInputFloats(sum_inputs);
-      this.row_total = parseFloat(total.toFixed(2));
-      let above_per_diem_row = this.abovePerDiemRow();
-      if(above_per_diem_row.length > 0) {
-        above_per_diem_row.find('.row-sum-input').val(Math.max(0, this.row_total - this.per_diem).toFixed(2));
-        this.row_total = parseFloat(Math.min(this.per_diem, this.row_total).toFixed(2));
+      let total = parseFloat(Utils.sumInputFloats(sum_inputs).toFixed(2));
+      if(this.percentage > 0) {
+        total = total * (this.percentage / 100);
       }
+      this.row_total = this.totalOrPerDiem(total, this.per_diem);
       if (parseFloat(this.element.find('.row-sum-input').val()) > (this.per_diem)) {
         this.element.find('.add-other-expenses').removeClass('hidden');
         this.element.find('.row-sum-input').parent().addClass('has-error');
@@ -77,6 +77,15 @@ class ItineraryRow {
     });
   };
 
+  totalOrPerDiem = (row_total, per_diem) => {
+    let above_per_diem_row = this.abovePerDiemRow();
+    if(above_per_diem_row.length > 0) {
+      rowSumInputValue(above_per_diem_row, Math.max(0, row_total - per_diem).toFixed(2))
+      row_total = Math.min(per_diem, row_total);
+    }
+    return row_total;
+  };
+
   abovePerDiemRow = () => {
     let data = this.getRowData(this.element);
     return $('#expense_above_per_diems')
@@ -84,6 +93,10 @@ class ItineraryRow {
       .parents('tr')
       .find(`input.client-id[value="${this.client_id()}"]`)
       .parents('tr');
+  }
+
+  rowSumInputValue = (row, val) => {
+    row.find('.row-sum-input').val(val);
   }
 
   bindRemove = button => {
