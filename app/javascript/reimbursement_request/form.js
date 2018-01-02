@@ -172,12 +172,12 @@ class Form {
   bindSubmitButtons = () => {
     let buttons = $("button[type='submit'");
     buttons.on('click', e => {
-      $(e.currentTarget).popover('hide');
-      $(e.currentTarget).popover('dispose');
+      $("button[type='submit']").popover('hide');
+      $("button[type='submit']").popover('dispose');
       //check accounting rows total vs grand total and error if they do not match
-      if (this.state.accountings_total !== this.state.grand_total) {
+      if (this.state.accountings_total > this.state.grand_total) {
         $(e.currentTarget).popover({
-          content: `Accounting Total: <b>$${this.state.accountings_total}</b><br/>Reimbursement Total: <b>$${this.state.grand_total}</b><br/><br/>Accounting entries and reimbursement totals <b>must match</b> before saving the request.`,
+          content: `Reimbursement Requested: <b>$${this.state.accountings_total}</b><br/>Calculated Expenses: <b>$${this.state.grand_total}</b><br/><br/>Reimbursement request <b>cannot exceed</b> the calculated expenses total.`,
           placement: 'top',
           title: 'Accounting Reimbursement Error',
           trigger: 'focus',
@@ -189,6 +189,12 @@ class Form {
         });
         $(e.currentTarget).popover('toggle');
         e.preventDefault();
+      } 
+    });
+    $(document).on('click', e => {
+      if($(e.target).prop('type') !== 'submit') {
+        $("button[type='submit']").popover('hide');
+        $("button[type='submit']").popover('dispose');
       }
     });
   }

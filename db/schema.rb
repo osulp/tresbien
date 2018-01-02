@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171227205731) do
+ActiveRecord::Schema.define(version: 20171229235415) do
 
   create_table "account_codes", force: :cascade do |t|
     t.string "name"
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(version: 20171227205731) do
     t.string "country"
     t.float "per_diem"
     t.string "client_id"
+    t.integer "percentage"
     t.index ["reimbursement_request_id"], name: "index_travel_itineraries_on_reimbursement_request_id"
   end
 

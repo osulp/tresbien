@@ -11,6 +11,7 @@
   <td><%= f.input :lunch, label: false, input_html: { class: 'sum-input', value: number_with_precision(f.object.lunch, precision: 2)} %></td>
   <td><%= f.input :dinner, label: false, input_html: { class: 'sum-input', value: number_with_precision(f.object.dinner, precision: 2)} %></td>
   <td><%= f.input :hotel, label: false, input_html: { class: 'hotel sum-input', value: number_with_precision(f.object.hotel, precision: 2) } %></td>
+  <td><%= f.input :percentage, as: :integer, label: false, error_html: {}, input_html: {  class: 'percentage', value: f.object.percentage || 100, min: 0, max: 100, step: 1 } %></td>
   <td><%= f.input :amount, label: false, error_html: {}, input_html: { readonly: true, class: "row-sum-input" , value: number_with_precision(f.object.amount, precision: 2)} %></td>
   <td>
     <%= f.input :per_diem, as: :hidden, label: false, input_html: { class: "per-diem-rate", value: number_with_precision(f.object.per_diem, precision: 2) } %>

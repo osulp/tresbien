@@ -38,7 +38,7 @@
       <h4><%= t('reimbursement_request_form.headers.daily_itineraries') %></h4>
       </div>
     </div>
-    <%= render layout: "nested_fields_table", locals: { attributes: ["Date", "Location", "Breakfast", "Lunch", "Dinner", "Hotel", "Amount", ""], id: "daily_itineraries", total_class: "itineraries-total" } do %>
+    <%= render layout: "nested_fields_table", locals: { attributes: ["Date", "Location", "Breakfast", "Lunch", "Dinner", "Hotel", "% Reimbursed", "Amount", ""], id: "daily_itineraries", total_class: "itineraries-total" } do %>
       <%= f.simple_fields_for :travel_itineraries do |travel_itinerary| %>
         <%= render "travel_itinerary_fields", f: travel_itinerary %>
       <% end %>

@@ -19,6 +19,7 @@ class TravelItinerary < ApplicationRecord
 
   def calculate_amount
     total = (self.break.to_f + self.lunch.to_f + self.dinner.to_f + self.hotel.to_f).round(2)
+    total = (total * (self.percentage / 100.0)).round(2) if self.percentage
     self.amount = [total, self.per_diem].min
   end
 
