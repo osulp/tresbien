@@ -61,13 +61,13 @@ gem 'bootstrap', git: 'https://github.com/twbs/bootstrap-rubygem'
 
 # use font-awesome as a replacement for lost glyphicons in bootstrap 4
 gem 'font-awesome-rails'
-gem 'rails_admin'
+gem 'rails_admin', '~> 1.3.0'
 # Use simple form for reimbursement request form
 gem 'simple_form'
 # Use cocoon for add/remove functionality in nested forms
 gem 'cocoon'
 # Use Paperclip for adding attachments
-gem "paperclip", "~> 5.0.0"
+gem "paperclip", "~> 5.2.0"
 # Use nested_form to help with reimbursement request form
 gem 'nested_form'
 # Use webpacker to support ES6 javascript
@@ -81,6 +81,9 @@ gem 'wkhtmltopdf-binary'
 
 # use CombinePDF for pdf export with attachments
 gem 'combine_pdf'
+
+gem 'loofah', '~> 2.2.1'
+gem 'rails-html-sanitizer', '~> 1.0.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
