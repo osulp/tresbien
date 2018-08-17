@@ -1,0 +1,43 @@
+version: '2.3'
+
+volumes:
+  app:
+
+networks:
+  external:
+  internal:
+
+services:
+  ##
+  # Basic image for the rails application server, see Dockerfile
+  app:
+    build: .
+    environment:
+      - RAILS_ENV=${RAILS_ENV}
+    volumes:
+      - .:/data
+      - app:/data/tmp/uploads
+    networks:
+      internal:
+
+  ##
+  # Run the application in the currently set RAILS_ENV, set to development by default in the .env file.
+  web:
+    extends: app
+    # Ideally we will replace this set of commands with an entrypoint script that checks to see if these
+    # have been run already have been run and if so it just starts the server without the first three commands
+    # taking time to run.
+    command: >
+      bash -c "touch tmp/pids/server.pid && rm tmp/pids/server.pid && bundle exec rails server -p 3000 -b '0.0.0.0'"
+    depends_on:
+      db_migrate:
+        condition: service_started
+    expose:
+      - 3000
+
+  ##
+  # Ensure that the database migrations are run on the appropriate database related to the RAILS_ENV running
+  db_migrate:
+    extends: app
+    restart: on-failure
+    command: bundle exec rails db:migrate
