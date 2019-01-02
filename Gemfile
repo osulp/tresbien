@@ -82,7 +82,9 @@ gem 'wkhtmltopdf-binary'
 # use CombinePDF for pdf export with attachments
 gem 'combine_pdf'
 
-gem 'loofah', '~> 2.2.1'
+# Security Audit
+gem 'loofah', '>= 2.2.3'
+gem 'rack', '>= 2.0.6'
 gem 'rails-html-sanitizer', '~> 1.0.4'
 
 group :production, :staging do
